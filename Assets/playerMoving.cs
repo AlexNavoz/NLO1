@@ -7,8 +7,8 @@ public class playerMoving : MonoBehaviour
 {
     public float EnginePower = 30.0f;
 
-    public Button leftButton;
-    public Button rightButton;
+    public PressedButton leftButton;
+    public PressedButton rightButton;
     public GameObject leftEngine;
     Rigidbody2D rbLeft;
     public GameObject rightEngine;
@@ -23,16 +23,24 @@ public class playerMoving : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A)||leftButton.isPressed)
         {
             rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-            leftParticle.Play();
+            if (!leftParticle.isPlaying)
+            {
+                leftParticle.Play(true);
+            }
         }
-        if (Input.GetKey(KeyCode.D))
+        else leftParticle.Stop(true);
+        if (Input.GetKey(KeyCode.D)||rightButton.isPressed)
         {
             rbRight.AddRelativeForce(Vector3.up * EnginePower);
-            rightParticle.Play();
+            //if (!rightParticle.isPlaying)
+            
+                rightParticle.Play(true);
+            
         }
+        else rightParticle.Stop(true);
 
     }
 }
