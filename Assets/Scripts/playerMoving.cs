@@ -31,7 +31,7 @@ public class playerMoving : MonoBehaviour
                 leftParticle.Play(true);
             }
         }
-        else leftParticle.Stop(true);
+        //else leftParticle.Stop(true);
         if (Input.GetKey(KeyCode.D)||rightButton.isPressed)
         {
             rbRight.AddRelativeForce(Vector3.up * EnginePower);
