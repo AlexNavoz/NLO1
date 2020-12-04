@@ -9,16 +9,14 @@ public class playerMoving : MonoBehaviour
 
     public Button leftButton;
     public Button rightButton;
-    GameObject leftEngine;
+    public GameObject leftEngine;
     Rigidbody2D rbLeft;
-    GameObject rightEngine;
+    public GameObject rightEngine;
     Rigidbody2D rbRight;
     public ParticleSystem leftParticle;
     public ParticleSystem rightParticle;
     void Start()
     {
-        leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
-        rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
         rbRight = rightEngine.GetComponent<Rigidbody2D>();
     }
@@ -30,13 +28,11 @@ public class playerMoving : MonoBehaviour
             rbLeft.AddRelativeForce(Vector3.up * EnginePower);
             leftParticle.Play();
         }
-        else { leftParticle.Stop(); }
         if (Input.GetKey(KeyCode.D))
         {
             rbRight.AddRelativeForce(Vector3.up * EnginePower);
             rightParticle.Play();
         }
-        else { rightParticle.Stop(); }
 
     }
 }
