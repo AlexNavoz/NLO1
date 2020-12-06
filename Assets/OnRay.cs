@@ -23,8 +23,8 @@ public class OnRay : MonoBehaviour
         if (isInRay)
         {
             massScale -= (0.005f / massOnStart);
-            if (massScale < 0.001f)
-                massScale = 0.001f;
+            if (massScale < 0.1f)
+                massScale = 0.1f;
 
             rb.mass = massOnStart * (float)massScale;
 

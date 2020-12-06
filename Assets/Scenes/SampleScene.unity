@@ -925,8 +925,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 1}
-      - {x: -7.0197306, y: -38.267174}
-      - {x: 5.6031137, y: -38.054718}
+      - {x: -10.509469, y: -51.192146}
+      - {x: 10.9023485, y: -51.108932}
 --- !u!114 &127107168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5944,6 +5944,7 @@ GameObject:
   - component: {fileID: 406272085}
   - component: {fileID: 406272084}
   - component: {fileID: 406272086}
+  - component: {fileID: 406272087}
   m_Layer: 8
   m_Name: WhiteCow
   m_TagString: Untagged
@@ -6016,6 +6017,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInRay: 0
+--- !u!114 &406272087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406272082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f7d47d25d5849438f487b6772ebe60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanse: 20
+  cowPower: 200
 --- !u!1 &502363976
 GameObject:
   m_ObjectHideFlags: 0
@@ -6041,8 +6056,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502363976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: -21.78, z: 0}
-  m_LocalScale: {x: 10.545559, y: 4.4470415, z: 1}
+  m_LocalPosition: {x: -0.18, y: -31.36, z: 0}
+  m_LocalScale: {x: 13.316531, y: 6.339016, z: 1}
   m_Children: []
   m_Father: {fileID: 127107165}
   m_RootOrder: 0
@@ -6207,6 +6222,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6222,6 +6238,26 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ed6f9fb98e43f4d92aa4eba6f80912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  smoothSpeed: 1
+  offset: {x: 0, y: -5, z: -10}
+  maxSize: 15
+  minSize: 10
+  maxHeight: 5
+  minHeight: 0
+  leftEdge: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -7079,7 +7115,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 90, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 3.057204}
+    m_Scale: {x: 1.25, y: 1, z: 4.614472}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -18391,7 +18427,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 3.59, y: 1.37}
   m_EdgeRadius: 0
 --- !u!114 &1437392538
 MonoBehaviour:
@@ -18419,6 +18455,7 @@ GameObject:
   - component: {fileID: 1582265664}
   - component: {fileID: 1582265663}
   - component: {fileID: 1582265662}
+  - component: {fileID: 1582265666}
   m_Layer: 8
   m_Name: WhiteCow (1)
   m_TagString: Untagged
@@ -18491,6 +18528,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1582265666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582265661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f7d47d25d5849438f487b6772ebe60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanse: 0
+  cowPower: 200
 --- !u!1 &1591787894
 GameObject:
   m_ObjectHideFlags: 0
@@ -18505,7 +18556,7 @@ GameObject:
   - component: {fileID: 1591787897}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18906,6 +18957,7 @@ GameObject:
   - component: {fileID: 1992124826}
   - component: {fileID: 1992124825}
   - component: {fileID: 1992124824}
+  - component: {fileID: 1992124828}
   m_Layer: 8
   m_Name: WhiteCow (2)
   m_TagString: Untagged
@@ -18978,6 +19030,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1992124828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992124823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f7d47d25d5849438f487b6772ebe60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanse: 0
+  cowPower: 200
 --- !u!1 &2114140269
 GameObject:
   m_ObjectHideFlags: 0
