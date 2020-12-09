@@ -10,11 +10,18 @@ public class CowMoving : MonoBehaviour
     float cowSpeed = 1.0f;
     bool faceRight;
     Rigidbody2D rb;
+    Animator anim;
 
     public float distanse;
-    public float cowPower = 10.0f;
+    public float cowPower = 1.0f;
+    float cowPowerindex = 1.0f;
+    float startMass;
+
+    public bool isGrounded;
     void Start()
     {
+        startMass = GetComponent<Rigidbody2D>().mass;
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         onRay = GetComponent<OnRay>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -22,6 +29,7 @@ public class CowMoving : MonoBehaviour
 
     private void Update()
     {
+        cowPowerindex = rb.mass / startMass;
         if (onRay.isInRay&& !scared)
         {
             scared = true;
@@ -34,25 +42,40 @@ public class CowMoving : MonoBehaviour
 
         if ((player.position.x -transform.position.x)>distanse|| (player.position.x - transform.position.x) < -distanse)
         {
+            scared = false;
             Chill();
         }
     }
 
     void Chill()
     {
+        anim.SetBool("isInFear", false);
+        anim.SetBool("isFly", false);
         Debug.Log("fuf");
     }
 
     void InFear()
     {
-        if (transform.position.x > player.position.x)
+        if (isGrounded)
         {
-            RightRunning();
+            anim.SetBool("isFly", false);
+            anim.SetBool("isInFear", true);
+            if (transform.position.x > player.position.x)
+            {
+                RightRunning();
+            }
+            if (transform.position.x < player.position.x)
+            {
+                LeftRunning();
+            }
         }
-        if (transform.position.x < player.position.x)
+        if (!isGrounded)
         {
-            LeftRunning();
+
+            anim.SetBool("isInFear", false);
+            anim.SetBool("isFly", true);
         }
+       
     }
     void RightRunning()
     {
@@ -63,7 +86,7 @@ public class CowMoving : MonoBehaviour
             faceRight = true;
             transform.rotation = cowRotation;
         }
-        rb.AddForce(Vector3.right * cowPower * Time.deltaTime);
+        rb.AddForce(Vector3.right * cowPower *cowPowerindex* Time.deltaTime);
     }
     void LeftRunning()
     {
@@ -74,7 +97,7 @@ public class CowMoving : MonoBehaviour
             faceRight = false;
             transform.rotation = cowRotation;
         }
-        rb.AddForce(Vector3.left * cowPower * Time.deltaTime);
+        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime);
     }
     void Flip()
     {
