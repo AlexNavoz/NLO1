@@ -29,12 +29,14 @@ public class RayScript : MonoBehaviour
     {
         OnRay onRay;
         onRay = obj.GetComponent<OnRay>();
-        onRay.isInRay = true;
+        if (onRay != null)
+            onRay.isInRay = true;
     }
     void OutDecreaser(GameObject obj)
     {
         OnRay onRay;
         onRay = obj.GetComponent<OnRay>();
-        onRay.isInRay = false;
+        if(onRay != null)
+            onRay.isInRay = false;
     }
 }

@@ -25,6 +25,7 @@ public class playerMoving : MonoBehaviour
 
     void FixedUpdate()
     {
+        //return;
         if (Input.GetKey(KeyCode.A)||leftButton.isPressed)
         {
             rbLeft.AddRelativeForce(Vector3.up * EnginePower);

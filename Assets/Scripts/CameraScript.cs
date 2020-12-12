@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraScript : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
     Camera cam;
 
     public float smoothSpeed = 1.0f;
@@ -48,5 +49,9 @@ public class CameraScript : MonoBehaviour
             Vector3 LeftEdge = new Vector3(leftEdge, transform.position.y, transform.position.z);
             transform.position = LeftEdge;
         }
+    }
+    public void Replay()
+    {
+        SceneManager.LoadScene(0);
     }
 }
