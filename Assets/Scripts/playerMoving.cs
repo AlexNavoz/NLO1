@@ -15,8 +15,17 @@ public class playerMoving : MonoBehaviour
     Rigidbody2D rbRight;
     public ParticleSystem leftParticle;
     public ParticleSystem rightParticle;
+
+    //fuel bar variables
+    public float maxFuel = 100.0f;
+    public float consumption = 0.01f;
+    float currentFuel;
+    public FuelBarScript fuelBar;
     void Start()
     {
+        currentFuel = maxFuel;
+        fuelBar.SetMaxTank(maxFuel);
+
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
@@ -25,19 +34,35 @@ public class playerMoving : MonoBehaviour
 
     void FixedUpdate()
     {
-        //return;
-        if (Input.GetKey(KeyCode.A)||leftButton.isPressed)
+        if (currentFuel > 0)
         {
-            rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-            leftParticle.Play();
-        }
-        else { leftParticle.Stop(); }
-        if (Input.GetKey(KeyCode.D)||rightButton.isPressed)
-        {
-            rbRight.AddRelativeForce(Vector3.up * EnginePower);
-            rightParticle.Play();
-        }
-        else { rightParticle.Stop(); }
 
+            if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
+            {
+                rbLeft.AddRelativeForce(Vector3.up * EnginePower);
+                FuelConsampsion(consumption);
+                leftParticle.Play();
+            }
+            else { leftParticle.Stop(); }
+            if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
+            {
+                rbRight.AddRelativeForce(Vector3.up * EnginePower);
+                FuelConsampsion(consumption);
+                rightParticle.Play();
+            }
+
+            else { rightParticle.Stop(); }
+        }
+        else 
+        {   leftParticle.Stop();
+            rightParticle.Stop();
+        }
+
+    }
+
+    public void FuelConsampsion(float Consumption)
+    {
+        currentFuel -= Consumption;
+        fuelBar.SetValue(currentFuel);
     }
 }
