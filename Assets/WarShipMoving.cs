@@ -34,6 +34,9 @@ public class WarShipMoving : MonoBehaviour
     public FuelBarScript fuelBar;
     void Start()
     {
+        leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
+        rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
+
         currentFuel = maxFuel;
         fuelBar.SetMaxTank(maxFuel);
 

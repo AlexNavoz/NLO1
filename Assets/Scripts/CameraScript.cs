@@ -7,6 +7,7 @@ public class CameraScript : MonoBehaviour
 {
     GameObject player;
     Camera cam;
+    public GameObject Plate;
 
     public float smoothSpeed = 1.0f;
     public Vector3 offset;
@@ -15,6 +16,11 @@ public class CameraScript : MonoBehaviour
     public float maxHeight;
     public float minHeight;
     public float leftEdge;
+
+    private void Awake()
+    {
+        Instantiate(Plate);
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
