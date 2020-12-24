@@ -22,15 +22,18 @@ public class playerMoving : MonoBehaviour
     //fuel bar variables
     public float maxFuel;
     public float consumption = 0.01f;
-    float currentFuel;
+    public float currentFuel;
     public FuelBarScript fuelBar;
+    string lname;
 
-    
+
+
 
     private void Awake()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.LoadPlatePrefs();
+        mainScript.LoadShortPlatePrefs();
     }
     void Start()
     {
@@ -39,13 +42,16 @@ public class playerMoving : MonoBehaviour
         EnginePower = mainScript.P_enginePower;
 
         maxFuel = mainScript.P_maxFuel;
-        currentFuel = mainScript.P_fuelLevel;
         fuelBar.SetMaxTank(maxFuel);
+        currentFuel = mainScript.P_fuelLevel;
+        fuelBar.SetValue(currentFuel);
 
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
         rbRight = rightEngine.GetComponent<Rigidbody2D>();
+        lname = SceneManager.GetActiveScene().name;
+
     }
 
     void FixedUpdate()
@@ -56,7 +62,7 @@ public class playerMoving : MonoBehaviour
             if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
             {
                 rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-                if (!SceneManager.sceneCount.Equals(1))
+                if (lname!= "Main menu")
                 {
                     FuelConsampsion(consumption);
                 }
@@ -66,7 +72,7 @@ public class playerMoving : MonoBehaviour
             if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
             {
                 rbRight.AddRelativeForce(Vector3.up * EnginePower);
-                if (!SceneManager.sceneCount.Equals(1))
+                if (lname != "Main menu")
                 {
                     FuelConsampsion(consumption);
                 }

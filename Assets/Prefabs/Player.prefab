@@ -5887,7 +5887,7 @@ GameObject:
   - component: {fileID: 836836198695602301}
   m_Layer: 13
   m_Name: ForceShield
-  m_TagString: Untagged
+  m_TagString: ForceShield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6044,6 +6044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 0
+  currentHP: 0
   fsb: {fileID: 3109287303014853255}
 --- !u!1 &3410058231178433594
 GameObject:
@@ -6569,6 +6570,7 @@ MonoBehaviour:
   rightParticle: {fileID: 9088907899103466262}
   maxFuel: 150
   consumption: 0.01
+  currentFuel: 0
   fuelBar: {fileID: 2061461447}
 --- !u!60 &9088907898758553136
 PolygonCollider2D:
