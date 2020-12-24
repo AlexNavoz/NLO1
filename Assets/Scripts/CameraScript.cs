@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
 {
     GameObject player;
     Camera cam;
-    public GameObject Plate;
+    MainScript mainScript;
 
     public float smoothSpeed = 1.0f;
     public Vector3 offset;
@@ -19,7 +19,8 @@ public class CameraScript : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(Plate);
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        mainScript.StartOnPosition();
     }
     void Start()
     {

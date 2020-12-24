@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playerMoving : MonoBehaviour
 {
-    public float EnginePower = 30.0f;
+    MainScript mainScript;
+
+    public float EnginePower;
 
     public PressedButton leftButton;
     public PressedButton rightButton;
@@ -17,13 +20,26 @@ public class playerMoving : MonoBehaviour
     public ParticleSystem rightParticle;
 
     //fuel bar variables
-    public float maxFuel = 100.0f;
+    public float maxFuel;
     public float consumption = 0.01f;
     float currentFuel;
     public FuelBarScript fuelBar;
+
+    
+
+    private void Awake()
+    {
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        mainScript.LoadPlatePrefs();
+    }
     void Start()
     {
-        currentFuel = maxFuel;
+        
+
+        EnginePower = mainScript.P_enginePower;
+
+        maxFuel = mainScript.P_maxFuel;
+        currentFuel = mainScript.P_fuelLevel;
         fuelBar.SetMaxTank(maxFuel);
 
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
@@ -40,14 +56,20 @@ public class playerMoving : MonoBehaviour
             if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
             {
                 rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-                FuelConsampsion(consumption);
+                if (!SceneManager.sceneCount.Equals(1))
+                {
+                    FuelConsampsion(consumption);
+                }
                 leftParticle.Play();
             }
             else { leftParticle.Stop(); }
             if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
             {
                 rbRight.AddRelativeForce(Vector3.up * EnginePower);
-                FuelConsampsion(consumption);
+                if (!SceneManager.sceneCount.Equals(1))
+                {
+                    FuelConsampsion(consumption);
+                }
                 rightParticle.Play();
             }
 
