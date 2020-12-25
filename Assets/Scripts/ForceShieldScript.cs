@@ -21,8 +21,8 @@ public class ForceShieldScript : MonoBehaviour
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
 
         maxHP = mainScript.P_forceShieldStrength;
-        currentHP = maxHP;
-        fsb.SetHPValue(currentHP);
+        fsb.SetMaxHP(maxHP);
+        SetHPValue();
 
         anim = GetComponent<Animator>();
         lname = SceneManager.GetActiveScene().name;
@@ -38,7 +38,8 @@ public class ForceShieldScript : MonoBehaviour
         }
         if (currentHP <= 0)
         {
-            Destroy(gameObject);
+            mainScript.shieldIsActive = false;
+            gameObject.SetActive(false);
         }
     }
 
@@ -49,5 +50,10 @@ public class ForceShieldScript : MonoBehaviour
             currentHP -= dmg;
             fsb.SetValue(currentHP);
         }
+    }
+    public void SetHPValue()
+    {
+        currentHP = mainScript.P_forceShieldLevel;
+        fsb.SetValue(currentHP);
     }
 }

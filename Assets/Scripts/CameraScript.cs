@@ -24,6 +24,7 @@ public class CameraScript : MonoBehaviour
     }
     void Start()
     {
+        mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
     }

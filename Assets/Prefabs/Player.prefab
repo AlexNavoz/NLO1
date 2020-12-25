@@ -120,9 +120,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CameraScript, Assembly-CSharp
-        m_MethodName: Replay
+      - m_Target: {fileID: 9088907898758553137}
+        m_TargetAssemblyTypeName: playerMoving, Assembly-CSharp
+        m_MethodName: DeletePrefs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2875,7 +2875,7 @@ ParticleSystem:
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
-      m_Bits: 4096
+      m_Bits: 4294967295
     influenceList:
     - {fileID: 0}
   ClampVelocityModule:
@@ -6490,6 +6490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyParticle: {fileID: 2321953763351771361, guid: 23bfd05f5459f444a9b30a79c8695b0a,
     type: 3}
+  collection: 0
 --- !u!1 &9088907898758553151
 GameObject:
   m_ObjectHideFlags: 0
@@ -11700,7 +11701,7 @@ GameObject:
   - component: {fileID: 9088907899474959374}
   - component: {fileID: 9088907899474959360}
   - component: {fileID: 9088907899474959361}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: RayParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16612,7 +16613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9088907899848058880}
   - component: {fileID: 9088907899848058883}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: RayMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16695,7 +16696,7 @@ GameObject:
   - component: {fileID: 9088907899950702359}
   - component: {fileID: 9088907899950702358}
   - component: {fileID: 9088907899950702377}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}

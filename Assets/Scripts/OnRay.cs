@@ -6,6 +6,7 @@ public class OnRay : MonoBehaviour
 {
     public bool isInRay = false;
     Rigidbody2D rb;
+    public int count;
 
     float massOnStart;
     Vector3 scaleOnStart;

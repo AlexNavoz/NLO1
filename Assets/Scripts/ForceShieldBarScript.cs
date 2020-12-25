@@ -11,10 +11,10 @@ public class ForceShieldBarScript : MonoBehaviour
     {
         slider = GameObject.FindGameObjectWithTag("ForceShieldBar").GetComponent<Slider>();
     }
-    public void SetHPValue(float health)
+    public void SetMaxHP(float health)
     {
         slider.maxValue = health;
-        slider.value = health;
+        //slider.value = health;
     }
 
     public void SetValue(float health)

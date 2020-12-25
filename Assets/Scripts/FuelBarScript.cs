@@ -12,7 +12,7 @@ public class FuelBarScript : MonoBehaviour
     public void SetMaxTank(float fuel)
     {
         slider.maxValue = fuel;
-        slider.value = fuel;
+       // slider.value = fuel;
     }
 
     public void SetValue(float fuel) 

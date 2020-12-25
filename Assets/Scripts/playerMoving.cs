@@ -32,6 +32,7 @@ public class playerMoving : MonoBehaviour
     private void Awake()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        mainScript.shieldIsActive = true;
         mainScript.LoadPlatePrefs();
         mainScript.LoadShortPlatePrefs();
     }
@@ -43,8 +44,8 @@ public class playerMoving : MonoBehaviour
 
         maxFuel = mainScript.P_maxFuel;
         fuelBar.SetMaxTank(maxFuel);
-        currentFuel = mainScript.P_fuelLevel;
-        fuelBar.SetValue(currentFuel);
+        SetFuelValues();
+
 
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
@@ -91,6 +92,15 @@ public class playerMoving : MonoBehaviour
     public void FuelConsampsion(float Consumption)
     {
         currentFuel -= Consumption;
+        fuelBar.SetValue(currentFuel);
+    }
+    public void DeletePrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+    public void SetFuelValues()
+    {
+        currentFuel = mainScript.P_fuelLevel;
         fuelBar.SetValue(currentFuel);
     }
 }
