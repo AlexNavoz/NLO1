@@ -103,4 +103,11 @@ public class playerMoving : MonoBehaviour
         currentFuel = mainScript.P_fuelLevel;
         fuelBar.SetValue(currentFuel);
     }
+
+    public void ReloadPlatePrefs()
+    {
+        mainScript.LoadPlatePrefs();
+        EnginePower = mainScript.P_enginePower;
+        maxFuel = mainScript.P_maxFuel;
+    }
 }

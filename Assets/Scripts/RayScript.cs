@@ -5,6 +5,15 @@ using UnityEngine;
 public class RayScript : MonoBehaviour
 {
     public float rayPower;
+    PointEffector2D rayLift;
+    MainScript mainScript;
+    private void Start()
+    {
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        rayLift = GetComponent<PointEffector2D>();
+        //change after Garage menu
+        rayLift.forceMagnitude = -mainScript.P_rayLiftPower;
+    }
 
 
 
