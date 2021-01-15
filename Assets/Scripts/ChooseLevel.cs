@@ -8,6 +8,7 @@ public class ChooseLevel : MonoBehaviour
     MainScript mainScript;
     playerMoving player;
     ForceShieldScript fs;
+    public GameObject canvas;
 
     private void Awake()
     {
@@ -18,16 +19,19 @@ public class ChooseLevel : MonoBehaviour
     {
         if (collision.gameObject.layer == 10)
         {
-            /*
-            player = collision.gameObject.GetComponent<playerMoving>();
-            mainScript.P_fuelLevel = player.currentFuel;
-            fs = collision.gameObject.GetComponent<ForceShieldScript>();
-            mainScript.P_forceShieldLevel = fs.currentHP;*/
+            canvas.SetActive(true);
+            Time.timeScale = 0;
             mainScript.SafeShortPlatePrefs();
             
-            SceneManager.LoadScene(2);
+            
         }
             
         
+    }
+
+    public void ChooseEarthStage(int stage)
+    {
+        SceneManager.LoadScene(stage);
+        Time.timeScale = 1;
     }
 }
