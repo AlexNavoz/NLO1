@@ -8,7 +8,7 @@ public class LoadMainMenuFirstTime : MonoBehaviour
 
     void Start()
     {
-        Invoke("LoadMainMenu", 2);
+        Invoke("LoadMainMenu", 1);
     }
 
     void LoadMainMenu()

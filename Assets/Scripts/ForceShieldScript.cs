@@ -20,8 +20,7 @@ public class ForceShieldScript : MonoBehaviour
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
 
-        maxHP = mainScript.P_forceShieldStrength;
-        fsb.SetMaxHP(maxHP);
+        
         SetHPValue();
 
         anim = GetComponent<Animator>();
@@ -34,7 +33,7 @@ public class ForceShieldScript : MonoBehaviour
         if(collision.gameObject.layer == 9)
         {
             anim.SetTrigger("TakeDMGAnim");
-            TakingDamage(10);
+            TakingDamage(3);
         }
         if (currentHP <= 0)
         {
@@ -53,6 +52,8 @@ public class ForceShieldScript : MonoBehaviour
     }
     public void SetHPValue()
     {
+        maxHP = mainScript.P_forceShieldStrength;
+        fsb.SetMaxHP(maxHP);
         currentHP = mainScript.P_forceShieldLevel;
         fsb.SetValue(currentHP);
     }

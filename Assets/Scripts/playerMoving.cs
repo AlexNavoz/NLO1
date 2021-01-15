@@ -42,8 +42,7 @@ public class playerMoving : MonoBehaviour
 
         EnginePower = mainScript.P_enginePower;
 
-        maxFuel = mainScript.P_maxFuel;
-        fuelBar.SetMaxTank(maxFuel);
+        
         SetFuelValues();
 
 
@@ -100,6 +99,8 @@ public class playerMoving : MonoBehaviour
     }
     public void SetFuelValues()
     {
+        maxFuel = mainScript.P_maxFuel;
+        fuelBar.SetMaxTank(maxFuel);
         currentFuel = mainScript.P_fuelLevel;
         fuelBar.SetValue(currentFuel);
     }

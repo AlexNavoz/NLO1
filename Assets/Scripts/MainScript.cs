@@ -44,7 +44,7 @@ public class MainScript : MonoBehaviour
         LoadPlatePrefs();
         LoadShortPlatePrefs();
 
-        allMoney = PlayerPrefs.GetInt("allMoney", 100000);
+        allMoney = PlayerPrefs.GetInt("allMoney", 25000);
         text.text = allMoney.ToString();
         CanvasOrNotCanvas();
 
@@ -56,7 +56,7 @@ public class MainScript : MonoBehaviour
         P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 120.0f);
         //P_rayDacreaserPower = PlayerPrefs.GetFloat("P_rayDecreaserPower", 0.1f);
         P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
-        P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 100.0f);
+        P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
     }
     public void LoadShortPlatePrefs()
     {
