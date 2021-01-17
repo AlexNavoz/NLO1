@@ -7,6 +7,7 @@ public class OnRay : MonoBehaviour
     public bool isInRay = false;
     Rigidbody2D rb;
     public int count;
+    Transform player;
 
     float massOnStart;
     Vector3 scaleOnStart;
@@ -14,6 +15,7 @@ public class OnRay : MonoBehaviour
     double massScale = 1.0f;
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         massOnStart = rb.mass;
         scaleOnStart = transform.localScale;
@@ -33,6 +35,11 @@ public class OnRay : MonoBehaviour
             transform.localScale = new Vector2(scaleOnStart.x * (float)transformscale, scaleOnStart.y * (float)transformscale);
         }
         
+        if((player.position.x - transform.position.x) > 60 || (player.position.x - transform.position.x) < -60)
+        {
+            gameObject.SetActive(false);
+        }
+        else gameObject.SetActive(true);
     }
 
 }

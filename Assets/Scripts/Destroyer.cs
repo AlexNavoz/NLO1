@@ -9,9 +9,11 @@ public class Destroyer : MonoBehaviour
     public int collection;
     MainScript mainScript;
     ParticleSystem givingParticle;
+    playerMoving player_moving;
     
     private void Start()
     {
+        player_moving = GetComponentInParent<playerMoving>();
         givingParticle = GetComponentInChildren<ParticleSystem>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         playerRb = GetComponentInParent<Rigidbody2D>();
@@ -42,6 +44,19 @@ public class Destroyer : MonoBehaviour
             mainScript.SetMoney(mainScript.collection);
             givingParticle.Play();
             mainScript.collection = 0;
+        }
+
+        if (collision.gameObject.layer == 17)
+        {
+            Debug.Log("FuelPoint");
+            int onRayCount;
+            GameObject obj = collision.gameObject;
+            onRayCount = obj.GetComponent<OnRay>().count;
+            mainScript.P_fuelLevel += ((float) onRayCount);
+            player_moving.SetFuelValues();
+
+            Instantiate(DestroyParticle, transform.position, Quaternion.identity);
+            Destroy(obj);
         }
     }
 }

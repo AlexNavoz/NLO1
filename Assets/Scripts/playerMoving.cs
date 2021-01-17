@@ -100,9 +100,19 @@ public class playerMoving : MonoBehaviour
     public void SetFuelValues()
     {
         maxFuel = mainScript.P_maxFuel;
-        fuelBar.SetMaxTank(maxFuel);
         currentFuel = mainScript.P_fuelLevel;
-        fuelBar.SetValue(currentFuel);
+        if (currentFuel < maxFuel)
+        {
+            fuelBar.SetMaxTank(maxFuel);
+
+            fuelBar.SetValue(currentFuel);
+        }
+        else
+        {
+            fuelBar.SetMaxTank(maxFuel);
+
+            fuelBar.SetValue(maxFuel);
+        }
     }
 
     public void ReloadPlatePrefs()
