@@ -34,12 +34,12 @@ public class OnRay : MonoBehaviour
             double transformscale = System.Math.Pow(massScale, 0.7f);
             transform.localScale = new Vector2(scaleOnStart.x * (float)transformscale, scaleOnStart.y * (float)transformscale);
         }
-        
+        /*
         if((player.position.x - transform.position.x) > 60 || (player.position.x - transform.position.x) < -60)
         {
             gameObject.SetActive(false);
         }
-        else gameObject.SetActive(true);
+        else gameObject.SetActive(true);*/
     }
 
 }

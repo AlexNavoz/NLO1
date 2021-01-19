@@ -10,8 +10,11 @@ public class ChooseLevel : MonoBehaviour
     ForceShieldScript fs;
     public GameObject canvas;
 
+    Animator crossfade;
+
     private void Awake()
     {
+        crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
     }
 
@@ -31,7 +34,16 @@ public class ChooseLevel : MonoBehaviour
 
     public void ChooseEarthStage(int stage)
     {
-        SceneManager.LoadScene(stage);
         Time.timeScale = 1;
+        StartCoroutine(CrossFade(stage));
+    }
+
+    IEnumerator CrossFade(int levelIndex)
+    {
+        crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1.0f);
+
+        SceneManager.LoadScene(levelIndex);
     }
 }
