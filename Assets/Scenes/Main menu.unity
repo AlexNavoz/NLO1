@@ -1247,9 +1247,9 @@ RectTransform:
   m_Father: {fileID: 589831436}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -482.83, y: 261.8}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 29.170013, y: -45.200012}
   m_SizeDelta: {x: 37.8981, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372964056
@@ -8269,6 +8269,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadSceneScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4609985599476630485, guid: a6c84ce5818f37e438c5b1542d4f1a21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c84ce5818f37e438c5b1542d4f1a21, type: 3}
 --- !u!1 &847085395
@@ -8354,14 +8359,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 718747366}
+        m_TargetAssemblyTypeName: ChooseLevel, Assembly-CSharp
+        m_MethodName: ChooseEarthStage
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8607,7 +8612,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level2
+  m_Text: AsteroidTest
 --- !u!222 &869558251
 CanvasRenderer:
   m_ObjectHideFlags: 0

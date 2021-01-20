@@ -19,7 +19,7 @@ public class RayScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 8)
+        if(collision.gameObject.layer == 8|| collision.gameObject.layer == 19)
         {
             GameObject obj = collision.gameObject;
             InDecreaser(obj);
@@ -27,7 +27,7 @@ public class RayScript : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 8 || collision.gameObject.layer == 19)
         {
             GameObject obj = collision.gameObject;
             OutDecreaser(obj);

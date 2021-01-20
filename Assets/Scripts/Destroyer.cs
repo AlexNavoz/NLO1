@@ -24,19 +24,28 @@ public class Destroyer : MonoBehaviour
         {
             Rigidbody2D cowRb;
             int onRayCount;
-            
+            OnRay onRayComponent;
 
             GameObject obj = collision.gameObject;
 
-            onRayCount = obj.GetComponent<OnRay>().count;
-            mainScript.collection += onRayCount;
-            cowRb = obj.GetComponent<Rigidbody2D>();
-            if (cowRb != null){
-                playerRb.mass += cowRb.mass;
+            onRayComponent = obj.GetComponent<OnRay>();
+            if (onRayComponent == null)
+            {
+                return;
             }
-            Instantiate(DestroyParticle, transform.position, Quaternion.identity);
+            else
+            {
+                onRayCount = onRayComponent.count;
+                mainScript.collection += onRayCount;
+                cowRb = obj.GetComponent<Rigidbody2D>();
+                if (cowRb != null)
+                {
+                    playerRb.mass += cowRb.mass;
+                }
+                Instantiate(DestroyParticle, transform.position, Quaternion.identity);
 
-            Destroy(obj);
+                Destroy(obj);
+            }
         }
 
         if(collision.gameObject.layer == 14&& mainScript.collection!=0)

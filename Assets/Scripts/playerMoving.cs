@@ -38,7 +38,7 @@ public class playerMoving : MonoBehaviour
     }
     void Start()
     {
-        
+        Time.timeScale = 1;
 
         EnginePower = mainScript.P_enginePower;
 
@@ -103,15 +103,21 @@ public class playerMoving : MonoBehaviour
         currentFuel = mainScript.P_fuelLevel;
         if (currentFuel < maxFuel)
         {
+            mainScript.P_maxFuel = maxFuel;
+            mainScript.P_fuelLevel = currentFuel;
             fuelBar.SetMaxTank(maxFuel);
 
             fuelBar.SetValue(currentFuel);
+
         }
         else
         {
             fuelBar.SetMaxTank(maxFuel);
-
-            fuelBar.SetValue(maxFuel);
+            currentFuel = maxFuel;
+            fuelBar.SetValue(currentFuel);
+            
+            mainScript.P_maxFuel = maxFuel;
+            mainScript.P_fuelLevel = currentFuel;
         }
     }
 

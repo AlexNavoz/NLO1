@@ -15,12 +15,13 @@ public class ForceShieldScript : MonoBehaviour
     public float maxHP;
     public float currentHP;
     public ForceShieldBarScript fsb;
+    Animator mainCameraAnim;
 
     private void Start()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
 
-        
+        mainCameraAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         SetHPValue();
 
         anim = GetComponent<Animator>();
@@ -32,7 +33,7 @@ public class ForceShieldScript : MonoBehaviour
 
         if(collision.gameObject.layer == 9)
         {
-            anim.SetTrigger("TakeDMGAnim");
+            
             TakingDamage(3);
         }
         if (currentHP <= 0)
@@ -44,6 +45,11 @@ public class ForceShieldScript : MonoBehaviour
 
     public void TakingDamage(float dmg)
     {
+        anim.SetTrigger("TakeDMGAnim");
+        if (dmg >= 5)
+        {
+            mainCameraAnim.SetTrigger("Shake");
+        }
         if (lname !="Main menu")
         {
             currentHP -= dmg;

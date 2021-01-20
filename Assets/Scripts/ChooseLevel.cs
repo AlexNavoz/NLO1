@@ -9,6 +9,7 @@ public class ChooseLevel : MonoBehaviour
     playerMoving player;
     ForceShieldScript fs;
     public GameObject canvas;
+    int i = 0;
 
     Animator crossfade;
 
@@ -20,8 +21,9 @@ public class ChooseLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 10)
+        if (collision.gameObject.layer == 10&& i == 0)
         {
+            i++;
             canvas.SetActive(true);
             Time.timeScale = 0;
             mainScript.SafeShortPlatePrefs();
@@ -36,6 +38,7 @@ public class ChooseLevel : MonoBehaviour
     {
         Time.timeScale = 1;
         StartCoroutine(CrossFade(stage));
+        
     }
 
     IEnumerator CrossFade(int levelIndex)
@@ -43,7 +46,7 @@ public class ChooseLevel : MonoBehaviour
         crossfade.SetTrigger("Start");
 
         yield return new WaitForSeconds(1.0f);
-
+        i = 0;
         SceneManager.LoadScene(levelIndex);
     }
 }

@@ -8,8 +8,10 @@ public class ComingHomeScript : MonoBehaviour
     MainScript mainScript;
     playerMoving player;
     ForceShieldScript fs;
+    Animator crossfade;
     void Start()
     {
+        crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
     }
 
@@ -18,12 +20,21 @@ public class ComingHomeScript : MonoBehaviour
     {
         if(collision.gameObject.layer == 10)
         {
-            /*player = collision.gameObject.GetComponent<playerMoving>();
-            mainScript.P_fuelLevel = player.currentFuel;
-            fs = collision.gameObject.GetComponent<ForceShieldScript>();
-            mainScript.P_forceShieldLevel = fs.currentHP;*/
             mainScript.SafeShortPlatePrefs();
-            SceneManager.LoadScene(1);
+            ChooseEarthStage(1);
         }
+    }
+    public void ChooseEarthStage(int stage)
+    {
+        StartCoroutine(CrossFade(stage));
+
+    }
+
+    IEnumerator CrossFade(int levelIndex)
+    {
+        crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(levelIndex);
     }
 }

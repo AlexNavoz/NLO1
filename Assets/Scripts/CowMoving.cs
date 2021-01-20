@@ -39,23 +39,24 @@ public class CowMoving : MonoBehaviour
     private void Update()
     {
         cowPowerindex = rb.mass / startMass;
-        if (onRay.isInRay && !scared)
+        if (onRay.isInRay)
         {
-            scared = true;
-            waitTime = 1;
+            if (!scared)
+            {
+                scared = true;
+                waitTime = 1;
+            }
+        }
+        else if ((player.position.x - transform.position.x) > distanse || (player.position.x - transform.position.x) < -distanse)
+        {
+            scared = false;
         }
 
         if (scared)
         {
             InFear();
         }
-
-        if ((player.position.x - transform.position.x) > distanse || (player.position.x - transform.position.x) < -distanse)
-        {
-            scared = false;
-
-        }
-        if (!scared)
+        else
         {
             Chill();
         }
