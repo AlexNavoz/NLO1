@@ -8,12 +8,6 @@ public class SwipeMenu : MonoBehaviour
     public GameObject scrollBar;
     float scrollPosition = 0;
     float[] pos;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         pos = new float[transform.childCount];

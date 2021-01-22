@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using UnityEngine.SceneManagement;
 
 public class AsteroidCameraScript : MonoBehaviour
@@ -10,6 +11,7 @@ public class AsteroidCameraScript : MonoBehaviour
     Camera cam;
     MainScript mainScript;
 
+    public Vector3 offset;
     public float cameraSpeed;
     public float cameraAcceleration;
     public float leftEdge;
@@ -31,9 +33,11 @@ public class AsteroidCameraScript : MonoBehaviour
         cam = Camera.main;
         
     }
-    void LateUpdate()
+    void FixedUpdate()
     {
-        
+        Vector3 playerPosition = player.transform.position + offset;
+        Vector3 SmoothedPosition = Vector3.Lerp(transform.position, playerPosition, 3.0f*Time.fixedDeltaTime);
+        transform.position = SmoothedPosition;
 
         transform.position = new Vector3( player.transform.position.x, transform.position.y, transform.position.z);
         if (transform.position.x < leftEdge)
@@ -48,18 +52,14 @@ public class AsteroidCameraScript : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        transform.position += Vector3.up * cameraSpeed * Time.deltaTime;
-        cameraSpeed += cameraAcceleration;
-    }
+    
 
     IEnumerator MakingAsteroids()
     {
         while (true)
         {
             int i = Random.Range(0, 3);
-            Instantiate(asteroids[i], new Vector3(transform.position.x + Random.Range(-30, 30), transform.position.y + 50, transform.position.z), Quaternion.identity);
+            Instantiate(asteroids[i], new Vector3(Random.Range(-30, 30), transform.position.y + 50, transform.position.z), Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
         }
     }

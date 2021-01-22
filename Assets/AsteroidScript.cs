@@ -6,11 +6,13 @@ public class AsteroidScript : MonoBehaviour
 {
     Rigidbody2D rb;
     ForceShieldScript fs;
+    Transform player;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(Vector3.down * Random.Range(50.0f, 200.0f), ForceMode2D.Impulse);
+        rb.AddForce(Vector3.down * Random.Range(100.0f, 250.0f), ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(-100, 100),ForceMode2D.Impulse);
     }
 
@@ -19,6 +21,14 @@ public class AsteroidScript : MonoBehaviour
         if (collision.gameObject.layer == 13)
         {
             fs.TakingDamage(rb.mass / 2);
+        }
+    }
+
+    private void Update()
+    {
+        if (transform.position.y - player.position.y < -50)
+        {
+            Destroy(gameObject);
         }
     }
 

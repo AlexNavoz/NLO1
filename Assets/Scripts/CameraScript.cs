@@ -9,7 +9,7 @@ public class CameraScript : MonoBehaviour
     Camera cam;
     MainScript mainScript;
 
-    public float smoothSpeed = 1.0f;
+    float smoothSpeed = 3.0f;
     public Vector3 offset;
     public float maxSize;
     public float minSize;
@@ -29,10 +29,10 @@ public class CameraScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
     }
-    void LateUpdate()
+    void FixedUpdate()
     {
         Vector3 playerPosition = player.transform.position + offset;
-        Vector3 SmoothedPosition = Vector3.Lerp(transform.position, playerPosition, smoothSpeed);
+        Vector3 SmoothedPosition = Vector3.Lerp(transform.position, playerPosition, smoothSpeed*Time.fixedDeltaTime);
         transform.position = SmoothedPosition;
         cam.orthographicSize = player.transform.position.y*1.5f;
         if (cam.orthographicSize > maxSize)
