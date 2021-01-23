@@ -34,7 +34,7 @@ public class GarageScript : MonoBehaviour
     public Text P_tankText;
     public Slider P_tankSlider;
     public Button P_tankButton;
-    float[] P_tankpowers = new float[] { 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 100.0f, 120.0f, 140.0f, 160.0f, 190.0f };
+    float[] P_tankpowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 90.0f, 100.0f, 110.0f, 130.0f };
 
     //Shield
     int P_ShieldLevel;

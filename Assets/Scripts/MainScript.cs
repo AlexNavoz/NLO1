@@ -53,7 +53,7 @@ public class MainScript : MonoBehaviour
     public void LoadPlatePrefs()
     {
         P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
-        P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 120.0f);
+        P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 30.0f);
         //P_rayDacreaserPower = PlayerPrefs.GetFloat("P_rayDecreaserPower", 0.1f);
         P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
         P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
