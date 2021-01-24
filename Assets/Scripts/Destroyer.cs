@@ -10,9 +10,11 @@ public class Destroyer : MonoBehaviour
     MainScript mainScript;
     ParticleSystem givingParticle;
     playerMoving player_moving;
+    ForceShieldScript fs;
     
     private void Start()
     {
+        fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         player_moving = GetComponentInParent<playerMoving>();
         givingParticle = GetComponentInChildren<ParticleSystem>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
@@ -57,12 +59,24 @@ public class Destroyer : MonoBehaviour
 
         if (collision.gameObject.layer == 17)
         {
-            Debug.Log("FuelPoint");
             int onRayCount;
             GameObject obj = collision.gameObject;
             onRayCount = obj.GetComponent<OnRay>().count;
+            mainScript.P_fuelLevel = player_moving.currentFuel;
             mainScript.P_fuelLevel += ((float) onRayCount);
             player_moving.SetFuelValues();
+
+            Instantiate(DestroyParticle, transform.position, Quaternion.identity);
+            Destroy(obj);
+        }
+        if (collision.gameObject.layer == 18)
+        {
+            int onRayCount;
+            GameObject obj = collision.gameObject;
+            onRayCount = obj.GetComponent<OnRay>().count;
+            mainScript.P_forceShieldLevel = fs.currentHP;
+            mainScript.P_forceShieldLevel += ((float)onRayCount);
+            fs.SetHPValue();
 
             Instantiate(DestroyParticle, transform.position, Quaternion.identity);
             Destroy(obj);

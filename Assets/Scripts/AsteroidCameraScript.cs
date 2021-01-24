@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class AsteroidCameraScript : MonoBehaviour
 {
-    public GameObject[] asteroids = new GameObject[] { }; 
+    public GameObject[] asteroids = new GameObject[] { };
+    public GameObject[] bonuses = new GameObject[] { };
     GameObject player;
     Camera cam;
     MainScript mainScript;
+    public float AsteroidMakingSpeed = 0.2f;
+    public float bonusCreationSpeed = 0.5f;
 
     public Vector3 offset;
     public float cameraSpeed;
@@ -19,7 +22,6 @@ public class AsteroidCameraScript : MonoBehaviour
 
     private void Awake()
     {
-        //Screen.orientation = ScreenOrientation.Portrait;
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.StartOnPosition();
     }
@@ -27,6 +29,7 @@ public class AsteroidCameraScript : MonoBehaviour
     {
 
         StartCoroutine("MakingAsteroids");
+        StartCoroutine("MakingBonuses");
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
@@ -59,7 +62,17 @@ public class AsteroidCameraScript : MonoBehaviour
         {
             int i = Random.Range(0, 3);
             Instantiate(asteroids[i], new Vector3(Random.Range(-54, 54), transform.position.y + 50, transform.position.z), Quaternion.identity);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(AsteroidMakingSpeed);
+        }
+    }
+
+    IEnumerator MakingBonuses()
+    {
+        while (true)
+        {
+            int i = Random.Range(0, bonuses.Length);
+            Instantiate(bonuses[i], new Vector3(Random.Range(-54, 54), transform.position.y + 50, transform.position.z), Quaternion.identity);
+            yield return new WaitForSeconds(bonusCreationSpeed);
         }
     }
     public void Replay()

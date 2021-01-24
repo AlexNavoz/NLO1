@@ -12,7 +12,7 @@ public class AsteroidScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(Vector3.down * Random.Range(100.0f, 250.0f), ForceMode2D.Impulse);
+        rb.AddForce(Vector3.down * Random.Range(200.0f, 400.0f), ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(-100, 100),ForceMode2D.Impulse);
     }
 

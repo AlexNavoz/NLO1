@@ -58,9 +58,27 @@ public class ForceShieldScript : MonoBehaviour
     }
     public void SetHPValue()
     {
+
+
         maxHP = mainScript.P_forceShieldStrength;
-        fsb.SetMaxHP(maxHP);
         currentHP = mainScript.P_forceShieldLevel;
-        fsb.SetValue(currentHP);
+        if (currentHP < maxHP)
+        {
+            mainScript.P_forceShieldStrength = maxHP;
+            mainScript.P_forceShieldLevel = currentHP;
+            fsb.SetMaxHP(maxHP);
+
+            fsb.SetValue(currentHP);
+
+        }
+        else
+        {
+            fsb.SetMaxHP(maxHP);
+            currentHP = maxHP;
+            fsb.SetValue(currentHP);
+
+            mainScript.P_forceShieldStrength = maxHP;
+            mainScript.P_forceShieldLevel = currentHP;
+        }
     }
 }

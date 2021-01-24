@@ -60,7 +60,7 @@ public class GarageScript : MonoBehaviour
         P_rayText.text = P_rayPrice.ToString();
 
         //Tank
-        P_tankSlider.value = PlayerPrefs.GetFloat("P_maxFuel", 100.0f);
+        P_tankSlider.value = PlayerPrefs.GetFloat("P_maxFuel", 30.0f);
         P_TankLevel = PlayerPrefs.GetInt("P_TankLevel", 0);
         P_tankPrice = prices[P_TankLevel];
         P_tankText.text = P_tankPrice.ToString();
@@ -253,7 +253,7 @@ public class GarageScript : MonoBehaviour
     {
         P_shieldPrice = prices[P_ShieldLevel];
         P_ShieldLevel++;
-        PlayerPrefs.SetInt("P_ShieldLevel", P_TankLevel);
+        PlayerPrefs.SetInt("P_ShieldLevel", P_ShieldLevel);
         PlayerPrefs.SetFloat("P_forceShieldStrength", P_shieldpowers[P_ShieldLevel]);
         mainScript.SetMoney(-P_shieldPrice);
         P_shieldSlider.value = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
