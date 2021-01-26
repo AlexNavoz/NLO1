@@ -5,10 +5,14 @@ using UnityEngine;
 public class GroundDetector : MonoBehaviour
 {
     int i = 0;
-    CowMoving cowMoving;
+    Object cowMoving;
     private void Start()
     {
         cowMoving = GetComponentInParent<CowMoving>();
+        if (cowMoving == null)
+        {
+            cowMoving = GetComponentInParent<AttackerScript>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,8 +22,14 @@ public class GroundDetector : MonoBehaviour
             i++;
             if (i !=0)
             {
-                cowMoving.isGrounded = true;
-                
+                if (cowMoving.GetType() == typeof(CowMoving))
+                {
+                    ((CowMoving)cowMoving).isGrounded = true;
+                }
+                else if (cowMoving.GetType() == typeof(AttackerScript))
+                {
+                    ((AttackerScript)cowMoving).isGrounded = true;
+                }
             }
         }
     }
@@ -30,7 +40,14 @@ public class GroundDetector : MonoBehaviour
             i--;
             if (i == 0)
             {
-                cowMoving.isGrounded = false;
+                if (cowMoving.GetType() == typeof(CowMoving))
+                {
+                    ((CowMoving)cowMoving).isGrounded = false;
+                }
+                else if (cowMoving.GetType() == typeof(AttackerScript))
+                {
+                    ((AttackerScript)cowMoving).isGrounded = false;
+                }
             }
         }
     }
