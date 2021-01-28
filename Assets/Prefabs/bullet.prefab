@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPower: 50
   damage: 10
+  impulse_angle: 0
 --- !u!50 &5293332584899348570
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +150,7 @@ GameObject:
   - component: {fileID: 5293332585665051161}
   - component: {fileID: 5293332585665051160}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: BulletParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,8 +422,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1055,7 +1056,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1108,7 +1109,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -1120,20 +1121,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 1
+          inSlope: 5.971331
+          outSlope: 5.971331
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.06299212
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0.018348634
+          inSlope: -5.3887534
+          outSlope: -5.3887534
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.062992215
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2

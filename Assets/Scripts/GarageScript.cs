@@ -9,7 +9,7 @@ public class GarageScript : MonoBehaviour
     playerMoving player_moving;
     ForceShieldScript fs;
     public GameObject canvas;
-    int[] prices = new int[] {100,200,400,800,1500,2000,2000,2000,2000,2000};
+    int[] prices = new int[] {100,200,400,800,1500,2000,2000,2000,3000,4000};
     //plate variables
 
     //engine

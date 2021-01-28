@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackerScript : MonoBehaviour
 {
-    //public GameObject muzzle;
+    public GameObject muzzle;
     public GameObject bullet;
     bool scared;
     bool aiming = false;
@@ -17,6 +17,7 @@ public class AttackerScript : MonoBehaviour
     public float shootingtime = 3;
 
     public float distanse;
+    public float aiming_distanse;
     public float cowPower = 1.0f;
     float cowPowerindex = 1.0f;
     float startMass;
@@ -54,14 +55,19 @@ public class AttackerScript : MonoBehaviour
                 waitTime = 1;
             }
         }
-        else if ((player.position.x - transform.position.x) > distanse || (player.position.x - transform.position.x) < -distanse)
+        else if (System.Math.Abs(player.position.x - transform.position.x) > distanse && scared)
         {
             scared = false;
             aiming = false;
             aimingtime = 0;
         }
-        else {
-            aiming = true;
+        else if(System.Math.Abs(player.position.x - transform.position.x) < aiming_distanse && !scared)
+        {
+            if (!aiming)
+            {
+                aiming = true;
+                aimingtime = 0;
+            }
         }
 
         if (scared)
@@ -117,7 +123,7 @@ public class AttackerScript : MonoBehaviour
 
     void Shoot(float anim_position)
     {
-        GameObject newbullet = Instantiate(bullet, rb.position, new Quaternion(0,0,0,0));
+        GameObject newbullet = Instantiate(bullet, muzzle.transform.position, new Quaternion(0,0,0,0));
         BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
 
         newbulletscript.impulse_angle = anim_position;

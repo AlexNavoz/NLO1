@@ -21,6 +21,7 @@ public class BulletScript : MonoBehaviour
         impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
         impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
         rb.AddRelativeForce(impulse_vector * shootPower, ForceMode2D.Impulse);
+        Destroy(gameObject, 7.0f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
