@@ -8,6 +8,6 @@ public class PointKicker : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(Random.Range(-4, 4), Random.Range(-4, 4)), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(Random.Range(-2, 2), Random.Range(-2, 2)), ForceMode2D.Impulse);
     }
 }

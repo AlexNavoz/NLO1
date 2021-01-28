@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackerScript : MonoBehaviour
 {
+    public GameObject muzzle;
+    public GameObject bullet;
     bool scared;
     bool aiming = false;
     OnRay onRay;
@@ -110,7 +112,9 @@ public class AttackerScript : MonoBehaviour
         ChangeAnimation(4, anim_position);
     }
 
-    void Shoot() {
+    void Shoot()
+    {
+        Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
 
     }
 
