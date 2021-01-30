@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1881465733401982202}
   - component: {fileID: 1881465733401982203}
   m_Layer: 18
-  m_Name: Particle System
+  m_Name: HPParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -964,7 +964,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2

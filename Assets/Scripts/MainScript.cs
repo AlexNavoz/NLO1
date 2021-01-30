@@ -44,7 +44,7 @@ public class MainScript : MonoBehaviour
         LoadPlatePrefs();
         LoadShortPlatePrefs();
 
-        allMoney = PlayerPrefs.GetInt("allMoney", 25000);
+        allMoney = PlayerPrefs.GetInt("allMoney", 1500);
         text.text = allMoney.ToString();
         CanvasOrNotCanvas();
 

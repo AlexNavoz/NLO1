@@ -41,7 +41,7 @@ public class OnRay : MonoBehaviour
 
     void DistanceDetecting()
     {
-        if ((player.position.x - transform.position.x) > 60 || (player.position.x - transform.position.x) < -60)
+        if ((player.position.x - transform.position.x) > 40 || (player.position.x - transform.position.x) < -40)
         {
             gameObject.SetActive(false);
         }
