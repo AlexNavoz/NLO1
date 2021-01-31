@@ -6,21 +6,25 @@ public class BulletScript : MonoBehaviour
 {
     public float shootPower;
     public float damage;
+    public float massScale = 1;
     Rigidbody2D rb;
     ForceShieldScript fs;
+    Transform scale;
 
     public float impulse_angle;
 
     void Start()
     {
+        scale = GetComponent<Transform>();
         fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         rb = GetComponent<Rigidbody2D>();
-        //rb.AddRelativeForce(Vector3.left * shootPower, ForceMode2D.Impulse);
+        rb.mass *= massScale;
+        scale.localScale *= massScale;
         Vector2 impulse_vector;
 
         impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
         impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
-        rb.AddRelativeForce(impulse_vector * shootPower, ForceMode2D.Impulse);
+        rb.AddRelativeForce(impulse_vector * shootPower*massScale, ForceMode2D.Impulse);
         Destroy(gameObject, 7.0f);
     }
 
@@ -28,7 +32,7 @@ public class BulletScript : MonoBehaviour
     {
         if(collision.gameObject.layer == 13)
         {
-            fs.TakingDamage(damage);
+            fs.TakingDamage(damage*massScale);
         }
         Destroy(gameObject, 2.0f);
     }

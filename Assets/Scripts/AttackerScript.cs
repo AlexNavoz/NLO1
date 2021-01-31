@@ -125,8 +125,13 @@ public class AttackerScript : MonoBehaviour
     {
         GameObject newbullet = Instantiate(bullet, muzzle.transform.position, new Quaternion(0,0,0,0));
         BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
-
         newbulletscript.impulse_angle = anim_position;
+        newbulletscript.massScale = (float) onRay.massScale;
+       // newbulletscript.newShootPower *= (float)onRay.massScale;
+       // newbulletscript.rb.mass *= (float)onRay.massScale;
+       // newbulletscript.scale.localScale *= (float)onRay.massScale;
+
+        
     }
 
     void SetNextSpotToMove()

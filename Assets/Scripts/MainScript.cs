@@ -69,6 +69,12 @@ public class MainScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
         P_fuelLevel = player.currentFuel;
+        if (P_fuelLevel > 0)
+        {
+            PlayerPrefs.SetFloat("P_fuelLevel", P_fuelLevel);
+        }
+        else
+            PlayerPrefs.SetFloat("P_fuelLevel", 1.0f);
         if (shieldIsActive)
         {
             fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
@@ -77,7 +83,6 @@ public class MainScript : MonoBehaviour
         }
         else
             PlayerPrefs.SetFloat("P_forceShieldLevel", 1.0f);
-        PlayerPrefs.SetFloat("P_fuelLevel", P_fuelLevel);
         
         PlayerPrefs.SetInt("P_cowCount", P_cowCount);
     }

@@ -12,7 +12,7 @@ public class OnRay : MonoBehaviour
     float massOnStart;
     Vector3 scaleOnStart;
 
-    double massScale = 1.0f;
+    public double massScale = 1.0f;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
