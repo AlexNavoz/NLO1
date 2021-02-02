@@ -21,27 +21,30 @@ public class LooseScreenScript : MonoBehaviour
     Vector3 offset = new Vector3(0, -20, 0);
     void Start()
     {
-        if (mainScript.levelIndex == 1)
-        {
-            choiseAnim = choisePanel.GetComponent<Animation>();
-        }
+        
         mainAnim = mainPanel.GetComponent<Animation>();
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+            if (choisePanel != null)
+        {
+            choiseAnim = choisePanel.GetComponent<Animation>();
+        }
     }
 
     public void CanvasOpen()
     {
-        if (mainScript.levelIndex == 1)
+       if (mainScript.levelIndex == 1)
         {
             choisePanel.SetActive(false);
             collectionText.text = mainScript.collection.ToString();
+            priceText.text = (mainScript.collection / 2).ToString();
         }
         canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
         Invoke("TimeStop",mainAnim.clip.length);
-        priceText.text = (mainScript.collection/2).ToString();
+
     }
     public void TimeStop()
     {
@@ -73,12 +76,11 @@ public class LooseScreenScript : MonoBehaviour
     {
         Time.timeScale = 1;
         choisePanel.SetActive(true);
-        choiseAnim.Play("PanelStartAnim");
+        choiseAnim.Rewind("PanelStartAnim");
     }
 
     public void ExitPayPanel()
     {
-        choiseAnim.Play("PanelExitAnim");
         choisePanel.SetActive(false);
     }
 

@@ -397,7 +397,7 @@ Animation:
   m_GameObject: {fileID: 2577921772498534786}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 84b2573d90573e54d84b982defa43cee, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 84b2573d90573e54d84b982defa43cee, type: 2}
   - {fileID: 7400000, guid: caae9df2d5e37f248aac9b1a792796d0, type: 2}
@@ -1044,7 +1044,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2577921773640152030}
         m_TargetAssemblyTypeName: LooseScreenScript, Assembly-CSharp
-        m_MethodName: BuyEvac
+        m_MethodName: ExitPayPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -24,10 +24,10 @@ public class AsteroidCameraScript : MonoBehaviour
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.StartOnPosition();
+        mainScript.levelIndex = 2;
     }
     void Start()
     {
-
         StartCoroutine("MakingAsteroids");
         StartCoroutine("MakingBonuses");
         mainScript.CanvasOrNotCanvas();

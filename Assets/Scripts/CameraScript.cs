@@ -15,12 +15,22 @@ public class CameraScript : MonoBehaviour
     public float minSize;
     public float maxHeight;
     public float minHeight;
-    public float leftEdge;
+    public Transform leftBlock;
+    public Transform rightBlock;
 
     private void Awake()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.StartOnPosition();
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            mainScript.levelIndex = 0;
+        }
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            mainScript.levelIndex = 1;
+        }
     }
     void Start()
     {
@@ -28,14 +38,7 @@ public class CameraScript : MonoBehaviour
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            mainScript.levelIndex = 0;
-        }
-        else
-        {
-            mainScript.levelIndex = 1;
-        }
+        
     }
     void FixedUpdate()
     {
@@ -61,10 +64,15 @@ public class CameraScript : MonoBehaviour
             Vector3 MaxHeight = new Vector3(transform.position.x, maxHeight, transform.position.z);
             transform.position = MaxHeight;
         }
-        if (transform.position.x < leftEdge)
+        if (transform.position.x < leftBlock.position.x)
         {
-            Vector3 LeftEdge = new Vector3(leftEdge, transform.position.y, transform.position.z);
+            Vector3 LeftEdge = new Vector3(leftBlock.position.x, transform.position.y, transform.position.z);
             transform.position = LeftEdge;
+        }
+        if (transform.position.x > rightBlock.position.x)
+        {
+            Vector3 RightEdge = new Vector3(rightBlock.position.x, transform.position.y, transform.position.z);
+            transform.position = RightEdge;
         }
     }
     public void Replay()

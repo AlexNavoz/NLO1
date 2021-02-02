@@ -91,12 +91,17 @@ public class playerMoving : MonoBehaviour
                 rightParticle.Stop();
             }
         }
+        if (isDead)
+        {
+            leftParticle.Stop();
+            rightParticle.Stop();
+        }
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 11)
+        if(collision.gameObject.layer == 11|| collision.gameObject.layer == 19)
         {
             if (canDie)
             { i++;
