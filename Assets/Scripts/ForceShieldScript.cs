@@ -8,6 +8,7 @@ public class ForceShieldScript : MonoBehaviour
 
     Animator anim;
     MainScript mainScript;
+    playerMoving playermoving;
     string lname;
 
 
@@ -20,7 +21,7 @@ public class ForceShieldScript : MonoBehaviour
     private void Start()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
-
+        playermoving = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
         mainCameraAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         SetHPValue();
 
@@ -39,6 +40,7 @@ public class ForceShieldScript : MonoBehaviour
         if (currentHP <= 0)
         {
             mainScript.shieldIsActive = false;
+            playermoving.canDie = true;
             gameObject.SetActive(false);
         }
     }

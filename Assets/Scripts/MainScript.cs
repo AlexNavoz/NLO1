@@ -27,6 +27,7 @@ public class MainScript : MonoBehaviour
     Transform startPosTransform;
     public GameObject plate;
     public GameObject warship;
+    public int levelIndex = 0;
 
     //money variables
     string lname;

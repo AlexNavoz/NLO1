@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5293332584899348571}
   - component: {fileID: 5293332584899348570}
   - component: {fileID: 5293332584899348573}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPower: 50
   damage: 10
+  massScale: 1
   impulse_angle: 0
 --- !u!50 &5293332584899348570
 Rigidbody2D:
@@ -149,7 +150,7 @@ GameObject:
   - component: {fileID: 5293332585665051163}
   - component: {fileID: 5293332585665051161}
   - component: {fileID: 5293332585665051160}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

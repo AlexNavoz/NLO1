@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class ComingHomeScript : MonoBehaviour
 {
     MainScript mainScript;
-    playerMoving player;
-    ForceShieldScript fs;
     Animator crossfade;
     void Start()
     {

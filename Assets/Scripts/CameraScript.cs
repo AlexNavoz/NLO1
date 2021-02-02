@@ -28,6 +28,14 @@ public class CameraScript : MonoBehaviour
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            mainScript.levelIndex = 0;
+        }
+        else
+        {
+            mainScript.levelIndex = 1;
+        }
     }
     void FixedUpdate()
     {

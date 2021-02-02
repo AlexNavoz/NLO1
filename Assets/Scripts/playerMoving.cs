@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class playerMoving : MonoBehaviour
 {
     MainScript mainScript;
+    public GameObject forceShield;
+    int i = 0;
 
     public float EnginePower;
 
@@ -18,6 +20,8 @@ public class playerMoving : MonoBehaviour
     Rigidbody2D rbRight;
     public ParticleSystem leftParticle;
     public ParticleSystem rightParticle;
+    bool isDead;
+    public bool canDie;
 
     //fuel bar variables
     public float maxFuel;
@@ -44,8 +48,6 @@ public class playerMoving : MonoBehaviour
 
         
         SetFuelValues();
-
-
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
@@ -56,38 +58,56 @@ public class playerMoving : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentFuel > 0)
+        if (!isDead)
         {
-
-            if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
+            if (currentFuel > 0)
             {
-                rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-                if (lname!= "Main menu")
-                {
-                    FuelConsampsion(consumption);
-                }
-                leftParticle.Play();
-            }
-            else { leftParticle.Stop(); }
-            if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
-            {
-                rbRight.AddRelativeForce(Vector3.up * EnginePower);
-                if (lname != "Main menu")
-                {
-                    FuelConsampsion(consumption);
-                }
-                rightParticle.Play();
-            }
 
-            else { rightParticle.Stop(); }
-        }
-        else 
-        {   leftParticle.Stop();
-            rightParticle.Stop();
+                if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
+                {
+                    rbLeft.AddRelativeForce(Vector3.up * EnginePower);
+                    if (lname != "Main menu")
+                    {
+                        FuelConsampsion(consumption);
+                    }
+                    leftParticle.Play();
+                }
+                else { leftParticle.Stop(); }
+                if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
+                {
+                    rbRight.AddRelativeForce(Vector3.up * EnginePower);
+                    if (lname != "Main menu")
+                    {
+                        FuelConsampsion(consumption);
+                    }
+                    rightParticle.Play();
+                }
+
+                else { rightParticle.Stop(); }
+            }
+            else
+            {
+                leftParticle.Stop();
+                rightParticle.Stop();
+            }
         }
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 11)
+        {
+            if (canDie)
+            { i++;
+                if (i == 1)
+                {
+                    isDead = true;
+                    Invoke("OpenLosePanel", 2.0f);
+                }
+            }
+        }
+    }
     public void FuelConsampsion(float Consumption)
     {
         currentFuel -= Consumption;
@@ -126,5 +146,18 @@ public class playerMoving : MonoBehaviour
         mainScript.LoadPlatePrefs();
         EnginePower = mainScript.P_enginePower;
         maxFuel = mainScript.P_maxFuel;
+    }
+
+    public void OpenLosePanel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            LooseScreenScript losePanel = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
+            losePanel.Activation();
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            Application.Quit();
+        }
     }
 }

@@ -16,7 +16,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         scale = GetComponent<Transform>();
-        fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
+
         rb = GetComponent<Rigidbody2D>();
         rb.mass *= massScale;
         scale.localScale *= massScale;
@@ -25,6 +25,7 @@ public class BulletScript : MonoBehaviour
         impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
         impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
         rb.AddRelativeForce(impulse_vector * shootPower*massScale, ForceMode2D.Impulse);
+        fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         Destroy(gameObject, 7.0f);
     }
 

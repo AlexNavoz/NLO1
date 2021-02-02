@@ -24,7 +24,7 @@ public class PostScript : MonoBehaviour
         if (collision.gameObject.layer == 10 && i == 0)
         {
             i++;
-            Invoke("CanvasSetActive", 0.5f);
+            Invoke("CanvasSetActive", 0.8f);
             mainScript.SafeShortPlatePrefs();
 
 
@@ -35,7 +35,7 @@ public class PostScript : MonoBehaviour
     void CanvasSetActive()
     {
         canvas.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0.2f;
     }
     public void ExitCanvas()
     {
