@@ -13,7 +13,7 @@ public class ParallaxEffect : MonoBehaviour
     {
         startposX = transform.position.x;
         startposY = transform.position.y;
-        lengthX = GetComponent<SpriteRenderer>().bounds.size.x;
+        //lengthX = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     private void Update()
@@ -24,7 +24,8 @@ public class ParallaxEffect : MonoBehaviour
 
         transform.position = new Vector3(startposX + distX, startposY + distY, transform.position.z);
 
-        if(temp>startposX + lengthX)
+        /*
+           if(temp>startposX + lengthX)
         {
             startposX+=lengthX;
         }
@@ -32,5 +33,6 @@ public class ParallaxEffect : MonoBehaviour
         {
             startposX -= lengthX;
         }
+        */
     }
 }
