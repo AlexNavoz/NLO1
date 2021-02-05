@@ -6,6 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class LooseScreenScript : MonoBehaviour
 {
+    //Refuel cariables
+
+    public GameObject refuelCanvas;
+    public Button refuelByMoneyButton;
+    public Text refuelText;
+    Animation refuelAnim;
+    float refuelPrice;
+
+    //LooseScreen variables
+
     public GameObject evacuator;
     public GameObject canvas;
     public GameObject mainPanel;
@@ -21,13 +31,14 @@ public class LooseScreenScript : MonoBehaviour
     Vector3 offset = new Vector3(0, -20, 0);
     void Start()
     {
-        
+
         mainAnim = mainPanel.GetComponent<Animation>();
+        refuelAnim = refuelCanvas.GetComponent<Animation>();
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-            if (choisePanel != null)
+        if (choisePanel != null)
         {
             choiseAnim = choisePanel.GetComponent<Animation>();
         }
@@ -35,7 +46,7 @@ public class LooseScreenScript : MonoBehaviour
 
     public void CanvasOpen()
     {
-       if (mainScript.levelIndex == 1)
+        if (mainScript.levelIndex == 1)
         {
             choisePanel.SetActive(false);
             collectionText.text = mainScript.collection.ToString();
@@ -43,7 +54,7 @@ public class LooseScreenScript : MonoBehaviour
         }
         canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
-        Invoke("TimeStop",mainAnim.clip.length);
+        Invoke("TimeStop", mainAnim.clip.length);
 
     }
     public void TimeStop()
@@ -76,21 +87,24 @@ public class LooseScreenScript : MonoBehaviour
     {
         Time.timeScale = 1;
         choisePanel.SetActive(true);
-        choiseAnim.Rewind("PanelStartAnim");
+        choiseAnim.Play("PanelStartAnim");
+        Invoke("TimeStop", choiseAnim.clip.length);
     }
 
     public void ExitPayPanel()
     {
+        Time.timeScale = 1;
         choisePanel.SetActive(false);
     }
 
     public void BuyEvac()
     {
         mainScript.collection = mainScript.collection / 2;
+
         Evacuate();
     }
 
-    public void BuyEvacByAdd()
+    public void BuyEvacByAdd()                                                //change after add
     {
         Evacuate();
     }
@@ -107,4 +121,45 @@ public class LooseScreenScript : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene(levelIndex);
     }
+
+    // Refuel methods
+
+    public void RefuelCanvasOpen()
+    {
+        refuelPrice = player.GetComponent<playerMoving>().maxFuel * 3;
+        refuelText.text = refuelPrice.ToString();
+        if (refuelPrice > mainScript.allMoney)
+        {
+            refuelText.color = new Color(255,0,0);
+            refuelByMoneyButton.interactable = false;
+        }
+        refuelCanvas.SetActive(true);
+        refuelAnim.Play("PanelStartAnim");
+        Invoke("TimeStop", refuelAnim.clip.length);
+    }
+    public void RefuelByMoney()
+    {
+        mainScript.allMoney -= (int)refuelPrice;
+        player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
+        mainScript.SafeShortPlatePrefs();
+        player.GetComponent<playerMoving>().SetFuelValues();
+        ExitRefuelCanvas();
+    }
+                                                                                                                            // After Ads
+    public void RefuelByAds()
+    {
+        player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
+        mainScript.SafeShortPlatePrefs();
+        player.GetComponent<playerMoving>().SetFuelValues();
+        ExitRefuelCanvas();
+    }
+
+    public void ExitRefuelCanvas()
+    {
+        Time.timeScale = 1;
+        //refuelAnim.Play("PanelExitAnim");
+        //Invoke("ExitFromRefuelCanvas", refuelAnim.clip.length);
+        refuelCanvas.SetActive(false);
+    }
+
 }

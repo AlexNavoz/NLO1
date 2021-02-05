@@ -12,6 +12,7 @@ public class playerMoving : MonoBehaviour
 
     public float EnginePower;
 
+
     public PressedButton leftButton;
     public PressedButton rightButton;
     GameObject leftEngine;
@@ -30,7 +31,9 @@ public class playerMoving : MonoBehaviour
     public FuelBarScript fuelBar;
     string lname;
 
-
+    //refuel
+    LooseScreenScript refuelCanvas;
+    public bool alreadyRefueled = false;
 
 
     private void Awake()
@@ -53,6 +56,7 @@ public class playerMoving : MonoBehaviour
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
         rbRight = rightEngine.GetComponent<Rigidbody2D>();
         lname = SceneManager.GetActiveScene().name;
+
 
     }
 
@@ -97,6 +101,16 @@ public class playerMoving : MonoBehaviour
             rightParticle.Stop();
         }
 
+        if(mainScript.levelIndex == 2)
+        {
+            if(currentFuel<=0 && !alreadyRefueled)
+            {
+                alreadyRefueled = true;
+                Invoke("OpenRefuelPanel", 1.0f);
+            }
+        }
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -110,6 +124,18 @@ public class playerMoving : MonoBehaviour
                     isDead = true;
                     Invoke("OpenLosePanel", 2.0f);
                 }
+            }
+        }
+        if (collision.gameObject.layer == 9)
+        {
+            if (alreadyRefueled && currentFuel <= 0)
+            {
+                Invoke("OpenLosePanel", 2.0f);
+            }
+            if (!alreadyRefueled && currentFuel <= 0)
+            {
+                alreadyRefueled = true;
+                Invoke("OpenRefuelPanel", 1.0f);
             }
         }
     }
@@ -164,5 +190,10 @@ public class playerMoving : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+    public void OpenRefuelPanel()
+    {
+        refuelCanvas = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
+        refuelCanvas.RefuelCanvasOpen();
     }
 }

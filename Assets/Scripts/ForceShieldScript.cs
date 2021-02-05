@@ -34,7 +34,11 @@ public class ForceShieldScript : MonoBehaviour
 
         if(collision.gameObject.layer == 9)
         {
-            
+            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled)
+            {
+                playermoving.alreadyRefueled = true;
+                Invoke("OpenRefuelPanel", 1.0f);
+            }
             TakingDamage(3);
         }
         if (currentHP <= 0)
@@ -82,5 +86,11 @@ public class ForceShieldScript : MonoBehaviour
             mainScript.P_forceShieldStrength = maxHP;
             mainScript.P_forceShieldLevel = currentHP;
         }
+    }
+
+    public void OpenRefuelPanel()
+    {
+        LooseScreenScript refuelCanvas = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
+        refuelCanvas.RefuelCanvasOpen();
     }
 }
