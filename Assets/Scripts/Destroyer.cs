@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Destroyer : MonoBehaviour
@@ -39,6 +40,11 @@ public class Destroyer : MonoBehaviour
             {
                 onRayCount = onRayComponent.count;
                 mainScript.collection += onRayCount;
+                {
+                    StringBuilder sb = new StringBuilder("+", 10);
+                    sb.Append(((int)onRayCount).ToString());
+                    player_moving.showTextValue(gameObject, sb.ToString(), 1);
+                }
                 cowRb = obj.GetComponent<Rigidbody2D>();
                 if (cowRb != null)
                 {
@@ -50,7 +56,7 @@ public class Destroyer : MonoBehaviour
             }
         }
 
-        if(collision.gameObject.layer == 14&& mainScript.collection!=0)
+        if(collision.gameObject.layer == 14 && mainScript.collection!=0)
         {
             mainScript.SetMoney(mainScript.collection);
             givingParticle.Play();

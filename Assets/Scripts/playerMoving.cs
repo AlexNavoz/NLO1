@@ -7,14 +7,25 @@ using UnityEngine.SceneManagement;
 public class playerMoving : MonoBehaviour
 {
     MainScript mainScript;
+    int ShipIndex;
     public GameObject forceShield;
     int i = 0;
+    Canvas canvas;
+    Camera mainCamera;
 
     public float EnginePower;
 
-
+    // Plate Variables!!!
+    [SerializeField] GameObject Plate_Variables_______;
     public PressedButton leftButton;
     public PressedButton rightButton;
+    // WS Variables!!!
+    [SerializeField] GameObject WS_Variables_______;
+    public Slider leftSlider;
+    public Slider rightSlider;
+    public GameObject gun;
+
+
     GameObject leftEngine;
     Rigidbody2D rbLeft;
     GameObject rightEngine;
@@ -35,21 +46,44 @@ public class playerMoving : MonoBehaviour
     LooseScreenScript refuelCanvas;
     public bool alreadyRefueled = false;
 
+    //salary
+    public GameObject salary;
+
 
     private void Awake()
     {
+        canvas = GetComponentInChildren<Canvas>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.shieldIsActive = true;
-        mainScript.LoadPlatePrefs();
-        mainScript.LoadShortPlatePrefs();
+        ShipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
+        if (ShipIndex == 0)                                            
+        {
+            mainScript.LoadPlatePrefs();
+            mainScript.LoadShortPlatePrefs();
+        }
+        if (ShipIndex == 1)                                                    //After MainScript
+        {
+            mainScript.LoadPlatePrefs();
+            mainScript.LoadShortPlatePrefs();
+        }
+
     }
     void Start()
     {
         Time.timeScale = 1;
 
-        EnginePower = mainScript.P_enginePower;
+        if (ShipIndex == 0)
+        {
+            EnginePower = mainScript.P_enginePower;
+        }
+        if (ShipIndex == 1)                                                    //Change After MainScript
+        {
+            EnginePower = mainScript.P_enginePower;
+            leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
+            rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
+        }
 
-        
         SetFuelValues();
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
@@ -60,34 +94,67 @@ public class playerMoving : MonoBehaviour
 
     }
 
+    public void showTextValue(GameObject obj, string text, int type) {
+        GameObject textobj = Instantiate(salary);
+        textobj.transform.SetParent(canvas.transform);
+        SalaryShowing sh = textobj.GetComponent<SalaryShowing>();
+        sh.setTextAndPosition(canvas,mainCamera,obj,text, type);
+    }
+
     void FixedUpdate()
     {
         if (!isDead)
         {
             if (currentFuel > 0)
             {
-
-                if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
+                if (ShipIndex == 0)
                 {
-                    rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-                    if (lname != "Main menu")
+                    if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
                     {
-                        FuelConsampsion(consumption);
+                        rbLeft.AddRelativeForce(Vector3.up * EnginePower);
+                        if (lname != "Main menu")
+                        {
+                            FuelConsampsion(consumption);
+                        }
+                        leftParticle.Play();
                     }
-                    leftParticle.Play();
-                }
-                else { leftParticle.Stop(); }
-                if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
-                {
-                    rbRight.AddRelativeForce(Vector3.up * EnginePower);
-                    if (lname != "Main menu")
+                    else { leftParticle.Stop(); }
+                    if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
                     {
-                        FuelConsampsion(consumption);
+                        rbRight.AddRelativeForce(Vector3.up * EnginePower);
+                        if (lname != "Main menu")
+                        {
+                            FuelConsampsion(consumption);
+                        }
+                        rightParticle.Play();
                     }
-                    rightParticle.Play();
-                }
 
-                else { rightParticle.Stop(); }
+                    else { rightParticle.Stop(); }
+                }
+                if (ShipIndex == 1)                                                    //After MainScript
+                {
+                    if (leftSlider.value != 0)
+                    {
+                        if (lname != "Main menu")
+                        {
+                            FuelConsampsion(consumption);
+                        }
+                        rbLeft.AddRelativeForce(Vector3.up * EnginePower * leftSlider.value);
+                        leftParticle.Play();
+                    }
+                    else { leftParticle.Stop(); }
+                    if (rightSlider.value != 0)
+                    {
+                        if (lname != "Main menu")
+                        {
+                            FuelConsampsion(consumption);
+                        }
+                        rbRight.AddRelativeForce(Vector3.up * EnginePower * rightSlider.value);;
+                        rightParticle.Play();
+                    }
+
+                    else { rightParticle.Stop(); }
+                }
             }
             else
             {
@@ -154,25 +221,51 @@ public class playerMoving : MonoBehaviour
     }
     public void SetFuelValues()
     {
-        maxFuel = mainScript.P_maxFuel;
-        currentFuel = mainScript.P_fuelLevel;
-        if (currentFuel < maxFuel)
+        if (ShipIndex == 0)
         {
-            mainScript.P_maxFuel = maxFuel;
-            mainScript.P_fuelLevel = currentFuel;
-            fuelBar.SetMaxTank(maxFuel);
+            maxFuel = mainScript.P_maxFuel;
+            currentFuel = mainScript.P_fuelLevel;
+            if (currentFuel < maxFuel)
+            {
+                mainScript.P_maxFuel = maxFuel;
+                mainScript.P_fuelLevel = currentFuel;
+                fuelBar.SetMaxTank(maxFuel);
 
-            fuelBar.SetValue(currentFuel);
+                fuelBar.SetValue(currentFuel);
 
+            }
+            else
+            {
+                fuelBar.SetMaxTank(maxFuel);
+                currentFuel = maxFuel;
+                fuelBar.SetValue(currentFuel);
+
+                mainScript.P_maxFuel = maxFuel;
+                mainScript.P_fuelLevel = currentFuel;
+            }
         }
-        else
+        if (ShipIndex == 1)
         {
-            fuelBar.SetMaxTank(maxFuel);
-            currentFuel = maxFuel;
-            fuelBar.SetValue(currentFuel);
-            
-            mainScript.P_maxFuel = maxFuel;
-            mainScript.P_fuelLevel = currentFuel;
+            maxFuel = mainScript.P_maxFuel;
+            currentFuel = mainScript.P_fuelLevel;
+            if (currentFuel < maxFuel)
+            {
+                mainScript.P_maxFuel = maxFuel;
+                mainScript.P_fuelLevel = currentFuel;
+                fuelBar.SetMaxTank(maxFuel);
+
+                fuelBar.SetValue(currentFuel);
+
+            }
+            else
+            {
+                fuelBar.SetMaxTank(maxFuel);
+                currentFuel = maxFuel;
+                fuelBar.SetValue(currentFuel);
+
+                mainScript.P_maxFuel = maxFuel;
+                mainScript.P_fuelLevel = currentFuel;
+            }
         }
     }
 

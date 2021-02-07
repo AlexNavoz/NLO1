@@ -673,12 +673,18 @@ MonoBehaviour:
   P_rayDacreaserPower: 0
   P_rayLiftPower: 0
   P_forceShieldStrength: 0
+  WS_enginePower: 0
+  WS_maxFuel: 0
+  WS_rayDacreaserPower: 0
+  WS_rayLiftPower: 0
+  WS_forceShieldStrength: 0
   P_fuelLevel: 0
   P_forceShieldLevel: 0
   P_cowCount: 0
   shieldIsActive: 0
   plate: {fileID: 9088907898758553151, guid: 05b7f69cf42663643ae3af3b9843f565, type: 3}
-  warship: {fileID: 5029182061753530277, guid: 1f7c42c45fad124419fd0a12149f220d, type: 3}
+  warship: {fileID: 9088907898758553151, guid: 6051acea276ee2e44afb529a9e36d73c, type: 3}
+  ShipIndex: 0
   levelIndex: 0
   collection: 0
   allMoney: 0

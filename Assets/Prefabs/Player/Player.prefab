@@ -7130,8 +7130,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceShield: {fileID: 1542255254582477272}
   EnginePower: 120
+  Plate_Variables_______: {fileID: 0}
   leftButton: {fileID: 764991711}
   rightButton: {fileID: 310723200}
+  WS_Variables_______: {fileID: 0}
+  leftSlider: {fileID: 0}
+  rightSlider: {fileID: 0}
+  gun: {fileID: 0}
   leftParticle: {fileID: 9088907900091932739}
   rightParticle: {fileID: 9088907899103466262}
   canDie: 0
@@ -7140,6 +7145,7 @@ MonoBehaviour:
   currentFuel: 0
   fuelBar: {fileID: 2061461447}
   alreadyRefueled: 0
+  salary: {fileID: 5750557684458612199, guid: b1954b300272de04f9dd367c5dcfb73e, type: 3}
 --- !u!60 &9088907898758553136
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -13,6 +13,13 @@ public class MainScript : MonoBehaviour
     public float P_rayLiftPower;
     public float P_forceShieldStrength;
 
+    //WS variables
+    public float WS_enginePower;
+    public float WS_maxFuel;
+    public float WS_rayDacreaserPower;
+    public float WS_rayLiftPower;
+    public float WS_forceShieldStrength;
+
     //plate short time variables
     public float P_fuelLevel;
     public float P_forceShieldLevel;
@@ -27,6 +34,7 @@ public class MainScript : MonoBehaviour
     Transform startPosTransform;
     public GameObject plate;
     public GameObject warship;
+    public int ShipIndex;
     public int levelIndex = 0;
 
     //money variables
@@ -93,6 +101,7 @@ public class MainScript : MonoBehaviour
         startPos = new Vector3(startPosTransform.position.x, startPosTransform.position.y, startPosTransform.position.z);
 
         //change after garage menu
+        //PlayerPrefs.SetInt("ShipIndex",1);
         Instantiate(plate, startPos, Quaternion.identity);
     }
 

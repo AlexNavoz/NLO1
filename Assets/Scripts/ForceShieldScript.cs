@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text;
 
 public class ForceShieldScript : MonoBehaviour
 {
@@ -59,6 +60,9 @@ public class ForceShieldScript : MonoBehaviour
         }
         if (lname !="Main menu")
         {
+            StringBuilder sb = new StringBuilder("-",10);
+            sb.Append(((int)dmg).ToString());
+            playermoving.showTextValue(gameObject, sb.ToString(), 0);
             currentHP -= dmg;
             fsb.SetValue(currentHP);
         }
