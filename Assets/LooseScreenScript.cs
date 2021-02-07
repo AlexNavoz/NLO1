@@ -28,6 +28,7 @@ public class LooseScreenScript : MonoBehaviour
     MainScript mainScript;
     Animator crossfade;
     GameObject player;
+    playerMoving playerMoving;
     Vector3 offset = new Vector3(0, -20, 0);
     void Start()
     {
@@ -37,6 +38,7 @@ public class LooseScreenScript : MonoBehaviour
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerMoving = player.GetComponent<playerMoving>();
 
         if (choisePanel != null)
         {
@@ -139,10 +141,12 @@ public class LooseScreenScript : MonoBehaviour
     }
     public void RefuelByMoney()
     {
-        mainScript.allMoney -= (int)refuelPrice;
+        //mainScript.allMoney -= (int)refuelPrice;
+        mainScript.SetMoney(-(int)refuelPrice);
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         mainScript.SafeShortPlatePrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
+        playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();
     }
                                                                                                                             // After Ads
@@ -151,12 +155,14 @@ public class LooseScreenScript : MonoBehaviour
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         mainScript.SafeShortPlatePrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
+        playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();
     }
 
     public void ExitRefuelCanvas()
     {
         Time.timeScale = 1;
+        playerMoving.alreadyRefueled = true;
         //refuelAnim.Play("PanelExitAnim");
         //Invoke("ExitFromRefuelCanvas", refuelAnim.clip.length);
         refuelCanvas.SetActive(false);

@@ -4982,7 +4982,7 @@ SpriteRenderer:
   m_Size: {x: 4.46, y: 4.46}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &1197500035900212205
@@ -5036,6 +5036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInRay: 0
   count: 10
+  massScale: 1
 --- !u!114 &5551938911533114801
 MonoBehaviour:
   m_ObjectHideFlags: 0

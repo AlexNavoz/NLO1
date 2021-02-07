@@ -81,5 +81,15 @@ public class Destroyer : MonoBehaviour
             Instantiate(DestroyParticle, transform.position, Quaternion.identity);
             Destroy(obj);
         }
+        if (collision.gameObject.layer == 20)
+        {
+            int onRayCount;
+            GameObject obj = collision.gameObject;
+            onRayCount = obj.GetComponent<OnRay>().count;
+            mainScript.collection += onRayCount;
+
+            Instantiate(DestroyParticle, transform.position, Quaternion.identity);
+            Destroy(obj);
+        }
     }
 }

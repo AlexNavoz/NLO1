@@ -128,13 +128,17 @@ public class playerMoving : MonoBehaviour
         }
         if (collision.gameObject.layer == 9)
         {
-            if (alreadyRefueled && currentFuel <= 0)
+            if (alreadyRefueled && currentFuel <= 0 && !isDead)
             {
-                Invoke("OpenLosePanel", 2.0f);
+                i++;
+                    if (i == 1) 
+                {
+                    isDead = true;
+                    Invoke("OpenLosePanel", 2.0f); 
+                }
             }
             if (!alreadyRefueled && currentFuel <= 0)
             {
-                alreadyRefueled = true;
                 Invoke("OpenRefuelPanel", 1.0f);
             }
         }

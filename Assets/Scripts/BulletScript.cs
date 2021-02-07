@@ -25,7 +25,9 @@ public class BulletScript : MonoBehaviour
         impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
         impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
         rb.AddRelativeForce(impulse_vector * shootPower*massScale, ForceMode2D.Impulse);
-        fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
+        GameObject fs_obj;
+        if(fs_obj = GameObject.FindGameObjectWithTag("ForceShield"))
+            fs = fs_obj.GetComponent<ForceShieldScript>();
         Destroy(gameObject, 7.0f);
     }
 
@@ -33,7 +35,8 @@ public class BulletScript : MonoBehaviour
     {
         if(collision.gameObject.layer == 13)
         {
-            fs.TakingDamage(damage*massScale);
+            if(fs)
+                fs.TakingDamage(damage*massScale);
         }
         Destroy(gameObject, 2.0f);
     }

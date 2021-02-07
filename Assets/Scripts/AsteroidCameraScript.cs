@@ -13,6 +13,8 @@ public class AsteroidCameraScript : MonoBehaviour
     MainScript mainScript;
     public float AsteroidMakingSpeed = 0.2f;
     public float bonusCreationSpeed = 0.5f;
+    public Transform StartGeneration;
+    public Transform StopGeneration;
 
     public Vector3 offset;
     public float cameraSpeed;
@@ -28,12 +30,13 @@ public class AsteroidCameraScript : MonoBehaviour
     }
     void Start()
     {
-        StartCoroutine("MakingAsteroids");
-        StartCoroutine("MakingBonuses");
+        
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
-        
+        StartCoroutine("MakingAsteroids");
+        StartCoroutine("MakingBonuses");
+
     }
     void FixedUpdate()
     {
@@ -52,6 +55,11 @@ public class AsteroidCameraScript : MonoBehaviour
             Vector3 RightEdge = new Vector3(rightEdge, transform.position.y, transform.position.z);
             transform.position = RightEdge;
         }
+        if (transform.position.y < 0)
+        {
+            Vector3 botEdge = new Vector3(transform.position.x,0,transform.position.z);
+            transform.position = botEdge;
+        }
     }
 
     
@@ -60,9 +68,16 @@ public class AsteroidCameraScript : MonoBehaviour
     {
         while (true)
         {
-            int i = Random.Range(0, 3);
-            Instantiate(asteroids[i], new Vector3(Random.Range(-54, 54), transform.position.y + 50, transform.position.z), Quaternion.identity);
-            yield return new WaitForSeconds(AsteroidMakingSpeed);
+            if (player.transform.position.y > StartGeneration.position.y && player.transform.position.y < StopGeneration.position.y)
+            {
+                int i = Random.Range(0, 3);
+                Instantiate(asteroids[i], new Vector3(Random.Range(-54, 54), transform.position.y + 50, transform.position.z), Quaternion.identity);
+                yield return new WaitForSeconds(AsteroidMakingSpeed);
+            }
+            else
+            {
+                yield return new WaitForSeconds(AsteroidMakingSpeed);
+            }
         }
     }
 

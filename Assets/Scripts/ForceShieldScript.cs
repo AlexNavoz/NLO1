@@ -10,6 +10,7 @@ public class ForceShieldScript : MonoBehaviour
     MainScript mainScript;
     playerMoving playermoving;
     string lname;
+    int i = 0;
 
 
     //ForceShieldBar variables
@@ -34,9 +35,9 @@ public class ForceShieldScript : MonoBehaviour
 
         if(collision.gameObject.layer == 9)
         {
-            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled)
+            i++;
+            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled && currentHP>3 && i ==1)
             {
-                playermoving.alreadyRefueled = true;
                 Invoke("OpenRefuelPanel", 1.0f);
             }
             TakingDamage(3);
