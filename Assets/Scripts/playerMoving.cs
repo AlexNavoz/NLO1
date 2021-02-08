@@ -64,8 +64,8 @@ public class playerMoving : MonoBehaviour
         }
         if (ShipIndex == 1)                                                    //After MainScript
         {
-            mainScript.LoadPlatePrefs();
-            mainScript.LoadShortPlatePrefs();
+            mainScript.LoadWSPrefs();
+            mainScript.LoadShortWSPrefs();
         }
 
     }
@@ -79,7 +79,7 @@ public class playerMoving : MonoBehaviour
         }
         if (ShipIndex == 1)                                                    //Change After MainScript
         {
-            EnginePower = mainScript.P_enginePower;
+            EnginePower = mainScript.WS_enginePower;
             leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
             rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
         }
@@ -246,12 +246,12 @@ public class playerMoving : MonoBehaviour
         }
         if (ShipIndex == 1)
         {
-            maxFuel = mainScript.P_maxFuel;
-            currentFuel = mainScript.P_fuelLevel;
+            maxFuel = mainScript.WS_maxFuel;
+            currentFuel = mainScript.WS_fuelLevel;
             if (currentFuel < maxFuel)
             {
-                mainScript.P_maxFuel = maxFuel;
-                mainScript.P_fuelLevel = currentFuel;
+                mainScript.WS_maxFuel = maxFuel;
+                mainScript.WS_fuelLevel = currentFuel;
                 fuelBar.SetMaxTank(maxFuel);
 
                 fuelBar.SetValue(currentFuel);
@@ -263,8 +263,8 @@ public class playerMoving : MonoBehaviour
                 currentFuel = maxFuel;
                 fuelBar.SetValue(currentFuel);
 
-                mainScript.P_maxFuel = maxFuel;
-                mainScript.P_fuelLevel = currentFuel;
+                mainScript.WS_maxFuel = maxFuel;
+                mainScript.WS_fuelLevel = currentFuel;
             }
         }
     }
@@ -274,6 +274,12 @@ public class playerMoving : MonoBehaviour
         mainScript.LoadPlatePrefs();
         EnginePower = mainScript.P_enginePower;
         maxFuel = mainScript.P_maxFuel;
+    }
+    public void ReloadWSPrefs()
+    {
+        mainScript.LoadPlatePrefs();
+        EnginePower = mainScript.WS_enginePower;
+        maxFuel = mainScript.WS_maxFuel;
     }
 
     public void OpenLosePanel()

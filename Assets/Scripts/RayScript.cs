@@ -12,7 +12,14 @@ public class RayScript : MonoBehaviour
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         rayLift = GetComponent<PointEffector2D>();
         //change after Garage menu
-        rayLift.forceMagnitude = -mainScript.P_rayLiftPower;
+        if (mainScript.ShipIndex == 0)
+        {
+            rayLift.forceMagnitude = -mainScript.P_rayLiftPower;
+        }
+        if (mainScript.ShipIndex == 1)
+        {
+            rayLift.forceMagnitude = -mainScript.WS_rayLiftPower;
+        }
     }
 
 

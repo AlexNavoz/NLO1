@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GarageScript : MonoBehaviour
 {
@@ -9,8 +10,14 @@ public class GarageScript : MonoBehaviour
     playerMoving player_moving;
     ForceShieldScript fs;
     public GameObject canvas;
+    Animator crossfade;
+    public GameObject P_ChoosePanel;
+    public GameObject WS_ChoosePanel;
+    bool HaveChoosen = false;
     int[] prices = new int[] {100,200,400,800,1500,2000,2000,2000,3000,4000};
-    //plate variables
+    int[] WSprices = new int[] { 200, 400, 800, 1500, 2000, 3000, 4000, 5000, 6000, 7000 };
+
+    //plate variables_______________________________________________________________________________________________
 
     //engine
     int P_EngineLevel;
@@ -43,9 +50,49 @@ public class GarageScript : MonoBehaviour
     public Slider P_shieldSlider;
     public Button P_shieldButton;
     float[] P_shieldpowers = new float[] { 20.0f, 30.0f, 50.0f, 70.0f, 100.0f, 130.0f, 160.0f, 190.0f, 240.0f, 300.0f };
+
+
+
+    //WarShip variables_________________________________________________________________________________________________________
+
+    //engine
+    int WS_EngineLevel;
+    int WS_enginePrice;
+    public Text WS_engineText;
+    public Slider WS_engineSlider;
+    public Button WS_engineButton;
+    float[] WS_enginepowers = new float[] { 80.0f, 90.0f, 100.0f, 110.0f, 120.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f };
+
+    //Ray
+    int WS_RayLevel;
+    int WS_rayPrice;
+    public Text WS_rayText;
+    public Slider WS_raySlider;
+    public Button WS_rayButton;
+    float[] WS_raypowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 75.0f, 80.0f, 90.0f, 105.0f, 120.0f };
+
+    //Tank
+    int WS_TankLevel;
+    int WS_tankPrice;
+    public Text WS_tankText;
+    public Slider WS_tankSlider;
+    public Button WS_tankButton;
+    float[] WS_tankpowers = new float[] { 40.0f, 50.0f, 60.0f, 80.0f, 100.0f, 130.0f, 150.0f, 160.0f, 180.0f, 200.0f };
+
+    //Shield
+    int WS_ShieldLevel;
+    int WS_shieldPrice;
+    public Text WS_shieldText;
+    public Slider WS_shieldSlider;
+    public Button WS_shieldButton;
+    float[] WS_shieldpowers = new float[] { 40.0f, 60.0f, 80.0f, 100.0f, 130.0f, 160.0f, 200.0f, 240.0f, 300.0f, 400.0f };
     void Start()
     {
-        //plate
+        player_moving = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
+        fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
+        //plate_______________________________________________________________________________________________________________________________
 
         //engine
         P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
@@ -70,11 +117,6 @@ public class GarageScript : MonoBehaviour
         P_ShieldLevel = PlayerPrefs.GetInt("P_ShieldLevel", 0);
         P_shieldPrice = prices[P_ShieldLevel];
         P_shieldText.text = P_shieldPrice.ToString();
-
-
-        player_moving = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
-        fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
-        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
 
         //engine
         if (P_enginePrice > mainScript.allMoney)
@@ -120,10 +162,93 @@ public class GarageScript : MonoBehaviour
         {
             P_shieldButton.gameObject.SetActive(false);
         }
+
+        //WarShip_____________________________________________________________________________________________________________________
+
+        //engine
+        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 120.0f);
+        WS_EngineLevel = PlayerPrefs.GetInt("WS_EngineLevel", 0);
+        WS_enginePrice = WSprices[WS_EngineLevel];
+        WS_engineText.text = WS_enginePrice.ToString();
+
+        //Ray
+        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
+        WS_RayLevel = PlayerPrefs.GetInt("WS_RayLevel", 0);
+        WS_rayPrice = WSprices[WS_RayLevel];
+        WS_rayText.text = WS_rayPrice.ToString();
+
+        //Tank
+        WS_tankSlider.value = PlayerPrefs.GetFloat("WS_maxFuel", 30.0f);
+        WS_TankLevel = PlayerPrefs.GetInt("WS_TankLevel", 0);
+        WS_tankPrice = WSprices[WS_TankLevel];
+        WS_tankText.text = WS_tankPrice.ToString();
+
+        //Shield
+        WS_shieldSlider.value = PlayerPrefs.GetFloat("WS_forceShieldStrength", 20.0f);
+        WS_ShieldLevel = PlayerPrefs.GetInt("WS_ShieldLevel", 0);
+        WS_shieldPrice = WSprices[WS_ShieldLevel];
+        WS_shieldText.text = WS_shieldPrice.ToString();
+
+        //engine
+        if (WS_enginePrice > mainScript.allMoney)
+        {
+            WS_engineButton.interactable = false;
+        }
+        else WS_engineButton.interactable = true;
+        if (WS_EngineLevel == 9)
+        {
+            WS_engineButton.gameObject.SetActive(false);
+        }
+
+
+        //ray
+        if (WS_rayPrice > mainScript.allMoney)
+        {
+            WS_rayButton.interactable = false;
+        }
+        else WS_rayButton.interactable = true;
+        if (PlayerPrefs.GetInt("WS_RayLevel", 0) == 9)
+        {
+            WS_rayButton.gameObject.SetActive(false);
+        }
+
+        //tank
+        if (WS_tankPrice > mainScript.allMoney)
+        {
+            WS_tankButton.interactable = false;
+        }
+        else WS_tankButton.interactable = true;
+        if (PlayerPrefs.GetInt("WS_TankLevel", 0) == 9)
+        {
+            WS_tankButton.gameObject.SetActive(false);
+        }
+
+        //shield
+        if (WS_shieldPrice > mainScript.allMoney)
+        {
+            WS_shieldButton.interactable = false;
+        }
+        else WS_shieldButton.interactable = true;
+        if (PlayerPrefs.GetInt("WS_ShieldLevel", 0) == 9)
+        {
+            WS_shieldButton.gameObject.SetActive(false);
+        }
+
+        if (mainScript.ShipIndex == 0)
+        {
+            P_ChoosePanel.SetActive(false);
+            WS_ChoosePanel.SetActive(true);
+        }
+        if (mainScript.ShipIndex == 1)
+        {
+            P_ChoosePanel.SetActive(true);
+            WS_ChoosePanel.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        //_____________________________________________________________________PLATE_________________________________________
         //engine
         if(P_enginePrice > mainScript.allMoney)
         {
@@ -135,6 +260,7 @@ public class GarageScript : MonoBehaviour
         {
             P_engineButton.gameObject.SetActive(false);
         }
+
 
 
         //ray
@@ -170,6 +296,53 @@ public class GarageScript : MonoBehaviour
         {
             P_shieldButton.gameObject.SetActive(false);
         }
+
+        //___________________________________________________________________________WARSHIP____________________________________________________
+
+        //engine
+        if (WS_enginePrice > mainScript.allMoney)
+        {
+            WS_engineButton.interactable = false;
+        }
+        else WS_engineButton.interactable = true;
+        if (WS_EngineLevel == 9)
+        {
+            WS_engineButton.gameObject.SetActive(false);
+        }
+
+
+        //ray
+        if (WS_rayPrice > mainScript.allMoney)
+        {
+            WS_rayButton.interactable = false;
+        }
+        else WS_rayButton.interactable = true;
+        if (PlayerPrefs.GetInt("WS_RayLevel", 0) == 9)
+        {
+            WS_rayButton.gameObject.SetActive(false);
+        }
+
+        //tank
+        if (WS_tankPrice > mainScript.allMoney)
+        {
+            WS_tankButton.interactable = false;
+        }
+        else WS_tankButton.interactable = true;
+        if (PlayerPrefs.GetInt("WS_TankLevel", 0) == 9)
+        {
+            WS_tankButton.gameObject.SetActive(false);
+        }
+
+        //shield
+        if (WS_shieldPrice > mainScript.allMoney)
+        {
+            WS_shieldButton.interactable = false;
+        }
+        else WS_shieldButton.interactable = true;
+        if (PlayerPrefs.GetInt("WS_ShieldLevel", 0) == 9)
+        {
+            WS_shieldButton.gameObject.SetActive(false);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -187,10 +360,15 @@ public class GarageScript : MonoBehaviour
     public void ExitCanvas()
     {
         Time.timeScale = 1;
+        if (HaveChoosen)
+        {
+            StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
+        }
         canvas.SetActive(false);
 
     }
 
+    //___________________________________________________________PLATE_UPGRADE_____________________________________________________
     public void P_UpgradeEngine()
     {
         P_enginePrice = prices[P_EngineLevel];
@@ -268,5 +446,110 @@ public class GarageScript : MonoBehaviour
             P_shieldButton.gameObject.SetActive(false);
         }
 
+    }
+
+    //_______________________________________________________________________WARSHIP_UPGRADE________________________________________________
+
+    public void WS_UpgradeEngine()
+    {
+        WS_enginePrice = WSprices[WS_EngineLevel];
+        WS_EngineLevel++;
+        PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
+        PlayerPrefs.SetFloat("WS_enginePower", WS_enginepowers[WS_EngineLevel]);
+        mainScript.SetMoney(-WS_enginePrice);
+        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 120.0f);
+        WS_enginePrice = WSprices[WS_EngineLevel];
+        WS_engineText.text = WS_enginePrice.ToString();
+
+        player_moving.ReloadWSPrefs();
+
+        if (PlayerPrefs.GetInt("WS_EngineLevel", 0) == 9)
+        {
+            WS_engineButton.gameObject.SetActive(false);
+        }
+
+    }
+    public void WS_UpgradeRay()
+    {
+        WS_rayPrice = WSprices[WS_RayLevel];
+        WS_RayLevel++;
+        PlayerPrefs.SetInt("WS_RayLevel", WS_RayLevel);
+        PlayerPrefs.SetFloat("WS_rayLiftPower", WS_raypowers[WS_RayLevel]);
+        mainScript.SetMoney(-WS_rayPrice);
+        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
+        WS_rayPrice = WSprices[WS_RayLevel];
+        WS_rayText.text = WS_rayPrice.ToString();
+
+        if (PlayerPrefs.GetInt("WS_RayLevel", 0) == 9)
+        {
+            WS_rayButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void WS_UpgradeTank()
+    {
+        WS_tankPrice = WSprices[WS_TankLevel];
+        WS_TankLevel++;
+        PlayerPrefs.SetInt("WS_TankLevel", WS_TankLevel);
+        PlayerPrefs.SetFloat("WS_maxFuel", WS_tankpowers[WS_TankLevel]);
+        mainScript.SetMoney(-WS_tankPrice);
+        WS_tankSlider.value = PlayerPrefs.GetFloat("WS_maxFuel", 100.0f);
+        WS_tankPrice = WSprices[WS_TankLevel];
+        WS_tankText.text = WS_tankPrice.ToString();
+
+        player_moving.ReloadWSPrefs();
+        player_moving.SetFuelValues();
+
+        if (PlayerPrefs.GetInt("WS_TankLevel", 0) == 9)
+        {
+            WS_tankButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void WS_UpgradeShield()
+    {
+        WS_shieldPrice = WSprices[WS_ShieldLevel];
+        WS_ShieldLevel++;
+        PlayerPrefs.SetInt("WS_ShieldLevel", WS_ShieldLevel);
+        PlayerPrefs.SetFloat("WS_forceShieldStrength", WS_shieldpowers[WS_ShieldLevel]);
+        mainScript.SetMoney(-WS_shieldPrice);
+        WS_shieldSlider.value = PlayerPrefs.GetFloat("WS_forceShieldStrength", 20.0f);
+        WS_shieldPrice = WSprices[WS_ShieldLevel];
+        WS_shieldText.text = WS_shieldPrice.ToString();
+
+        mainScript.LoadWSPrefs();
+        fs.SetHPValue();
+
+        if (PlayerPrefs.GetInt("WS_ShieldLevel", 0) == 9)
+        {
+            WS_shieldButton.gameObject.SetActive(false);
+        }
+
+    }
+    public void TakeWS()
+    {
+        HaveChoosen = true;
+        mainScript.ShipIndex = 1;
+        PlayerPrefs.SetInt("ShipIndex",1);
+        P_ChoosePanel.SetActive(true);
+        WS_ChoosePanel.SetActive(false);
+    }
+    public void TakePlate()
+    {
+        HaveChoosen = true;
+        mainScript.ShipIndex = 0;
+        PlayerPrefs.SetInt("ShipIndex", 0);
+        P_ChoosePanel.SetActive(false);
+        WS_ChoosePanel.SetActive(true);       
+    }
+
+    IEnumerator CrossFade(int levelIndex)
+    {
+        crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(levelIndex);
     }
 }

@@ -69,27 +69,51 @@ public class ForceShieldScript : MonoBehaviour
     }
     public void SetHPValue()
     {
-
-
-        maxHP = mainScript.P_forceShieldStrength;
-        currentHP = mainScript.P_forceShieldLevel;
-        if (currentHP < maxHP)
+        if (mainScript.ShipIndex == 0)
         {
-            mainScript.P_forceShieldStrength = maxHP;
-            mainScript.P_forceShieldLevel = currentHP;
-            fsb.SetMaxHP(maxHP);
+            maxHP = mainScript.P_forceShieldStrength;
+            currentHP = mainScript.P_forceShieldLevel;
+            if (currentHP < maxHP)
+            {
+                mainScript.P_forceShieldStrength = maxHP;
+                mainScript.P_forceShieldLevel = currentHP;
+                fsb.SetMaxHP(maxHP);
 
-            fsb.SetValue(currentHP);
+                fsb.SetValue(currentHP);
 
+            }
+            else
+            {
+                fsb.SetMaxHP(maxHP);
+                currentHP = maxHP;
+                fsb.SetValue(currentHP);
+
+                mainScript.P_forceShieldStrength = maxHP;
+                mainScript.P_forceShieldLevel = currentHP;
+            }
         }
-        else
+        if(mainScript.ShipIndex == 1)
         {
-            fsb.SetMaxHP(maxHP);
-            currentHP = maxHP;
-            fsb.SetValue(currentHP);
+            maxHP = mainScript.WS_forceShieldStrength;
+            currentHP = mainScript.WS_forceShieldLevel;
+            if (currentHP < maxHP)
+            {
+                mainScript.WS_forceShieldStrength = maxHP;
+                mainScript.WS_forceShieldLevel = currentHP;
+                fsb.SetMaxHP(maxHP);
 
-            mainScript.P_forceShieldStrength = maxHP;
-            mainScript.P_forceShieldLevel = currentHP;
+                fsb.SetValue(currentHP);
+
+            }
+            else
+            {
+                fsb.SetMaxHP(maxHP);
+                currentHP = maxHP;
+                fsb.SetValue(currentHP);
+
+                mainScript.WS_forceShieldStrength = maxHP;
+                mainScript.WS_forceShieldLevel = currentHP;
+            }
         }
     }
 
