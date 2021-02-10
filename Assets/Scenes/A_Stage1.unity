@@ -511,6 +511,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6282d660e42e0934cb37e1416a98248a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 40, z: 0}
+  distanseX: 40
+  AsteroidMakingSpeed: 0.5
+  bonusCreationSpeed: 0.7
+  StartGeneration: {fileID: 1744044858}
+  StopGeneration: {fileID: 476519494}
+  asteroids:
+  - {fileID: 4092380103002201841, guid: 9c55a120c51a4b441964e50f7341d5c7, type: 3}
+  - {fileID: 3856374775380071613, guid: 61eb88ac529a0f44c80c5c5a9d662004, type: 3}
+  - {fileID: 1698807901376260565, guid: b923a4227229bdc47904286d13346988, type: 3}
+  bonuses:
+  - {fileID: 46485990091067371, guid: eaf822b0a47589646b11e92e18127ab1, type: 3}
+  - {fileID: 8552285357441354752, guid: 6dc22b64004e6784ba69e25cbf371496, type: 3}
+  - {fileID: 46485990091067371, guid: 4e75ed957c89c19438ac06a905cbc20d, type: 3}
 --- !u!4 &383335779
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,18 +1108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9658c8e9a51de54e8280a68d25d8cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroids:
-  - {fileID: 3856374775380071613, guid: 61eb88ac529a0f44c80c5c5a9d662004, type: 3}
-  - {fileID: 1698807901376260565, guid: b923a4227229bdc47904286d13346988, type: 3}
-  - {fileID: 4092380103002201841, guid: 9c55a120c51a4b441964e50f7341d5c7, type: 3}
-  bonuses:
-  - {fileID: 8552285357441354752, guid: 6dc22b64004e6784ba69e25cbf371496, type: 3}
-  - {fileID: 46485990091067371, guid: eaf822b0a47589646b11e92e18127ab1, type: 3}
-  - {fileID: 46485990091067371, guid: 4e75ed957c89c19438ac06a905cbc20d, type: 3}
-  AsteroidMakingSpeed: 0.4
-  bonusCreationSpeed: 1.5
-  StartGeneration: {fileID: 1744044858}
-  StopGeneration: {fileID: 476519494}
   offset: {x: 0, y: 15, z: -15}
   cameraSpeed: 0.5
   cameraAcceleration: 0.001
@@ -2102,7 +2104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744044857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 51.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
