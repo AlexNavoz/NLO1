@@ -9,9 +9,11 @@ public class BonusCreator : MonoBehaviour
     public int max;
     int count;
     Rigidbody2D rb;
+    GameObject player;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         count = Random.Range(min, max);
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(Vector3.down * Random.Range(150.0f, 250.0f), ForceMode2D.Impulse);
@@ -26,6 +28,13 @@ public class BonusCreator : MonoBehaviour
             {
                 Instantiate(bonus,transform.position, Quaternion.identity);
             }
+            Destroy(gameObject);
+        }
+    }
+    private void Update()
+    {
+        if (transform.position.y - player.transform.position.y < -50)
+        {
             Destroy(gameObject);
         }
     }

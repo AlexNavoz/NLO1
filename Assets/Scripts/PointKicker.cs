@@ -9,5 +9,6 @@ public class PointKicker : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(Random.Range(-2, 2), Random.Range(-2, 2)), ForceMode2D.Impulse);
+        Destroy(gameObject, 20.0f);
     }
 }

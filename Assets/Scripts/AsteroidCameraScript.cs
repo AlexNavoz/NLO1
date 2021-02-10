@@ -7,14 +7,21 @@ using UnityEngine.SceneManagement;
 public class AsteroidCameraScript : MonoBehaviour
 {
     GameObject player;
+    public GameObject mainCameraObject;
+    Rigidbody2D playerRb;
     Camera cam;
     MainScript mainScript;
+
+    Vector3 camRotation;
+    Quaternion startRotation;
 
     public Vector3 offset;
     public float cameraSpeed;
     public float cameraAcceleration;
     public float leftEdge;
     public float rightEdge;
+    public Transform StartGeneration;
+    public Transform StopGeneration;
 
     private void Awake()
     {
@@ -24,9 +31,9 @@ public class AsteroidCameraScript : MonoBehaviour
     }
     void Start()
     {
-        
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerRb = player.GetComponent<Rigidbody2D>();
         cam = Camera.main;
 
     }
@@ -52,6 +59,18 @@ public class AsteroidCameraScript : MonoBehaviour
             Vector3 botEdge = new Vector3(transform.position.x,0,transform.position.z);
             transform.position = botEdge;
         }
+    }
+
+    private void Update()
+    {
+        if (player.transform.position.y > StopGeneration.transform.position.y)
+        {
+            playerRb.gravityScale = -1;
+            startRotation = mainCameraObject.transform.rotation;
+            camRotation = new Vector3(mainCameraObject.transform.rotation.x, mainCameraObject.transform.rotation.y, mainCameraObject.transform.rotation.z+180.0f);
+            mainCameraObject.transform.rotation = Quaternion.Lerp(startRotation, Quaternion.Euler(camRotation),0.01f);
+        }
+        //0, 0, Mathf.Lerp(transform.rotation.z, 180.0f, 1.0f)
     }
     public void Replay()
     {

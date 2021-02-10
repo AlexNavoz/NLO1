@@ -42,6 +42,7 @@ public class AsteroidCreatorScript : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log(transform.rotation.z);                               //watafuck!
                     Instantiate(asteroids[i], new Vector3(transform.position.x, transform.position.y + Random.Range(-30, 30), transform.position.z), gameObject.transform.rotation);
                 }
                 yield return new WaitForSeconds(AsteroidMakingSpeed);

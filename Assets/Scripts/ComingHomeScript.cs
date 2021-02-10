@@ -19,6 +19,7 @@ public class ComingHomeScript : MonoBehaviour
         if(collision.gameObject.layer == 10)
         {
             mainScript.SafeShortPlatePrefs();
+            mainScript.SafeShortWSPrefs();
             ChooseEarthStage(1);
         }
     }
