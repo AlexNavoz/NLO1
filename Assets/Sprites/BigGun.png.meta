@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: d19e1e91eb4359243a9509f66e844a09
+guid: 2975b28edd1e4284380a2b843f9a2b01
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4189422147328957750
-    second: WarShip_0
+      213: -971063008101321254
+    second: BigGun_0
   - first:
-      213: -2697965365489088089
-    second: WarShip_1
-  - first:
-      213: 6215531929692574515
-    second: WarShip_2
+      213: 7266622973945720957
+    second: BigGun_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WarShip_0
+      name: BigGun_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 334
-        width: 1565
-        height: 661
+        x: 53
+        y: 206
+        width: 97
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63d52b91f31d32a30800000000000000
-      internalID: 4189422147328957750
+      spriteID: ad5399bc6571682f0800000000000000
+      internalID: -971063008101321254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WarShip_1
+      name: BigGun_1
       rect:
         serializedVersion: 2
-        x: 138
+        x: 196
         y: 0
-        width: 218
-        height: 237
+        width: 345
+        height: 1006
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,29 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a947b56bc6ee8ad0800000000000000
-      internalID: -2697965365489088089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarShip_2
-      rect:
-        serializedVersion: 2
-        x: 705
-        y: 29
-        width: 232
-        height: 208
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3339c67db51024650800000000000000
-      internalID: 6215531929692574515
+      spriteID: d703ab6381b38d460800000000000000
+      internalID: 7266622973945720957
       vertices: []
       indices: 
       edges: []

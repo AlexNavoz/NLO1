@@ -120,9 +120,10 @@ public class AttackerScript : MonoBehaviour
 
         ChangeAnimation(4, anim_position);
     }
-
+    
     void Shoot(float anim_position)
     {
+        
         GameObject newbullet = Instantiate(bullet, muzzle.transform.position, new Quaternion(0,0,0,0));
         BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
         newbulletscript.impulse_angle = anim_position;
