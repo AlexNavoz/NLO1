@@ -15,7 +15,7 @@ public class BulletScript : MonoBehaviour
     Rigidbody2D rb;
     ForceShieldScript fs;
     Transform scale;
-    Vector2 impulse_vector;
+    Vector2 impulse_vector = new Vector2(0.0f,1.0f);
 
     public float impulse_angle;
 
@@ -26,9 +26,10 @@ public class BulletScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.mass *= massScale;
         scale.localScale *= massScale;
-       
-        impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
-        impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
+
+        //impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
+        //impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
+
         if (!rocketOrBullet)
         {
             rb.AddRelativeForce(impulse_vector * shootPower * massScale, ForceMode2D.Impulse);

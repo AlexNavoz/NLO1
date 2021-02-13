@@ -124,7 +124,7 @@ public class AttackerScript : MonoBehaviour
     void Shoot(float anim_position)
     {
         
-        GameObject newbullet = Instantiate(bullet, muzzle.transform.position, new Quaternion(0,0,0,0));
+        GameObject newbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.Euler(0, 0, -90.0f * anim_position));
         BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
         newbulletscript.impulse_angle = anim_position;
         newbulletscript.massScale = (float) onRay.massScale;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ public class AsteroidCameraScript : MonoBehaviour
 
     Vector3 camRotation;
     Quaternion startRotation;
+    public int boxIndex;
 
     public Vector3 offset;
     public float cameraSpeed;
@@ -22,6 +24,13 @@ public class AsteroidCameraScript : MonoBehaviour
     public float rightEdge;
     public Transform StartGeneration;
     public Transform StopGeneration;
+
+    playerMoving PlayerMoving;
+
+    public float salaryRange = 100;
+    public int salaryEveryRange = 100;
+
+    float lastSalaryYPosition = 0;
 
     private void Awake()
     {
@@ -35,7 +44,9 @@ public class AsteroidCameraScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerRb = player.GetComponent<Rigidbody2D>();
         cam = Camera.main;
+        PlayerMoving = player.GetComponent<playerMoving>();
 
+        lastSalaryYPosition = 0;
     }
     void FixedUpdate()
     {
@@ -65,10 +76,23 @@ public class AsteroidCameraScript : MonoBehaviour
     {
         if (player.transform.position.y > StopGeneration.transform.position.y)
         {
+            lastSalaryYPosition = 99999999999999999; // a lot!!!
             playerRb.gravityScale = -1;
             startRotation = mainCameraObject.transform.rotation;
-            camRotation = new Vector3(mainCameraObject.transform.rotation.x, mainCameraObject.transform.rotation.y, mainCameraObject.transform.rotation.z+180.0f);
-            mainCameraObject.transform.rotation = Quaternion.Lerp(startRotation, Quaternion.Euler(camRotation),0.01f);
+            camRotation = new Vector3(mainCameraObject.transform.rotation.x, mainCameraObject.transform.rotation.y, mainCameraObject.transform.rotation.z + 180.0f);
+            mainCameraObject.transform.rotation = Quaternion.Lerp(startRotation, Quaternion.Euler(camRotation), 0.01f);
+        }
+        else
+        {
+            if (player.transform.position.y > (lastSalaryYPosition + salaryRange)) {
+                lastSalaryYPosition += salaryRange;
+                mainScript.collection += salaryEveryRange;
+                {
+                    StringBuilder sb = new StringBuilder("+", 10);
+                    sb.Append((salaryEveryRange).ToString());
+                    PlayerMoving.showTextValue(gameObject, sb.ToString(), 1);
+                }
+            }
         }
         //0, 0, Mathf.Lerp(transform.rotation.z, 180.0f, 1.0f)
     }
