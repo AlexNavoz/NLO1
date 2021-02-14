@@ -11943,6 +11943,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2879819242597542688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441612871258794499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20391d911fad3d34498a9da5b07482ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCount: 10
+  boxHP: 5
+  boxParticle: {fileID: 2599414397068859177, guid: bfd6ece7f002f2f468aeb21d18c936bf,
+    type: 3}
 --- !u!1 &3458538476698715931
 GameObject:
   m_ObjectHideFlags: 0
@@ -24067,11 +24083,18 @@ MonoBehaviour:
   rightParticle: {fileID: 9088907899103466262}
   canDie: 0
   maxFuel: 150
-  consumption: 0.01
+  consumption: 0.5
   currentFuel: 0
   fuelBar: {fileID: 2061461447}
   alreadyRefueled: 0
   salary: {fileID: 5750557684458612199, guid: b1954b300272de04f9dd367c5dcfb73e, type: 3}
+  boxes:
+  - {fileID: 6002087551546553530}
+  - {fileID: 1250871119097883531}
+  - {fileID: 977694485324383223}
+  - {fileID: 5633378763787735471}
+  - {fileID: 4407723290812716476}
+  - {fileID: 8850368069889303730}
 --- !u!60 &9088907898758553136
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -40028,6 +40051,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f431921af30d47e4fa61816382b39e52, type: 3}
+--- !u!1 &3441612871258794499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5014446070674132577, guid: f431921af30d47e4fa61816382b39e52,
+    type: 3}
+  m_PrefabInstance: {fileID: 7662299232671917154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6894627681751045425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3889799283346567507, guid: f431921af30d47e4fa61816382b39e52,

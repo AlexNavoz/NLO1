@@ -111,9 +111,9 @@ public class CowMoving : MonoBehaviour
                 {
                     movingVector = -1.0f;
                 }
-                movingVector *= (walkSpeed * Time.deltaTime);
+                movingVector *= (walkSpeed);
                 ChangeAnimation(1);
-                rb.AddForce(new Vector3(movingVector, 0, 0) * walkSpeed*cowPowerindex);
+                rb.AddForce(new Vector3(movingVector, 0, 0) * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
             }
             else
             {
@@ -171,7 +171,12 @@ public class CowMoving : MonoBehaviour
     void RightRunning()
     {
         RightRotate();
-        rb.AddForce(Vector3.right * cowPower * cowPowerindex * Time.deltaTime);
+        rb.AddForce(Vector3.right * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
+    }
+    void LeftRunning()
+    {
+        LeftRotate();
+        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
     }
     void LeftRotate()
     {
@@ -184,11 +189,6 @@ public class CowMoving : MonoBehaviour
             faceRight = false;
             transform.rotation = cowRotation;
         }
-    }
-    void LeftRunning()
-    {
-        LeftRotate();
-        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime);
     }
     void Flip()
     {

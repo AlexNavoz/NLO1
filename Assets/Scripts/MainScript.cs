@@ -48,6 +48,7 @@ public class MainScript : MonoBehaviour
     public Text text;
     public GameObject canvas;
 
+    public static float forceBatchingMultiplier = 0;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -61,6 +62,7 @@ public class MainScript : MonoBehaviour
         text.text = allMoney.ToString();
         CanvasOrNotCanvas();
 
+        forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
     }
     public void MoreMoney()
     {

@@ -27,7 +27,7 @@ public class OnRay : MonoBehaviour
     {
         if (isInRay)
         {
-            massScale -= (0.005f / massOnStart);
+            massScale -= (Time.deltaTime * 0.25f / massOnStart);// * MainScript.forceBatchingMultiplier;
             if (massScale < 0.1f)
                 massScale = 0.1f;
 

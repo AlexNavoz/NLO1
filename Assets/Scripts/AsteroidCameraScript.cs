@@ -12,6 +12,7 @@ public class AsteroidCameraScript : MonoBehaviour
     Rigidbody2D playerRb;
     Camera cam;
     MainScript mainScript;
+    playerMoving PlayerMoving;
 
     Vector3 camRotation;
     Quaternion startRotation;
@@ -24,8 +25,6 @@ public class AsteroidCameraScript : MonoBehaviour
     public float rightEdge;
     public Transform StartGeneration;
     public Transform StopGeneration;
-
-    playerMoving PlayerMoving;
 
     public float salaryRange = 100;
     public int salaryEveryRange = 100;
@@ -47,6 +46,8 @@ public class AsteroidCameraScript : MonoBehaviour
         PlayerMoving = player.GetComponent<playerMoving>();
 
         lastSalaryYPosition = 0;
+
+        PlayerMoving.boxes[boxIndex].SetActive(true);
     }
     void FixedUpdate()
     {

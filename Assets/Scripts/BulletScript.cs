@@ -32,8 +32,9 @@ public class BulletScript : MonoBehaviour
 
         if (!rocketOrBullet)
         {
-            rb.AddRelativeForce(impulse_vector * shootPower * massScale, ForceMode2D.Impulse);
+            rb.AddRelativeForce(impulse_vector * shootPower * massScale * MainScript.forceBatchingMultiplier, ForceMode2D.Impulse);
         }
+        
         GameObject fs_obj;
         if(fs_obj = GameObject.FindGameObjectWithTag("ForceShield"))
             fs = fs_obj.GetComponent<ForceShieldScript>();
@@ -47,7 +48,7 @@ public class BulletScript : MonoBehaviour
             flyTime -= Time.deltaTime;
             if (flyTime > 0)
             {
-                rb.AddRelativeForce(impulse_vector * shootPower * massScale, ForceMode2D.Force);
+                rb.AddRelativeForce(impulse_vector * shootPower * massScale * Time.deltaTime * MainScript.forceBatchingMultiplier, ForceMode2D.Force);
             }
             else { smokeParticle.Stop(); }
         }

@@ -196,9 +196,9 @@ public class AttackerScript : MonoBehaviour
                 {
                     movingVector = -1.0f;
                 }
-                movingVector *= (walkSpeed * Time.deltaTime);
+                movingVector *= (walkSpeed);
                 ChangeAnimation(1);
-                rb.AddForce(new Vector3(movingVector, 0, 0) * walkSpeed * cowPowerindex);
+                rb.AddForce(new Vector3(movingVector, 0, 0) * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
             }
             else
             {
@@ -257,7 +257,7 @@ public class AttackerScript : MonoBehaviour
     void RightRunning()
     {
         RightRotate();
-        rb.AddForce(Vector3.right * cowPower * cowPowerindex * Time.deltaTime);
+        rb.AddForce(Vector3.right * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
     }
     void LeftRotate()
     {
@@ -274,7 +274,7 @@ public class AttackerScript : MonoBehaviour
     void LeftRunning()
     {
         LeftRotate();
-        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime);
+        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
     }
     void Flip()
     {

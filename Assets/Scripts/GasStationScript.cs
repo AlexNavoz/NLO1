@@ -62,6 +62,7 @@ public class GasStationScript : MonoBehaviour
         forceShield.currentHP = forceShield.maxHP;
         //change after garage
         mainScript.SafeShortPlatePrefs();
+        mainScript.SafeShortWSPrefs();
 
         forceShield.SetHPValue();
         playerScript.SetFuelValues();

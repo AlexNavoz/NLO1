@@ -1222,6 +1222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCameraObject: {fileID: 49228974}
+  boxIndex: 0
   offset: {x: 0, y: 15, z: -15}
   cameraSpeed: 0.5
   cameraAcceleration: 0.001
@@ -1229,6 +1230,8 @@ MonoBehaviour:
   rightEdge: 10
   StartGeneration: {fileID: 1744044858}
   StopGeneration: {fileID: 476519494}
+  salaryRange: 100
+  salaryEveryRange: 70
 --- !u!4 &787827024
 Transform:
   m_ObjectHideFlags: 0

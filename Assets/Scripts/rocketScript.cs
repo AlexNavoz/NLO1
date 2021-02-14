@@ -41,7 +41,7 @@ public class rocketScript : MonoBehaviour
         flyTime -= Time.deltaTime;
         if (flyTime > 0)
         {
-            rb.AddRelativeForce(impulse_vector * shootPower * massScale, ForceMode2D.Force);
+            rb.AddRelativeForce(impulse_vector * shootPower * massScale * MainScript.forceBatchingMultiplier, ForceMode2D.Force);
             smokeParticle.Stop();
         }
     }

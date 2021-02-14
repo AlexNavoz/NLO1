@@ -37,7 +37,7 @@ public class playerMoving : MonoBehaviour
 
     //fuel bar variables
     public float maxFuel;
-    public float consumption = 0.01f;
+    public float consumption = 5.0f;
     public float currentFuel;
     public FuelBarScript fuelBar;
     string lname;
@@ -49,6 +49,8 @@ public class playerMoving : MonoBehaviour
     //salary
     public GameObject salary;
 
+    //Boxes
+    public GameObject[] boxes = new GameObject[] { };
 
     private void Awake()
     {
@@ -212,7 +214,7 @@ public class playerMoving : MonoBehaviour
     }
     public void FuelConsampsion(float Consumption)
     {
-        currentFuel -= Consumption;
+        currentFuel -= Consumption * Time.deltaTime;
         fuelBar.SetValue(currentFuel);
     }
     public void DeletePrefs()

@@ -26,7 +26,7 @@ public class PostScript : MonoBehaviour
             i++;
             Invoke("CanvasSetActive", 0.8f);
             mainScript.SafeShortPlatePrefs();
-
+            mainScript.SafeShortWSPrefs();
 
         }
 
