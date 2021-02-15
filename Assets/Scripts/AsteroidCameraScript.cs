@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class AsteroidCameraScript : MonoBehaviour
 {
     GameObject player;
+    GameObject finish;
     public GameObject mainCameraObject;
     Rigidbody2D playerRb;
     Camera cam;
@@ -44,7 +45,7 @@ public class AsteroidCameraScript : MonoBehaviour
         playerRb = player.GetComponent<Rigidbody2D>();
         cam = Camera.main;
         PlayerMoving = player.GetComponent<playerMoving>();
-
+        finish = GameObject.FindGameObjectWithTag("Finish");
         lastSalaryYPosition = 0;
 
         PlayerMoving.boxes[boxIndex].SetActive(true);
@@ -71,6 +72,11 @@ public class AsteroidCameraScript : MonoBehaviour
             Vector3 botEdge = new Vector3(transform.position.x,0,transform.position.z);
             transform.position = botEdge;
         }
+        if (transform.position.y > finish.transform.position.y)
+        {
+            Vector3 finishEdge = new Vector3(transform.position.x, finish.transform.position.y, transform.position.z);
+            transform.position = finishEdge;
+        }
     }
 
     private void Update()
@@ -95,7 +101,6 @@ public class AsteroidCameraScript : MonoBehaviour
                 }
             }
         }
-        //0, 0, Mathf.Lerp(transform.rotation.z, 180.0f, 1.0f)
     }
     public void Replay()
     {

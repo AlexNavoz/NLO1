@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInRay: 0
   count: 40
+  massScale: 1
 --- !u!114 &1097761664856536572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ MonoBehaviour:
   cowPower: 850
   isGrounded: 0
   startWaitTime: 4
-  walkSpeed: 20
+  walkSpeed: 450
 --- !u!95 &6648545885791957594
 Animator:
   serializedVersion: 3

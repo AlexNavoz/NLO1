@@ -11955,8 +11955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20391d911fad3d34498a9da5b07482ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCount: 10
-  boxHP: 5
+  boxCount: 200
+  boxHP: 10
   boxParticle: {fileID: 2599414397068859177, guid: bfd6ece7f002f2f468aeb21d18c936bf,
     type: 3}
 --- !u!1 &3458538476698715931
@@ -15803,7 +15803,7 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 3
     m_StartRange: 0
-    m_EndRange: 1.2703738
+    m_EndRange: 1.39
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -16128,7 +16128,7 @@ ParticleSystemForceField:
     m_DragCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 100
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -39704,6 +39704,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cardboard2
       objectReference: {fileID: 0}
+    - target: {fileID: 8695780324093720442, guid: f5340b32636780843b0dc173b6333797,
+        type: 3}
+      propertyPath: m_TagString
+      value: box
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5340b32636780843b0dc173b6333797, type: 3}
 --- !u!4 &1883697858940895974 stripped
@@ -40048,6 +40053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014446070674132577, guid: f431921af30d47e4fa61816382b39e52,
+        type: 3}
+      propertyPath: m_TagString
+      value: box
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f431921af30d47e4fa61816382b39e52, type: 3}

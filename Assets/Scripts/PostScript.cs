@@ -44,19 +44,19 @@ public class PostScript : MonoBehaviour
 
     }
 
-    public void ChooseAsteroidStage(int stage)
+    public void ChooseAsteroidStage(string stageName)
     {
         Time.timeScale = 1;
-        StartCoroutine(CrossFade(stage));
+        StartCoroutine(CrossFade(stageName));
 
     }
 
-    IEnumerator CrossFade(int levelIndex)
+    IEnumerator CrossFade(string levelName)
     {
         crossfade.SetTrigger("Start");
 
         yield return new WaitForSeconds(1.0f);
         i = 0;
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(levelName);
     }
 }

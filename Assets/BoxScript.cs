@@ -10,7 +10,7 @@ public class BoxScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer != 10 && collision.gameObject.layer != 13)
+        if(collision.gameObject.layer == 19)
         {
             boxHP -= 1;
             Instantiate(boxParticle, transform.position, Quaternion.identity);
