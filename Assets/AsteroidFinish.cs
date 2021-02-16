@@ -27,10 +27,11 @@ public class AsteroidFinish : MonoBehaviour
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         box = GameObject.FindGameObjectWithTag("box");
-        boxScript = box.GetComponent<BoxScript>();
+        
         player = GameObject.FindGameObjectWithTag("Player");
         playerMoving = player.GetComponent<playerMoving>();
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
+        boxScript = box.GetComponent<BoxScript>();
         boxStartHP = boxScript.boxHP;
     }
 

@@ -145,6 +145,7 @@ public class LooseScreenScript : MonoBehaviour
         mainScript.SetMoney(-(int)refuelPrice);
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         mainScript.SafeShortPlatePrefs();
+        mainScript.SafeShortWSPrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();
@@ -154,6 +155,7 @@ public class LooseScreenScript : MonoBehaviour
     {
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         mainScript.SafeShortPlatePrefs();
+        mainScript.SafeShortWSPrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();

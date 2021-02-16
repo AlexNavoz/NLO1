@@ -10,6 +10,8 @@ public class CowMoving : MonoBehaviour
     bool faceRight = false;
     Rigidbody2D rb;
     Animator anim;
+    AudioSource scream;
+    int a = 0;
 
     public float distanse;
     public float cowPower = 1.0f;
@@ -26,9 +28,10 @@ public class CowMoving : MonoBehaviour
     int currentanimation = 0; // 1 - walk, 2 - fly, 3 - fear
     void Start()
     {
+
         waitTime = startWaitTime;
         SetNextSpotToMove();
-
+        scream = GetComponent<AudioSource>();
         startMass = GetComponent<Rigidbody2D>().mass;
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -99,7 +102,7 @@ public class CowMoving : MonoBehaviour
     }
     void Chill()
     {
-
+        a = 0;                          //for sound
         if (waitTime <= 0)
         {
             float distanceToTarget = randomSpot - transform.position.x;
@@ -134,6 +137,12 @@ public class CowMoving : MonoBehaviour
 
     void InFear()
     {
+        if(a == 0)
+        {
+            scream.pitch = Random.Range(0.8f, 1.1f);
+            scream.Play();
+            a++;
+        }
         if (isGrounded)
         {
             ChangeAnimation(3);

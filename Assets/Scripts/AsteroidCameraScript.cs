@@ -37,18 +37,19 @@ public class AsteroidCameraScript : MonoBehaviour
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.StartOnPosition();
         mainScript.levelIndex = 2;
+        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerMoving = player.GetComponent<playerMoving>();
+        PlayerMoving.boxes[boxIndex].SetActive(true);
     }
     void Start()
     {
         mainScript.CanvasOrNotCanvas();
-        player = GameObject.FindGameObjectWithTag("Player");
+       
         playerRb = player.GetComponent<Rigidbody2D>();
         cam = Camera.main;
-        PlayerMoving = player.GetComponent<playerMoving>();
         finish = GameObject.FindGameObjectWithTag("Finish");
-        lastSalaryYPosition = 0;
 
-        PlayerMoving.boxes[boxIndex].SetActive(true);
+        lastSalaryYPosition = 0;
     }
     void FixedUpdate()
     {

@@ -12,7 +12,8 @@ public class playerMoving : MonoBehaviour
     int i = 0;
     Canvas canvas;
     Camera mainCamera;
-
+    public AudioSource jetSound1;
+    public AudioSource jetSound2;
     public float EnginePower;
 
     // Plate Variables!!!
@@ -114,16 +115,24 @@ public class playerMoving : MonoBehaviour
                     if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
                     {
                         rbLeft.AddRelativeForce(Vector3.up * EnginePower);
+                        if(!jetSound1.isPlaying)
+                        jetSound1.Play();
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
                         }
                         leftParticle.Play();
                     }
-                    else { leftParticle.Stop(); }
+                    else
+                    { 
+                        leftParticle.Stop();
+                        jetSound1.Stop();
+                    }
                     if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
                     {
                         rbRight.AddRelativeForce(Vector3.up * EnginePower);
+                        if (!jetSound2.isPlaying)
+                            jetSound2.Play();
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
@@ -131,7 +140,11 @@ public class playerMoving : MonoBehaviour
                         rightParticle.Play();
                     }
 
-                    else { rightParticle.Stop(); }
+                    else 
+                    { 
+                        rightParticle.Stop();
+                        jetSound2.Stop();
+                    }
                 }
                 if (ShipIndex == 1)                                                    //After MainScript
                 {
@@ -142,26 +155,40 @@ public class playerMoving : MonoBehaviour
                             FuelConsampsion(consumption);
                         }
                         rbLeft.AddRelativeForce(Vector3.up * EnginePower * leftSlider.value);
+                        if (!jetSound1.isPlaying)
+                            jetSound1.Play();
                         leftParticle.Play();
                     }
-                    else { leftParticle.Stop(); }
+                    else 
+                    { 
+                        leftParticle.Stop();
+                        jetSound1.Stop();
+                    }
                     if (rightSlider.value != 0)
                     {
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
                         }
-                        rbRight.AddRelativeForce(Vector3.up * EnginePower * rightSlider.value);;
+                        rbRight.AddRelativeForce(Vector3.up * EnginePower * rightSlider.value);
+                        if (!jetSound2.isPlaying)
+                            jetSound2.Play();
                         rightParticle.Play();
                     }
 
-                    else { rightParticle.Stop(); }
+                    else 
+                    {
+                        rightParticle.Stop();
+                        jetSound2.Stop();
+                    }
                 }
             }
             else
             {
                 leftParticle.Stop();
                 rightParticle.Stop();
+                jetSound1.Stop();
+                jetSound2.Stop();
             }
         }
         if (isDead)

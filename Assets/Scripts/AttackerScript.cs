@@ -29,6 +29,10 @@ public class AttackerScript : MonoBehaviour
     public float walkSpeed = 1.0f;
     float randomSpot;
 
+    AudioSource scream;
+    int s;
+    public AudioSource aim;
+    int a;
 
     int currentanimation = 0; // 1 - walk, 2 - fly, 3 - fear
     float current_animation_position = 0.0f;
@@ -36,7 +40,7 @@ public class AttackerScript : MonoBehaviour
     {
         waitTime = startWaitTime;
         SetNextSpotToMove();
-
+        scream = GetComponent<AudioSource>();
         startMass = GetComponent<Rigidbody2D>().mass;
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -91,6 +95,12 @@ public class AttackerScript : MonoBehaviour
         double distanceToUFO_x = player.position.x - transform.position.x;
         double distanceToUFO_y = player.position.y - transform.position.y;
 
+        if(a == 0)
+        {
+            aim.pitch = Random.Range(0.8f, 1.1f);
+            aim.Play();
+            a++;
+        }
         if (distanceToUFO_x > 0)
         {
             RightRotate();
@@ -98,7 +108,6 @@ public class AttackerScript : MonoBehaviour
         else
         {
             LeftRotate();
-            //distanceToUFO_x = -distanceToUFO_x;
         }
 
         float anim_position = (float)((System.Math.Atan2(System.Math.Abs(distanceToUFO_x), distanceToUFO_y) * 2.0) / System.Math.PI);
@@ -123,16 +132,11 @@ public class AttackerScript : MonoBehaviour
     
     void Shoot(float anim_position)
     {
-        
+        a = 0;                                                      //for aim sound
         GameObject newbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.Euler(0, 0, -90.0f * anim_position));
         BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
         newbulletscript.impulse_angle = anim_position;
-        newbulletscript.massScale = (float) onRay.massScale;
-       // newbulletscript.newShootPower *= (float)onRay.massScale;
-       // newbulletscript.rb.mass *= (float)onRay.massScale;
-       // newbulletscript.scale.localScale *= (float)onRay.massScale;
-
-        
+        newbulletscript.massScale = (float) onRay.massScale;  
     }
 
     void SetNextSpotToMove()
@@ -141,7 +145,6 @@ public class AttackerScript : MonoBehaviour
 
         float distanceToTarget = randomSpot - transform.position.x;
 
-        //Quaternion cowRotation = transform.rotation;
         if (distanceToTarget > 0)
         {
             RightRotate();
@@ -172,19 +175,17 @@ public class AttackerScript : MonoBehaviour
             anim.SetBool("isInFear", false);
         if (currentanimation == 4)
         {
-            //anim.SetBool("Aim", true);
             anim.speed = 0.0f;
             anim.Play("Hunter", 0, position);
         }
         else
         {
             anim.speed = 1.0f;
-            //anim.SetBool("Aim", false);
         }
     }
     void Chill()
     {
-
+        s = 0;                                              //for audio screem
         if (waitTime <= 0)
         {
             float distanceToTarget = randomSpot - transform.position.x;
@@ -220,11 +221,15 @@ public class AttackerScript : MonoBehaviour
 
     void InFear()
     {
+        if(s == 0)
+        {
+            scream.pitch = Random.Range(0.8f, 1.1f);
+            scream.Play();
+            s++;
+        }
         if (isGrounded)
         {
             ChangeAnimation(3);
-            //anim.SetBool("isFly", false);
-            //anim.SetBool("isInFear", true);
             if (transform.position.x > player.position.x)
             {
                 RightRunning();
@@ -237,8 +242,6 @@ public class AttackerScript : MonoBehaviour
         if (!isGrounded)
         {
             ChangeAnimation(2);
-            //anim.SetBool("isInFear", false);
-            //anim.SetBool("isFly", true);
         }
 
     }

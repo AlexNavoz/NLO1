@@ -23,7 +23,7 @@ public class Destroyer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 8|| collision.gameObject.layer == 20)
         {
             Rigidbody2D cowRb;
             int onRayCount;
@@ -87,7 +87,7 @@ public class Destroyer : MonoBehaviour
             Instantiate(DestroyParticle, transform.position, Quaternion.identity);
             Destroy(obj);
         }
-        if (collision.gameObject.layer == 20)
+        /*if (collision.gameObject.layer == 20)
         {
             int onRayCount;
             GameObject obj = collision.gameObject;
@@ -96,6 +96,6 @@ public class Destroyer : MonoBehaviour
 
             Instantiate(DestroyParticle, transform.position, Quaternion.identity);
             Destroy(obj);
-        }
+        }*/
     }
 }

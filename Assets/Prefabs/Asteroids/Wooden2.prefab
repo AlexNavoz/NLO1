@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 7310920370460060122}
   - component: {fileID: 5878961065681842483}
   - component: {fileID: 8672346547739398225}
+  - component: {fileID: 6809347716490583467}
   m_Layer: 3
   m_Name: Wooden2
-  m_TagString: Untagged
+  m_TagString: box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869589593574408930}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -12.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -181,3 +182,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &6809347716490583467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869589593574408930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20391d911fad3d34498a9da5b07482ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCount: 1000
+  boxHP: 20
+  boxParticle: {fileID: 2599414397068859177, guid: bfd6ece7f002f2f468aeb21d18c936bf,
+    type: 3}

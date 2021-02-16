@@ -7,8 +7,10 @@ public class AsteroidScript : MonoBehaviour
     Rigidbody2D rb;
     ForceShieldScript fs = null;
     Transform player;
+    AudioSource audioBoom;
     void Start()
     {
+        audioBoom = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         rb.AddRelativeForce(Vector3.down * Random.Range(200.0f, 400.0f), ForceMode2D.Impulse);
@@ -25,6 +27,8 @@ public class AsteroidScript : MonoBehaviour
         if (collision.gameObject.layer == 13)
         {
             fs.TakingDamage(rb.mass / 2);
+            audioBoom.pitch = Random.Range(0.9f, 1.1f);
+            audioBoom.Play();
         }
     }
 

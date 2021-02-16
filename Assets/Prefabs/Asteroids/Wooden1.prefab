@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5566255474666215572}
   - component: {fileID: 8781059930530283645}
   - component: {fileID: 5769262545322533151}
+  - component: {fileID: 2827369718319948497}
   m_Layer: 3
   m_Name: Wooden1
-  m_TagString: Untagged
+  m_TagString: box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,3 +182,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &2827369718319948497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619885158213153708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20391d911fad3d34498a9da5b07482ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCount: 500
+  boxHP: 20
+  boxParticle: {fileID: 2599414397068859177, guid: bfd6ece7f002f2f468aeb21d18c936bf,
+    type: 3}
