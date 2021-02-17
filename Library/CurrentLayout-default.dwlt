@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1280
     height: 717
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 122
+  controlID: 132
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_MixersTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 80bcfeff
+    m_SelectedIDs: 
     m_LastClickedID: -82816
     m_ExpandedIDs: 12eb343c
     m_RenameOverlay:
@@ -579,7 +579,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7cf0f7ff92f0f7ff92f2f7ffd2f3f7ff18f5f7ff541bf8ffc84af8ffa671f8ff1275f8ff1675f8ff6e3cfaffae3cfaffda3ffaff5410fbff861efbff6035feffe436feff4e38feff1e3afeff783bfeffbc60feff0490feffe6b6feffb8bafeff8625ffffc625fffffe26ffffcad0ffffced0ffff78d1ffffb8d1fffff0d2ffff54ddffffa4dfffff3ef0ffff44fbffff
+      m_ExpandedIDs: 44fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1091,22 +1091,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Player
+    - Assets/Prefabs/Mobs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 62
   m_LastFolders:
-  - Assets/Prefabs/Player
+  - Assets/Prefabs/Mobs
   m_LastFoldersGridSize: 62
   m_LastProjectPath: D:\Projects\NLO1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 102}
-    m_SelectedIDs: 12560000
-    m_LastClickedID: 22034
-    m_ExpandedIDs: 00000000c64e0000ca4e0000cc4e000000ca9a3b
+    m_SelectedIDs: 0e4f0000
+    m_LastClickedID: 20238
+    m_ExpandedIDs: 00000000f24e0000f44e0000f64e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1134,7 +1134,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c64e0000c84e0000ca4e0000cc4e0000
+    m_ExpandedIDs: 00000000f24e0000f44e0000f64e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1223,7 +1223,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 900
   m_GlobalObjectId: 
   m_LockTracker:
     m_IsLocked: 0
