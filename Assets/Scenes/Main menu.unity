@@ -4137,7 +4137,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level2
+  m_Text: Town
 --- !u!222 &596918001
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11160,7 +11160,7 @@ GameObject:
   - component: {fileID: 847085398}
   - component: {fileID: 847085397}
   m_Layer: 0
-  m_Name: Earth2 (1)
+  m_Name: Earth3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11654,7 +11654,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AsteroidTest
+  m_Text: Sand
 --- !u!222 &869558251
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11790,7 +11790,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.620791, y: -6.1209874}
+  m_Offset: {x: -4.620791, y: -5.4406137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -11801,7 +11801,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.0824175, y: 2.6143732}
+  m_Size: {x: 9.0824175, y: 3.9751205}
   m_EdgeRadius: 0
 --- !u!114 &897520415
 MonoBehaviour:
@@ -18972,7 +18972,7 @@ GameObject:
   - component: {fileID: 2014860884}
   - component: {fileID: 2014860883}
   m_Layer: 0
-  m_Name: Earth2 (2)
+  m_Name: Earth4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19042,14 +19042,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 718747366}
+        m_TargetAssemblyTypeName: ChooseLevel, Assembly-CSharp
+        m_MethodName: ChooseEarthStage
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

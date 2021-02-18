@@ -6,7 +6,16 @@ public class EvacuationScript : MonoBehaviour
 {
     float massOnStart;
     float dragOnStart;
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player" || collision.gameObject.layer == 8)
+        {
+            collision.transform.position =new Vector3(collision.transform.position.x, collision.transform.position.y+ 10 *Time.deltaTime, collision.transform.position.z);
+        }
+    }
+
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject obj = collision.gameObject;
         
@@ -57,5 +66,5 @@ public class EvacuationScript : MonoBehaviour
         {
             rb.gravityScale = 1;
         }
-    }
+    }*/
 }

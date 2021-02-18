@@ -54,7 +54,11 @@ public class LooseScreenScript : MonoBehaviour
             collectionText.text = mainScript.collection.ToString();
             priceText.text = (mainScript.collection / 2).ToString();
         }
-        canvas.SetActive(true);
+        if (mainScript.levelIndex == 2)
+        {
+            collectionText.text = (mainScript.collection/2).ToString();
+        }
+            canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
         Invoke("TimeStop", mainAnim.clip.length);
 
@@ -68,7 +72,12 @@ public class LooseScreenScript : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         mainScript.SafeShortPlatePrefs();
-        StartCoroutine(CrossFade(1));
+        if (mainScript.levelIndex == 2)
+        {
+            mainScript.allMoney += mainScript.collection / 2;
+            mainScript.collection = 0;
+        }
+            StartCoroutine(CrossFade(1));
     }
 
     public void Restart()

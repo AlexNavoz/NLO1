@@ -355,14 +355,20 @@ public class GarageScript : MonoBehaviour
     void CanvasSetActive()
     {
         canvas.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0.1f;
     }
     public void ExitCanvas()
     {
         Time.timeScale = 1;
         if (HaveChoosen)
         {
+            HaveChoosen = false;
             StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
+        }
+        else
+        {
+            Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+            playerRb.AddForce(Vector3.up*playerRb.mass*20, ForceMode2D.Impulse);
         }
         canvas.SetActive(false);
 
