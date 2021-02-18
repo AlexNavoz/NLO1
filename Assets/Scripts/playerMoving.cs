@@ -8,7 +8,8 @@ public class playerMoving : MonoBehaviour
 {
     MainScript mainScript;
     int ShipIndex;
-    public GameObject forceShield;
+    GameObject forceShield;
+    ForceShieldScript fsScript;
     int i = 0;
     Canvas canvas;
     Camera mainCamera;
@@ -93,7 +94,8 @@ public class playerMoving : MonoBehaviour
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
         rbRight = rightEngine.GetComponent<Rigidbody2D>();
         lname = SceneManager.GetActiveScene().name;
-
+        forceShield = GameObject.FindGameObjectWithTag("ForceShield");
+        fsScript = forceShield.GetComponent<ForceShieldScript>();
 
     }
 
@@ -208,6 +210,21 @@ public class playerMoving : MonoBehaviour
 
 
     }
+    private void Update()
+    {
+        if (fsScript.currentHP <= 0)
+        {
+            mainScript.shieldIsActive = false;
+            canDie = true;
+            forceShield.SetActive(false);
+        }
+        else
+        {
+            forceShield.SetActive(true);
+            mainScript.shieldIsActive = true;
+            canDie = false;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -218,7 +235,7 @@ public class playerMoving : MonoBehaviour
                 if (i == 1)
                 {
                     isDead = true;
-                    Invoke("OpenLosePanel", 2.0f);
+                    OpenLosePanel();
                 }
             }
         }
@@ -235,7 +252,7 @@ public class playerMoving : MonoBehaviour
             }
             if (!alreadyRefueled && currentFuel <= 0)
             {
-                Invoke("OpenRefuelPanel", 1.0f);
+                OpenRefuelPanel();
             }
         }
     }
@@ -306,7 +323,7 @@ public class playerMoving : MonoBehaviour
     }
     public void ReloadWSPrefs()
     {
-        mainScript.LoadPlatePrefs();
+        mainScript.LoadWSPrefs();
         EnginePower = mainScript.WS_enginePower;
         maxFuel = mainScript.WS_maxFuel;
     }

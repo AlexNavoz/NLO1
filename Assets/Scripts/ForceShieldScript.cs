@@ -36,18 +36,13 @@ public class ForceShieldScript : MonoBehaviour
 
         if(collision.gameObject.layer == 9)
         {
-            i++;
-            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled && currentHP>3 && i ==1)
+            
+            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled && i ==0)
             {
-                Invoke("OpenRefuelPanel", 1.0f);
+                i++;
+                OpenRefuelPanel();
             }
             TakingDamage(3);
-        }
-        if (currentHP <= 0)
-        {
-            mainScript.shieldIsActive = false;
-            playermoving.canDie = true;
-            gameObject.SetActive(false);
         }
     }
 

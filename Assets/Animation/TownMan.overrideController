@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TownMan
+  m_Controller: {fileID: 9100000, guid: 264ec0c2e1d1d8d4daf94827e19eba54, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 53a34eb9918fd504797d4b4e067f59d0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9527bf73e48af7a47a3b21ca51a557bc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e402c2491a41fd742a464e358a6a1613, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4ec9a3b7650f1b64f81d34d6565ea7c4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d9d4333b454a5f944b34c824a12f3f33, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c4b778af3fd191b44b61e7d9db9fe235, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa3d1e6f3d506174dbf5b3cbb2683d4b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 258f502d3548dcb408a31db819e03d1b, type: 2}
