@@ -17,6 +17,12 @@ public class GarageScript : MonoBehaviour
     int[] prices = new int[] {100,200,400,800,1500,2000,2000,2000,3000,4000};
     int[] WSprices = new int[] { 200, 400, 800, 1500, 2000, 3000, 4000, 5000, 6000, 7000 };
 
+    //Buy ship
+
+    public GameObject buyWSPanel;
+    public Button buyWSButton;
+
+
     //plate variables_______________________________________________________________________________________________
 
     //engine
@@ -92,6 +98,8 @@ public class GarageScript : MonoBehaviour
         fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
+
+
         //plate_______________________________________________________________________________________________________________________________
 
         //engine
@@ -166,7 +174,7 @@ public class GarageScript : MonoBehaviour
         //WarShip_____________________________________________________________________________________________________________________
 
         //engine
-        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 120.0f);
+        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 80.0f);
         WS_EngineLevel = PlayerPrefs.GetInt("WS_EngineLevel", 0);
         WS_enginePrice = WSprices[WS_EngineLevel];
         WS_engineText.text = WS_enginePrice.ToString();
@@ -248,9 +256,22 @@ public class GarageScript : MonoBehaviour
 
     private void Update()
     {
+        //Buy ships
+        if(mainScript.allMoney < 10000)
+        {
+            buyWSButton.interactable = false;
+        }
+        else buyWSButton.interactable = true;
+
+        if (PlayerPrefs.GetInt("WSBuy", 0) == 0)
+        {
+            buyWSPanel.SetActive(true);
+        }
+        else buyWSPanel.SetActive(false);
+
         //_____________________________________________________________________PLATE_________________________________________
         //engine
-        if(P_enginePrice > mainScript.allMoney)
+        if (P_enginePrice > mainScript.allMoney)
         {
             P_engineButton.interactable = false;
         }
@@ -557,5 +578,12 @@ public class GarageScript : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void BuyWS()
+    {
+        mainScript.SetMoney(-10000);
+        buyWSPanel.SetActive(false);
+        PlayerPrefs.SetInt("WSBuy", 1);
     }
 }
