@@ -54,6 +54,12 @@ public class playerMoving : MonoBehaviour
     //Boxes
     public GameObject[] boxes = new GameObject[] { };
 
+    //Criminal Stars
+    public GameObject crimePanel;
+    public GameObject[] criminalStars;
+    public GameObject[] badGuys;
+    int crimeIndex = 0;
+
     private void Awake()
     {
         canvas = GetComponentInChildren<Canvas>();
@@ -66,7 +72,7 @@ public class playerMoving : MonoBehaviour
             mainScript.LoadPlatePrefs();
             mainScript.LoadShortPlatePrefs();
         }
-        if (ShipIndex == 1)                                                    //After MainScript
+        if (ShipIndex == 1)                                                    
         {
             mainScript.LoadWSPrefs();
             mainScript.LoadShortWSPrefs();
@@ -81,13 +87,22 @@ public class playerMoving : MonoBehaviour
         {
             EnginePower = mainScript.P_enginePower;
         }
-        if (ShipIndex == 1)                                                    //Change After MainScript
+        if (ShipIndex == 1)                                         
         {
             EnginePower = mainScript.WS_enginePower;
             leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
             rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
         }
+        if(mainScript.levelIndex == 1)
+        {
+            crimePanel.SetActive(true);
+        }
+        else
+        {
+            crimePanel.SetActive(false);
+        }
 
+        StartCoroutine ("SpawnEnemies");
         SetFuelValues();
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
@@ -212,6 +227,12 @@ public class playerMoving : MonoBehaviour
     }
     private void Update()
     {
+        if (mainScript.collection > 100&&!criminalStars[0].activeSelf)
+        {
+            crimeIndex = 1;
+            criminalStars[0].SetActive(true);
+        }
+
         if (fsScript.currentHP <= 0)
         {
             mainScript.shieldIsActive = false;
@@ -344,5 +365,22 @@ public class playerMoving : MonoBehaviour
     {
         refuelCanvas = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
         refuelCanvas.RefuelCanvasOpen();
+    }
+    IEnumerator SpawnEnemies()
+    {
+        while (true)
+        {
+            Vector3 badGuysPos = new Vector3(transform.position.x + 50.0f, 0, 0);
+            if (crimeIndex == 0)
+            {
+                yield return new WaitForSeconds(10.0f);
+            }
+            else
+            {
+                Instantiate(badGuys[crimeIndex-1], badGuysPos, new Quaternion(0,0,0,0));
+            }
+            yield return new WaitForSeconds(10.0f);
+        }
+        
     }
 }

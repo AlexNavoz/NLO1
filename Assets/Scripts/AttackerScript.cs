@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackerScript : MonoBehaviour
 {
+    public bool isAgressive = true;
     public GameObject muzzle;
     public GameObject bullet;
     bool scared;
@@ -65,13 +66,18 @@ public class AttackerScript : MonoBehaviour
             aiming = false;
             aimingtime = 0;
         }
-        else if(System.Math.Abs(player.position.x - transform.position.x) < aiming_distanse && !scared)
+        else if (System.Math.Abs(player.position.x - transform.position.x) < aiming_distanse && !scared)
         {
             if (!aiming)
             {
                 aiming = true;
                 aimingtime = 0;
             }
+        }
+        else 
+        {
+            a = 0;
+            aiming = false;
         }
 
         if (scared)
@@ -86,7 +92,14 @@ public class AttackerScript : MonoBehaviour
             }
             else
             {
-                Chill();
+                if (!isAgressive)
+                {
+                    Chill();
+                }
+                if (isAgressive)
+                {
+                    Attacking();
+                }
             }
         }
     }
@@ -279,9 +292,18 @@ public class AttackerScript : MonoBehaviour
         LeftRotate();
         rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
     }
-    void Flip()
+    void Attacking()
     {
-
+        s = 0;                                              //for audio screem
+        ChangeAnimation(3);
+        if (transform.position.x < player.position.x)
+        {
+            RightRunning();
+        }
+        if (transform.position.x > player.position.x)
+        {
+            LeftRunning();
+        }
 
     }
 }

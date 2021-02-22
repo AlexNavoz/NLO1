@@ -41,11 +41,14 @@ public class OnRay : MonoBehaviour
 
     void DistanceDetecting()
     {
-        if ((player.position.x - transform.position.x) > 40 || (player.position.x - transform.position.x) < -40)
+        if (gameObject.tag != "Bad")
         {
-            gameObject.SetActive(false);
+            if ((player.position.x - transform.position.x) > 40 || (player.position.x - transform.position.x) < -40)
+            {
+                gameObject.SetActive(false);
+            }
+            else gameObject.SetActive(true);
         }
-        else gameObject.SetActive(true);
     }
 
 }
