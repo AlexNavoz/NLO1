@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ac345f9378e0d439a6c5a7da8b850d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAgressive: 0
+  isAgressive: 1
   muzzle: {fileID: 8358718777424794920}
   bullet: {fileID: 5293332584899348574, guid: 92d86da1a792e694a98c34909f4b2c8d, type: 3}
   shootingtime: 2
@@ -186,7 +186,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9308089416cc6eb4096522d68ef16efe, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.56
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -230,7 +230,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.82
+      value: 0.41
       inSlope: 0
       outSlope: 0
       tangentMode: 0

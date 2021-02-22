@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class CameraScript : MonoBehaviour
 {
     GameObject player;
+    playerMoving playerMoving;
     Camera cam;
     MainScript mainScript;
+    public GameObject[] badGuys;
 
     float smoothSpeed = 3.0f;
     public Vector3 offset;
@@ -37,8 +39,10 @@ public class CameraScript : MonoBehaviour
         Screen.orientation = ScreenOrientation.Landscape;
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerMoving = player.GetComponent<playerMoving>();
         cam = Camera.main;
-        
+        StartCoroutine("SpawnEnemies");
+
     }
     void FixedUpdate()
     {
@@ -78,5 +82,31 @@ public class CameraScript : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene(0);
+    }
+    IEnumerator SpawnEnemies()
+    {
+        while (true)
+        {
+            Vector3 badGuysPos = new Vector3(player.transform.position.x + 50.0f, 0, 0);
+            Vector3 badGuysPos2 = new Vector3(player.transform.position.x - 50.0f, 0, 0);
+            float leftOrRight = Random.Range(-1.0f, 1.0f);
+            if (playerMoving.crimeIndex == 0)
+            {
+                yield return new WaitForSeconds(10.0f);
+            }
+            else
+            {
+                if (leftOrRight > 0)
+                {
+                    Instantiate(badGuys[playerMoving.crimeIndex - 1], badGuysPos, new Quaternion(0, 0, 0, 0));
+                }
+                else
+                {
+                    Instantiate(badGuys[playerMoving.crimeIndex - 1], badGuysPos2, new Quaternion(0, 0, 0, 0));
+                }
+            }
+            yield return new WaitForSeconds(10.0f);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChooseLevel : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class ChooseLevel : MonoBehaviour
 
     Animator crossfade;
 
+    //Buy levels variables
+    public GameObject[] blockPanels;
+    public Button[] LevelBuyButtons;
+    public int[] LevelBuyPrices = new int[] {1000,2000,4000,6000,8000 };
+
     private void Awake()
     {
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
@@ -21,18 +27,38 @@ public class ChooseLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        for(int i = 0; i<blockPanels.Length; i++)
+        {
+            if (blockPanels[i] != null)
+            {
+                if (PlayerPrefs.GetInt("Stage" + i, 0) == 1)
+                {
+                    blockPanels[i].SetActive(false);
+                }
+            }
+            if (LevelBuyButtons[i] != null)
+            {
+                if (LevelBuyPrices[i] > mainScript.allMoney)
+                {
+                    LevelBuyButtons[i].interactable = false;
+                }
+            }
+        }
+
         if (collision.gameObject.layer == 10&& i == 0)
         {
             i++;
             canvas.SetActive(true);
             Time.timeScale = 0;
             mainScript.SafeShortPlatePrefs();
-            mainScript.SafeShortWSPrefs();
-            
-            
+            mainScript.SafeShortWSPrefs();  
         }
-            
-        
+    }
+    public void BuyEarthStage(int stageIndex)
+    {
+        PlayerPrefs.SetInt("Stage" + stageIndex, 1);
+        blockPanels[stageIndex].SetActive(false);
+        mainScript.SetMoney(-LevelBuyPrices[stageIndex]);
     }
 
     public void ChooseEarthStage(int stage)

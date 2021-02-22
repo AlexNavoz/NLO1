@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackerScript : MonoBehaviour
 {
-    public bool isAgressive = true;
+    public int isAgressive = 1;
     public GameObject muzzle;
     public GameObject bullet;
     bool scared;
@@ -92,11 +92,11 @@ public class AttackerScript : MonoBehaviour
             }
             else
             {
-                if (!isAgressive)
+                if (isAgressive==0)
                 {
                     Chill();
                 }
-                if (isAgressive)
+                if (isAgressive==1)
                 {
                     Attacking();
                 }
