@@ -36,6 +36,7 @@ public class CameraScript : MonoBehaviour
     }
     void Start()
     {
+        Time.fixedDeltaTime = 0.02f;
         Screen.orientation = ScreenOrientation.Landscape;
         mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");

@@ -389,7 +389,7 @@ public class GarageScript : MonoBehaviour
         else
         {
             Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-            playerRb.AddForce(Vector3.up*playerRb.mass*20, ForceMode2D.Impulse);
+            playerRb.AddForce(Vector3.up*playerRb.mass*25, ForceMode2D.Impulse);
         }
         canvas.SetActive(false);
 

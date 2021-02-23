@@ -93,16 +93,6 @@ public class playerMoving : MonoBehaviour
             leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
             rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
         }
-        if(mainScript.levelIndex == 1)
-        {
-            crimePanel.SetActive(true);
-        }
-        else
-        {
-            crimePanel.SetActive(false);
-        }
-
-        SetFuelValues();
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
         rbLeft = leftEngine.GetComponent<Rigidbody2D>();
@@ -110,6 +100,16 @@ public class playerMoving : MonoBehaviour
         lname = SceneManager.GetActiveScene().name;
         forceShield = GameObject.FindGameObjectWithTag("ForceShield");
         fsScript = forceShield.GetComponent<ForceShieldScript>();
+        SetFuelValues();
+        if (mainScript.levelIndex == 1)
+        {
+            crimePanel.SetActive(true);
+        }
+        else
+        {
+            crimePanel.SetActive(false);
+        }
+        
     }
 
     public void showTextValue(GameObject obj, string text, int type) {
@@ -225,32 +225,6 @@ public class playerMoving : MonoBehaviour
     }
     private void Update()
     {
-        if (mainScript.collection > 200&&!criminalStars[0].activeSelf)
-        {
-            crimeIndex = 1;
-            criminalStars[crimeIndex-1].SetActive(true);
-        }
-        if (mainScript.collection > 500 && !criminalStars[1].activeSelf)
-        {
-            crimeIndex = 2;
-            criminalStars[crimeIndex - 1].SetActive(true);
-        }
-        if (mainScript.collection > 1000 && !criminalStars[2].activeSelf)
-        {
-            crimeIndex = 3;
-            criminalStars[crimeIndex - 1].SetActive(true);
-        }
-        if (mainScript.collection > 2000 && !criminalStars[3].activeSelf)
-        {
-            crimeIndex = 4;
-            criminalStars[crimeIndex - 1].SetActive(true);
-        }
-        if (mainScript.collection > 5000 && !criminalStars[4].activeSelf)
-        {
-            crimeIndex = 5;
-            criminalStars[crimeIndex - 1].SetActive(true);
-        }
-
         if (fsScript.currentHP <= 0)
         {
             mainScript.shieldIsActive = false;
@@ -262,6 +236,35 @@ public class playerMoving : MonoBehaviour
             forceShield.SetActive(true);
             mainScript.shieldIsActive = true;
             canDie = false;
+        }
+
+        if (mainScript.levelIndex == 1)
+        {
+            if (mainScript.collection > 200 && !criminalStars[0].activeSelf)
+            {
+                crimeIndex = 1;
+                criminalStars[crimeIndex - 1].SetActive(true);
+            }
+            if (mainScript.collection > 1000 && !criminalStars[1].activeSelf)
+            {
+                crimeIndex = 2;
+                criminalStars[crimeIndex - 1].SetActive(true);
+            }
+            if (mainScript.collection > 2000 && !criminalStars[2].activeSelf)
+            {
+                crimeIndex = 3;
+                criminalStars[crimeIndex - 1].SetActive(true);
+            }
+            if (mainScript.collection > 5000 && !criminalStars[3].activeSelf)
+            {
+                crimeIndex = 4;
+                criminalStars[crimeIndex - 1].SetActive(true);
+            }
+            if (mainScript.collection >10000 && !criminalStars[4].activeSelf)
+            {
+                crimeIndex = 5;
+                criminalStars[crimeIndex - 1].SetActive(true);
+            }
         }
     }
 

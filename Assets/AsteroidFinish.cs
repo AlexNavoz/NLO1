@@ -22,6 +22,7 @@ public class AsteroidFinish : MonoBehaviour
     playerMoving playerMoving;
     MainScript mainScript;
     public GameObject canvas;
+    AsteroidCameraScript ACScript;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class AsteroidFinish : MonoBehaviour
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         boxScript = box.GetComponent<BoxScript>();
         boxStartHP = boxScript.boxHP;
+        ACScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AsteroidCameraScript>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +48,18 @@ public class AsteroidFinish : MonoBehaviour
         {
             boxFinishHP = boxScript.boxHP;
             percent = boxFinishHP * 100 / boxStartHP;
+            if(percent > 0 && percent < 50)
+            {
+                PlayerPrefs.SetInt("A_Stage" + ACScript.boxIndex, 1);
+            }
+            if (percent >= 50 && percent < 90)
+            {
+                PlayerPrefs.SetInt("A_Stage" + ACScript.boxIndex, 2);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("A_Stage" + ACScript.boxIndex, 3);
+            }
             percentText.text = percent.ToString()+"%";
             finishBoxCount = (percent * boxScript.boxCount) / 100;
             boxCountText.text = finishBoxCount.ToString();

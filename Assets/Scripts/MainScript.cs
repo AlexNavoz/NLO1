@@ -40,6 +40,7 @@ public class MainScript : MonoBehaviour
     playerMoving player;
     ForceShieldScript fs;
     public bool shieldIsActive;
+    public int[] postLevels;
 
     //money variables
     string lname;
@@ -57,6 +58,9 @@ public class MainScript : MonoBehaviour
     {
         LoadPlatePrefs();
         LoadShortPlatePrefs();
+        LoadWSPrefs();
+        LoadShortWSPrefs();
+        
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",0);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
         text.text = allMoney.ToString();
@@ -178,5 +182,13 @@ public class MainScript : MonoBehaviour
             PlayerPrefs.SetFloat("WS_forceShieldLevel", 1.0f);
 
         PlayerPrefs.SetInt("WS_cowCount", WS_cowCount);
+    }
+    public void PostLevels()
+    {
+        PostScript postScript = GameObject.FindGameObjectWithTag("Post").GetComponent<PostScript>();
+        for(int i = 0; i < postScript.a_Stages.Length-1; i++)
+        {
+            postLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
+        }
     }
 }

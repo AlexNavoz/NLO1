@@ -13,7 +13,7 @@ public class AsteroidScript : MonoBehaviour
         audioBoom = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
-        rb.AddRelativeForce(Vector3.down * Random.Range(200.0f, 400.0f), ForceMode2D.Impulse);
+        rb.AddRelativeForce(Vector3.down * Random.Range(100.0f, 300.0f), ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(-100, 100),ForceMode2D.Impulse);
         GameObject fs_obj;
         if ((fs_obj = GameObject.FindGameObjectWithTag("ForceShield")) != null)

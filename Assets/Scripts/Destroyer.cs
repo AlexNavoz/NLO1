@@ -32,6 +32,7 @@ public class Destroyer : MonoBehaviour
             GameObject obj = collision.gameObject;
 
             onRayComponent = obj.GetComponent<OnRay>();
+           
             if (onRayComponent == null)
             {
                 return;
@@ -39,13 +40,18 @@ public class Destroyer : MonoBehaviour
             else
             {
                 onRayCount = onRayComponent.count;
+                cowRb = obj.GetComponent<Rigidbody2D>();
+                if (cowRb.mass >= 2.0f)
+                {
+                    return;
+                }
                 mainScript.collection += onRayCount;
                 {
                     StringBuilder sb = new StringBuilder("+", 10);
                     sb.Append(((int)onRayCount).ToString());
                     player_moving.showTextValue(gameObject, sb.ToString(), 1);
                 }
-                cowRb = obj.GetComponent<Rigidbody2D>();
+               
                 if (cowRb != null)
                 {
                     playerRb.mass += cowRb.mass;
