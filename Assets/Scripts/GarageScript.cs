@@ -388,7 +388,9 @@ public class GarageScript : MonoBehaviour
         }
         else
         {
-            Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+            player.transform.rotation = new Quaternion(0,0,0,0);
             playerRb.AddForce(Vector3.up*playerRb.mass*25, ForceMode2D.Impulse);
         }
         canvas.SetActive(false);

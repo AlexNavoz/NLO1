@@ -71,7 +71,6 @@ public class GasStationScript : MonoBehaviour
 
     void EnterToStation()
     {
-        Time.timeScale = 0;
         canvas.SetActive(true);
         price = (int)((playerScript.maxFuel - playerScript.currentFuel) + (forceShield.maxHP - forceShield.currentHP));
         text.text = price.ToString();
@@ -88,7 +87,6 @@ public class GasStationScript : MonoBehaviour
     }
      public void Exit()
     {
-        Time.timeScale = 1;
         canvas.SetActive(false);
     }
 }

@@ -8,6 +8,7 @@ public class playerMoving : MonoBehaviour
 {
     MainScript mainScript;
     int ShipIndex;
+    Rigidbody2D rb;
     GameObject forceShield;
     ForceShieldScript fsScript;
     int i = 0;
@@ -101,6 +102,7 @@ public class playerMoving : MonoBehaviour
         forceShield = GameObject.FindGameObjectWithTag("ForceShield");
         fsScript = forceShield.GetComponent<ForceShieldScript>();
         SetFuelValues();
+        rb = GetComponent<Rigidbody2D>();
         if (mainScript.levelIndex == 1)
         {
             crimePanel.SetActive(true);
@@ -129,6 +131,7 @@ public class playerMoving : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
                     {
+                        rb.drag = 1;
                         rbLeft.AddRelativeForce(Vector3.up * EnginePower);
                         if(!jetSound1.isPlaying)
                         jetSound1.Play();
@@ -139,12 +142,14 @@ public class playerMoving : MonoBehaviour
                         leftParticle.Play();
                     }
                     else
-                    { 
+                    {
+                        rb.drag = 5;
                         leftParticle.Stop();
                         jetSound1.Stop();
                     }
                     if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
                     {
+                        rb.drag = 1;
                         rbRight.AddRelativeForce(Vector3.up * EnginePower);
                         if (!jetSound2.isPlaying)
                             jetSound2.Play();
@@ -156,7 +161,8 @@ public class playerMoving : MonoBehaviour
                     }
 
                     else 
-                    { 
+                    {
+                        rb.drag = 5;
                         rightParticle.Stop();
                         jetSound2.Stop();
                     }
@@ -165,6 +171,7 @@ public class playerMoving : MonoBehaviour
                 {
                     if (leftSlider.value != 0)
                     {
+                        rb.drag = 1;
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
@@ -175,12 +182,14 @@ public class playerMoving : MonoBehaviour
                         leftParticle.Play();
                     }
                     else 
-                    { 
+                    {
+                        rb.drag = 5;
                         leftParticle.Stop();
                         jetSound1.Stop();
                     }
                     if (rightSlider.value != 0)
                     {
+                        rb.drag = 1;
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
@@ -193,6 +202,7 @@ public class playerMoving : MonoBehaviour
 
                     else 
                     {
+                        rb.drag = 5;
                         rightParticle.Stop();
                         jetSound2.Stop();
                     }
@@ -200,6 +210,7 @@ public class playerMoving : MonoBehaviour
             }
             else
             {
+                rb.drag = 1;
                 leftParticle.Stop();
                 rightParticle.Stop();
                 jetSound1.Stop();

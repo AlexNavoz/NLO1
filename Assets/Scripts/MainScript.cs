@@ -40,7 +40,7 @@ public class MainScript : MonoBehaviour
     playerMoving player;
     ForceShieldScript fs;
     public bool shieldIsActive;
-    public int[] postLevels;
+    public int[] postLevels = null;
 
     //money variables
     string lname;
@@ -186,7 +186,8 @@ public class MainScript : MonoBehaviour
     public void PostLevels()
     {
         PostScript postScript = GameObject.FindGameObjectWithTag("Post").GetComponent<PostScript>();
-        for(int i = 0; i < postScript.a_Stages.Length-1; i++)
+        postLevels = new int[postScript.a_Stages.Length];
+        for (int i = 0; i < postScript.a_Stages.Length; i++)
         {
             postLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
         }

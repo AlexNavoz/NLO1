@@ -24,6 +24,7 @@ public class PostScript : MonoBehaviour
     private void Start()
     {
         mainScript.PostLevels();
+        StarsSwitch();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,29 +61,28 @@ public class PostScript : MonoBehaviour
 
     void StarsSwitch()
     {
-        for(int i = 0; i<a_Stages.Length-1; i++)
+        for(int i = 0; i<a_Stages.Length; i++)
         {
-            GameObject star1 = a_Stages[i].transform.Find("Star1").gameObject;
-            GameObject star2 = a_Stages[i].transform.Find("Star2").gameObject;
-            GameObject star3 = a_Stages[i].transform.Find("Star3").gameObject;
-            if (mainScript.postLevels[i] == 3)
-            {
-                star1.SetActive(true);
-                star2.SetActive(true);
-                star3.SetActive(true);
-            }
-            if (mainScript.postLevels[i] == 2)
-            {
-                star1.SetActive(true);
-                star2.SetActive(true);
-            }
-            if (mainScript.postLevels[i] == 1)
-            {
-                star1.SetActive(true);
-            }
-            if (mainScript.postLevels[i] == 0)
-            {
-                a_Buttons[i + 1].interactable = false;
+            Transform stars = a_Stages[i].transform.Find("Stars");
+            GameObject star1 = stars.Find("Star1").gameObject;
+            GameObject star2 = stars.Find("Star2").gameObject;
+            GameObject star3 = stars.Find("Star3").gameObject;
+            switch (mainScript.postLevels==null ? 0 : mainScript.postLevels[i]) {
+                case 3:
+                    star3.SetActive(true);
+                    goto case 2;
+                case 2:
+                    star2.SetActive(true);
+                    goto case 1;
+                case 1:
+                    star1.SetActive(true);
+                    if ((i + 1) < a_Buttons.Length)
+                        a_Buttons[i + 1].interactable = true;
+                    break;
+                default:
+                    if((i + 1) < a_Buttons.Length)
+                        a_Buttons[i + 1].interactable = false;
+                    break;
             }
         }
     }
