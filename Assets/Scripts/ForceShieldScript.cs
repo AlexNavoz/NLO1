@@ -42,7 +42,6 @@ public class ForceShieldScript : MonoBehaviour
                 i++;
                 OpenRefuelPanel();
             }
-            TakingDamage(3);
         }
     }
 
