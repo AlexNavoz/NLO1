@@ -232,8 +232,8 @@ MonoBehaviour:
   smokeParticle: {fileID: 0}
   emission: {fileID: 0}
   flyTime: 0
-  shootPower: 50
-  damage: 10
+  shootPower: 30
+  damage: 6
   massScale: 1
   impulse_angle: 0
 --- !u!96 &4693939898358900114
@@ -355,7 +355,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 0.3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
