@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GarageScript : MonoBehaviour
 {
+    public AudioSource tunButton;
     MainScript mainScript;
     playerMoving player_moving;
     ForceShieldScript fs;
@@ -400,7 +401,8 @@ public class GarageScript : MonoBehaviour
     //___________________________________________________________PLATE_UPGRADE_____________________________________________________
     public void P_UpgradeEngine()
     {
-        P_enginePrice = prices[P_EngineLevel];
+        tunButton.Play();
+           P_enginePrice = prices[P_EngineLevel];
         P_EngineLevel++;
         PlayerPrefs.SetInt("P_EngineLevel", P_EngineLevel);
         PlayerPrefs.SetFloat("P_enginePower", P_enginepowers[P_EngineLevel]);
@@ -419,6 +421,7 @@ public class GarageScript : MonoBehaviour
     }
     public void P_UpgradeRay()
     {
+        tunButton.Play();
         P_rayPrice = prices[P_RayLevel];
         P_RayLevel++;
         PlayerPrefs.SetInt("P_RayLevel", P_RayLevel);
@@ -437,6 +440,7 @@ public class GarageScript : MonoBehaviour
 
     public void P_UpgradeTank()
     {
+        tunButton.Play();
         P_tankPrice = prices[P_TankLevel];
         P_TankLevel++;
         PlayerPrefs.SetInt("P_TankLevel", P_TankLevel);
@@ -458,6 +462,7 @@ public class GarageScript : MonoBehaviour
 
     public void P_UpgradeShield()
     {
+        tunButton.Play();
         P_shieldPrice = prices[P_ShieldLevel];
         P_ShieldLevel++;
         PlayerPrefs.SetInt("P_ShieldLevel", P_ShieldLevel);
@@ -481,6 +486,7 @@ public class GarageScript : MonoBehaviour
 
     public void WS_UpgradeEngine()
     {
+        tunButton.Play();
         WS_enginePrice = WSprices[WS_EngineLevel];
         WS_EngineLevel++;
         PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
@@ -500,6 +506,7 @@ public class GarageScript : MonoBehaviour
     }
     public void WS_UpgradeRay()
     {
+        tunButton.Play();
         WS_rayPrice = WSprices[WS_RayLevel];
         WS_RayLevel++;
         PlayerPrefs.SetInt("WS_RayLevel", WS_RayLevel);
@@ -518,6 +525,7 @@ public class GarageScript : MonoBehaviour
 
     public void WS_UpgradeTank()
     {
+        tunButton.Play();
         WS_tankPrice = WSprices[WS_TankLevel];
         WS_TankLevel++;
         PlayerPrefs.SetInt("WS_TankLevel", WS_TankLevel);
@@ -539,6 +547,7 @@ public class GarageScript : MonoBehaviour
 
     public void WS_UpgradeShield()
     {
+        tunButton.Play();
         WS_shieldPrice = WSprices[WS_ShieldLevel];
         WS_ShieldLevel++;
         PlayerPrefs.SetInt("WS_ShieldLevel", WS_ShieldLevel);
@@ -559,6 +568,7 @@ public class GarageScript : MonoBehaviour
     }
     public void TakeWS()
     {
+        tunButton.Play();
         HaveChoosen = true;
         mainScript.ShipIndex = 1;
         PlayerPrefs.SetInt("ShipIndex",1);
@@ -567,6 +577,7 @@ public class GarageScript : MonoBehaviour
     }
     public void TakePlate()
     {
+        tunButton.Play();
         HaveChoosen = true;
         mainScript.ShipIndex = 0;
         PlayerPrefs.SetInt("ShipIndex", 0);

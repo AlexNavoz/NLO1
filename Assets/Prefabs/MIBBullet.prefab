@@ -42,9 +42,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: dea7c7a00cd27a34690a6acdcb32f988, type: 3}
+  m_audioClip: {fileID: 8300000, guid: acaa0f2d647cc4b4ba85d0195958124b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5032,7 +5032,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0.5
   m_Material: {fileID: 0}
@@ -5058,7 +5058,7 @@ MonoBehaviour:
     type: 3}
   flyTime: 5
   shootPower: 1500
-  damage: 20
+  damage: 0
   massScale: 1
   impulse_angle: 0
 --- !u!58 &8350102489222557219
