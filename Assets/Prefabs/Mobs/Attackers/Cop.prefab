@@ -166,8 +166,8 @@ MonoBehaviour:
   muzzle: {fileID: 1747568803469673374}
   bullet: {fileID: 5293332584899348574, guid: 780adade519c2654aa1dab2035229812, type: 3}
   shootingtime: 0.6
-  distanse: 25
-  aiming_distanse: 10
+  distanse: 10
+  aiming_distanse: 15
   cowPower: 500
   isGrounded: 0
   startWaitTime: 2.5
@@ -184,7 +184,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9308089416cc6eb4096522d68ef16efe, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 811c32d2eff6fd841bfb4b8f8981175a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInRay: 0
-  count: 100
+  count: 200
   massScale: 1
 --- !u!114 &104623940892101770
 MonoBehaviour:
@@ -167,7 +167,7 @@ MonoBehaviour:
   bullet: {fileID: 5293332584899348574, guid: d82937018ef724948874768e4b028cdd, type: 3}
   shootingtime: 2
   distanse: 25
-  aiming_distanse: 25
+  aiming_distanse: 30
   cowPower: 500
   isGrounded: 0
   startWaitTime: 2.5

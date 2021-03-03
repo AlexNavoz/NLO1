@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public bool rocketOrBullet = false;
+    public int bulletIndex = 0;
     public ParticleSystem smokeParticle;
     public GameObject emission;
     public float flyTime;
-
+    FixedJoint2D joint;
     public float shootPower;
     public float damage;
     public float massScale = 1;
@@ -18,6 +18,7 @@ public class BulletScript : MonoBehaviour
     Vector2 impulse_vector = new Vector2(0.0f,1.0f);
 
     public float impulse_angle;
+    int i = 0;
 
     void Start()
     {
@@ -30,20 +31,30 @@ public class BulletScript : MonoBehaviour
         //impulse_vector.x = (float)System.Math.Sin(impulse_angle * System.Math.PI / 2.0f);
         //impulse_vector.y = (float)System.Math.Cos(impulse_angle * System.Math.PI / 2.0f);
 
-        if (!rocketOrBullet)
+        if (bulletIndex == 0)
         {
             rb.AddRelativeForce(impulse_vector * shootPower * massScale * MainScript.forceBatchingMultiplier, ForceMode2D.Impulse);
+            Destroy(gameObject, 5.0f);
+        }
+        if (bulletIndex == 1)
+        {
+            Destroy(gameObject, 5.0f);
+        }
+        if (bulletIndex == 2)
+        {
+            rb.AddRelativeForce(impulse_vector * shootPower * massScale * MainScript.forceBatchingMultiplier, ForceMode2D.Impulse);
+            joint = GetComponent<FixedJoint2D>();
         }
         
         GameObject fs_obj;
         if(fs_obj = GameObject.FindGameObjectWithTag("ForceShield"))
             fs = fs_obj.GetComponent<ForceShieldScript>();
-        Destroy(gameObject, 7.0f);
+        
     }
 
     private void Update()
     {
-        if (rocketOrBullet)
+        if (bulletIndex == 1)
         {
             flyTime -= Time.deltaTime;
             if (flyTime > 0)
@@ -56,7 +67,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!rocketOrBullet)
+        if (bulletIndex == 0)
         {
             if (collision.gameObject.layer == 13)
             {
@@ -65,7 +76,7 @@ public class BulletScript : MonoBehaviour
             }
             Destroy(gameObject, 2.0f);
         }
-        if (rocketOrBullet)
+        if (bulletIndex == 1)
         {
             if (collision.gameObject.layer == 13)
             {
@@ -80,6 +91,21 @@ public class BulletScript : MonoBehaviour
             {
                 Instantiate(emission, transform.position, Quaternion.identity);
                 Destroy(gameObject);
+            }
+        }
+        if (bulletIndex == 2)
+        {
+            if (collision.gameObject.layer == 13)
+            {
+                if (fs&&i == 0)
+                {
+                    
+                    fs.TakingDamage(damage * massScale);
+                    FixedJoint2D joint = gameObject.AddComponent<FixedJoint2D>();
+                    joint.breakForce = 100;
+                    joint.connectedBody = collision.rigidbody;
+                    i++;
+                }
             }
         }
     }

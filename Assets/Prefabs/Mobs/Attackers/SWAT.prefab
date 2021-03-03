@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInRay: 0
-  count: 150
+  count: 200
   massScale: 1
 --- !u!114 &104623940892101770
 MonoBehaviour:
@@ -167,7 +167,7 @@ MonoBehaviour:
   bullet: {fileID: 5293332584899348574, guid: 0a1ffdd6036661d4ca10c0f4098fde0f, type: 3}
   shootingtime: 0.2
   distanse: 20
-  aiming_distanse: 25
+  aiming_distanse: 20
   cowPower: 420
   isGrounded: 0
   startWaitTime: 2.5
@@ -184,7 +184,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 99aaca618ce980341a3318152e2f4a17, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 811c32d2eff6fd841bfb4b8f8981175a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.56
   m_Pitch: 1
