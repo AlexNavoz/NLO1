@@ -48,6 +48,7 @@ public class MainScript : MonoBehaviour
     public int allMoney;
     public Text text;
     public GameObject canvas;
+    public GameObject buyMoneyPanel;
 
     public static float forceBatchingMultiplier = 0;
     private void Awake()
@@ -191,5 +192,24 @@ public class MainScript : MonoBehaviour
         {
             postLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
         }
+    }
+
+    //________________________________________________________BuyMoney___________________________________________
+
+    public void OpenBuyMoneyPanel()
+    {
+        buyMoneyPanel.SetActive(true);
+    }
+    public void ExitButMoneyPanel()
+    {
+        buyMoneyPanel.SetActive(false);
+    }
+    public void BuyMoneyByMoney(int reward)
+    {
+        SetMoney(reward);
+    }
+    public void BuyMoneyByAds(int reward)
+    {
+        SetMoney(reward);
     }
 }

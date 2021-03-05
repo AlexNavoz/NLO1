@@ -16,6 +16,7 @@ public class playerMoving : MonoBehaviour
     Camera mainCamera;
     public AudioSource jetSound1;
     public AudioSource jetSound2;
+    public AudioSource deathSound;
     public float EnginePower;
 
     // Plate Variables!!!
@@ -256,22 +257,22 @@ public class playerMoving : MonoBehaviour
                 crimeIndex = 1;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection > 1000 && !criminalStars[1].activeSelf)
+            if (mainScript.collection > 700 && !criminalStars[1].activeSelf)
             {
                 crimeIndex = 2;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection > 2000 && !criminalStars[2].activeSelf)
+            if (mainScript.collection > 1500 && !criminalStars[2].activeSelf)
             {
                 crimeIndex = 3;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection > 5000 && !criminalStars[3].activeSelf)
+            if (mainScript.collection > 3000 && !criminalStars[3].activeSelf)
             {
                 crimeIndex = 4;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection >10000 && !criminalStars[4].activeSelf)
+            if (mainScript.collection >5000 && !criminalStars[4].activeSelf)
             {
                 crimeIndex = 5;
                 criminalStars[crimeIndex - 1].SetActive(true);
@@ -288,6 +289,7 @@ public class playerMoving : MonoBehaviour
                 if (i == 1)
                 {
                     isDead = true;
+                    deathSound.Play();
                     OpenLosePanel();
                 }
             }

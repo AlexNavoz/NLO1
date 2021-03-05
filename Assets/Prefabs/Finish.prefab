@@ -9627,7 +9627,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1377642338903901304}
   - component: {fileID: 1377642338903901287}
-  - component: {fileID: 1377642338903901286}
   - component: {fileID: 1377642338903901305}
   m_Layer: 0
   m_Name: Finish
@@ -9677,26 +9676,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 23, y: 169.5}
   m_EdgeRadius: 0
---- !u!250 &1377642338903901286
-PointEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377642338903901307}
-  m_Enabled: 0
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceMagnitude: 30
-  m_ForceVariation: 0
-  m_DistanceScale: 1
-  m_ForceSource: 0
-  m_ForceTarget: 0
-  m_ForceMode: 0
-  m_Drag: 0
-  m_AngularDrag: 0
 --- !u!114 &1377642338903901305
 MonoBehaviour:
   m_ObjectHideFlags: 0
