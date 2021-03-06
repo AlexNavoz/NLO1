@@ -28,7 +28,11 @@ public class playerMoving : MonoBehaviour
     public Slider leftSlider;
     public Slider rightSlider;
     public GameObject gun;
-
+    // Knippel Variables!!!
+    public Joystick leftJoystick;
+    public Joystick rightJoystick;
+    public Transform leftJet;
+    public Transform rightJet;
 
     GameObject leftEngine;
     Rigidbody2D rbLeft;
@@ -128,7 +132,7 @@ public class playerMoving : MonoBehaviour
         {
             if (currentFuel > 0)
             {
-                if (ShipIndex == 0)
+                if (ShipIndex == 2)
                 {
                     if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
                     {
@@ -204,6 +208,50 @@ public class playerMoving : MonoBehaviour
                     else 
                     {
                         rb.drag = 5;
+                        rightParticle.Stop();
+                        jetSound2.Stop();
+                    }
+                }
+                if (ShipIndex == 0)                                                    //KNIPPEL!!
+                {
+                    if (leftJoystick.Horizontal != 0|| leftJoystick.Vertical != 0)
+                    {
+                        rb.drag = 1;
+                        if (lname != "Main menu")
+                        {
+                            FuelConsampsion(consumption);
+                        }
+                        float leftJetRotation = (float)System.Math.Atan2(leftJoystick.Horizontal, leftJoystick.Vertical);                        
+                        leftJet.rotation = Quaternion.Euler(0, 0, -180.0f * leftJetRotation / (float)System.Math.PI);
+                        rbLeft.AddForce(new Vector3(leftJoystick.Horizontal, leftJoystick.Vertical,0) * EnginePower);
+                        if (!jetSound1.isPlaying)
+                            jetSound1.Play();
+                        leftParticle.Play();
+                    }
+                    else
+                    {
+                        rb.drag = 20;
+                        leftParticle.Stop();
+                        jetSound1.Stop();
+                    }
+                    if (rightJoystick.Horizontal != 0 || rightJoystick.Vertical != 0)
+                    {
+                        rb.drag = 1;
+                        if (lname != "Main menu")
+                        {
+                            FuelConsampsion(consumption);
+                        }
+                        float rightJetRotation = (float)System.Math.Atan2(rightJoystick.Horizontal, rightJoystick.Vertical);
+                        rightJet.rotation = Quaternion.Euler(0, 0,-180* rightJetRotation / (float)System.Math.PI);
+                        rbRight.AddForce(new Vector3(rightJoystick.Horizontal, rightJoystick.Vertical, 0) * EnginePower);
+                        if (!jetSound2.isPlaying)
+                            jetSound2.Play();
+                        rightParticle.Play();
+                    }
+
+                    else
+                    {
+                        rb.drag = 20;
                         rightParticle.Stop();
                         jetSound2.Stop();
                     }

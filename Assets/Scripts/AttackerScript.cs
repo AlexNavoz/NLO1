@@ -125,6 +125,9 @@ public class AttackerScript : MonoBehaviour
 
         float anim_position = (float)((System.Math.Atan2(System.Math.Abs(distanceToUFO_x), distanceToUFO_y) * 2.0) / System.Math.PI);
 
+        //float povorot_levogo_soska = (float)System.Math.Atan2(sosok_l_x, sosok_l_y);
+        //Quaternion.Euler(0, 0, 180.0f * povorot_levogo_soska / System.Math.PI);
+
         if (anim_position > 1.0f)
             anim_position = 1.0f;
         if (anim_position < 0.0f)
