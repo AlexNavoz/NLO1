@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 5293332584899348572}
   - component: {fileID: 5293332584899348575}
   - component: {fileID: 8783881903947587946}
-  - component: {fileID: 6611795977909802574}
   - component: {fileID: 4693939898358900114}
   - component: {fileID: 5293332584899348570}
   - component: {fileID: 2353988333226013536}
@@ -206,7 +205,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: db839a745ec50304e9cfb6f1173df82e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -234,24 +233,7 @@ MonoBehaviour:
   smokeParticle: {fileID: 0}
   emission: {fileID: 0}
   flyTime: 0
-  shootPower: 10
-  damage: 5
-  massScale: 1
-  impulse_angle: 0
---- !u!114 &6611795977909802574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5293332584899348574}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63deb194cab16aa41afe78c44fff3046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFlaming: 0
-  shootPower: 20
+  shootPower: 15
   damage: 5
   massScale: 1
   impulse_angle: 0
@@ -375,7 +357,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.3
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}

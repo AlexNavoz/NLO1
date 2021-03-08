@@ -102,7 +102,7 @@ public class BulletScript : MonoBehaviour
                     
                     fs.TakingDamage(damage * massScale);
                     FixedJoint2D joint = gameObject.AddComponent<FixedJoint2D>();
-                    joint.breakForce = 100;
+                    joint.breakForce = 200;
                     joint.connectedBody = collision.rigidbody;
                     i++;
                 }

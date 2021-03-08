@@ -1,4 +1,4 @@
-#if UNITY_ANDROID || true
+#if UNITY_ANDROID
  using UnityEngine;
  using System;
  using System.Collections.Generic;
@@ -31,7 +31,7 @@
          }
      }
 
-    public void Start() {
+    public GPG_CloudSaveSystem() {
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
          .EnableSavedGames()
          .Build();

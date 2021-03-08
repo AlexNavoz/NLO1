@@ -132,7 +132,7 @@ public class playerMoving : MonoBehaviour
         {
             if (currentFuel > 0)
             {
-                if (ShipIndex == 2)
+                if (ShipIndex == 0)
                 {
                     if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
                     {
@@ -212,7 +212,7 @@ public class playerMoving : MonoBehaviour
                         jetSound2.Stop();
                     }
                 }
-                if (ShipIndex == 0)                                                    //KNIPPEL!!
+                if (ShipIndex == 2)                                                    //KNIPPEL!!
                 {
                     if (leftJoystick.Horizontal != 0|| leftJoystick.Vertical != 0)
                     {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ChooseLevel : MonoBehaviour
 {
     MainScript mainScript;
-    playerMoving player;
+    GameObject player;
     ForceShieldScript fs;
     public GameObject canvas;
     int i = 0;
@@ -23,6 +23,7 @@ public class ChooseLevel : MonoBehaviour
     {
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,6 +67,13 @@ public class ChooseLevel : MonoBehaviour
         Time.timeScale = 1;
         StartCoroutine(CrossFade(stage));
         
+    }
+    public void ExitChoosePanel()
+    {
+        canvas.SetActive(false);
+        Time.timeScale = 1;
+        i = 0;
+        player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 15, player.transform.position.z);
     }
 
     IEnumerator CrossFade(int levelIndex)

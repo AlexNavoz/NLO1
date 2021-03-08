@@ -50,6 +50,8 @@ public class MainScript : MonoBehaviour
     public GameObject canvas;
     public GameObject buyMoneyPanel;
 
+    GPG_CloudSaveSystem cloudsaves;
+
     public static float forceBatchingMultiplier = 0;
     private void Awake()
     {
@@ -57,6 +59,8 @@ public class MainScript : MonoBehaviour
     }
     void Start()
     {
+        cloudsaves = new GPG_CloudSaveSystem();
+        cloudsaves.SaveToCloud();
         LoadPlatePrefs();
         LoadShortPlatePrefs();
         LoadWSPrefs();
