@@ -228,12 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0c921a75f33c94ab28a755cb932bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketOrBullet: 0
+  bulletIndex: 0
   smokeParticle: {fileID: 0}
   emission: {fileID: 0}
   flyTime: 0
   shootPower: 20
-  damage: 3
+  damage: 1.5
   massScale: 1
   impulse_angle: 0
 --- !u!96 &4693939898358900114
