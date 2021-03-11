@@ -440,7 +440,8 @@ public class playerMoving : MonoBehaviour
         }
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            Application.Quit();
+            ShortMenuScript shortMenu = GameObject.FindGameObjectWithTag("ShortMenu").GetComponent<ShortMenuScript>();
+            shortMenu.StartShortMenu();
         }
     }
     public void OpenRefuelPanel()
