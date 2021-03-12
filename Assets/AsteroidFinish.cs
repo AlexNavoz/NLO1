@@ -86,6 +86,7 @@ public class AsteroidFinish : MonoBehaviour
         Time.timeScale = 1.0f;
         mainScript.SafeShortPlatePrefs();
         mainScript.SafeShortWSPrefs();
+        mainScript.SafeShortKPrefs();
         StartCoroutine(CrossFade(1));
     }
 

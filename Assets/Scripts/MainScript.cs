@@ -20,6 +20,13 @@ public class MainScript : MonoBehaviour
     public float WS_rayLiftPower;
     public float WS_forceShieldStrength;
 
+    //Knippel variables
+    public float K_enginePower;
+    public float K_maxFuel;
+    public float K_rayDacreaserPower;
+    public float K_rayLiftPower;
+    public float K_forceShieldStrength;
+
     //plate short time variables
     public float P_fuelLevel;
     public float P_forceShieldLevel;
@@ -30,11 +37,17 @@ public class MainScript : MonoBehaviour
     public float WS_forceShieldLevel;
     public int WS_cowCount;
 
+    //Knippel short time variables
+    public float K_fuelLevel;
+    public float K_forceShieldLevel;
+    public int K_cowCount;
+
     //starting game
     Vector3 startPos;
     Transform startPosTransform;
     public GameObject plate;
     public GameObject warship;
+    public GameObject knippel;
     public int ShipIndex;
     public int levelIndex = 0;
     playerMoving player;
@@ -65,7 +78,9 @@ public class MainScript : MonoBehaviour
         LoadShortPlatePrefs();
         LoadWSPrefs();
         LoadShortWSPrefs();
-        
+        LoadKPrefs();
+        LoadShortKPrefs();
+
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",0);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
         text.text = allMoney.ToString();
@@ -73,11 +88,6 @@ public class MainScript : MonoBehaviour
 
         forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
     }
-    public void MoreMoney()
-    {
-        SetMoney(1000);
-    }
-
     public void StartOnPosition()
     {
         startPosTransform = GameObject.FindGameObjectWithTag("StartPosition").GetComponent<Transform>();
@@ -91,6 +101,10 @@ public class MainScript : MonoBehaviour
         if (ShipIndex == 1)
         {
             Instantiate(warship, startPos, Quaternion.identity);
+        }
+        if (ShipIndex == 2)
+        {
+            Instantiate(knippel, startPos, Quaternion.identity);
         }
     }
 
@@ -187,6 +201,45 @@ public class MainScript : MonoBehaviour
             PlayerPrefs.SetFloat("WS_forceShieldLevel", 1.0f);
 
         PlayerPrefs.SetInt("WS_cowCount", WS_cowCount);
+    }
+    //__________________________________________________________________________________KNIPPEL__________________________________________________________
+
+
+    public void LoadKPrefs()
+    {
+        K_enginePower = PlayerPrefs.GetFloat("K_enginePower", 80.0f);
+        K_maxFuel = PlayerPrefs.GetFloat("K_maxFuel", 40.0f);
+        //K_rayDacreaserPower = PlayerPrefs.GetFloat("WS_rayDecreaserPower", 0.1f);
+        K_rayLiftPower = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
+        K_forceShieldStrength = PlayerPrefs.GetFloat("K_forceShieldStrength", 40.0f);
+    }
+    public void LoadShortKPrefs()
+    {
+        K_fuelLevel = PlayerPrefs.GetFloat("K_fuelLevel", K_maxFuel);
+        K_forceShieldLevel = PlayerPrefs.GetFloat("K_forceShieldLevel", K_forceShieldStrength);
+        K_cowCount = PlayerPrefs.GetInt("K_cowCount", 0);
+    }
+
+    public void SafeShortKPrefs()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
+        K_fuelLevel = player.currentFuel;
+        if (K_fuelLevel > 0)
+        {
+            PlayerPrefs.SetFloat("K_fuelLevel", K_fuelLevel);
+        }
+        else
+            PlayerPrefs.SetFloat("K_fuelLevel", 1.0f);
+        if (shieldIsActive)
+        {
+            fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
+            K_forceShieldLevel = fs.currentHP;
+            PlayerPrefs.SetFloat("K_forceShieldLevel", K_forceShieldLevel);
+        }
+        else
+            PlayerPrefs.SetFloat("K_forceShieldLevel", 1.0f);
+
+        PlayerPrefs.SetInt("K_cowCount", K_cowCount);
     }
     public void PostLevels()
     {

@@ -48,6 +48,7 @@ public class GasStationScript : MonoBehaviour
         //change after garage
         mainScript.SafeShortPlatePrefs();
         mainScript.SafeShortWSPrefs();
+        mainScript.SafeShortKPrefs();
 
         forceShield.SetHPValue();
         playerScript.SetFuelValues();
@@ -63,6 +64,7 @@ public class GasStationScript : MonoBehaviour
         //change after garage
         mainScript.SafeShortPlatePrefs();
         mainScript.SafeShortWSPrefs();
+        mainScript.SafeShortKPrefs();
 
         forceShield.SetHPValue();
         playerScript.SetFuelValues();

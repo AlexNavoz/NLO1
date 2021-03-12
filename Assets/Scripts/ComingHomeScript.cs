@@ -20,6 +20,7 @@ public class ComingHomeScript : MonoBehaviour
         {
             mainScript.SafeShortPlatePrefs();
             mainScript.SafeShortWSPrefs();
+            mainScript.SafeShortKPrefs();
             ChooseEarthStage(1);
         }
     }

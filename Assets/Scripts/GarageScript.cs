@@ -14,14 +14,18 @@ public class GarageScript : MonoBehaviour
     Animator crossfade;
     public GameObject P_ChoosePanel;
     public GameObject WS_ChoosePanel;
+    public GameObject K_ChoosePanel;
     bool HaveChoosen = false;
     int[] prices = new int[] {100,200,400,800,1500,2000,2000,2000,3000,4000};
     int[] WSprices = new int[] { 200, 400, 800, 1500, 2000, 3000, 4000, 5000, 6000, 7000 };
+    int[] Kprices = new int[] { 400, 800, 1500, 2000, 3000, 5000, 7000, 10000, 15000, 20000 };
 
     //Buy ship
 
     public GameObject buyWSPanel;
     public Button buyWSButton;
+    public GameObject buyKPanel;
+    public Button buyKButton;
 
 
     //plate variables_______________________________________________________________________________________________
@@ -93,6 +97,40 @@ public class GarageScript : MonoBehaviour
     public Slider WS_shieldSlider;
     public Button WS_shieldButton;
     float[] WS_shieldpowers = new float[] { 40.0f, 60.0f, 80.0f, 100.0f, 130.0f, 160.0f, 200.0f, 240.0f, 300.0f, 400.0f };
+
+    //Knippel variables_________________________________________________________________________________________________________
+
+    //engine
+    int K_EngineLevel;
+    int K_enginePrice;
+    public Text K_engineText;
+    public Slider K_engineSlider;
+    public Button K_engineButton;
+    float[] K_enginepowers = new float[] { 80.0f, 90.0f, 100.0f, 110.0f, 120.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f };
+
+    //Ray
+    int K_RayLevel;
+    int K_rayPrice;
+    public Text K_rayText;
+    public Slider K_raySlider;
+    public Button K_rayButton;
+    float[] K_raypowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 100.0f, 120.0f, 150.0f, 200.0f };
+
+    //Tank
+    int K_TankLevel;
+    int K_tankPrice;
+    public Text K_tankText;
+    public Slider K_tankSlider;
+    public Button K_tankButton;
+    float[] K_tankpowers = new float[] { 50.0f, 60.0f, 80.0f, 100.0f, 120.0f, 150.0f, 170.0f, 200.0f, 250.0f, 300.0f };
+
+    //Shield
+    int K_ShieldLevel;
+    int K_shieldPrice;
+    public Text K_shieldText;
+    public Slider K_shieldSlider;
+    public Button K_shieldButton;
+    float[] K_shieldpowers = new float[] { 50.0f, 80.0f, 120.0f, 150.0f, 170.0f, 200.0f, 250.0f, 300.0f, 400.0f, 500.0f };
     void Start()
     {
         player_moving = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
@@ -242,16 +280,95 @@ public class GarageScript : MonoBehaviour
         {
             WS_shieldButton.gameObject.SetActive(false);
         }
+        //Knippel_____________________________________________________________________________________________________________________
+
+        //engine
+        K_engineSlider.value = PlayerPrefs.GetFloat("K_enginePower", 80.0f);
+        K_EngineLevel = PlayerPrefs.GetInt("K_EngineLevel", 0);
+        K_enginePrice = Kprices[K_EngineLevel];
+        K_engineText.text = K_enginePrice.ToString();
+
+        //Ray
+        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
+        K_RayLevel = PlayerPrefs.GetInt("K_RayLevel", 0);
+        K_rayPrice = Kprices[K_RayLevel];
+        K_rayText.text = K_rayPrice.ToString();
+
+        //Tank
+        K_tankSlider.value = PlayerPrefs.GetFloat("K_maxFuel", 50.0f);
+        K_TankLevel = PlayerPrefs.GetInt("K_TankLevel", 0);
+        K_tankPrice = Kprices[K_TankLevel];
+        K_tankText.text = K_tankPrice.ToString();
+
+        //Shield
+        K_shieldSlider.value = PlayerPrefs.GetFloat("K_forceShieldStrength", 50.0f);
+        K_ShieldLevel = PlayerPrefs.GetInt("K_ShieldLevel", 0);
+        K_shieldPrice = Kprices[K_ShieldLevel];
+        K_shieldText.text = K_shieldPrice.ToString();
+
+        //engine
+        if (K_enginePrice > mainScript.allMoney)
+        {
+            K_engineButton.interactable = false;
+        }
+        else K_engineButton.interactable = true;
+        if (K_EngineLevel == 9)
+        {
+            K_engineButton.gameObject.SetActive(false);
+        }
+
+
+        //ray
+        if (K_rayPrice > mainScript.allMoney)
+        {
+            K_rayButton.interactable = false;
+        }
+        else K_rayButton.interactable = true;
+        if (PlayerPrefs.GetInt("K_RayLevel", 0) == 9)
+        {
+            K_rayButton.gameObject.SetActive(false);
+        }
+
+        //tank
+        if (K_tankPrice > mainScript.allMoney)
+        {
+            K_tankButton.interactable = false;
+        }
+        else K_tankButton.interactable = true;
+        if (PlayerPrefs.GetInt("K_TankLevel", 0) == 9)
+        {
+            K_tankButton.gameObject.SetActive(false);
+        }
+
+        //shield
+        if (K_shieldPrice > mainScript.allMoney)
+        {
+            K_shieldButton.interactable = false;
+        }
+        else K_shieldButton.interactable = true;
+        if (PlayerPrefs.GetInt("K_ShieldLevel", 0) == 9)
+        {
+            K_shieldButton.gameObject.SetActive(false);
+        }
+        //+_________________________________________________________+
 
         if (mainScript.ShipIndex == 0)
         {
             P_ChoosePanel.SetActive(false);
             WS_ChoosePanel.SetActive(true);
+            K_ChoosePanel.SetActive(true);
         }
         if (mainScript.ShipIndex == 1)
         {
             P_ChoosePanel.SetActive(true);
             WS_ChoosePanel.SetActive(false);
+            K_ChoosePanel.SetActive(true);
+        }
+        if (mainScript.ShipIndex == 2)
+        {
+            P_ChoosePanel.SetActive(true);
+            WS_ChoosePanel.SetActive(true);
+            K_ChoosePanel.SetActive(false);
         }
     }
 
@@ -269,6 +386,20 @@ public class GarageScript : MonoBehaviour
             buyWSPanel.SetActive(true);
         }
         else buyWSPanel.SetActive(false);
+
+        //_______________________Knippel Buy
+
+        if (mainScript.allMoney < 100000)
+        {
+            buyKButton.interactable = false;
+        }
+        else buyKButton.interactable = true;
+
+        if (PlayerPrefs.GetInt("KBuy", 0) == 0)
+        {
+            buyKPanel.SetActive(true);
+        }
+        else buyKPanel.SetActive(false);
 
         //_____________________________________________________________________PLATE_________________________________________
         //engine
@@ -364,6 +495,52 @@ public class GarageScript : MonoBehaviour
         if (PlayerPrefs.GetInt("WS_ShieldLevel", 0) == 9)
         {
             WS_shieldButton.gameObject.SetActive(false);
+        }
+        //___________________________________________________________________________Knippel____________________________________________________
+
+        //engine
+        if (K_enginePrice > mainScript.allMoney)
+        {
+            K_engineButton.interactable = false;
+        }
+        else K_engineButton.interactable = true;
+        if (K_EngineLevel == 9)
+        {
+            K_engineButton.gameObject.SetActive(false);
+        }
+
+
+        //ray
+        if (K_rayPrice > mainScript.allMoney)
+        {
+            K_rayButton.interactable = false;
+        }
+        else K_rayButton.interactable = true;
+        if (PlayerPrefs.GetInt("K_RayLevel", 0) == 9)
+        {
+            K_rayButton.gameObject.SetActive(false);
+        }
+
+        //tank
+        if (K_tankPrice > mainScript.allMoney)
+        {
+            K_tankButton.interactable = false;
+        }
+        else K_tankButton.interactable = true;
+        if (PlayerPrefs.GetInt("K_TankLevel", 0) == 9)
+        {
+            K_tankButton.gameObject.SetActive(false);
+        }
+
+        //shield
+        if (K_shieldPrice > mainScript.allMoney)
+        {
+            K_shieldButton.interactable = false;
+        }
+        else K_shieldButton.interactable = true;
+        if (PlayerPrefs.GetInt("K_ShieldLevel", 0) == 9)
+        {
+            K_shieldButton.gameObject.SetActive(false);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -492,7 +669,7 @@ public class GarageScript : MonoBehaviour
         PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
         PlayerPrefs.SetFloat("WS_enginePower", WS_enginepowers[WS_EngineLevel]);
         mainScript.SetMoney(-WS_enginePrice);
-        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 120.0f);
+        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 80.0f);
         WS_enginePrice = WSprices[WS_EngineLevel];
         WS_engineText.text = WS_enginePrice.ToString();
 
@@ -566,6 +743,101 @@ public class GarageScript : MonoBehaviour
         }
 
     }
+
+    //_______________________________________________________________________KNIPPEL_UPGRADE________________________________________________
+
+    public void K_UpgradeEngine()
+    {
+        tunButton.Play();
+        K_enginePrice = Kprices[K_EngineLevel];
+        K_EngineLevel++;
+        PlayerPrefs.SetInt("K_EngineLevel", K_EngineLevel);
+        PlayerPrefs.SetFloat("K_enginePower", K_enginepowers[K_EngineLevel]);
+        mainScript.SetMoney(-K_enginePrice);
+        K_engineSlider.value = PlayerPrefs.GetFloat("K_enginePower", 80.0f);
+        K_enginePrice = Kprices[K_EngineLevel];
+        K_engineText.text = K_enginePrice.ToString();
+
+        player_moving.ReloadKPrefs();
+
+        if (PlayerPrefs.GetInt("K_EngineLevel", 0) == 9)
+        {
+            K_engineButton.gameObject.SetActive(false);
+        }
+
+    }
+    public void K_UpgradeRay()
+    {
+        tunButton.Play();
+        K_rayPrice = Kprices[K_RayLevel];
+        K_RayLevel++;
+        PlayerPrefs.SetInt("K_RayLevel", K_RayLevel);
+        PlayerPrefs.SetFloat("K_rayLiftPower", K_raypowers[K_RayLevel]);
+        mainScript.SetMoney(-K_rayPrice);
+        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
+        K_rayPrice = Kprices[K_RayLevel];
+        K_rayText.text = K_rayPrice.ToString();
+
+        if (PlayerPrefs.GetInt("K_RayLevel", 0) == 9)
+        {
+            K_rayButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void K_UpgradeTank()
+    {
+        tunButton.Play();
+        K_tankPrice = Kprices[K_TankLevel];
+        K_TankLevel++;
+        PlayerPrefs.SetInt("K_TankLevel", K_TankLevel);
+        PlayerPrefs.SetFloat("K_maxFuel", K_tankpowers[K_TankLevel]);
+        mainScript.SetMoney(-K_tankPrice);
+        K_tankSlider.value = PlayerPrefs.GetFloat("K_maxFuel", 50.0f);
+        K_tankPrice = Kprices[K_TankLevel];
+        K_tankText.text = K_tankPrice.ToString();
+
+        player_moving.ReloadKPrefs();
+        player_moving.SetFuelValues();
+
+        if (PlayerPrefs.GetInt("K_TankLevel", 0) == 9)
+        {
+            K_tankButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void K_UpgradeShield()
+    {
+        tunButton.Play();
+        K_shieldPrice = Kprices[K_ShieldLevel];
+        K_ShieldLevel++;
+        PlayerPrefs.SetInt("K_ShieldLevel", K_ShieldLevel);
+        PlayerPrefs.SetFloat("K_forceShieldStrength", K_shieldpowers[K_ShieldLevel]);
+        mainScript.SetMoney(-K_shieldPrice);
+        K_shieldSlider.value = PlayerPrefs.GetFloat("K_forceShieldStrength", 50.0f);
+        K_shieldPrice = Kprices[K_ShieldLevel];
+        K_shieldText.text = K_shieldPrice.ToString();
+
+        mainScript.LoadKPrefs();
+        fs.SetHPValue();
+
+        if (PlayerPrefs.GetInt("K_ShieldLevel", 0) == 9)
+        {
+            K_shieldButton.gameObject.SetActive(false);
+        }
+
+    }
+    public void TakeK()
+    {
+        tunButton.Play();
+        HaveChoosen = true;
+        mainScript.ShipIndex = 2;
+        PlayerPrefs.SetInt("ShipIndex", 2);
+        P_ChoosePanel.SetActive(true);
+        WS_ChoosePanel.SetActive(true);
+        K_ChoosePanel.SetActive(false);
+    }
     public void TakeWS()
     {
         tunButton.Play();
@@ -574,6 +846,7 @@ public class GarageScript : MonoBehaviour
         PlayerPrefs.SetInt("ShipIndex",1);
         P_ChoosePanel.SetActive(true);
         WS_ChoosePanel.SetActive(false);
+        K_ChoosePanel.SetActive(true);
     }
     public void TakePlate()
     {
@@ -582,7 +855,8 @@ public class GarageScript : MonoBehaviour
         mainScript.ShipIndex = 0;
         PlayerPrefs.SetInt("ShipIndex", 0);
         P_ChoosePanel.SetActive(false);
-        WS_ChoosePanel.SetActive(true);       
+        WS_ChoosePanel.SetActive(true);
+        K_ChoosePanel.SetActive(true);
     }
 
     IEnumerator CrossFade(int levelIndex)
@@ -598,5 +872,11 @@ public class GarageScript : MonoBehaviour
         mainScript.SetMoney(-10000);
         buyWSPanel.SetActive(false);
         PlayerPrefs.SetInt("WSBuy", 1);
+    }
+    public void BuyK()
+    {
+        mainScript.SetMoney(-100000);
+        buyKPanel.SetActive(false);
+        PlayerPrefs.SetInt("KBuy", 1);
     }
 }

@@ -109,6 +109,29 @@ public class ForceShieldScript : MonoBehaviour
                 mainScript.WS_forceShieldLevel = currentHP;
             }
         }
+        if (mainScript.ShipIndex == 2)
+        {
+            maxHP = mainScript.K_forceShieldStrength;
+            currentHP = mainScript.K_forceShieldLevel;
+            if (currentHP < maxHP)
+            {
+                mainScript.K_forceShieldStrength = maxHP;
+                mainScript.K_forceShieldLevel = currentHP;
+                fsb.SetMaxHP(maxHP);
+
+                fsb.SetValue(currentHP);
+
+            }
+            else
+            {
+                fsb.SetMaxHP(maxHP);
+                currentHP = maxHP;
+                fsb.SetValue(currentHP);
+
+                mainScript.K_forceShieldStrength = maxHP;
+                mainScript.K_forceShieldLevel = currentHP;
+            }
+        }
     }
 
     public void OpenRefuelPanel()

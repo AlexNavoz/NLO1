@@ -52,7 +52,8 @@ public class ChooseLevel : MonoBehaviour
             canvas.SetActive(true);
             Time.timeScale = 0;
             mainScript.SafeShortPlatePrefs();
-            mainScript.SafeShortWSPrefs();  
+            mainScript.SafeShortWSPrefs();
+            mainScript.SafeShortKPrefs();
         }
     }
     public void BuyEarthStage(int stageIndex)

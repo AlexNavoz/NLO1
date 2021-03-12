@@ -20,6 +20,10 @@ public class RayScript : MonoBehaviour
         {
             rayLift.forceMagnitude = -mainScript.WS_rayLiftPower;
         }
+        if (mainScript.ShipIndex == 2)
+        {
+            rayLift.forceMagnitude = -mainScript.K_rayLiftPower;
+        }
     }
 
 

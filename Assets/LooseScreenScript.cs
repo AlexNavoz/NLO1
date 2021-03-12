@@ -72,6 +72,8 @@ public class LooseScreenScript : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         mainScript.SafeShortPlatePrefs();
+        mainScript.SafeShortWSPrefs();
+        mainScript.SafeShortKPrefs();
         if (mainScript.levelIndex == 2)
         {
             mainScript.allMoney += mainScript.collection / 2;
@@ -156,6 +158,7 @@ public class LooseScreenScript : MonoBehaviour
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         mainScript.SafeShortPlatePrefs();
         mainScript.SafeShortWSPrefs();
+        mainScript.SafeShortKPrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();
@@ -166,6 +169,7 @@ public class LooseScreenScript : MonoBehaviour
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         mainScript.SafeShortPlatePrefs();
         mainScript.SafeShortWSPrefs();
+        mainScript.SafeShortKPrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();

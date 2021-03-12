@@ -83,6 +83,11 @@ public class playerMoving : MonoBehaviour
             mainScript.LoadWSPrefs();
             mainScript.LoadShortWSPrefs();
         }
+        if (ShipIndex == 1)
+        {
+            mainScript.LoadKPrefs();
+            mainScript.LoadShortKPrefs();
+        }
 
     }
     void Start()
@@ -98,6 +103,10 @@ public class playerMoving : MonoBehaviour
             EnginePower = mainScript.WS_enginePower;
             leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
             rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
+        }
+        if (ShipIndex == 2)
+        {
+            EnginePower = mainScript.K_enginePower;
         }
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
@@ -416,6 +425,29 @@ public class playerMoving : MonoBehaviour
                 mainScript.WS_fuelLevel = currentFuel;
             }
         }
+        if (ShipIndex == 2)
+        {
+            maxFuel = mainScript.K_maxFuel;
+            currentFuel = mainScript.K_fuelLevel;
+            if (currentFuel < maxFuel)
+            {
+                mainScript.K_maxFuel = maxFuel;
+                mainScript.K_fuelLevel = currentFuel;
+                fuelBar.SetMaxTank(maxFuel);
+
+                fuelBar.SetValue(currentFuel);
+
+            }
+            else
+            {
+                fuelBar.SetMaxTank(maxFuel);
+                currentFuel = maxFuel;
+                fuelBar.SetValue(currentFuel);
+
+                mainScript.K_maxFuel = maxFuel;
+                mainScript.K_fuelLevel = currentFuel;
+            }
+        }
     }
 
     public void ReloadPlatePrefs()
@@ -429,6 +461,12 @@ public class playerMoving : MonoBehaviour
         mainScript.LoadWSPrefs();
         EnginePower = mainScript.WS_enginePower;
         maxFuel = mainScript.WS_maxFuel;
+    }
+    public void ReloadKPrefs()
+    {
+        mainScript.LoadKPrefs();
+        EnginePower = mainScript.K_enginePower;
+        maxFuel = mainScript.K_maxFuel;
     }
 
     public void OpenLosePanel()
