@@ -1,28 +1,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialScript : MonoBehaviour
 {
 
     GameObject player;
     playerMoving playerMoving;
+    Button leftButton;
+    Button rightButton;
 
     int tutorialStage = 0;
+    const int tutorialStagesCount = 10;
     // Start is called before the first frame update
     public GameObject[] tutorialObjects;
     void Start()
     {
+        leftButton = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Button>();
+        rightButton = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Button>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMoving = player.GetComponent<playerMoving>();
-        Invoke("TutorialUpdate", 2.0f);
+        tutorialStage = 0;
+        Invoke("TutorialUpdate", 1.0f);
     }
 
-    void TutorialUpdate() {
-        tutorialObjects[0].SetActive(true);
-        tutorialStage = 1;
-        Invoke("TutorialTimestop", 0.5f);
+    void TutorialUpdate()
+    {
+        updateStage();
     }
+
+    void updateStage()
+    {
+        tutorialObjects[0].SetActive(tutorialStage == 0);
+        tutorialObjects[1].SetActive(tutorialStage == 1);
+        tutorialObjects[2].SetActive(tutorialStage == 2);
+        tutorialObjects[3].SetActive(tutorialStage == 3);
+        tutorialObjects[4].SetActive(tutorialStage == 4);
+        if (tutorialStage == 5)
+        {
+            leftButton.interactable = true;
+            rightButton.interactable = true;
+        } else
+        {
+            leftButton.interactable = false;
+            rightButton.interactable = false;
+        }
+        tutorialObjects[5].SetActive(tutorialStage == 6);
+        tutorialObjects[6].SetActive(tutorialStage == 7);
+        tutorialObjects[7].SetActive(tutorialStage == 8);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.name + " : " + gameObject.name + " : " + Time.time);
+        if (collision.gameObject.layer == 10)
+        {
+            nextClicked();
+        }
+    }
+
+    void finishTutuorial() { 
+        //something finalizing
+    }
+
+    public void nextClicked()
+    {
+        if ((tutorialStage + 1) == tutorialStagesCount) {
+            finishTutuorial();
+            return;
+        }
+        tutorialStage++;
+        updateStage();
+    }
+    public void backClicked()
+    {
+        if (tutorialStage == 0) {
+            finishTutuorial();
+            return;
+        }
+        tutorialStage--;
+        updateStage();
+    }
+    /*
 
     void TutorialTimestop()
     {
@@ -38,17 +98,20 @@ public class TutorialScript : MonoBehaviour
                 tutorialStage++;
                 tutorialObjects[1].SetActive(true);
                 tutorialObjects[4].SetActive(true);
+                rightButton.interactable = false;
                 Invoke("TutorialTimestop", 0.5f);
                 break;
             case 2:
                 tutorialObjects[1].SetActive(false);
                 tutorialObjects[4].SetActive(false);
+                rightButton.interactable = true;
                 Time.timeScale = 1;
                 tutorialStage++;
                 break;
             case 4:
                 tutorialObjects[2].SetActive(false);
                 tutorialObjects[5].SetActive(false);
+                leftButton.interactable = true;
                 Time.timeScale = 1;
                 tutorialStage++;
                 break;
@@ -64,8 +127,10 @@ public class TutorialScript : MonoBehaviour
     void TutorialDoubleClickPrevent() {
         doubleClickPrevent = 0;
     }
+    */
     void Update()
     {
+        /*
         if (doubleClickPrevent < 1.0f)
         {
             doubleClickPrevent += Time.deltaTime;
@@ -100,6 +165,7 @@ public class TutorialScript : MonoBehaviour
                     tutorialStage++;
                     tutorialObjects[2].SetActive(true);
                     tutorialObjects[5].SetActive(true);
+                    leftButton.interactable = false;
                     Invoke("TutorialTimestop", 0.5f);
                     break;
                 }
@@ -115,5 +181,6 @@ public class TutorialScript : MonoBehaviour
                 }
                 break;
         }
+        */
     }
 }

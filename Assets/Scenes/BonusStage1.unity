@@ -10172,6 +10172,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3228456978662802656, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7,
+        type: 3}
+      propertyPath: trainingLevelName.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228456978662802656, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7,
+        type: 3}
+      propertyPath: trainingLevelName.Array.data[0]
+      value: BonusStage1 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228456978662802656, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7,
+        type: 3}
+      propertyPath: trainingLevelName.Array.data[1]
+      value: BonusStage1 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228456978662802656, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7,
+        type: 3}
+      propertyPath: trainingLevelName.Array.data[2]
+      value: BonusStage1
+      objectReference: {fileID: 0}
     - target: {fileID: 3451980498133739962, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7,
         type: 3}
       propertyPath: m_RootOrder
@@ -10310,6 +10330,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705064180289551866, guid: d4e264a5c799b2e4788a705df0414460,
+        type: 3}
+      propertyPath: trainingLevelName.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 705064180289551866, guid: d4e264a5c799b2e4788a705df0414460,
+        type: 3}
+      propertyPath: trainingLevelName.Array.data[0]
+      value: BonusStage1 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705064180289551866, guid: d4e264a5c799b2e4788a705df0414460,
+        type: 3}
+      propertyPath: trainingLevelName.Array.data[1]
+      value: BonusStage1 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 705064180289551866, guid: d4e264a5c799b2e4788a705df0414460,
+        type: 3}
+      propertyPath: trainingLevelName.Array.data[2]
+      value: BonusStage1
+      objectReference: {fileID: 0}
     - target: {fileID: 8853692535770300032, guid: d4e264a5c799b2e4788a705df0414460,
         type: 3}
       propertyPath: m_RootOrder
