@@ -18,7 +18,7 @@ public class CeilingScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().mass+= massCoeff;
+            collision.gameObject.GetComponent<Rigidbody2D>().mass += massCoeff;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

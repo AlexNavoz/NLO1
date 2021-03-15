@@ -15,7 +15,7 @@ public class DummyCreatorScript : MonoBehaviour
         while (true)
         {
             Instantiate(cowDummy, new Vector3(transform.position.x, Random.Range(-10, 10), transform.position.z),Quaternion.identity);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.0f);
         }
     }
 }
