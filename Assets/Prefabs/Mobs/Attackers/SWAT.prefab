@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInRay: 0
-  count: 200
+  count: 150
   massScale: 1
 --- !u!114 &104623940892101770
 MonoBehaviour:
@@ -165,7 +165,7 @@ MonoBehaviour:
   isAgressive: 1
   muzzle: {fileID: 8339265641411491391}
   bullet: {fileID: 5293332584899348574, guid: 0a1ffdd6036661d4ca10c0f4098fde0f, type: 3}
-  shootingtime: 0.2
+  shootingtime: 0.25
   distanse: 20
   aiming_distanse: 20
   cowPower: 420

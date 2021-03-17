@@ -72,6 +72,7 @@ public class playerMoving : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.shieldIsActive = true;
+        crimeIndex = 0;
         ShipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
         if (ShipIndex == 0)                                            
         {
@@ -83,7 +84,7 @@ public class playerMoving : MonoBehaviour
             mainScript.LoadWSPrefs();
             mainScript.LoadShortWSPrefs();
         }
-        if (ShipIndex == 1)
+        if (ShipIndex == 2)
         {
             mainScript.LoadKPrefs();
             mainScript.LoadShortKPrefs();
@@ -197,7 +198,6 @@ public class playerMoving : MonoBehaviour
                     }
                     else 
                     {
-                        rb.drag = 5;
                         leftParticle.Stop();
                         jetSound1.Stop();
                     }
@@ -213,19 +213,21 @@ public class playerMoving : MonoBehaviour
                             jetSound2.Play();
                         rightParticle.Play();
                     }
-
                     else 
                     {
-                        rb.drag = 5;
                         rightParticle.Stop();
                         jetSound2.Stop();
+                    }
+                    if(rightSlider.value == 0|| leftSlider.value == 0)
+                    {
+                        rb.drag = 5;
                     }
                 }
                 if (ShipIndex == 2)                                                    //KNIPPEL!!
                 {
                     if (leftJoystick.Horizontal != 0|| leftJoystick.Vertical != 0)
                     {
-                        rb.drag = 1;
+                        rb.drag = 2;
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
@@ -239,13 +241,12 @@ public class playerMoving : MonoBehaviour
                     }
                     else
                     {
-                        rb.drag = 20;
                         leftParticle.Stop();
                         jetSound1.Stop();
                     }
                     if (rightJoystick.Horizontal != 0 || rightJoystick.Vertical != 0)
                     {
-                        rb.drag = 1;
+                        rb.drag = 2;
                         if (lname != "Main menu")
                         {
                             FuelConsampsion(consumption);
@@ -260,9 +261,12 @@ public class playerMoving : MonoBehaviour
 
                     else
                     {
-                        rb.drag = 20;
                         rightParticle.Stop();
                         jetSound2.Stop();
+                    }
+                    if (rightJoystick.Horizontal == 0 || rightJoystick.Vertical == 0|| leftJoystick.Horizontal == 0 || leftJoystick.Vertical == 0)
+                    {
+                        rb.drag = 20;
                     }
                 }
             }
