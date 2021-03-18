@@ -47,6 +47,7 @@ public class PostScript : MonoBehaviour
     }
     public void ExitCanvas()
     {
+        i = 0;
         Time.timeScale = 1;
         canvas.SetActive(false);
 
