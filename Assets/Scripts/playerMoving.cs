@@ -40,7 +40,7 @@ public class playerMoving : MonoBehaviour
     Rigidbody2D rbRight;
     public ParticleSystem leftParticle;
     public ParticleSystem rightParticle;
-    bool isDead;
+    public bool isDead;
     public bool canDie;
 
     //fuel bar variables
@@ -283,6 +283,8 @@ public class playerMoving : MonoBehaviour
         {
             leftParticle.Stop();
             rightParticle.Stop();
+            jetSound1.Stop();
+            jetSound2.Stop();
         }
 
         if(mainScript.levelIndex == 2)

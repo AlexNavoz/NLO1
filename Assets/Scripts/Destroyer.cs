@@ -12,6 +12,7 @@ public class Destroyer : MonoBehaviour
     ParticleSystem givingParticle;
     playerMoving player_moving;
     ForceShieldScript fs;
+    public int stolenCows;
     
     private void Start()
     {
@@ -39,6 +40,7 @@ public class Destroyer : MonoBehaviour
             }
             else
             {
+                stolenCows++;
                 onRayCount = onRayComponent.count;
                 cowRb = obj.GetComponent<Rigidbody2D>();
                 if (cowRb.mass >= 2.0f)

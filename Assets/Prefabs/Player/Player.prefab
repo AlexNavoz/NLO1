@@ -34066,7 +34066,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088907898435989488}
   m_LocalRotation: {x: -0, y: -0, z: -0.2622349, w: 0.9650041}
-  m_LocalPosition: {x: 0.9, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9088907899160425320}
@@ -34137,7 +34137,7 @@ GameObject:
   - component: {fileID: 9088907898644513235}
   m_Layer: 10
   m_Name: CowDestroyer
-  m_TagString: Untagged
+  m_TagString: Destroyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34198,6 +34198,7 @@ MonoBehaviour:
   DestroyParticle: {fileID: 2321953763351771361, guid: 23bfd05f5459f444a9b30a79c8695b0a,
     type: 3}
   collection: 0
+  stolenCows: 0
 --- !u!1 &9088907898758553151
 GameObject:
   m_ObjectHideFlags: 0
@@ -34345,23 +34346,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.7549999, y: -0.85499996}
-      - {x: 2.865, y: -0.775}
-      - {x: 3.0959888, y: -0.24662024}
-      - {x: 3.6280825, y: 0.04492107}
-      - {x: 3.6740615, y: 0.34473172}
+    - - {x: 3.0959888, y: -0.24662024}
+      - {x: 3.704922, y: 0.2212882}
       - {x: 3.4347765, y: 0.55401665}
       - {x: 1.9470184, y: 0.77662593}
       - {x: 1.791961, y: 1.1828101}
       - {x: 1.4206202, y: 1.7433016}
-      - {x: 0.8927207, y: 2.2212012}
-      - {x: -0.15835482, y: 2.3397613}
+      - {x: 0.8001379, y: 2.2983534}
+      - {x: -0.54411614, y: 2.3089004}
       - {x: -1.2387161, y: 1.7812581}
       - {x: -1.8445115, y: 0.7781865}
       - {x: -3.3625124, y: 0.5360447}
       - {x: -3.5912933, y: 0.20455222}
       - {x: -2.9618554, y: -0.23896247}
-      - {x: -1.8609117, y: -1.2894652}
       - {x: -1.1591698, y: -1.6411257}
       - {x: 1.165646, y: -1.65786}
 --- !u!1 &9088907899103466261
@@ -34390,7 +34387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088907899103466261}
   m_LocalRotation: {x: -0.01262912, y: -0.7069939, z: 0.7069942, w: 0.01262912}
-  m_LocalPosition: {x: 0.7899999, y: 0.35000017, z: -0.92}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 9088907899589595440}
@@ -39225,7 +39222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088907899160425303}
   m_LocalRotation: {x: 0, y: 0, z: -0.21643952, w: 0.97629607}
-  m_LocalPosition: {x: -3.37, y: -1.314, z: 0}
+  m_LocalPosition: {x: -2.5, y: -1.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9088907898435989491}
@@ -39245,7 +39242,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -39268,8 +39265,8 @@ FixedJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0.82534367, y: 0.89283776}
-  m_ConnectedAnchor: {x: -2.2446551, y: -0.8536192}
+  m_Anchor: {x: 0, y: 0.5}
+  m_ConnectedAnchor: {x: -2.288691, y: -1.096846}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!61 &9088907899160425302
@@ -39285,7 +39282,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.72, y: 0.56}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -39323,7 +39320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088907899278183754}
   m_LocalRotation: {x: -0, y: -0, z: -0.16549896, w: 0.98621}
-  m_LocalPosition: {x: 0.73, y: 0.19, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9088907899589595440}
@@ -44225,7 +44222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088907899589595441}
   m_LocalRotation: {x: 0, y: 0, z: 0.2164396, w: 0.97629607}
-  m_LocalPosition: {x: 2.15, y: -1.952, z: 0}
+  m_LocalPosition: {x: 2.5, y: -1.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9088907899278183757}
@@ -44245,7 +44242,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -44268,8 +44265,8 @@ FixedJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0.7053896, y: 0.82485795}
-  m_ConnectedAnchor: {x: 2.4407003, y: -0.90631425}
+  m_Anchor: {x: 0, y: 0.5}
+  m_ConnectedAnchor: {x: 2.2886908, y: -1.0968461}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!61 &9088907899589595443
@@ -44285,7 +44282,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.72, y: 0.56}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -44420,7 +44417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088907900091932750}
   m_LocalRotation: {x: -0.01262912, y: -0.7069939, z: 0.7069942, w: 0.01262912}
-  m_LocalPosition: {x: 0.7899999, y: 0.35000017, z: -0.92}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 9088907899160425320}

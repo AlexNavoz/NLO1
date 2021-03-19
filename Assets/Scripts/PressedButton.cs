@@ -9,13 +9,11 @@ public class PressedButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("OnPointerUp");
         isPressed = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDown");
         isPressed = true;
     }
 }

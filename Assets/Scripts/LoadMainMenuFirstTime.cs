@@ -13,6 +13,11 @@ public class LoadMainMenuFirstTime : MonoBehaviour
 
     void LoadMainMenu()
     {
+        if(PlayerPrefs.GetInt("TutorialCompleted",0)==1)
         SceneManager.LoadScene(1);
+        else
+        {
+            SceneManager.LoadScene("FirstStartStage");
+        }
     }
 }
