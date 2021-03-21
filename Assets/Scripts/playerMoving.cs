@@ -150,7 +150,7 @@ public class playerMoving : MonoBehaviour
                         rbLeft.AddRelativeForce(Vector3.up * EnginePower);
                         if(!jetSound1.isPlaying)
                         jetSound1.Play();
-                        if (lname != "Main menu")
+                        if (mainScript.levelIndex!=0)
                         {
                             FuelConsampsion(consumption);
                         }
@@ -168,7 +168,7 @@ public class playerMoving : MonoBehaviour
                         rbRight.AddRelativeForce(Vector3.up * EnginePower);
                         if (!jetSound2.isPlaying)
                             jetSound2.Play();
-                        if (lname != "Main menu")
+                        if (mainScript.levelIndex != 0)
                         {
                             FuelConsampsion(consumption);
                         }
@@ -187,7 +187,7 @@ public class playerMoving : MonoBehaviour
                     if (leftSlider.value != 0)
                     {
                         rb.drag = 1;
-                        if (lname != "Main menu")
+                        if (mainScript.levelIndex != 0)
                         {
                             FuelConsampsion(consumption);
                         }
@@ -204,7 +204,7 @@ public class playerMoving : MonoBehaviour
                     if (rightSlider.value != 0)
                     {
                         rb.drag = 1;
-                        if (lname != "Main menu")
+                        if (mainScript.levelIndex != 0)
                         {
                             FuelConsampsion(consumption);
                         }
@@ -228,7 +228,7 @@ public class playerMoving : MonoBehaviour
                     if (leftJoystick.Horizontal != 0|| leftJoystick.Vertical != 0)
                     {
                         rb.drag = 2;
-                        if (lname != "Main menu")
+                        if (mainScript.levelIndex != 0)
                         {
                             FuelConsampsion(consumption);
                         }
@@ -247,7 +247,7 @@ public class playerMoving : MonoBehaviour
                     if (rightJoystick.Horizontal != 0 || rightJoystick.Vertical != 0)
                     {
                         rb.drag = 2;
-                        if (lname != "Main menu")
+                        if (mainScript.levelIndex != 0)
                         {
                             FuelConsampsion(consumption);
                         }

@@ -13,13 +13,12 @@ public class TutorialScript : MonoBehaviour
     GameObject leftButton;
     GameObject rightButton;
     public GameObject nextButton;
-    public GameObject backButton;
+   // public GameObject backButton;
     public GameObject cows;
 
     Destroyer destroyer;
     int a = 0;
     int tutorialStage = 0;
-    const int tutorialStagesCount = 10;
     public GameObject[] tutorialObjects;
 
     Transform startPosTransform;
@@ -122,7 +121,7 @@ public class TutorialScript : MonoBehaviour
             leftButton.SetActive(true);
             rightButton.SetActive(true);
             nextButton.SetActive(false);
-            backButton.SetActive(false);
+            //backButton.SetActive(false);
         }
         else
         {
@@ -131,7 +130,7 @@ public class TutorialScript : MonoBehaviour
             leftButton.SetActive(false);
             rightButton.SetActive(false);
             nextButton.SetActive(true);
-            backButton.SetActive(true);
+            //backButton.SetActive(true);
         }
     }
     public void NextTutorialStage()

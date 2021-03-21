@@ -9,11 +9,10 @@ public class TutorialScriptMainMenu : MonoBehaviour
     GameObject leftButton;
     GameObject rightButton;
     public GameObject nextButton;
-    public GameObject backButton;
+    //public GameObject backButton;
     public GameObject cows;
 
     Destroyer destroyer;
-    int a = 0;
     int tutorialStage = 0;
     public GameObject[] tutorialObjects;
 
@@ -38,7 +37,7 @@ public class TutorialScriptMainMenu : MonoBehaviour
         leftButton.SetActive(false);
         rightButton.SetActive(false);
         nextButton.SetActive(true);
-        backButton.SetActive(true);
+        //backButton.SetActive(true);
     }
     private void Update()
     {

@@ -81,6 +81,10 @@ public class LooseScreenScript : MonoBehaviour
         }
             StartCoroutine(CrossFade(1));
     }
+    public void ExitFromTutorial()
+    {
+        PlayerPrefs.SetInt("TutorialCompleted", 1);
+    }
 
     public void Restart()
     {

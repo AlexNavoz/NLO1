@@ -5,8 +5,11 @@ using UnityEngine;
 public class DummyCreatorScript : MonoBehaviour
 {
     public GameObject cowDummy;
+    MainScript mainScript;
     void Start()
     {
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        mainScript.levelIndex = 0;
         StartCoroutine("DummyCorutine");
     }
 
