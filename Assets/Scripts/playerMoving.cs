@@ -225,6 +225,7 @@ public class playerMoving : MonoBehaviour
                 }
                 if (ShipIndex == 2)                                                    //KNIPPEL!!
                 {
+                    rb.gravityScale = 0;
                     if (leftJoystick.Horizontal != 0|| leftJoystick.Vertical != 0)
                     {
                         rb.drag = 2;
@@ -277,6 +278,10 @@ public class playerMoving : MonoBehaviour
                 rightParticle.Stop();
                 jetSound1.Stop();
                 jetSound2.Stop();
+                if(ShipIndex == 2)
+                {
+                    rb.gravityScale = 1;
+                }
             }
         }
         if (isDead)
@@ -285,6 +290,10 @@ public class playerMoving : MonoBehaviour
             rightParticle.Stop();
             jetSound1.Stop();
             jetSound2.Stop();
+            if (ShipIndex == 2)
+            {
+                rb.gravityScale = 1;
+            }
         }
 
         if(mainScript.levelIndex == 2)
@@ -477,15 +486,22 @@ public class playerMoving : MonoBehaviour
 
     public void OpenLosePanel()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 1)
+        try
         {
-            LooseScreenScript losePanel = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
-            losePanel.Activation();
+            if (SceneManager.GetActiveScene().buildIndex != 1)
+            {
+                LooseScreenScript losePanel = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
+                losePanel.Activation();
+            }
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                ShortMenuScript shortMenu = GameObject.FindGameObjectWithTag("ShortMenu").GetComponent<ShortMenuScript>();
+                shortMenu.StartShortMenu();
+            }
         }
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        catch
         {
-            ShortMenuScript shortMenu = GameObject.FindGameObjectWithTag("ShortMenu").GetComponent<ShortMenuScript>();
-            shortMenu.StartShortMenu();
+            SceneManager.LoadScene("Main menu");
         }
     }
     public void OpenRefuelPanel()

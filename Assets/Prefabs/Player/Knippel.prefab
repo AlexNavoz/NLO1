@@ -37558,7 +37558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &314826465157223355
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44334,6 +44334,7 @@ MonoBehaviour:
   DestroyParticle: {fileID: 2321953763351771361, guid: 23bfd05f5459f444a9b30a79c8695b0a,
     type: 3}
   collection: 0
+  stolenCows: 0
 --- !u!1 &9088907898758553151
 GameObject:
   m_ObjectHideFlags: 0
@@ -44429,6 +44430,7 @@ MonoBehaviour:
   rightJet: {fileID: 9088907899589595440}
   leftParticle: {fileID: 2638677066236005269}
   rightParticle: {fileID: 1024742247502126067}
+  isDead: 0
   canDie: 0
   maxFuel: 150
   consumption: 0.5
@@ -49655,7 +49657,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
+    - - {x: -0.022303939, y: 1.7360296}
       - {x: -10.290817, y: -56.162014}
       - {x: 9.331413, y: -56.46936}
 --- !u!114 &9088907899950702377

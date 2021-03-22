@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
+using UnityEngine.Analytics;
 
-public class MainScript : MonoBehaviour
+public class MainScript : MonoBehaviour, IUnityAdsListener
 {
     //plate variables
     public float P_enginePower;
@@ -63,17 +65,27 @@ public class MainScript : MonoBehaviour
     public GameObject canvas;
     public GameObject buyMoneyPanel;
 
-    GPG_CloudSaveSystem cloudsaves;
+    //GPG_CloudSaveSystem cloudsaves;
 
     public static float forceBatchingMultiplier = 0;
+
+
+#if UNITY_IOS
+    string gameId = "4059550";
+#else
+    string gameId = "4059551";
+#endif
+    string mySurfacingId = "rewardedVideo";
+    bool testMode = false;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
-        cloudsaves = new GPG_CloudSaveSystem();
-        cloudsaves.SaveToCloud();
+        //cloudsaves = new GPG_CloudSaveSystem();
+        //cloudsaves.SaveToCloud();
         LoadPlatePrefs();
         LoadShortPlatePrefs();
         LoadWSPrefs();
@@ -87,6 +99,12 @@ public class MainScript : MonoBehaviour
         CanvasOrNotCanvas();
 
         forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
+
+        //Analytics.initializeOnStartup = false;
+        //Analytics.enabled = false;
+
+        Advertisement.AddListener(this);
+        Advertisement.Initialize(gameId, testMode);
     }
     public void StartOnPosition()
     {
@@ -268,5 +286,105 @@ public class MainScript : MonoBehaviour
     public void BuyMoneyByAds(int reward)
     {
         SetMoney(reward);
+    }
+
+    AdsListener adslistener;
+    public void checkIfAdsReady()
+    {
+        if (Advertisement.IsReady(mySurfacingId))
+        {
+            EnableAdButtons();
+        }
+        else
+        {
+            DisableAdButtons();
+        }
+    }
+    void DisableAdButtons()
+    {
+        GameObject[] buttons = GameObject.FindGameObjectsWithTag("AdButton");
+        if (buttons == null)
+            return;
+        foreach (GameObject buttongo in buttons) {
+            Button button =  buttongo.GetComponent<Button>();
+            if(button!=null)
+                button.interactable = false;
+        }
+    }
+    void EnableAdButtons()
+    {
+        GameObject[] buttons = GameObject.FindGameObjectsWithTag("AdButton");
+        if (buttons == null)
+            return;
+        foreach (GameObject buttongo in buttons)
+        {
+            Button button = buttongo.GetComponent<Button>();
+            if (button != null)
+                button.interactable = true;
+        }
+    }
+    public bool ShowRewardedVideo(AdsListener p_adslistener)
+    {
+        // Check if UnityAds ready before calling Show method:
+        if (Advertisement.IsReady(mySurfacingId))
+        {
+            Advertisement.Show(mySurfacingId);
+            adslistener = p_adslistener;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
+        }
+        return false;
+    }
+
+    public void OnUnityAdsDidFinish(string surfacingId, ShowResult showResult)
+    {
+        if (adslistener == null)
+            return;
+        // Define conditional logic for each ad completion status:
+        if (showResult == ShowResult.Finished)
+        {
+            adslistener.AdsShowed();
+            // Reward the user for watching the ad to completion.
+        }
+        else if (showResult == ShowResult.Skipped)
+        {
+            adslistener.AdsSkipped();
+            // Do not reward the user for skipping the ad.
+        }
+        else if (showResult == ShowResult.Failed)
+        {
+            Debug.LogWarning("The ad did not finish due to an error.");
+            adslistener.AdsFailed();
+        }
+    }
+
+    public void OnUnityAdsReady(string surfacingId)
+    {
+        // If the ready Ad Unit or legacy Placement is rewarded, show the ad:
+        if (surfacingId == mySurfacingId)
+        {
+            EnableAdButtons();
+            // Optional actions to take when theAd Unit or legacy Placement becomes ready (for example, enable the rewarded ads button)
+        }
+    }
+
+
+    public void OnUnityAdsDidError(string message)
+    {
+        // Log the error.
+    }
+
+    public void OnUnityAdsDidStart(string surfacingId)
+    {
+        // Optional actions to take when the end-users triggers an ad.
+    }
+
+    // When the object that subscribes to ad events is destroyed, remove the listener:
+    public void OnDestroy()
+    {
+        Advertisement.RemoveListener(this);
     }
 }

@@ -25038,7 +25038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &314826465157223355
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34293,6 +34293,7 @@ MonoBehaviour:
   rightJet: {fileID: 0}
   leftParticle: {fileID: 9088907900091932739}
   rightParticle: {fileID: 9088907899103466262}
+  isDead: 0
   canDie: 0
   maxFuel: 150
   consumption: 0.5
@@ -44375,7 +44376,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
+    - - {x: -0.09905422, y: 1.9056394}
       - {x: -10.509469, y: -51.192146}
       - {x: 10.9023485, y: -51.108932}
 --- !u!114 &9088907899950702377

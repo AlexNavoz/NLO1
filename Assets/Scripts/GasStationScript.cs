@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GasStationScript : MonoBehaviour
+public class GasStationScript : MonoBehaviour, AdsListener
 {
     public GameObject canvas;
     public Text text;
@@ -58,6 +58,19 @@ public class GasStationScript : MonoBehaviour
     }
     public void RefuelByAds()
     {
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
+    }
+
+    public void AdsShowed()
+    { 
+        Debug.Log("AdsSkipped");
         price = 0;
         playerScript.currentFuel = playerScript.maxFuel;
         forceShield.currentHP = forceShield.maxHP;
@@ -69,6 +82,15 @@ public class GasStationScript : MonoBehaviour
         forceShield.SetHPValue();
         playerScript.SetFuelValues();
         Exit();
+    }
+
+    public void AdsFailed()
+    {
+        Debug.Log("AdsFailed");
+    }
+    public void AdsSkipped()
+    {
+        Debug.Log("AdsSkipped");
     }
 
     void EnterToStation()
@@ -86,6 +108,7 @@ public class GasStationScript : MonoBehaviour
             text.color = new Color(255, 255, 0);
             refuelByMoneyButton.interactable = true;
         }
+        mainScript.checkIfAdsReady();
     }
      public void Exit()
     {

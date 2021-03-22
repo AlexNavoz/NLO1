@@ -554,7 +554,7 @@ public class GarageScript : MonoBehaviour
     void CanvasSetActive()
     {
         canvas.SetActive(true);
-        Time.timeScale = 0.1f;
+        Time.timeScale = 1;
     }
     public void ExitCanvas()
     {

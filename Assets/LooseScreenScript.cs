@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LooseScreenScript : MonoBehaviour
+public class LooseScreenScript : MonoBehaviour, AdsListener
 {
     //Refuel cariables
 
@@ -30,6 +30,8 @@ public class LooseScreenScript : MonoBehaviour
     GameObject player;
     playerMoving playerMoving;
     Vector3 offset = new Vector3(0, -20, 0);
+
+    int adsdestination = 1;
     void Start()
     {
 
@@ -48,6 +50,8 @@ public class LooseScreenScript : MonoBehaviour
 
     public void CanvasOpen()
     {
+        if (canvas.activeSelf)
+            return;
         if (mainScript.levelIndex == 1)
         {
             choisePanel.SetActive(false);
@@ -58,7 +62,7 @@ public class LooseScreenScript : MonoBehaviour
         {
             collectionText.text = (mainScript.collection/2).ToString();
         }
-            canvas.SetActive(true);
+        canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
         Invoke("TimeStop", mainAnim.clip.length);
 
@@ -107,6 +111,8 @@ public class LooseScreenScript : MonoBehaviour
         choisePanel.SetActive(true);
         choiseAnim.Play("PanelStartAnim");
         Invoke("TimeStop", choiseAnim.clip.length);
+
+        mainScript.checkIfAdsReady();
     }
 
     public void ExitPayPanel()
@@ -124,7 +130,15 @@ public class LooseScreenScript : MonoBehaviour
 
     public void BuyEvacByAdd()                                                //change after add
     {
-        Evacuate();
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            adsdestination = 2;
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
     }
 
     public void Activation()
@@ -154,6 +168,7 @@ public class LooseScreenScript : MonoBehaviour
         refuelCanvas.SetActive(true);
         refuelAnim.Play("PanelStartAnim");
         Invoke("TimeStop", refuelAnim.clip.length);
+        mainScript.checkIfAdsReady();
     }
     public void RefuelByMoney()
     {
@@ -170,13 +185,44 @@ public class LooseScreenScript : MonoBehaviour
                                                                                                                             // After Ads
     public void RefuelByAds()
     {
-        player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
-        mainScript.SafeShortPlatePrefs();
-        mainScript.SafeShortWSPrefs();
-        mainScript.SafeShortKPrefs();
-        player.GetComponent<playerMoving>().SetFuelValues();
-        playerMoving.alreadyRefueled = true;
-        ExitRefuelCanvas();
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            adsdestination = 1;
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
+    }
+
+
+    public void AdsShowed()
+    {
+        if (adsdestination == 1)
+        {
+            Debug.Log("AdsSkipped");
+            player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
+            mainScript.SafeShortPlatePrefs();
+            mainScript.SafeShortWSPrefs();
+            mainScript.SafeShortKPrefs();
+            player.GetComponent<playerMoving>().SetFuelValues();
+            playerMoving.alreadyRefueled = true;
+            ExitRefuelCanvas();
+        }
+        else if (adsdestination == 2)
+        {
+            Evacuate();
+        }
+    }
+
+    public void AdsFailed()
+    {
+        Debug.Log("AdsFailed");
+    }
+    public void AdsSkipped()
+    {
+        Debug.Log("AdsSkipped");
     }
 
     public void ExitRefuelCanvas()
