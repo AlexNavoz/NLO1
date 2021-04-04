@@ -5,6 +5,7 @@ using UnityEngine;
 public class OnRay : MonoBehaviour
 {
     public bool isInRay = false;
+    public int questObjectIndex;
     Rigidbody2D rb;
     public int count;
     Transform player;

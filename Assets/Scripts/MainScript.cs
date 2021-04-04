@@ -69,6 +69,13 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
 
     public static float forceBatchingMultiplier = 0;
 
+    //Quest variables
+    public static int questObjectCount = 0;
+    public static int questObjectIndex = 0;
+    public static int questObjectId = 0;
+    public GameObject[] quests;
+    public Text questPanelProgress;
+    public Text questPanelTime;
 
 #if UNITY_IOS
     string gameId = "4059550";
@@ -92,6 +99,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         LoadShortWSPrefs();
         LoadKPrefs();
         LoadShortKPrefs();
+        LoadQuestPrefs();
 
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",0);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
@@ -141,6 +149,19 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
             canvas.SetActive(false);
         }
         else canvas.SetActive(true);
+    }
+    // quest
+
+    public void LoadQuestPrefs()
+    {
+        questObjectId = PlayerPrefs.GetInt("questObjectId", 0);
+        questObjectCount = PlayerPrefs.GetInt("questObjectCount", 0);
+    }
+
+    public void SaveQuestPrefs()
+    {
+        PlayerPrefs.SetInt("questObjectId", questObjectId);
+        PlayerPrefs.SetInt("questObjectCount", questObjectCount);
     }
 
     //__________________________________________________________________________PLATE______________________________________________________________________
@@ -387,4 +408,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         Advertisement.RemoveListener(this);
     }
+
+    //__________________________________________________________________________________Quest_________________________________________
+    
 }

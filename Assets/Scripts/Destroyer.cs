@@ -40,6 +40,11 @@ public class Destroyer : MonoBehaviour
             }
             else
             {
+                if(onRayComponent.questObjectIndex == MainScript.questObjectIndex)
+                {
+                    MainScript.questObjectCount++;
+                    mainScript.SaveQuestPrefs();
+                }
                 stolenCows++;
                 onRayCount = onRayComponent.count;
                 cowRb = obj.GetComponent<Rigidbody2D>();

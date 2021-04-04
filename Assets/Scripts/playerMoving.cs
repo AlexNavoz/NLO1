@@ -140,6 +140,18 @@ public class playerMoving : MonoBehaviour
     {
         if (!isDead)
         {
+            if (transform.position.y < -0.7&& mainScript.levelIndex!=0&& mainScript.levelIndex != 2)
+            {
+                rb.gravityScale = 2.5f;
+            }
+            else
+            {
+                if (ShipIndex != 2)
+                {
+                    rb.gravityScale = 1;
+                }
+                else rb.gravityScale = 0;
+            }
             if (currentFuel > 0)
             {
                 if (ShipIndex == 0)
