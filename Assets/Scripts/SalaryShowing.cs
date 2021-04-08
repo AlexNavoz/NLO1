@@ -67,16 +67,25 @@ public class SalaryShowing : MonoBehaviour
         }
 
 
-        RectTransform CanvasRect = objcanvas.GetComponent<RectTransform>();
-        Vector2 ViewportPosition = objcam.WorldToViewportPoint(obj.transform.position);
+        if (objcam == null)
+        {
+            RectTransform rt = obj.GetComponent<RectTransform>();
+            Vector2 ifelementposition = new Vector2(rt.anchoredPosition.x, rt.anchoredPosition.y);
+            RectTransform recttransform = GetComponent<RectTransform>();
+            recttransform.anchoredPosition = ifelementposition + deltaposition;
+        }
+        else
+        {
+            RectTransform CanvasRect = objcanvas.GetComponent<RectTransform>();
+            Vector2 ViewportPosition = objcam.WorldToViewportPoint(obj.transform.position);
 
-        Vector2 WorldObject_ScreenPosition = new Vector2(
-            ((ViewportPosition.x * CanvasRect.sizeDelta.x) - (CanvasRect.sizeDelta.x * 0.5f)),
-            ((ViewportPosition.y * CanvasRect.sizeDelta.y) - (CanvasRect.sizeDelta.y * 0.5f)));
+            Vector2 WorldObject_ScreenPosition = new Vector2(
+                ((ViewportPosition.x * CanvasRect.sizeDelta.x) - (CanvasRect.sizeDelta.x * 0.5f)),
+                ((ViewportPosition.y * CanvasRect.sizeDelta.y) - (CanvasRect.sizeDelta.y * 0.5f)));
 
-
-        RectTransform recttransform = GetComponent<RectTransform>();
-        recttransform.anchoredPosition = WorldObject_ScreenPosition + deltaposition;
+            RectTransform recttransform = GetComponent<RectTransform>();
+            recttransform.anchoredPosition = WorldObject_ScreenPosition + deltaposition;
+        }
 
         //RectTransform recttransform = GetComponent<RectTransform>();
         //Vector2 currentAnchored = recttransform.anchoredPosition;

@@ -16,6 +16,7 @@ public class UFOQuest
 public class QuestScript : MonoBehaviour
 {
     public Image targetIcon;
+    public Image miniIcon;
     MainScript mainScript;
     public Text howMuchNeedText;
     public Text rewardText;
@@ -61,6 +62,7 @@ public class QuestScript : MonoBehaviour
         reward = getQuestById(idToLoad).reward;
         MainScript.questObjectIndex = getQuestById(idToLoad).targetIndex;
         targetIcon.sprite = getQuestById(idToLoad).icon;
+        miniIcon.sprite = getQuestById(idToLoad).icon;
 
         loadedQuestId = idToLoad;
     }

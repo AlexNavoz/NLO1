@@ -57,6 +57,8 @@ public class Destroyer : MonoBehaviour
                     StringBuilder sb = new StringBuilder("+", 10);
                     sb.Append(((int)onRayCount).ToString());
                     player_moving.showTextValue(gameObject, sb.ToString(), 1);
+
+                    //player_moving.showQuestText(mainScript.questButton, sb.ToString(), 1);
                 }
                
                 if (cowRb != null)

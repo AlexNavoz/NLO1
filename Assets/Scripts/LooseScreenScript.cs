@@ -75,9 +75,6 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     public void LoadMainMenu()
     {
         Time.timeScale = 1.0f;
-        mainScript.SafeShortPlatePrefs();
-        mainScript.SafeShortWSPrefs();
-        mainScript.SafeShortKPrefs();
         if (mainScript.levelIndex == 2)
         {
             mainScript.allMoney += mainScript.collection / 2;
@@ -182,9 +179,6 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         //mainScript.allMoney -= (int)refuelPrice;
         mainScript.SetMoney(-(int)refuelPrice);
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
-        mainScript.SafeShortPlatePrefs();
-        mainScript.SafeShortWSPrefs();
-        mainScript.SafeShortKPrefs();
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;
         ExitRefuelCanvas();
@@ -210,9 +204,6 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         {
             Debug.Log("AdsSkipped");
             player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
-            mainScript.SafeShortPlatePrefs();
-            mainScript.SafeShortWSPrefs();
-            mainScript.SafeShortKPrefs();
             player.GetComponent<playerMoving>().SetFuelValues();
             playerMoving.alreadyRefueled = true;
             ExitRefuelCanvas();

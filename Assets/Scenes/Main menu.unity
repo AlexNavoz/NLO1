@@ -7158,7 +7158,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041F\u043E\u0447\u0442\u0430"
+  m_Text: Post office
 --- !u!222 &523296925
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7581,7 +7581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0412\u044B\u0445\u043E\u0434"
+  m_Text: Exit
 --- !u!222 &544316730
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8309,8 +8309,8 @@ Canvas:
   m_GameObject: {fileID: 589831435}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -9623,7 +9623,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2160, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.3
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -22683,7 +22683,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0413\u0430\u0440\u0430\u0436"
+  m_Text: Garage
 --- !u!222 &1250346196
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23780,7 +23780,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0417\u0430\u043F\u0440\u0430\u0432\u043A\u0430"
+  m_Text: Gas station
 --- !u!222 &1325243798
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30660,7 +30660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1906225573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30730,8 +30730,8 @@ Canvas:
   m_GameObject: {fileID: 1906225572}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

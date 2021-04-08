@@ -16,9 +16,9 @@ public class GarageScript : MonoBehaviour
     public GameObject WS_ChoosePanel;
     public GameObject K_ChoosePanel;
     bool HaveChoosen = false;
-    int[] prices = new int[] {100,200,400,800,1500,2000,2000,2000,3000,4000};
-    int[] WSprices = new int[] { 200, 400, 800, 1500, 2000, 3000, 4000, 5000, 6000, 7000 };
-    int[] Kprices = new int[] { 400, 800, 1500, 2000, 3000, 5000, 7000, 10000, 15000, 20000 };
+    int[] prices = new int[] {200,400,800,1500,2000,3000,4000,5000,6000,7000};
+    int[] WSprices = new int[] { 300, 600, 1000, 2000, 3000, 5000, 6000, 7000, 8000, 10000 };
+    int[] Kprices = new int[] { 500, 1000, 2000, 4000, 6000, 8000, 10000, 15000, 20000, 30000 };
 
     //Buy ship
 

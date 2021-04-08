@@ -8,9 +8,6 @@ public class ChooseLevel : MonoBehaviour
 {
     MainScript mainScript;
     GameObject player;
-    ForceShieldScript fs;
-    public GameObject canvas;
-    int i = 0;
 
     Animator crossfade;
 
@@ -26,9 +23,9 @@ public class ChooseLevel : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnEnable()
     {
-        for(int i = 0; i<blockPanels.Length; i++)
+        for (int i = 0; i < blockPanels.Length; i++)
         {
             if (blockPanels[i] != null)
             {
@@ -45,16 +42,6 @@ public class ChooseLevel : MonoBehaviour
                 }
             }
         }
-
-        if (collision.gameObject.layer == 10&& i == 0)
-        {
-            i++;
-            canvas.SetActive(true);
-            Time.timeScale = 0;
-            mainScript.SafeShortPlatePrefs();
-            mainScript.SafeShortWSPrefs();
-            mainScript.SafeShortKPrefs();
-        }
     }
     public void BuyEarthStage(int stageIndex)
     {
@@ -65,15 +52,11 @@ public class ChooseLevel : MonoBehaviour
 
     public void ChooseEarthStage(int stage)
     {
-        Time.timeScale = 1;
         StartCoroutine(CrossFade(stage));
-        
     }
     public void ExitChoosePanel()
     {
-        canvas.SetActive(false);
-        Time.timeScale = 1;
-        i = 0;
+        gameObject.SetActive(false);
         player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 15, player.transform.position.z);
     }
 
@@ -82,7 +65,6 @@ public class ChooseLevel : MonoBehaviour
         crossfade.SetTrigger("Start");
 
         yield return new WaitForSeconds(1.0f);
-        i = 0;
         SceneManager.LoadScene(levelIndex);
     }
 }

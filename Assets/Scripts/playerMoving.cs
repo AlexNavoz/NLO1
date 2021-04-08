@@ -77,17 +77,14 @@ public class playerMoving : MonoBehaviour
         if (ShipIndex == 0)                                            
         {
             mainScript.LoadPlatePrefs();
-            mainScript.LoadShortPlatePrefs();
         }
         if (ShipIndex == 1)                                                    
         {
             mainScript.LoadWSPrefs();
-            mainScript.LoadShortWSPrefs();
         }
         if (ShipIndex == 2)
         {
             mainScript.LoadKPrefs();
-            mainScript.LoadShortKPrefs();
         }
 
     }
@@ -135,6 +132,13 @@ public class playerMoving : MonoBehaviour
         SalaryShowing sh = textobj.GetComponent<SalaryShowing>();
         sh.setTextAndPosition(canvas,mainCamera,obj,text, type);
     }
+    public void showQuestText(GameObject obj, string text, int type)
+    {
+        GameObject textobj = Instantiate(salary);
+        textobj.transform.SetParent(canvas.transform);
+        SalaryShowing sh = textobj.GetComponent<SalaryShowing>();
+        sh.setTextAndPosition(canvas, null, obj, text, type);
+    }
 
     void FixedUpdate()
     {
@@ -142,7 +146,7 @@ public class playerMoving : MonoBehaviour
         {
             if (transform.position.y < -0.7&& mainScript.levelIndex!=0&& mainScript.levelIndex != 2)
             {
-                rb.gravityScale = 2.5f;
+                rb.gravityScale = 1.75f;
             }
             else
             {
@@ -170,7 +174,6 @@ public class playerMoving : MonoBehaviour
                     }
                     else
                     {
-                        rb.drag = 5;
                         leftParticle.Stop();
                         jetSound1.Stop();
                     }
@@ -189,9 +192,12 @@ public class playerMoving : MonoBehaviour
 
                     else 
                     {
-                        rb.drag = 5;
                         rightParticle.Stop();
                         jetSound2.Stop();
+                    }
+                    if (!rightButton.isPressed || !leftButton.isPressed)
+                    {
+                        rb.drag = 5;
                     }
                 }
                 if (ShipIndex == 1)                                                    //After MainScript
@@ -400,80 +406,22 @@ public class playerMoving : MonoBehaviour
         currentFuel -= Consumption * Time.deltaTime;
         fuelBar.SetValue(currentFuel);
     }
-    public void DeletePrefs()
-    {
-        PlayerPrefs.DeleteAll();
-    }
     public void SetFuelValues()
     {
         if (ShipIndex == 0)
         {
             maxFuel = mainScript.P_maxFuel;
-            currentFuel = mainScript.P_fuelLevel;
-            if (currentFuel < maxFuel)
-            {
-                mainScript.P_maxFuel = maxFuel;
-                mainScript.P_fuelLevel = currentFuel;
-                fuelBar.SetMaxTank(maxFuel);
-
-                fuelBar.SetValue(currentFuel);
-
-            }
-            else
-            {
-                fuelBar.SetMaxTank(maxFuel);
-                currentFuel = maxFuel;
-                fuelBar.SetValue(currentFuel);
-
-                mainScript.P_maxFuel = maxFuel;
-                mainScript.P_fuelLevel = currentFuel;
-            }
+            currentFuel = mainScript.P_maxFuel;
         }
         if (ShipIndex == 1)
         {
             maxFuel = mainScript.WS_maxFuel;
-            currentFuel = mainScript.WS_fuelLevel;
-            if (currentFuel < maxFuel)
-            {
-                mainScript.WS_maxFuel = maxFuel;
-                mainScript.WS_fuelLevel = currentFuel;
-                fuelBar.SetMaxTank(maxFuel);
-
-                fuelBar.SetValue(currentFuel);
-
-            }
-            else
-            {
-                fuelBar.SetMaxTank(maxFuel);
-                currentFuel = maxFuel;
-                fuelBar.SetValue(currentFuel);
-
-                mainScript.WS_maxFuel = maxFuel;
-                mainScript.WS_fuelLevel = currentFuel;
-            }
+            currentFuel = mainScript.WS_maxFuel;
         }
         if (ShipIndex == 2)
         {
             maxFuel = mainScript.K_maxFuel;
-            currentFuel = mainScript.K_fuelLevel;
-            if (currentFuel < maxFuel)
-            {
-                mainScript.K_maxFuel = maxFuel;
-                mainScript.K_fuelLevel = currentFuel;
-                fuelBar.SetMaxTank(maxFuel);
-
-                fuelBar.SetValue(currentFuel);
-
-            }
-            else
-            {
-                fuelBar.SetMaxTank(maxFuel);
-                currentFuel = maxFuel;
-                fuelBar.SetValue(currentFuel);
-
-                mainScript.K_maxFuel = maxFuel;
-                mainScript.K_fuelLevel = currentFuel;
-            }
+            currentFuel = mainScript.K_maxFuel;
         }
     }
 

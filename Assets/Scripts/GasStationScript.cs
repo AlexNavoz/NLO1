@@ -45,10 +45,6 @@ public class GasStationScript : MonoBehaviour, AdsListener
         price = 0;
         playerScript.currentFuel = playerScript.maxFuel;
         forceShield.currentHP = forceShield.maxHP;
-        //change after garage
-        mainScript.SafeShortPlatePrefs();
-        mainScript.SafeShortWSPrefs();
-        mainScript.SafeShortKPrefs();
 
         forceShield.SetHPValue();
         playerScript.SetFuelValues();
@@ -74,10 +70,6 @@ public class GasStationScript : MonoBehaviour, AdsListener
         price = 0;
         playerScript.currentFuel = playerScript.maxFuel;
         forceShield.currentHP = forceShield.maxHP;
-        //change after garage
-        mainScript.SafeShortPlatePrefs();
-        mainScript.SafeShortWSPrefs();
-        mainScript.SafeShortKPrefs();
 
         forceShield.SetHPValue();
         playerScript.SetFuelValues();

@@ -9,6 +9,7 @@ public class CameraScript : MonoBehaviour
     playerMoving playerMoving;
     Camera cam;
     MainScript mainScript;
+    public int levelIndex = 0;
     public GameObject[] badGuys;
 
     float smoothSpeed = 3.0f;
@@ -29,20 +30,20 @@ public class CameraScript : MonoBehaviour
         {
             mainScript.levelIndex = 0;
         }
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-        {
-            mainScript.levelIndex = 1;
-        }
+        else mainScript.levelIndex = levelIndex;
+
     }
     void Start()
     {
         Time.fixedDeltaTime = 0.02f;
-        Screen.orientation = ScreenOrientation.Landscape;
-        mainScript.CanvasOrNotCanvas();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMoving = player.GetComponent<playerMoving>();
         cam = Camera.main;
         StartCoroutine("SpawnEnemies");
+        if(levelIndex == 1)
+        {
+            mainScript.questButton.SetActive(true);
+        }
 
     }
     void FixedUpdate()

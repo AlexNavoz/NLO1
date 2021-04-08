@@ -73,6 +73,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public static int questObjectCount = 0;
     public static int questObjectIndex = 0;
     public static int questObjectId = 0;
+    public GameObject questButton;
     public GameObject[] quests;
     public Text questPanelProgress;
     public Text questPanelTime;
@@ -94,17 +95,12 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         //cloudsaves = new GPG_CloudSaveSystem();
         //cloudsaves.SaveToCloud();
         LoadPlatePrefs();
-        LoadShortPlatePrefs();
         LoadWSPrefs();
-        LoadShortWSPrefs();
         LoadKPrefs();
-        LoadShortKPrefs();
         LoadQuestPrefs();
 
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",0);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
-        text.text = allMoney.ToString();
-        CanvasOrNotCanvas();
 
         forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
 
@@ -138,17 +134,6 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         allMoney += money;
         PlayerPrefs.SetInt("allMoney", allMoney);
-        text.text = allMoney.ToString();
-    }
-
-    public void CanvasOrNotCanvas()
-    {
-        lname = SceneManager.GetActiveScene().name;
-        if (lname != "Main menu")
-        {
-            canvas.SetActive(false);
-        }
-        else canvas.SetActive(true);
     }
     // quest
 
@@ -169,37 +154,8 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
         P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 30.0f);
-        //P_rayDacreaserPower = PlayerPrefs.GetFloat("P_rayDecreaserPower", 0.1f);
         P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
         P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
-    }
-    public void LoadShortPlatePrefs()
-    {
-        P_fuelLevel = PlayerPrefs.GetFloat("P_fuelLevel", P_maxFuel);
-        P_forceShieldLevel = PlayerPrefs.GetFloat("P_forceShieldLevel", P_forceShieldStrength);
-        P_cowCount = PlayerPrefs.GetInt("P_cowCount", 0);
-    }
-
-    public void SafeShortPlatePrefs()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
-        P_fuelLevel = player.currentFuel;
-        if (P_fuelLevel > 0)
-        {
-            PlayerPrefs.SetFloat("P_fuelLevel", P_fuelLevel);
-        }
-        else
-            PlayerPrefs.SetFloat("P_fuelLevel", 1.0f);
-        if (shieldIsActive)
-        {
-            fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
-            P_forceShieldLevel = fs.currentHP;
-            PlayerPrefs.SetFloat("P_forceShieldLevel", P_forceShieldLevel);
-        }
-        else
-            PlayerPrefs.SetFloat("P_forceShieldLevel", 1.0f);
-        
-        PlayerPrefs.SetInt("P_cowCount", P_cowCount);
     }
 
     //__________________________________________________________________________________WARSHIP__________________________________________________________
@@ -213,34 +169,6 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         WS_rayLiftPower = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
         WS_forceShieldStrength = PlayerPrefs.GetFloat("WS_forceShieldStrength", 40.0f);
     }
-    public void LoadShortWSPrefs()
-    {
-        WS_fuelLevel = PlayerPrefs.GetFloat("WS_fuelLevel", WS_maxFuel);
-        WS_forceShieldLevel = PlayerPrefs.GetFloat("WS_forceShieldLevel", WS_forceShieldStrength);
-        WS_cowCount = PlayerPrefs.GetInt("WS_cowCount", 0);
-    }
-
-    public void SafeShortWSPrefs()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
-        WS_fuelLevel = player.currentFuel;
-        if (WS_fuelLevel > 0)
-        {
-            PlayerPrefs.SetFloat("WS_fuelLevel", WS_fuelLevel);
-        }
-        else
-            PlayerPrefs.SetFloat("WS_fuelLevel", 1.0f);
-        if (shieldIsActive)
-        {
-            fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
-            WS_forceShieldLevel = fs.currentHP;
-            PlayerPrefs.SetFloat("WS_forceShieldLevel", WS_forceShieldLevel);
-        }
-        else
-            PlayerPrefs.SetFloat("WS_forceShieldLevel", 1.0f);
-
-        PlayerPrefs.SetInt("WS_cowCount", WS_cowCount);
-    }
     //__________________________________________________________________________________KNIPPEL__________________________________________________________
 
 
@@ -252,34 +180,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         K_rayLiftPower = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
         K_forceShieldStrength = PlayerPrefs.GetFloat("K_forceShieldStrength", 40.0f);
     }
-    public void LoadShortKPrefs()
-    {
-        K_fuelLevel = PlayerPrefs.GetFloat("K_fuelLevel", K_maxFuel);
-        K_forceShieldLevel = PlayerPrefs.GetFloat("K_forceShieldLevel", K_forceShieldStrength);
-        K_cowCount = PlayerPrefs.GetInt("K_cowCount", 0);
-    }
 
-    public void SafeShortKPrefs()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
-        K_fuelLevel = player.currentFuel;
-        if (K_fuelLevel > 0)
-        {
-            PlayerPrefs.SetFloat("K_fuelLevel", K_fuelLevel);
-        }
-        else
-            PlayerPrefs.SetFloat("K_fuelLevel", 1.0f);
-        if (shieldIsActive)
-        {
-            fs = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
-            K_forceShieldLevel = fs.currentHP;
-            PlayerPrefs.SetFloat("K_forceShieldLevel", K_forceShieldLevel);
-        }
-        else
-            PlayerPrefs.SetFloat("K_forceShieldLevel", 1.0f);
-
-        PlayerPrefs.SetInt("K_cowCount", K_cowCount);
-    }
     public void PostLevels()
     {
         PostScript postScript = GameObject.FindGameObjectWithTag("Post").GetComponent<PostScript>();
@@ -291,23 +192,6 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     }
 
     //________________________________________________________BuyMoney___________________________________________
-
-    public void OpenBuyMoneyPanel()
-    {
-        buyMoneyPanel.SetActive(true);
-    }
-    public void ExitButMoneyPanel()
-    {
-        buyMoneyPanel.SetActive(false);
-    }
-    public void BuyMoneyByMoney(int reward)
-    {
-        SetMoney(reward);
-    }
-    public void BuyMoneyByAds(int reward)
-    {
-        SetMoney(reward);
-    }
 
     AdsListener adslistener;
     public void checkIfAdsReady()
