@@ -19,6 +19,16 @@ public class playerMoving : MonoBehaviour
     public AudioSource deathSound;
     public float EnginePower;
 
+    //LevelIndex variables!
+    public GameObject ray;
+    public GameObject destroyer;
+    public GameObject gun;
+    public GameObject claw;
+    public GameObject clawController;
+    public Rigidbody2D clawLeft;
+    public Rigidbody2D clawRight;
+    bool ClawIsClosen = false;
+
     // Plate Variables!!!
     [SerializeField] GameObject Plate_Variables_______;
     public PressedButton leftButton;
@@ -27,7 +37,6 @@ public class playerMoving : MonoBehaviour
     [SerializeField] GameObject WS_Variables_______;
     public Slider leftSlider;
     public Slider rightSlider;
-    public GameObject gun;
     // Knippel Variables!!!
     public Joystick leftJoystick;
     public Joystick rightJoystick;
@@ -114,14 +123,59 @@ public class playerMoving : MonoBehaviour
         forceShield = GameObject.FindGameObjectWithTag("ForceShield");
         fsScript = forceShield.GetComponent<ForceShieldScript>();
         SetFuelValues();
-        rb = GetComponent<Rigidbody2D>();
-        if (mainScript.levelIndex == 1)
-        {
-            crimePanel.SetActive(true);
-        }
-        else
-        {
-            crimePanel.SetActive(false);
+        rb = GetComponent<Rigidbody2D>();   
+        crimePanel.SetActive(false);
+
+        switch (mainScript.levelIndex){
+            case 1:
+                crimePanel.SetActive(true);
+                ray.SetActive(true);
+                destroyer.SetActive(true);
+                if (mainScript.ShipIndex == 1)
+                {
+                    gun.SetActive(true);
+                }
+                else { gun.SetActive(false); };
+                claw.SetActive(false);
+                clawController.SetActive(false);
+                break;
+            case 2:
+                ray.SetActive(true);
+                destroyer.SetActive(true);
+                if (mainScript.ShipIndex == 1)
+                {
+                    gun.SetActive(true);
+                }
+                else { gun.SetActive(false); }
+                claw.SetActive(false);
+                clawController.SetActive(false);
+                break;
+            case 3:
+                ray.SetActive(true);
+                destroyer.SetActive(true);
+                if (mainScript.ShipIndex == 1)
+                {
+                    gun.SetActive(true);
+                }
+                else { gun.SetActive(false); }
+                claw.SetActive(false);
+                clawController.SetActive(false);
+                break;
+            case 4:
+                ray.SetActive(false);
+                destroyer.SetActive(false);
+                gun.SetActive(true);
+                claw.SetActive(false);
+                clawController.SetActive(false);
+                break;
+            case 5:
+                Time.fixedDeltaTime = 0.01f;
+                ray.SetActive(false);
+                destroyer.SetActive(false);
+                gun.SetActive(true);
+                claw.SetActive(true);
+                clawController.SetActive(true);
+                break;
         }
         
     }
@@ -323,7 +377,19 @@ public class playerMoving : MonoBehaviour
             }
         }
 
-
+        if(mainScript.levelIndex == 5)
+        {
+            if (ClawIsClosen)
+            {
+                clawLeft.AddTorque(-70);
+                clawRight.AddTorque(70);
+            }
+            else
+            {
+                clawLeft.AddTorque(70);
+                clawRight.AddTorque(-70);
+            }
+        }
     }
     private void Update()
     {
@@ -476,4 +542,15 @@ public class playerMoving : MonoBehaviour
         refuelCanvas.RefuelCanvasOpen();
     }
     
+    public void ClawControl()
+    {
+        if (ClawIsClosen)
+        {
+            ClawIsClosen = false;
+        }
+        else
+        {
+            ClawIsClosen = true;
+        }
+    }
 }

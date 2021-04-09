@@ -35,7 +35,6 @@ public class CameraScript : MonoBehaviour
     }
     void Start()
     {
-        Time.fixedDeltaTime = 0.02f;
         player = GameObject.FindGameObjectWithTag("Player");
         playerMoving = player.GetComponent<playerMoving>();
         cam = Camera.main;
@@ -43,6 +42,10 @@ public class CameraScript : MonoBehaviour
         if(levelIndex == 1)
         {
             mainScript.questButton.SetActive(true);
+        }
+        if (levelIndex != 5)
+        {
+            Time.fixedDeltaTime = 0.02f;
         }
 
     }
