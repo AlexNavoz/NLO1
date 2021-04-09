@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuScript : MonoBehaviour
+public class MainMenuScript : MonoBehaviour, AdsListener
 {
     MainScript mainScript;
     GameObject mainCameraObj;
@@ -13,9 +13,16 @@ public class MainMenuScript : MonoBehaviour
     int currentMoney;
 
     public AudioSource tunButton;
-    public AudioSource clickButton;
+    public AudioSource clickButton;                       //Sounds
     public AudioSource menuOpenSound;
 
+    //Campaign
+    public GameObject campaignPanel;
+
+    //ShipRent
+    public GameObject rentPanel;
+    public Button rentByMoneyButton;
+    int rentIndex = 0;
 
     public Button nextShipButton;
     public Button previousShipButton;
@@ -151,6 +158,8 @@ public class MainMenuScript : MonoBehaviour
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
         mainScript.questButton.SetActive(false);
+        rentPanel.SetActive(false);
+        
         #region
 
         //plate_______________________________________________________________________________________________________________________________
@@ -373,6 +382,12 @@ public class MainMenuScript : MonoBehaviour
             buyKButton.interactable = false;
         }
         else buyKButton.interactable = true;
+
+        if (mainScript.allMoney < 1000)
+        {
+            rentByMoneyButton.interactable = false;
+        }
+        else rentByMoneyButton.interactable = true;
 
         #region
 
@@ -798,11 +813,67 @@ public class MainMenuScript : MonoBehaviour
 
     public void GameButtonClick()
     {
-        chooseGameStagePanel.SetActive(true);
+        if(shipIndex == 1 && PlayerPrefs.GetInt("WSBuy", 0) == 0 && rentIndex == 0 )
+        {
+            rentPanel.SetActive(true);
+            chooseGameStagePanel.SetActive(true);
+        }
+        if (shipIndex == 2 && PlayerPrefs.GetInt("KBuy", 0) == 0 && rentIndex == 0)
+        {
+            rentPanel.SetActive(true);
+            chooseGameStagePanel.SetActive(true);
+        }
+        else
+        {
+            chooseGameStagePanel.SetActive(true);
+        }
     }
+    //__________________________RENT!____________________
+    #region
+    public void RentExit()
+    {
+        clickButton.Play();
+        rentPanel.SetActive(false);
+        chooseGameStagePanel.SetActive(false);
+    }
+
+    public void RentByMoney()
+    {
+        clickButton.Play();
+        rentIndex = 1;
+        rentPanel.SetActive(false);
+        mainScript.SetMoney(-1000);
+    }
+    public void RentByAds()
+    {
+        clickButton.Play();
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
+    }
+    public void AdsShowed()
+    {
+        Debug.Log("AdsSkipped");
+        rentIndex = 1;
+        rentPanel.SetActive(false);
+    }
+    public void AdsFailed()
+    {
+        Debug.Log("AdsFailed");
+    }
+    public void AdsSkipped()
+    {
+        Debug.Log("AdsSkipped");
+    }
+#endregion
     public void CloseTheGame()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 

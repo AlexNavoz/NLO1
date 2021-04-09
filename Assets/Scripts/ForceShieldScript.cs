@@ -25,6 +25,23 @@ public class ForceShieldScript : MonoBehaviour
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         playermoving = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
         mainCameraAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+
+        if (mainScript.ShipIndex == 0)
+        {
+            maxHP = mainScript.P_forceShieldStrength;
+            currentHP = maxHP;
+        }
+        if (mainScript.ShipIndex == 1)
+        {
+            maxHP = mainScript.WS_forceShieldStrength;
+            currentHP = maxHP;
+        }
+        if (mainScript.ShipIndex == 2)
+        {
+            maxHP = mainScript.K_forceShieldStrength;
+            currentHP = maxHP;
+        }
+
         SetHPValue();
 
         anim = GetComponent<Animator>();
@@ -66,7 +83,6 @@ public class ForceShieldScript : MonoBehaviour
         if (mainScript.ShipIndex == 0)
         {
             maxHP = mainScript.P_forceShieldStrength;
-            currentHP = mainScript.P_forceShieldLevel;
             if (currentHP < maxHP)
             {
                 mainScript.P_forceShieldStrength = maxHP;
@@ -89,7 +105,6 @@ public class ForceShieldScript : MonoBehaviour
         if(mainScript.ShipIndex == 1)
         {
             maxHP = mainScript.WS_forceShieldStrength;
-            currentHP = mainScript.WS_forceShieldLevel;
             if (currentHP < maxHP)
             {
                 mainScript.WS_forceShieldStrength = maxHP;
@@ -112,7 +127,6 @@ public class ForceShieldScript : MonoBehaviour
         if (mainScript.ShipIndex == 2)
         {
             maxHP = mainScript.K_forceShieldStrength;
-            currentHP = mainScript.K_forceShieldLevel;
             if (currentHP < maxHP)
             {
                 mainScript.K_forceShieldStrength = maxHP;

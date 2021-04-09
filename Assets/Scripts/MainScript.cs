@@ -84,7 +84,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     string gameId = "4059551";
 #endif
     string mySurfacingId = "rewardedVideo";
-    bool testMode = false;
+    bool testMode = true;
 
     private void Awake()
     {

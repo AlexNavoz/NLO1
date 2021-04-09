@@ -412,16 +412,22 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.P_maxFuel;
             currentFuel = mainScript.P_maxFuel;
+            fuelBar.SetMaxTank(maxFuel);
+            fuelBar.SetValue(currentFuel);
         }
         if (ShipIndex == 1)
         {
             maxFuel = mainScript.WS_maxFuel;
+            fuelBar.SetMaxTank(maxFuel);
             currentFuel = mainScript.WS_maxFuel;
+            fuelBar.SetValue(currentFuel);
         }
         if (ShipIndex == 2)
         {
             maxFuel = mainScript.K_maxFuel;
+            fuelBar.SetMaxTank(maxFuel);
             currentFuel = mainScript.K_maxFuel;
+            fuelBar.SetValue(currentFuel);
         }
     }
 
