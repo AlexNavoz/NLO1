@@ -56,6 +56,7 @@ public class ChooseLevel : MonoBehaviour
     }
     public void ExitChoosePanel()
     {
+        mainScript.mainMenuPanelIndex = 0;
         gameObject.SetActive(false);
     }
 

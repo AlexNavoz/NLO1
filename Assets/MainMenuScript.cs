@@ -341,6 +341,15 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                 break;
         }
 
+        switch (mainScript.mainMenuPanelIndex)
+        {
+            case 1:
+                GameButtonClick();
+                break;
+            case 2:
+                CampaignButtonClick();
+                break;
+        }
         currentMoney = mainScript.allMoney;
         moneyText.text = currentMoney.ToString();
 
@@ -811,8 +820,29 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     #endregion
 
+    public void CampaignButtonClick()
+    {
+        mainScript.mainMenuPanelIndex = 2;
+        if (shipIndex == 1 && PlayerPrefs.GetInt("WSBuy", 0) == 0 && rentIndex == 0)
+        {
+            rentPanel.SetActive(true);
+            campaignPanel.SetActive(true);
+        }
+        if (shipIndex == 2 && PlayerPrefs.GetInt("KBuy", 0) == 0 && rentIndex == 0)
+        {
+            rentPanel.SetActive(true);
+            campaignPanel.SetActive(true);
+        }
+        else
+        {
+            campaignPanel.SetActive(true);
+        }
+    }
+    
+
     public void GameButtonClick()
     {
+        mainScript.mainMenuPanelIndex = 1;
         if(shipIndex == 1 && PlayerPrefs.GetInt("WSBuy", 0) == 0 && rentIndex == 0 )
         {
             rentPanel.SetActive(true);
@@ -832,6 +862,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     #region
     public void RentExit()
     {
+        mainScript.mainMenuPanelIndex = 0;
         clickButton.Play();
         rentPanel.SetActive(false);
         chooseGameStagePanel.SetActive(false);

@@ -43,7 +43,7 @@ public class CameraScript : MonoBehaviour
         {
             mainScript.questButton.SetActive(true);
         }
-        if (levelIndex != 5)
+        //if (levelIndex != 5)
         {
             Time.fixedDeltaTime = 0.02f;
         }

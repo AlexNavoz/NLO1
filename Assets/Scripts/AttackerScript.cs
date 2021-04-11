@@ -34,11 +34,13 @@ public class AttackerScript : MonoBehaviour
     int s;
     public AudioSource aim;
     int a;
+    MainScript mainScript;
 
     int currentanimation = 0; // 1 - walk, 2 - fly, 3 - fear
     float current_animation_position = 0.0f;
     void Start()
     {
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         waitTime = startWaitTime;
         SetNextSpotToMove();
         scream = GetComponent<AudioSource>();
@@ -52,53 +54,56 @@ public class AttackerScript : MonoBehaviour
     private void Update()
     {
         cowPowerindex = rb.mass / startMass;
-        if (onRay.isInRay)
+        if (!mainScript.peace)
         {
-            if (!scared)
+            if (onRay.isInRay)
             {
-                scared = true;
-                waitTime = 1;
+                if (!scared)
+                {
+                    scared = true;
+                    waitTime = 1;
+                }
             }
-        }
-        else if (System.Math.Abs(player.position.x - transform.position.x) > distanse && scared)
-        {
-            scared = false;
-            aiming = false;
-            aimingtime = 0;
-        }
-        else if (System.Math.Abs(player.position.x - transform.position.x) < aiming_distanse && !scared)
-        {
-            if (!aiming)
+            else if (System.Math.Abs(player.position.x - transform.position.x) > distanse && scared)
             {
-                aiming = true;
+                scared = false;
+                aiming = false;
                 aimingtime = 0;
             }
-        }
-        else 
-        {
-            a = 0;
-            aiming = false;
-        }
-
-        if (scared)
-        {
-            InFear();
-        }
-        else
-        {
-            if (aiming)
+            else if (System.Math.Abs(player.position.x - transform.position.x) < aiming_distanse && !scared)
             {
-                Aiming();
+                if (!aiming)
+                {
+                    aiming = true;
+                    aimingtime = 0;
+                }
             }
             else
             {
-                if (isAgressive==0)
+                a = 0;
+                aiming = false;
+            }
+
+            if (scared)
+            {
+                InFear();
+            }
+            else
+            {
+                if (aiming)
                 {
-                    Chill();
+                    Aiming();
                 }
-                if (isAgressive==1)
+                else
                 {
-                    Attacking();
+                    if (isAgressive == 0)
+                    {
+                        Chill();
+                    }
+                    if (isAgressive == 1)
+                    {
+                        Attacking();
+                    }
                 }
             }
         }

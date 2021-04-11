@@ -2032,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7af360b462bff14680cb8c1183c10bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  peace: 0
   P_enginePower: 0
   P_maxFuel: 0
   P_rayDacreaserPower: 0
@@ -2050,28 +2051,22 @@ MonoBehaviour:
   P_fuelLevel: 0
   P_forceShieldLevel: 0
   P_cowCount: 0
-  WS_fuelLevel: 0
-  WS_forceShieldLevel: 0
-  WS_cowCount: 0
-  K_fuelLevel: 0
-  K_forceShieldLevel: 0
-  K_cowCount: 0
   plate: {fileID: 9088907898758553151, guid: 05b7f69cf42663643ae3af3b9843f565, type: 3}
   warship: {fileID: 9088907898758553151, guid: 6051acea276ee2e44afb529a9e36d73c, type: 3}
   knippel: {fileID: 9088907898758553151, guid: f15b3c9bc3ff6a245a7e2daedaf09466, type: 3}
   ShipIndex: 0
   levelIndex: 0
+  mainMenuPanelIndex: 0
   shieldIsActive: 0
   postLevels: 
   collection: 0
   allMoney: 0
-  text: {fileID: 0}
-  canvas: {fileID: 0}
-  buyMoneyPanel: {fileID: 0}
   questButton: {fileID: 237800536}
   quests: []
   questPanelProgress: {fileID: 0}
   questPanelTime: {fileID: 0}
+  campaignQisetObjIndex: 0
+  campaignQuestObjCount: 0
 --- !u!4 &1845433771
 Transform:
   m_ObjectHideFlags: 0

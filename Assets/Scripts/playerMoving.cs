@@ -196,199 +196,207 @@ public class playerMoving : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isDead)
+        if (!mainScript.peace)
         {
-            if (transform.position.y < -0.7&& mainScript.levelIndex!=0&& mainScript.levelIndex != 2)
+            if (!isDead)
             {
-                rb.gravityScale = 1.75f;
-            }
-            else
-            {
-                if (ShipIndex != 2)
+                if (transform.position.y < -0.7 && mainScript.levelIndex != 0 && mainScript.levelIndex != 2)
                 {
-                    rb.gravityScale = 1;
+                    rb.gravityScale = 1.75f;
                 }
-                else rb.gravityScale = 0;
-            }
-            if (currentFuel > 0)
-            {
-                if (ShipIndex == 0)
+                else
                 {
-                    if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
+                    if (ShipIndex != 2)
                     {
-                        rb.drag = 1;
-                        rbLeft.AddRelativeForce(Vector3.up * EnginePower);
-                        if(!jetSound1.isPlaying)
-                        jetSound1.Play();
-                        if (mainScript.levelIndex!=0)
+                        rb.gravityScale = 1;
+                    }
+                    else rb.gravityScale = 0;
+                }
+                if (currentFuel > 0)
+                {
+                    if (ShipIndex == 0)
+                    {
+                        if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
                         {
-                            FuelConsampsion(consumption);
+                            rb.drag = 1;
+                            rbLeft.AddRelativeForce(Vector3.up * EnginePower);
+                            if (!jetSound1.isPlaying)
+                                jetSound1.Play();
+                            if (mainScript.levelIndex != 0)
+                            {
+                                FuelConsampsion(consumption);
+                            }
+                            leftParticle.Play();
                         }
-                        leftParticle.Play();
-                    }
-                    else
-                    {
-                        leftParticle.Stop();
-                        jetSound1.Stop();
-                    }
-                    if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
-                    {
-                        rb.drag = 1;
-                        rbRight.AddRelativeForce(Vector3.up * EnginePower);
-                        if (!jetSound2.isPlaying)
-                            jetSound2.Play();
-                        if (mainScript.levelIndex != 0)
+                        else
                         {
-                            FuelConsampsion(consumption);
+                            leftParticle.Stop();
+                            jetSound1.Stop();
                         }
-                        rightParticle.Play();
-                    }
+                        if (Input.GetKey(KeyCode.D) || rightButton.isPressed)
+                        {
+                            rb.drag = 1;
+                            rbRight.AddRelativeForce(Vector3.up * EnginePower);
+                            if (!jetSound2.isPlaying)
+                                jetSound2.Play();
+                            if (mainScript.levelIndex != 0)
+                            {
+                                FuelConsampsion(consumption);
+                            }
+                            rightParticle.Play();
+                        }
 
-                    else 
-                    {
-                        rightParticle.Stop();
-                        jetSound2.Stop();
-                    }
-                    if (!rightButton.isPressed || !leftButton.isPressed)
-                    {
-                        rb.drag = 5;
-                    }
-                }
-                if (ShipIndex == 1)                                                    //After MainScript
-                {
-                    if (leftSlider.value != 0)
-                    {
-                        rb.drag = 1;
-                        if (mainScript.levelIndex != 0)
+                        else
                         {
-                            FuelConsampsion(consumption);
+                            rightParticle.Stop();
+                            jetSound2.Stop();
                         }
-                        rbLeft.AddRelativeForce(Vector3.up * EnginePower * leftSlider.value);
-                        if (!jetSound1.isPlaying)
-                            jetSound1.Play();
-                        leftParticle.Play();
-                    }
-                    else 
-                    {
-                        leftParticle.Stop();
-                        jetSound1.Stop();
-                    }
-                    if (rightSlider.value != 0)
-                    {
-                        rb.drag = 1;
-                        if (mainScript.levelIndex != 0)
+                        if (!rightButton.isPressed || !leftButton.isPressed)
                         {
-                            FuelConsampsion(consumption);
+                            rb.drag = 5;
                         }
-                        rbRight.AddRelativeForce(Vector3.up * EnginePower * rightSlider.value);
-                        if (!jetSound2.isPlaying)
-                            jetSound2.Play();
-                        rightParticle.Play();
                     }
-                    else 
+                    if (ShipIndex == 1)                                                    //After MainScript
                     {
-                        rightParticle.Stop();
-                        jetSound2.Stop();
-                    }
-                    if(rightSlider.value == 0|| leftSlider.value == 0)
-                    {
-                        rb.drag = 5;
-                    }
-                }
-                if (ShipIndex == 2)                                                    //KNIPPEL!!
-                {
-                    rb.gravityScale = 0;
-                    if (leftJoystick.Horizontal != 0|| leftJoystick.Vertical != 0)
-                    {
-                        rb.drag = 2;
-                        if (mainScript.levelIndex != 0)
+                        if (leftSlider.value != 0)
                         {
-                            FuelConsampsion(consumption);
+                            rb.drag = 1;
+                            if (mainScript.levelIndex != 0)
+                            {
+                                FuelConsampsion(consumption);
+                            }
+                            rbLeft.AddRelativeForce(Vector3.up * EnginePower * leftSlider.value);
+                            if (!jetSound1.isPlaying)
+                                jetSound1.Play();
+                            leftParticle.Play();
                         }
-                        float leftJetRotation = (float)System.Math.Atan2(leftJoystick.Horizontal, leftJoystick.Vertical);                        
-                        leftJet.rotation = Quaternion.Euler(0, 0, -180.0f * leftJetRotation / (float)System.Math.PI);
-                        rbLeft.AddForce(new Vector3(leftJoystick.Horizontal, leftJoystick.Vertical,0) * EnginePower);
-                        if (!jetSound1.isPlaying)
-                            jetSound1.Play();
-                        leftParticle.Play();
-                    }
-                    else
-                    {
-                        leftParticle.Stop();
-                        jetSound1.Stop();
-                    }
-                    if (rightJoystick.Horizontal != 0 || rightJoystick.Vertical != 0)
-                    {
-                        rb.drag = 2;
-                        if (mainScript.levelIndex != 0)
+                        else
                         {
-                            FuelConsampsion(consumption);
+                            leftParticle.Stop();
+                            jetSound1.Stop();
                         }
-                        float rightJetRotation = (float)System.Math.Atan2(rightJoystick.Horizontal, rightJoystick.Vertical);
-                        rightJet.rotation = Quaternion.Euler(0, 0,-180* rightJetRotation / (float)System.Math.PI);
-                        rbRight.AddForce(new Vector3(rightJoystick.Horizontal, rightJoystick.Vertical, 0) * EnginePower);
-                        if (!jetSound2.isPlaying)
-                            jetSound2.Play();
-                        rightParticle.Play();
+                        if (rightSlider.value != 0)
+                        {
+                            rb.drag = 1;
+                            if (mainScript.levelIndex != 0)
+                            {
+                                FuelConsampsion(consumption);
+                            }
+                            rbRight.AddRelativeForce(Vector3.up * EnginePower * rightSlider.value);
+                            if (!jetSound2.isPlaying)
+                                jetSound2.Play();
+                            rightParticle.Play();
+                        }
+                        else
+                        {
+                            rightParticle.Stop();
+                            jetSound2.Stop();
+                        }
+                        if (rightSlider.value == 0 || leftSlider.value == 0)
+                        {
+                            rb.drag = 5;
+                        }
                     }
+                    if (ShipIndex == 2)                                                    //KNIPPEL!!
+                    {
+                        rb.gravityScale = 0;
+                        if (leftJoystick.Horizontal != 0 || leftJoystick.Vertical != 0)
+                        {
+                            rb.drag = 2;
+                            if (mainScript.levelIndex != 0)
+                            {
+                                FuelConsampsion(consumption);
+                            }
+                            float leftJetRotation = (float)System.Math.Atan2(leftJoystick.Horizontal, leftJoystick.Vertical);
+                            leftJet.rotation = Quaternion.Euler(0, 0, -180.0f * leftJetRotation / (float)System.Math.PI);
+                            rbLeft.AddForce(new Vector3(leftJoystick.Horizontal, leftJoystick.Vertical, 0) * EnginePower);
+                            if (!jetSound1.isPlaying)
+                                jetSound1.Play();
+                            leftParticle.Play();
+                        }
+                        else
+                        {
+                            leftParticle.Stop();
+                            jetSound1.Stop();
+                        }
+                        if (rightJoystick.Horizontal != 0 || rightJoystick.Vertical != 0)
+                        {
+                            rb.drag = 2;
+                            if (mainScript.levelIndex != 0)
+                            {
+                                FuelConsampsion(consumption);
+                            }
+                            float rightJetRotation = (float)System.Math.Atan2(rightJoystick.Horizontal, rightJoystick.Vertical);
+                            rightJet.rotation = Quaternion.Euler(0, 0, -180 * rightJetRotation / (float)System.Math.PI);
+                            rbRight.AddForce(new Vector3(rightJoystick.Horizontal, rightJoystick.Vertical, 0) * EnginePower);
+                            if (!jetSound2.isPlaying)
+                                jetSound2.Play();
+                            rightParticle.Play();
+                        }
 
-                    else
-                    {
-                        rightParticle.Stop();
-                        jetSound2.Stop();
+                        else
+                        {
+                            rightParticle.Stop();
+                            jetSound2.Stop();
+                        }
+                        if (rightJoystick.Horizontal == 0 || rightJoystick.Vertical == 0 || leftJoystick.Horizontal == 0 || leftJoystick.Vertical == 0)
+                        {
+                            rb.drag = 20;
+                        }
                     }
-                    if (rightJoystick.Horizontal == 0 || rightJoystick.Vertical == 0|| leftJoystick.Horizontal == 0 || leftJoystick.Vertical == 0)
+                }
+                else
+                {
+                    rb.drag = 1;
+                    leftParticle.Stop();
+                    rightParticle.Stop();
+                    jetSound1.Stop();
+                    jetSound2.Stop();
+                    if (ShipIndex == 2)
                     {
-                        rb.drag = 20;
+                        rb.gravityScale = 1;
                     }
                 }
             }
-            else
+            if (isDead)
             {
-                rb.drag = 1;
                 leftParticle.Stop();
                 rightParticle.Stop();
                 jetSound1.Stop();
                 jetSound2.Stop();
-                if(ShipIndex == 2)
+                if (ShipIndex == 2)
                 {
                     rb.gravityScale = 1;
                 }
             }
-        }
-        if (isDead)
-        {
-            leftParticle.Stop();
-            rightParticle.Stop();
-            jetSound1.Stop();
-            jetSound2.Stop();
-            if (ShipIndex == 2)
-            {
-                rb.gravityScale = 1;
-            }
-        }
 
-        if(mainScript.levelIndex == 2)
-        {
-            if(currentFuel<=0 && !alreadyRefueled)
+            if (mainScript.levelIndex == 2)
             {
-                alreadyRefueled = true;
-                Invoke("OpenRefuelPanel", 1.0f);
+                if (currentFuel <= 0 && !alreadyRefueled)
+                {
+                    alreadyRefueled = true;
+                    Invoke("OpenRefuelPanel", 1.0f);
+                }
+            }
+
+            if (mainScript.levelIndex == 5)
+            {
+                if (ClawIsClosen)
+                {
+                    clawLeft.AddTorque(-50);
+                    clawRight.AddTorque(50);
+                }
+                else
+                {
+                    clawLeft.AddTorque(50);
+                    clawRight.AddTorque(-50);
+                }
             }
         }
-
-        if(mainScript.levelIndex == 5)
+        else
         {
-            if (ClawIsClosen)
-            {
-                clawLeft.AddTorque(-70);
-                clawRight.AddTorque(70);
-            }
-            else
-            {
-                clawLeft.AddTorque(70);
-                clawRight.AddTorque(-70);
-            }
+            rb.drag = 20;
+            rb.gravityScale = 0;
         }
     }
     private void Update()
@@ -445,25 +453,31 @@ public class playerMoving : MonoBehaviour
                 if (i == 1)
                 {
                     isDead = true;
-                    deathSound.Play();
-                    OpenLosePanel();
+                    if (mainScript.levelIndex == 1)
+                    {
+                        deathSound.Play();
+                        OpenLosePanel();
+                    }
                 }
             }
         }
         if (collision.gameObject.layer == 9)
         {
-            if (alreadyRefueled && currentFuel <= 0 && !isDead)
+            if (mainScript.levelIndex == 1)
             {
-                i++;
-                    if (i == 1) 
+                if (alreadyRefueled && currentFuel <= 0 && !isDead)
                 {
-                    isDead = true;
-                    Invoke("OpenLosePanel", 2.0f); 
+                    i++;
+                    if (i == 1)
+                    {
+                        isDead = true;
+                        Invoke("OpenLosePanel", 2.0f);
+                    }
                 }
-            }
-            if (!alreadyRefueled && currentFuel <= 0)
-            {
-                OpenRefuelPanel();
+                if (!alreadyRefueled && currentFuel <= 0)
+                {
+                    OpenRefuelPanel();
+                }
             }
         }
     }
@@ -520,7 +534,7 @@ public class playerMoving : MonoBehaviour
     {
         try
         {
-            if (SceneManager.GetActiveScene().buildIndex != 1)
+            if (SceneManager.GetActiveScene().buildIndex != 1&&mainScript.levelIndex == 1)
             {
                 LooseScreenScript losePanel = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
                 losePanel.Activation();
@@ -533,7 +547,7 @@ public class playerMoving : MonoBehaviour
         }
         catch
         {
-            SceneManager.LoadScene("Main menu");
+            SceneManager.LoadScene("MM");
         }
     }
     public void OpenRefuelPanel()

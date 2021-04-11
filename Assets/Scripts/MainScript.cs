@@ -8,6 +8,7 @@ using UnityEngine.Analytics;
 
 public class MainScript : MonoBehaviour, IUnityAdsListener
 {
+    public bool peace = false;
     //plate variables
     public float P_enginePower;
     public float P_maxFuel;
@@ -34,16 +35,6 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public float P_forceShieldLevel;
     public int P_cowCount;
 
-    //WS short time variables
-    public float WS_fuelLevel;
-    public float WS_forceShieldLevel;
-    public int WS_cowCount;
-
-    //Knippel short time variables
-    public float K_fuelLevel;
-    public float K_forceShieldLevel;
-    public int K_cowCount;
-
     //starting game
     Vector3 startPos;
     Transform startPosTransform;
@@ -52,6 +43,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public GameObject knippel;
     public int ShipIndex;
     public int levelIndex = 0;
+    public int mainMenuPanelIndex = 0;
     playerMoving player;
     ForceShieldScript fs;
     public bool shieldIsActive;
@@ -61,9 +53,6 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     string lname;
     public int collection;
     public int allMoney;
-    public Text text;
-    public GameObject canvas;
-    public GameObject buyMoneyPanel;
 
     //GPG_CloudSaveSystem cloudsaves;
 
@@ -77,6 +66,10 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public GameObject[] quests;
     public Text questPanelProgress;
     public Text questPanelTime;
+
+    //Campaign Quest var
+    public int campaignQisetObjIndex = 0;
+    public int campaignQuestObjCount = 0;
 
 #if UNITY_IOS
     string gameId = "4059550";

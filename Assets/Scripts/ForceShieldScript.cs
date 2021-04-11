@@ -51,7 +51,7 @@ public class ForceShieldScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if(collision.gameObject.layer == 9)
+        if(collision.gameObject.layer == 9&&mainScript.levelIndex == 1)
         {
             
             if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled && i ==0)
@@ -69,7 +69,7 @@ public class ForceShieldScript : MonoBehaviour
         {
             mainCameraAnim.SetTrigger("Shake");
         }
-        if (lname !="Main menu")
+        if (lname !="MM")
         {
             StringBuilder sb = new StringBuilder("-",10);
             sb.Append(((int)dmg).ToString());
@@ -108,7 +108,6 @@ public class ForceShieldScript : MonoBehaviour
             if (currentHP < maxHP)
             {
                 mainScript.WS_forceShieldStrength = maxHP;
-                mainScript.WS_forceShieldLevel = currentHP;
                 fsb.SetMaxHP(maxHP);
 
                 fsb.SetValue(currentHP);
@@ -121,7 +120,6 @@ public class ForceShieldScript : MonoBehaviour
                 fsb.SetValue(currentHP);
 
                 mainScript.WS_forceShieldStrength = maxHP;
-                mainScript.WS_forceShieldLevel = currentHP;
             }
         }
         if (mainScript.ShipIndex == 2)
@@ -130,7 +128,6 @@ public class ForceShieldScript : MonoBehaviour
             if (currentHP < maxHP)
             {
                 mainScript.K_forceShieldStrength = maxHP;
-                mainScript.K_forceShieldLevel = currentHP;
                 fsb.SetMaxHP(maxHP);
 
                 fsb.SetValue(currentHP);
@@ -143,7 +140,6 @@ public class ForceShieldScript : MonoBehaviour
                 fsb.SetValue(currentHP);
 
                 mainScript.K_forceShieldStrength = maxHP;
-                mainScript.K_forceShieldLevel = currentHP;
             }
         }
     }

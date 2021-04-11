@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CowMoving : MonoBehaviour
-{
+{ 
+    MainScript mainScript;
     bool scared;
     OnRay onRay;
     Transform player;
@@ -28,7 +29,7 @@ public class CowMoving : MonoBehaviour
     int currentanimation = 0; // 1 - walk, 2 - fly, 3 - fear
     void Start()
     {
-
+        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         waitTime = startWaitTime;
         SetNextSpotToMove();
         scream = GetComponent<AudioSource>();
@@ -41,27 +42,30 @@ public class CowMoving : MonoBehaviour
 
     private void Update()
     {
-        cowPowerindex = rb.mass / startMass;
-        if (onRay.isInRay)
+        if (!mainScript.peace)
         {
-            if (!scared)
+            cowPowerindex = rb.mass / startMass;
+            if (onRay.isInRay)
             {
-                scared = true;
-                waitTime = 1;
+                if (!scared)
+                {
+                    scared = true;
+                    waitTime = 1;
+                }
             }
-        }
-        else if ((player.position.x - transform.position.x) > distanse || (player.position.x - transform.position.x) < -distanse)
-        {
-            scared = false;
-        }
+            else if ((player.position.x - transform.position.x) > distanse || (player.position.x - transform.position.x) < -distanse)
+            {
+                scared = false;
+            }
 
-        if (scared)
-        {
-            InFear();
-        }
-        else
-        {
-            Chill();
+            if (scared)
+            {
+                InFear();
+            }
+            else
+            {
+                Chill();
+            }
         }
     }
 
