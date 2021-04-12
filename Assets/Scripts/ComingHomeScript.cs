@@ -9,6 +9,7 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
     MainScript mainScript;
     Animator crossfade;
     Rigidbody2D playerRB;
+    CampQuestScript campQuest;
     public Button x2Button;
     public GameObject canvas;
     public Text collectionText;
@@ -19,21 +20,29 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         canvas.SetActive(false);
+        if (mainScript.levelIndex != 1)
+        {
+            campQuest = GameObject.FindGameObjectWithTag("CampQuest").GetComponent<CampQuestScript>();
+        }
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 10)
+        if (collision.gameObject.layer == 10)
         {
-            canvas.SetActive(true);
-            playerRB.gravityScale = 0;
-            playerRB.drag = 10;
-            collectionText.text = mainScript.collection.ToString();
-            if (mainScript.collection>1500)
-            {
-                x2Button.interactable = false;
-            }
+            switch (mainScript.levelIndex) {
+                case 1:
+                    canvas.SetActive(true);
+                    playerRB.gravityScale = 0;
+                    playerRB.drag = 10;
+                    collectionText.text = mainScript.collection.ToString();
+                    if (mainScript.collection > 1500)
+                    {
+                        x2Button.interactable = false;
+                    }
+                    break;
+        }
         }
     }
 

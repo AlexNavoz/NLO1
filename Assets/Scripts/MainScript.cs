@@ -47,7 +47,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     playerMoving player;
     ForceShieldScript fs;
     public bool shieldIsActive;
-    public int[] postLevels = null;
+    public int[] campLevels = null;
 
     //money variables
     string lname;
@@ -174,13 +174,22 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         K_forceShieldStrength = PlayerPrefs.GetFloat("K_forceShieldStrength", 40.0f);
     }
 
-    public void PostLevels()
+   /* public void PostLevels()
     {
         PostScript postScript = GameObject.FindGameObjectWithTag("Post").GetComponent<PostScript>();
         postLevels = new int[postScript.a_Stages.Length];
         for (int i = 0; i < postScript.a_Stages.Length; i++)
         {
             postLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
+        }
+    }*/
+    public void CampLevels()
+    {
+        CampaignMenuScript campMenu = GameObject.FindGameObjectWithTag("CampMenu").GetComponent<CampaignMenuScript>();
+        campLevels = new int[campMenu.campStages.Length];
+        for (int i = 0; i < campMenu.campStages.Length; i++)
+        {
+            campLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
         }
     }
 

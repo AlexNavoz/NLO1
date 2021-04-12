@@ -397,6 +397,10 @@ public class playerMoving : MonoBehaviour
         {
             rb.drag = 20;
             rb.gravityScale = 0;
+            leftParticle.Stop();
+            rightParticle.Stop();
+            jetSound1.Stop();
+            jetSound2.Stop();
         }
     }
     private void Update()

@@ -23,7 +23,7 @@ public class PostScript : MonoBehaviour
     }
     private void Start()
     {
-        mainScript.PostLevels();
+        //mainScript.PostLevels();
         StarsSwitch();
     }
 
@@ -65,7 +65,7 @@ public class PostScript : MonoBehaviour
             GameObject star1 = stars.Find("Star1").gameObject;
             GameObject star2 = stars.Find("Star2").gameObject;
             GameObject star3 = stars.Find("Star3").gameObject;
-            switch (mainScript.postLevels==null ? 0 : mainScript.postLevels[i]) {
+            switch (mainScript.campLevels==null ? 0 : mainScript.campLevels[i]) {
                 case 3:
                     star3.SetActive(true);
                     goto case 2;

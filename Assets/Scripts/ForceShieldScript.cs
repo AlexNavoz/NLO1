@@ -64,18 +64,19 @@ public class ForceShieldScript : MonoBehaviour
 
     public void TakingDamage(float dmg)
     {
-        anim.SetTrigger("TakeDMGAnim");
-        if (dmg >= 5)
+        if (!mainScript.peace)
         {
-            mainCameraAnim.SetTrigger("Shake");
-        }
-        if (lname !="MM")
-        {
-            StringBuilder sb = new StringBuilder("-",10);
-            sb.Append(((int)dmg).ToString());
-            playermoving.showTextValue(gameObject, sb.ToString(), 0);
-            currentHP -= dmg;
-            fsb.SetValue(currentHP);
+            anim.SetTrigger("TakeDMGAnim");
+            if (dmg >= 5)
+            {
+                mainCameraAnim.SetTrigger("Shake");
+            }
+            
+                StringBuilder sb = new StringBuilder("-", 10);
+                sb.Append(((int)dmg).ToString());
+                playermoving.showTextValue(gameObject, sb.ToString(), 0);
+                currentHP -= dmg;
+                fsb.SetValue(currentHP);
         }
     }
     public void SetHPValue()

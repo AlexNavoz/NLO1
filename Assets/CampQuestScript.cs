@@ -30,14 +30,17 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     //defeat panel
     public GameObject defeatPanel;
     public GameObject[] defeatReasonTextObj;
+    bool defeat = false;
 
     //refuel panel
     public GameObject refuelPanel;
     public Text refuelPrice;
+    public Button refuelByMoneyButton;
 
     //rearm panel
     public GameObject rearmPanel;
     public Text rearmText;
+    public Button rearmByMoneyButton;
 
     //_______________Other
     MainScript mainScript;
@@ -47,6 +50,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     bool gameIsStarted = false;
     bool alreadyRefuled = false;
     int adsdestination = 0;
+    float percent;
 
     private void Start()
     {
@@ -83,35 +87,76 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 case 2:
                     break;
                 case 3:
+                    percent = timeToQuest * 100 / currentTime;
                     screenProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
-                        QuestDefeat();
+                        if (!defeat)
+                        {
+                            defeat = true;
+                            Invoke("QuestDefeat", 2.0f);
+                        }
                     }
                     else if (playerMoving.currentFuel <= 5 && !alreadyRefuled)
                     {
                         NeedRefuel();
                     }
-                    else if (fss.currentHP <= 10)
+                    else if (fss.currentHP <= 15 && fss.currentHP >= 5 && !alreadyRefuled)
                     {
                         NeedRearm();
+                    }
+                    if(howManyNeed == mainScript.campaignQuestObjCount)
+                    {
+                        QuestWin();
                     }
                     break;
             }
         }
         
     }
-
+    //____WinPanel
+    #region
     void QuestWin()
     {
         mainScript.peace = true;
         winPanel.SetActive(true);
-
+        gameIsStarted = false;
+        switch (mainScript.levelIndex)
+        {
+            case 2:
+                break;
+            case 3:
+                if (percent < 25)
+                {
+                    winStars[0].SetActive(true);
+                    PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                }
+                else if (percent < 50)
+                {
+                    winStars[0].SetActive(true);
+                    winStars[1].SetActive(true);
+                    PlayerPrefs.SetInt("A_Stage" + SceneManager.GetActiveScene().name[0], 2);
+                }
+                else
+                {
+                    winStars[0].SetActive(true);
+                    winStars[1].SetActive(true);
+                    winStars[2].SetActive(true);
+                    PlayerPrefs.SetInt("A_Stage" + SceneManager.GetActiveScene().name[0], 3);
+                }
+                winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
+                winRewardText.text = (mainScript.collection + reward).ToString();
+                break;
+        }
+        mainScript.SetMoney(mainScript.collection + reward);
+        mainScript.collection = 0;
     }
+    #endregion
     void QuestDefeat()
     {
+        gameIsStarted = false;
         mainScript.peace = true;
-        defeatPanel.SetActive(false);
+        defeatPanel.SetActive(true);
         if (currentTime <= 0)
         {
             defeatReasonTextObj[2].SetActive(true);
@@ -125,12 +170,20 @@ public class CampQuestScript : MonoBehaviour, AdsListener
             defeatReasonTextObj[1].SetActive(true);
         }
     }
+
+    //____Refuel and Rearm
+    #region
     void NeedRefuel()
     {
         mainScript.peace = true;
         alreadyRefuled = true;
         refuelPanel.SetActive(true);
         refuelPrice.text = (((int)playerMoving.maxFuel - (int)playerMoving.currentFuel)*3).ToString();
+        if ((((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) * 3) > mainScript.allMoney)
+        {
+            refuelPrice.color = new Color(255, 0, 0);
+            refuelByMoneyButton.interactable = false;
+        }
     }
     public void RefuelByMoney()
     {
@@ -158,11 +211,21 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         alreadyRefuled = true;
         rearmPanel.SetActive(true);
         rearmText.text = (((int)fss.maxHP - (int)fss.currentHP) * 3).ToString();
+        if ((((int)fss.maxHP - (int)fss.currentHP) * 3) > mainScript.allMoney)
+        {
+            rearmText.color = new Color(255, 0, 0);
+            rearmByMoneyButton.interactable = false;
+        }
+    }
+    public void RearmCloseButton()
+    {
+        mainScript.peace = false;
+        rearmPanel.SetActive(false);
     }
     public void RearmByMoney()
     {
         mainScript.SetMoney(-((int)fss.maxHP - (int)fss.currentHP) * 3);
-        fss.maxHP = fss.currentHP;
+        fss.currentHP = fss.maxHP;
         fss.SetHPValue();
         rearmPanel.SetActive(false);
         mainScript.peace = false;
@@ -179,6 +242,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
             Debug.Log("Showing ad failed");
         }
     }
+    #endregion
     public void QuestPanelOKButton()
     {
         mainScript.peace = false;
@@ -204,7 +268,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         else if (adsdestination == 2)
         {
             Debug.Log("AdsSkipped");
-            fss.maxHP = fss.currentHP;
+            fss.currentHP = fss.maxHP;
             fss.SetHPValue();
             rearmPanel.SetActive(false);
             mainScript.peace = false;
