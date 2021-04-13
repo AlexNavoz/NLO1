@@ -26,6 +26,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     public Text winTimeText;
     public Text winRewardText;
     public GameObject[] winStars;
+    public GameObject ceiling;
 
     //defeat panel
     public GameObject defeatPanel;
@@ -42,6 +43,13 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     public Text rearmText;
     public Button rearmByMoneyButton;
 
+    //Evacuation
+    public GameObject evacButtonObj;
+    public GameObject evacPanel;
+    public GameObject evacuator;
+    public Text evacPrice;
+    public Button evacBuyButton;
+
     //_______________Other
     MainScript mainScript;
     Animator crossfade;
@@ -52,7 +60,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     bool gameIsStarted = false;
     bool alreadyRefuled = false;
     int adsdestination = 0;
-    float percent;
+    float percent = 100;
     bool victory = false;
 
     private void Start()
@@ -63,6 +71,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         playerMoving = player.GetComponent<playerMoving>();
         fss = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         questPanel.SetActive(true);
+        ceiling.SetActive(true);
         mainScript.peace = true;
 
         currentTime = (float)timeToQuest;
@@ -95,21 +104,23 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     if (mainScript.campaignQuestObjCount>=howManyNeed)
                     {
                         victory = true;
+                        ceiling.SetActive(false);
+                        evacButtonObj.SetActive(true);
                         mainScript.campaignQuestObjCount = howManyNeed;
                     }
                     percent = currentTime * 100 /timeToQuest ;
                     screenProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
                     if (percent < 25)
                     {
-                        screenTimeText.color = winTimeText.color = new Color(255,100,100);
+                        screenTimeText.color = winTimeText.color = new Color(255, 0, 0, 170);
                     }
                     else if (percent < 50)
                     {
-                        screenTimeText.color = winTimeText.color = new Color(255, 255, 100);
+                        screenTimeText.color = winTimeText.color = new Color(255, 255, 0, 170);
                     }
-                    else
+                    else if (percent<=100)
                     {
-                        screenTimeText.color = winTimeText.color = new Color(100, 255, 140);
+                        screenTimeText.color = winTimeText.color = new Color(0, 255, 0, 170);
                     }
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
@@ -195,6 +206,54 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.collection = 0;
         StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
     }
+    #endregion
+
+    //___Evacuation
+    #region
+
+    public void EvacPanelOpen()
+    {
+        mainScript.peace = true;
+        evacPanel.SetActive(true);
+        mainScript.checkIfAdsReady();
+        evacPrice.text = mainScript.collection.ToString();
+        if (mainScript.collection > mainScript.allMoney)
+        {
+            evacPrice.color = new Color(255, 0, 0);
+            evacBuyButton.interactable = false;
+        }
+    }
+    public void EvacPanelClose()
+    {
+        mainScript.peace = false;
+        evacPanel.SetActive(false);
+    }
+    public void Evacuate()
+    {
+        mainScript.peace = false;
+        evacPanel.SetActive(false);
+        Instantiate(evacuator, player.transform.position, Quaternion.identity);
+    }
+    public void BuyEvac()
+    {
+        mainScript.collection = 0;
+        mainScript.peace = false;
+        Evacuate();
+    }
+
+    public void BuyEvacByAdd()                                                //change after add
+    {
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            adsdestination = 3;
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
+    }
+
     #endregion
     void QuestDefeat()
     {
@@ -324,6 +383,12 @@ public class CampQuestScript : MonoBehaviour, AdsListener
             rearmPanel.SetActive(false);
             mainScript.peace = false;
         }
+        else if (adsdestination == 3)
+        {
+            Debug.Log("AdsSkipped");
+            Evacuate();
+        }
+
     }
 
     public void AdsFailed()

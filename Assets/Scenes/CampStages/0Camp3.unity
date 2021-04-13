@@ -8712,7 +8712,7 @@ GameObject:
   - component: {fileID: 1087211706}
   - component: {fileID: 1087211705}
   m_Layer: 0
-  m_Name: ComeHome
+  m_Name: TopBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12149,25 +12149,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5566126437162919801, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437162919806, guid: d356dda57e85a824bba7fd3c887d963c,
+    - target: {fileID: 3105900854029043905, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5566126437173907293, guid: d356dda57e85a824bba7fd3c887d963c,
+    - target: {fileID: 4308974418594994663, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5.4987793
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973777952687700653, guid: d356dda57e85a824bba7fd3c887d963c,
+        type: 3}
+      propertyPath: m_Text
+      value: Evacuation!
       objectReference: {fileID: 0}
     - target: {fileID: 5566126437173907293, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2.8989868
+      propertyPath: m_AnchoredPosition.x
+      value: 5.4941406
       objectReference: {fileID: 0}
     - target: {fileID: 5566126437191657797, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
@@ -12231,343 +12231,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
-      propertyPath: reward
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: howManyNeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: timeToQuest
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437197901312, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437198642956, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437214836280, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.3898926
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: ceiling
       value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: WinOkButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437351676247, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437388069670, guid: d356dda57e85a824bba7fd3c887d963c,
+      objectReference: {fileID: 1087211703}
+    - target: {fileID: 8634615093818644575, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.3898926
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: WinOkButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437885543645, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126437892488252, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373730, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Name
-      value: RestartButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438016373740, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438033520590, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438125184952, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438171118453, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -4.1098633
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438290802455, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438351802795, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -4.1098633
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438467019582, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.37426758
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843868, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Name
-      value: RestartButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438531843870, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438549832941, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438655932073, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.36901855
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438833421386, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126438833421386, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RearmCloseButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438833421386, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438884554189, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.39215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438884554189, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.39215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438884554189, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438894752971, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.3432312
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126438979441968, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.3432312
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397401, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_Name
-      value: ExitLevelButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: WinOkButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439129397403, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439160708033, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5566126438624759733}
-    - target: {fileID: 5566126439160708033, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RefuelCloseButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5566126439160708033, guid: d356dda57e85a824bba7fd3c887d963c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CampQuestScript, Assembly-CSharp
+      value: 2.5004272
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d356dda57e85a824bba7fd3c887d963c, type: 3}
---- !u!114 &5566126438624759733 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
-    type: 3}
-  m_PrefabInstance: {fileID: 5566126438624759732}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fef59a67bbf67ca448d113e372af9641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8853692535961087146
 PrefabInstance:
   m_ObjectHideFlags: 0
