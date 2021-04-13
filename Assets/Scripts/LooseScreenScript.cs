@@ -46,10 +46,12 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         {
             choiseAnim = choisePanel.GetComponent<Animation>();
         }
+        mainScript.peace = false;
     }
 
     public void CanvasOpen()
     {
+        mainScript.peace = true;
         if (canvas.activeSelf)
             return;
         if (mainScript.levelIndex == 1)
@@ -64,17 +66,12 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         }
         canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
-        Invoke("TimeStop", mainAnim.clip.length);
 
-    }
-    public void TimeStop()
-    {
-        Time.timeScale = 0;
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1.0f;
+        mainScript.peace = true;
         if (mainScript.levelIndex == 2)
         {
             mainScript.allMoney += mainScript.collection / 2;
@@ -90,20 +87,20 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     public void Restart()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1.0f;
+        mainScript.peace = true;
         mainScript.collection = 0;
         StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
     }
 
     public void Evacuate()
     {
-        Time.timeScale = 1.0f;
+        mainScript.peace = false;
         canvas.SetActive(false);
         Instantiate(evacuator, player.transform.position + offset, Quaternion.identity);
     }
     public void ExitMainCanvas()
     {
-        Time.timeScale = 1;
+        mainScript.peace = false;
         canvas.SetActive(false);
     }
 
@@ -112,8 +109,6 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         Time.timeScale = 1;
         choisePanel.SetActive(true);
         choiseAnim.Play("PanelStartAnim");
-        Invoke("TimeStop", choiseAnim.clip.length);
-
         mainScript.checkIfAdsReady();
     }
 
@@ -121,12 +116,13 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     {
         Time.timeScale = 1;
         choisePanel.SetActive(false);
+        mainScript.peace = false;
     }
 
     public void BuyEvac()
     {
         mainScript.collection = mainScript.collection / 2;
-
+        mainScript.peace = false;
         Evacuate();
     }
 
@@ -171,8 +167,8 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         }
         refuelCanvas.SetActive(true);
         refuelAnim.Play("PanelStartAnim");
-        Invoke("TimeStop", refuelAnim.clip.length);
         mainScript.checkIfAdsReady();
+        mainScript.peace = true;
     }
     public void RefuelByMoney()
     {
@@ -181,6 +177,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;
+        mainScript.peace = false;
         ExitRefuelCanvas();
     }
                                                                                                                             // After Ads
@@ -206,10 +203,12 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
             player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
             player.GetComponent<playerMoving>().SetFuelValues();
             playerMoving.alreadyRefueled = true;
+            mainScript.peace = false;
             ExitRefuelCanvas();
         }
         else if (adsdestination == 2)
         {
+            mainScript.peace = false;
             Evacuate();
         }
     }

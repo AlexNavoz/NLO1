@@ -44,19 +44,23 @@ public class CampQuestScript : MonoBehaviour, AdsListener
 
     //_______________Other
     MainScript mainScript;
+    Animator crossfade;
     playerMoving playerMoving;
+    GameObject player;
     ForceShieldScript fss;
     float currentTime;
     bool gameIsStarted = false;
     bool alreadyRefuled = false;
     int adsdestination = 0;
     float percent;
-    public bool victory;
+    bool victory = false;
 
     private void Start()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
-        playerMoving = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMoving>();
+        crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerMoving = player.GetComponent<playerMoving>();
         fss = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
         questPanel.SetActive(true);
         mainScript.peace = true;
@@ -88,8 +92,25 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 case 2:
                     break;
                 case 3:
-                    percent = timeToQuest * 100 / currentTime;
+                    if (mainScript.campaignQuestObjCount>=howManyNeed)
+                    {
+                        victory = true;
+                        mainScript.campaignQuestObjCount = howManyNeed;
+                    }
+                    percent = currentTime * 100 /timeToQuest ;
                     screenProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
+                    if (percent < 25)
+                    {
+                        screenTimeText.color = winTimeText.color = new Color(255,100,100);
+                    }
+                    else if (percent < 50)
+                    {
+                        screenTimeText.color = winTimeText.color = new Color(255, 255, 100);
+                    }
+                    else
+                    {
+                        screenTimeText.color = winTimeText.color = new Color(100, 255, 140);
+                    }
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
                         if (!defeat)
@@ -106,9 +127,10 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     {
                         NeedRearm();
                     }
-                    if(howManyNeed == mainScript.campaignQuestObjCount)
+                    if(victory && player.transform.position.y>27)
                     {
                         QuestWin();
+                        victory = false;
                     }
                     break;
             }
@@ -130,20 +152,31 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                    if(PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                    }
                 }
                 else if (percent < 50)
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    PlayerPrefs.SetInt("A_Stage" + SceneManager.GetActiveScene().name[0], 2);
+                    reward *= 2;
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                    }
                 }
                 else
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    PlayerPrefs.SetInt("A_Stage" + SceneManager.GetActiveScene().name[0], 3);
+                    reward *= 3;
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                    }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
                 winRewardText.text = (mainScript.collection + reward).ToString();
@@ -151,6 +184,16 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         }
         mainScript.SetMoney(mainScript.collection + reward);
         mainScript.collection = 0;
+    }
+
+    public void WinOkButton()
+    {
+        StartCoroutine(CrossFade(1));
+    }
+    public void Restart()
+    {
+        mainScript.collection = 0;
+        StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
     }
     #endregion
     void QuestDefeat()
@@ -185,6 +228,12 @@ public class CampQuestScript : MonoBehaviour, AdsListener
             refuelPrice.color = new Color(255, 0, 0);
             refuelByMoneyButton.interactable = false;
         }
+        mainScript.checkIfAdsReady();
+    }
+    public void RefuelCloseButton()
+    {
+        mainScript.peace = false;
+        refuelPanel.SetActive(false);
     }
     public void RefuelByMoney()
     {
@@ -217,6 +266,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
             rearmText.color = new Color(255, 0, 0);
             rearmByMoneyButton.interactable = false;
         }
+        mainScript.checkIfAdsReady();
     }
     public void RearmCloseButton()
     {
@@ -283,5 +333,12 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     public void AdsSkipped()
     {
         Debug.Log("AdsSkipped");
+    }
+    IEnumerator CrossFade(int levelIndex)
+    {
+        crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(levelIndex);
     }
 }

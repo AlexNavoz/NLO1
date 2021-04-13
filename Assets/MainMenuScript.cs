@@ -837,6 +837,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         {
             campaignPanel.SetActive(true);
         }
+        mainScript.checkIfAdsReady();
     }
     
 
@@ -857,6 +858,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         {
             chooseGameStagePanel.SetActive(true);
         }
+        mainScript.checkIfAdsReady();
     }
     //__________________________RENT!____________________
     #region

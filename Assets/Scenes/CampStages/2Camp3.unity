@@ -14543,7 +14543,7 @@ GameObject:
   - component: {fileID: 1520150259}
   m_Layer: 0
   m_Name: CampaignQuest
-  m_TagString: Untagged
+  m_TagString: CampQuest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14577,7 +14577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reward: 100
-  timeToQuest: 360
+  timeToQuest: 180
   questObjectIndex: 3
   howManyNeed: 6
   screenTimeText: {fileID: 834419321}
@@ -14999,7 +14999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.043, y: 0.15060632}
   m_AnchorMax: {x: 0.22464724, y: 0.86830324}
-  m_AnchoredPosition: {x: 5.4992065, y: 2.899002}
+  m_AnchoredPosition: {x: 5.4992676, y: 2.899002}
   m_SizeDelta: {x: 89.42001, y: 7.302002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1535820010

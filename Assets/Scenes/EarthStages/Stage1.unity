@@ -17634,7 +17634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ed6f9fb98e43f4d92aa4eba6f80912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 5
+  levelIndex: 1
   badGuys:
   - {fileID: 104623940892101771, guid: e0764bef4ef35ab4094e776b2f44cb83, type: 3}
   - {fileID: 104623940892101771, guid: 888499f6aace9004eb39417f99f83884, type: 3}
@@ -20333,6 +20333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081780032748766300, guid: 621157ebe1b06a2418e675b32d6a29f2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.5849609
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 621157ebe1b06a2418e675b32d6a29f2, type: 3}

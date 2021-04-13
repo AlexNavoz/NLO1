@@ -538,7 +538,7 @@ public class playerMoving : MonoBehaviour
     {
         try
         {
-            if (SceneManager.GetActiveScene().buildIndex != 1&&mainScript.levelIndex == 1)
+            if (SceneManager.GetActiveScene().buildIndex != 1 && mainScript.levelIndex == 1)
             {
                 LooseScreenScript losePanel = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
                 losePanel.Activation();
