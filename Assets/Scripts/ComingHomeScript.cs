@@ -42,6 +42,10 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
                         x2Button.interactable = false;
                     }
                     break;
+                case 3:
+                    break;
+                case 4:
+                    break;
         }
         }
     }

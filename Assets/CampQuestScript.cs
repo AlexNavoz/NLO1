@@ -51,6 +51,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     bool alreadyRefuled = false;
     int adsdestination = 0;
     float percent;
+    public bool victory;
 
     private void Start()
     {
