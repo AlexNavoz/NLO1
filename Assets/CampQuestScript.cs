@@ -62,6 +62,10 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     int adsdestination = 0;
     float percent = 100;
     bool victory = false;
+    GameObject box;
+    BoxScript boxScript;
+    float boxPercent;
+    int boxStartHP;
 
     private void Start()
     {
@@ -70,23 +74,25 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         player = GameObject.FindGameObjectWithTag("Player");
         playerMoving = player.GetComponent<playerMoving>();
         fss = GameObject.FindGameObjectWithTag("ForceShield").GetComponent<ForceShieldScript>();
-        questPanel.SetActive(true);
-        ceiling.SetActive(true);
+        questPanel.SetActive(true);        
         mainScript.peace = true;
-
         currentTime = (float)timeToQuest;
         screenTimeText.text = questTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
-
         mainScript.campaignQuestObjCount = 0;
-        screenProgressText.text = questProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
 
-        mainScript.campaignQisetObjIndex = questObjectIndex;
 
         switch (mainScript.levelIndex)
         {
             case 2:
+                box = GameObject.FindGameObjectWithTag("box");
+                boxScript = box.GetComponent<BoxScript>();
+                boxStartHP = boxScript.boxHP;
+                screenProgressText.text = questProgressText.text = (boxScript.boxHP * 100/boxStartHP).ToString();
                 break;
             case 3:
+                ceiling.SetActive(true);
+                mainScript.campaignQisetObjIndex = questObjectIndex;
+                screenProgressText.text = questProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
                 break;
         }
     }
@@ -96,35 +102,70 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         {
             currentTime -= Time.deltaTime;
             screenTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
+            percent = currentTime * 100 / timeToQuest;
+            if (percent < 25)
+            {
+                screenTimeText.color = winTimeText.color = new Color(255, 0, 0, 170);
+            }
+            else if (percent < 50)
+            {
+                screenTimeText.color = winTimeText.color = new Color(255, 255, 0, 170);
+            }
+            else if (percent <= 100)
+            {
+                screenTimeText.color = winTimeText.color = new Color(0, 255, 0, 170);
+            }
+
             switch (mainScript.levelIndex)
             {
                 case 2:
+                    boxPercent = boxScript.boxHP * 100 / boxStartHP;
+                    screenProgressText.text = boxPercent.ToString();
+
+                    if (currentTime <= 0 || boxPercent <= 0 || playerMoving.isDead|| box == null || playerMoving.currentFuel <= 0)
+                    {
+                        if (!defeat && !victory)
+                        {
+                            defeat = true;
+                            Invoke("QuestDefeat", 2.0f);
+                        }
+                    }
+                    else if (playerMoving.currentFuel <= 5 && !alreadyRefuled)
+                    {
+                        NeedRefuel();
+                    }
+                    else if (fss.currentHP <= 15 && fss.currentHP >= 5 && !alreadyRefuled)
+                    {
+                        NeedRearm();
+                    }
+
+                    if (boxPercent < 25)
+                    {
+                        screenProgressText.color = new Color(255, 0, 0, 170);
+                    }
+                    else if (boxPercent < 50)
+                    {
+                        screenProgressText.color = new Color(255, 255, 0, 170);
+                    }
+                    else if (boxPercent <= 100)
+                    {
+                        screenProgressText.color = new Color(0, 255, 0, 170);
+                    }
+
                     break;
                 case 3:
-                    if (mainScript.campaignQuestObjCount>=howManyNeed)
+                    if (mainScript.campaignQuestObjCount>=howManyNeed && !defeat)
                     {
                         victory = true;
                         ceiling.SetActive(false);
                         evacButtonObj.SetActive(true);
                         mainScript.campaignQuestObjCount = howManyNeed;
                     }
-                    percent = currentTime * 100 /timeToQuest ;
                     screenProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
-                    if (percent < 25)
-                    {
-                        screenTimeText.color = winTimeText.color = new Color(255, 0, 0, 170);
-                    }
-                    else if (percent < 50)
-                    {
-                        screenTimeText.color = winTimeText.color = new Color(255, 255, 0, 170);
-                    }
-                    else if (percent<=100)
-                    {
-                        screenTimeText.color = winTimeText.color = new Color(0, 255, 0, 170);
-                    }
+                    
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
-                        if (!defeat)
+                        if (!defeat && !victory)
                         {
                             defeat = true;
                             Invoke("QuestDefeat", 2.0f);
@@ -260,18 +301,41 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         gameIsStarted = false;
         mainScript.peace = true;
         defeatPanel.SetActive(true);
-        if (currentTime <= 0)
-        {
-            defeatReasonTextObj[2].SetActive(true);
-        }
-        if (playerMoving.currentFuel <= 0)
-        {
-            defeatReasonTextObj[0].SetActive(true);
-        }
-        if (playerMoving.isDead)
-        {
-            defeatReasonTextObj[1].SetActive(true);
-        }
+        switch (mainScript.levelIndex) {
+            case 2:
+                if (currentTime <= 0)
+                {
+                    defeatReasonTextObj[2].SetActive(true);
+                }
+                if (playerMoving.currentFuel <= 0)
+                {
+                    defeatReasonTextObj[0].SetActive(true);
+                }
+                if (playerMoving.isDead)
+                {
+                    defeatReasonTextObj[1].SetActive(true);
+                }
+                if (box == null || boxPercent <=0)
+                {
+                    defeatReasonTextObj[3].SetActive(true);
+                }
+                break;
+            case 3:
+                if (currentTime <= 0)
+                {
+                    defeatReasonTextObj[2].SetActive(true);
+                }
+                if (playerMoving.currentFuel <= 0)
+                {
+                    defeatReasonTextObj[0].SetActive(true);
+                }
+                if (playerMoving.isDead)
+                {
+                    defeatReasonTextObj[1].SetActive(true);
+                }
+
+                break;
+    }
     }
 
     //____Refuel and Rearm

@@ -13831,6 +13831,7 @@ MonoBehaviour:
   - {fileID: 1239254131}
   - {fileID: 922734676}
   - {fileID: 1653174176}
+  ceiling: {fileID: 0}
   defeatPanel: {fileID: 1528965322}
   defeatReasonTextObj:
   - {fileID: 1652500491}
@@ -13842,6 +13843,11 @@ MonoBehaviour:
   rearmPanel: {fileID: 542158232}
   rearmText: {fileID: 795089541}
   rearmByMoneyButton: {fileID: 301800992}
+  evacButtonObj: {fileID: 0}
+  evacPanel: {fileID: 0}
+  evacuator: {fileID: 0}
+  evacPrice: {fileID: 0}
+  evacBuyButton: {fileID: 0}
 --- !u!1 &1528262440
 GameObject:
   m_ObjectHideFlags: 0
@@ -14238,7 +14244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.043, y: 0.15060632}
   m_AnchorMax: {x: 0.22464724, y: 0.86830324}
-  m_AnchoredPosition: {x: 5.4992065, y: 2.899002}
+  m_AnchoredPosition: {x: 5.4991455, y: 2.899002}
   m_SizeDelta: {x: 89.42001, y: 7.302002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1535820010
@@ -15643,7 +15649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ed6f9fb98e43f4d92aa4eba6f80912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 3
+  levelIndex: 4
   badGuys:
   - {fileID: 104623940892101771, guid: e0764bef4ef35ab4094e776b2f44cb83, type: 3}
   - {fileID: 104623940892101771, guid: 888499f6aace9004eb39417f99f83884, type: 3}
