@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class playerMoving : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class playerMoving : MonoBehaviour
     public GameObject gun;
     public GameObject gunMuzzle;
     public GameObject muzzle;
+    public GameObject bullet;
     public GameObject claw;
     public GameObject clawController;
     public Rigidbody2D clawLeft;
@@ -448,20 +450,54 @@ public class playerMoving : MonoBehaviour
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
         }
-        if (mainScript.levelIndex == 4 || mainScript.levelIndex == 5) {
-            bool touched = false;
+        if (mainScript.levelIndex == 4 || mainScript.levelIndex == 5)
+        {
+            bool touching = false;
+            bool shooting = false;
             Vector2 touchPosition = new Vector2(0,0);
             for (int i = 0; i < Input.touchCount; i++)
             {
                 Touch t = Input.GetTouch(i);
-                //if (t.phase == TouchPhase.Began)
-                {
-                    touchPosition = t.position;
-                    touched = true;
-                    break;
+                if (EventSystem.current.IsPointerOverGameObject(t.fingerId)) {
+                    continue;
+                }
+                switch (t.phase) {
+                    case TouchPhase.Began:
+                        {
+                            if (aiming_touchid == -1)
+                            {
+                                aiming_touchid = t.fingerId;
+                                aiming_touchtime = 0;
+                                touching = true;
+                            }
+                        }
+                        break;
+                    case TouchPhase.Moved:
+                    case TouchPhase.Stationary:
+                        {
+                            if (aiming_touchid == t.fingerId) {
+                                touchPosition = t.position;
+                                aiming_touchtime += t.deltaTime;
+                                touching = true;
+                            }
+                        }
+                        break;
+                    case TouchPhase.Ended:
+                    case TouchPhase.Canceled:
+                        {
+                            if (aiming_touchid == t.fingerId)
+                            {
+                                aiming_touchtime += t.deltaTime;
+                                touchPosition = t.position;
+                                touching = true;
+                                shooting = true;
+                                aiming_touchid = -1;
+                            }
+                        }
+                        break;
                 }
             }
-            if (touched) {
+            if (touching) {
                 Vector2 ViewportPosition = mainCamera.WorldToScreenPoint(gameObject.transform.position);
 
                 double dx = touchPosition.x - ViewportPosition.x;
@@ -470,9 +506,22 @@ public class playerMoving : MonoBehaviour
                 float anim_position = (float)((System.Math.Atan2(dx, dy)) / System.Math.PI);
 
                 gunMuzzle.transform.rotation = Quaternion.Euler(0,0, 180 - anim_position * 180);
+
+                if (shooting)
+                {
+
+                    GameObject newbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.Euler(0, 0, -180.0f * anim_position));
+                    BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
+                    newbulletscript.impulse_angle = anim_position;
+                    newbulletscript.massScale = 1.0f;
+                    newbulletscript.shootPower *= aiming_touchtime;
+                }
             }
         }
     }
+
+    int aiming_touchid = -1;
+    float aiming_touchtime = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -91,7 +91,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 box = GameObject.FindGameObjectWithTag("box");
                 boxScript = box.GetComponent<BoxScript>();
                 boxStartHP = boxScript.boxHP;
-                screenProgressText.text = questProgressText.text = (boxScript.boxHP * 100/boxStartHP).ToString();
+                screenProgressText.text = questProgressText.text = (boxScript.boxHP * 100/boxStartHP).ToString() + "%";
                 break;
             case 3:
                 ceiling.SetActive(true);

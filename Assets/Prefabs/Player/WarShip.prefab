@@ -21263,7 +21263,7 @@ Transform:
   m_GameObject: {fileID: 3441147414118479030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.76, y: 0.43, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: -0.8, y: -0.8, z: 1}
   m_Children:
   - {fileID: 7239730669435165472}
   m_Father: {fileID: 9088907898758553150}
@@ -39016,13 +39016,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8330176409282384965}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 3.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6018036314794043901}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &8332771190596171488
 GameObject:
   m_ObjectHideFlags: 0
@@ -42407,6 +42407,9 @@ MonoBehaviour:
   ray: {fileID: 9088907899950702357}
   destroyer: {fileID: 9088907898644513246}
   gun: {fileID: 3441147414118479030}
+  gunMuzzle: {fileID: 3441147414118479030}
+  muzzle: {fileID: 8330176409282384965}
+  bullet: {fileID: 5293332584899348574, guid: 80a8a39c4659c6c488a12874d14b0c52, type: 3}
   claw: {fileID: 8623303172701901399}
   clawController: {fileID: 7970645102439101426}
   clawLeft: {fileID: 5920032007808683329}
