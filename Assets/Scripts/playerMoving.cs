@@ -23,6 +23,8 @@ public class playerMoving : MonoBehaviour
     public GameObject ray;
     public GameObject destroyer;
     public GameObject gun;
+    public GameObject gunMuzzle;
+    public GameObject muzzle;
     public GameObject claw;
     public GameObject clawController;
     public Rigidbody2D clawLeft;
@@ -444,6 +446,30 @@ public class playerMoving : MonoBehaviour
             {
                 crimeIndex = 5;
                 criminalStars[crimeIndex - 1].SetActive(true);
+            }
+        }
+        if (mainScript.levelIndex == 4 || mainScript.levelIndex == 5) {
+            bool touched = false;
+            Vector2 touchPosition = new Vector2(0,0);
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch t = Input.GetTouch(i);
+                //if (t.phase == TouchPhase.Began)
+                {
+                    touchPosition = t.position;
+                    touched = true;
+                    break;
+                }
+            }
+            if (touched) {
+                Vector2 ViewportPosition = mainCamera.WorldToScreenPoint(gameObject.transform.position);
+
+                double dx = touchPosition.x - ViewportPosition.x;
+                double dy = touchPosition.y - ViewportPosition.y;
+
+                float anim_position = (float)((System.Math.Atan2(dx, dy)) / System.Math.PI);
+
+                gunMuzzle.transform.rotation = Quaternion.Euler(0,0, 180 - anim_position * 180);
             }
         }
     }

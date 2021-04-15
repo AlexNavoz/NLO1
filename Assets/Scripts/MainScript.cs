@@ -189,7 +189,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         campLevels = new int[campMenu.campStages.Length];
         for (int i = 0; i < campMenu.campStages.Length; i++)
         {
-            campLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
+            campLevels[i] = PlayerPrefs.GetInt("campStage" + i, 0);
         }
     }
 

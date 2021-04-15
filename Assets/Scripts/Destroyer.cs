@@ -87,9 +87,8 @@ public class Destroyer : MonoBehaviour
             int onRayCount;
             GameObject obj = collision.gameObject;
             onRayCount = obj.GetComponent<OnRay>().count;
-            mainScript.P_fuelLevel = player_moving.currentFuel;
-            mainScript.P_fuelLevel += ((float) onRayCount);
-            player_moving.SetFuelValues();
+            player_moving.currentFuel += onRayCount;
+            player_moving.fuelBar.SetValue(player_moving.currentFuel);
 
             Instantiate(DestroyParticle, transform.position, Quaternion.identity);
             Destroy(obj);
@@ -99,8 +98,7 @@ public class Destroyer : MonoBehaviour
             int onRayCount;
             GameObject obj = collision.gameObject;
             onRayCount = obj.GetComponent<OnRay>().count;
-            mainScript.P_forceShieldLevel = fs.currentHP;
-            mainScript.P_forceShieldLevel += ((float)onRayCount);
+            fs.currentHP +=onRayCount;
             fs.SetHPValue();
 
             Instantiate(DestroyParticle, transform.position, Quaternion.identity);

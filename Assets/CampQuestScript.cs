@@ -61,11 +61,14 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     bool alreadyRefuled = false;
     int adsdestination = 0;
     float percent = 100;
+
+    //________Asteroids
     bool victory = false;
     GameObject box;
     BoxScript boxScript;
     float boxPercent;
     int boxStartHP;
+    GameObject asteroidsFinish;
 
     private void Start()
     {
@@ -84,6 +87,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         switch (mainScript.levelIndex)
         {
             case 2:
+                asteroidsFinish = GameObject.FindGameObjectWithTag("Finish");
                 box = GameObject.FindGameObjectWithTag("box");
                 boxScript = box.GetComponent<BoxScript>();
                 boxStartHP = boxScript.boxHP;
@@ -120,9 +124,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
             {
                 case 2:
                     boxPercent = boxScript.boxHP * 100 / boxStartHP;
-                    screenProgressText.text = boxPercent.ToString();
+                    screenProgressText.text = boxPercent.ToString() + "%";
 
-                    if (currentTime <= 0 || boxPercent <= 0 || playerMoving.isDead|| box == null || playerMoving.currentFuel <= 0)
+                    if (currentTime <= 0 || boxPercent <= 0 || playerMoving.isDead|| box == null || playerMoving.currentFuel <= 0 || boxScript.boxIsLost)
                     {
                         if (!defeat && !victory)
                         {
@@ -150,6 +154,11 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     else if (boxPercent <= 100)
                     {
                         screenProgressText.color = new Color(0, 255, 0, 170);
+                    }
+                    if ((player.transform.position.y-asteroidsFinish.transform.position.y)>15 && !defeat)
+                    {
+                        victory = true;
+                        QuestWin();
                     }
 
                     break;
@@ -199,6 +208,40 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         switch (mainScript.levelIndex)
         {
             case 2:
+                if (boxPercent < 25)
+                {
+                    winTimeText.color = new Color(255, 0, 0, 170);
+                    winStars[0].SetActive(true);
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                    }
+                }
+                else if (boxPercent < 50)
+                {
+                    winStars[0].SetActive(true);
+                    winStars[1].SetActive(true);
+                    reward *= 2;
+                    winTimeText.color = new Color(255, 255, 0, 170);
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                    }
+                }
+                else
+                {
+                    winStars[0].SetActive(true);
+                    winStars[1].SetActive(true);
+                    winStars[2].SetActive(true);
+                    reward *= 3;
+                    winTimeText.color = new Color(0, 255, 0, 170);
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                    }
+                }
+                winTimeText.text = boxPercent.ToString() + "%";
+                winRewardText.text = (mainScript.collection + reward).ToString();
                 break;
             case 3:
                 if (percent < 25)
@@ -318,6 +361,10 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (box == null || boxPercent <=0)
                 {
                     defeatReasonTextObj[3].SetActive(true);
+                }
+                if (boxScript.boxIsLost)
+                {
+                    defeatReasonTextObj[4].SetActive(true);
                 }
                 break;
             case 3:

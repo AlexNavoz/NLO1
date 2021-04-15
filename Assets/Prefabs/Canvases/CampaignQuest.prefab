@@ -220,6 +220,57 @@ MonoBehaviour:
   - Language: English
     Text: The pacage was destroyed
     Object: {fileID: 0}
+--- !u!1 &2316433644658544262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5994924148938998007}
+  - component: {fileID: 5603054536554261930}
+  m_Layer: 0
+  m_Name: Box Is lost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5994924148938998007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316433644658544262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5566126438218121217}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5603054536554261930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316433644658544262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Russian
+    Text: "\u041F\u043E\u0441\u044B\u043B\u043A\u0430 \u043F\u043E\u0442\u0435\u0440\u044F\u043D\u0430..."
+    Object: {fileID: 0}
+  - Language: English
+    Text: You have lost the pacage
+    Object: {fileID: 0}
 --- !u!1 &3105900854029043905
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3097561, y: 0.18730436}
   m_AnchorMax: {x: 0.861122, y: 0.85200006}
-  m_AnchoredPosition: {x: 0.12400055, y: 0.6650009}
+  m_AnchoredPosition: {x: 0.12399292, y: 0.66500854}
   m_SizeDelta: {x: 0.11499977, y: -5.233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5910990061843771714
@@ -1176,6 +1227,8 @@ MonoBehaviour:
   - {fileID: 5566126438125184959}
   - {fileID: 5566126438549832940}
   - {fileID: 5566126437197901319}
+  - {fileID: 6606553651268839432}
+  - {fileID: 6100741069059129545}
   refuelPanel: {fileID: 5566126438199680608}
   refuelPrice: {fileID: 5566126438894752820}
   refuelByMoneyButton: {fileID: 5566126438171118454}
@@ -2888,6 +2941,7 @@ RectTransform:
   - {fileID: 5566126438549832941}
   - {fileID: 5566126437197901312}
   - {fileID: 8866551543531232063}
+  - {fileID: 6924673597694344880}
   m_Father: {fileID: 5566126437252308436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4536,6 +4590,7 @@ Transform:
   - {fileID: 5566126437204606248}
   - {fileID: 61835612028729804}
   - {fileID: 1231558892120762498}
+  - {fileID: 5994924148938998007}
   m_Father: {fileID: 5566126437191657798}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6876,7 +6931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.024494395, y: 0.81777614}
   m_AnchorMax: {x: 0.15200001, y: 0.9675226}
-  m_AnchoredPosition: {x: 2.5006104, y: 3.1900024}
+  m_AnchoredPosition: {x: 2.5008545, y: 3.1900024}
   m_SizeDelta: {x: -9.341064, y: -2.8649902}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &566476740759374604
@@ -6973,6 +7028,100 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &6100741069059129545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6924673597694344880}
+  - component: {fileID: 6758343217054992481}
+  - component: {fileID: 7603808131435772363}
+  - component: {fileID: 8690375947259366739}
+  m_Layer: 0
+  m_Name: BoxLostReason
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &6924673597694344880
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100741069059129545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5566126437659866344}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.020602832, y: 0.1431053}
+  m_AnchorMax: {x: 0.96369857, y: 0.9086249}
+  m_AnchoredPosition: {x: 0.8515625, y: 0.000015258789}
+  m_SizeDelta: {x: -1.703, y: 0.000061035}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6758343217054992481
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100741069059129545}
+  m_CullTransparentMesh: 1
+--- !u!114 &7603808131435772363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100741069059129545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 222591a24c2c0494baaa591ee06ecaf1, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 200
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Box pzdc
+--- !u!114 &8690375947259366739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100741069059129545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Box Is lost
+  FallbackText: Box Is lost
 --- !u!1 &6169719178565987474
 GameObject:
   m_ObjectHideFlags: 0
@@ -7008,7 +7157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.71800005, y: 0.088880256}
   m_AnchorMax: {x: 0.934521, y: 0.31462675}
-  m_AnchoredPosition: {x: -1.1900024, y: 1}
+  m_AnchoredPosition: {x: -1.1900635, y: 1}
   m_SizeDelta: {x: -5, y: -14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5214448046432446203
