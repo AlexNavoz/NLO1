@@ -868,6 +868,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         clickButton.Play();
         rentPanel.SetActive(false);
         chooseGameStagePanel.SetActive(false);
+        campaignPanel.SetActive(false);
     }
 
     public void RentByMoney()

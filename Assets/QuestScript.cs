@@ -26,12 +26,15 @@ public class QuestScript : MonoBehaviour
     public Text questPanelProgress;
     public Text questPanelTime;
 
+    public GameObject completeTextBtn;
+
     int howMuchNeed;
     int reward;
     //public int objectIndex;
 
     public GameObject questPanel;
     public bool questCompleted;
+    public bool alreadyRewarded;
     Button thisQuestButton;
 
     public UFOQuest[] quests;
@@ -92,9 +95,11 @@ public class QuestScript : MonoBehaviour
             questCompleted = true;
             MainScript.questObjectCount = howMuchNeed;
         }
-        if (questCompleted)
+        if (questCompleted && !alreadyRewarded)
         {
-            thisQuestButton.interactable = false;
+            alreadyRewarded = true;
+            mainScript.SetMoney(reward);
+            //rewardText.text = completeTextBtn.GetComponent<Text>().text;
         }
     }
     public void QuestPanelActivation()
