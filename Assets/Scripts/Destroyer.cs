@@ -40,9 +40,9 @@ public class Destroyer : MonoBehaviour
             }
             else
             {
-                if(onRayComponent.questObjectIndex == MainScript.questObjectIndex)
+                if(onRayComponent.questObjectIndex == mainScript.questObjectIndex)
                 {
-                    MainScript.questObjectCount++;
+                    mainScript.questObjectCount++;
                     mainScript.SaveQuestPrefs();
                 }
                 if (onRayComponent.questObjectIndex == mainScript.campaignQisetObjIndex)

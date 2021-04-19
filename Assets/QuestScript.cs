@@ -54,26 +54,31 @@ public class QuestScript : MonoBehaviour
     }
     void LoadQuest(int idToLoad) {
 
-        if (MainScript.questObjectId != idToLoad)
+        if (mainScript.questObjectId != idToLoad)
         {
-            MainScript.questObjectId = idToLoad;
-            MainScript.questObjectCount = 0;
+            mainScript.questObjectId = idToLoad;
+            mainScript.questObjectCount = 0;
             thisQuestButton.interactable = true;
         }
 
         howMuchNeed = getQuestById(idToLoad).targetCount;
         reward = getQuestById(idToLoad).reward;
-        MainScript.questObjectIndex = getQuestById(idToLoad).targetIndex;
+        mainScript.questObjectIndex = getQuestById(idToLoad).targetIndex;
         targetIcon.sprite = getQuestById(idToLoad).icon;
         miniIcon.sprite = getQuestById(idToLoad).icon;
 
         loadedQuestId = idToLoad;
     }
 
+    void refreshQuest() {
+        mainScript.questIdSeed += questPeriod;
+        UpdateQuest();
+        mainScript.SaveQuestPrefs();
+    }
+
     void UpdateQuest()
     {
-        int timedQuestIndex = DateTime.Now.DayOfYear * 24 * 60 * 60 +
-            (((int)DateTime.Now.TimeOfDay.TotalSeconds) / questPeriod) * questPeriod;
+        int timedQuestIndex = ((DateTime.Now.DayOfYear * 24 * 60 * 60 + (int)DateTime.Now.TimeOfDay.TotalSeconds + mainScript.questIdSeed) / questPeriod) * questPeriod;
 
         if(timedQuestIndex != loadedQuestId)
             LoadQuest(timedQuestIndex);
@@ -88,12 +93,12 @@ public class QuestScript : MonoBehaviour
         timeText.text = questPanelTime.text = (timeToNextQuest / (60 * 60)).ToString("D2") + ":" + ((timeToNextQuest / 60 ) % 60).ToString("D2") + ":" + (timeToNextQuest % 60).ToString("D2");
 
         rewardText.text = reward.ToString();
-        progressText.text = (MainScript.questObjectCount.ToString() + "/" + howMuchNeed.ToString());
+        progressText.text = (mainScript.questObjectCount.ToString() + "/" + howMuchNeed.ToString());
         questPanelProgress.text = progressText.text;
-        if (MainScript.questObjectCount >= howMuchNeed)
+        if (mainScript.questObjectCount >= howMuchNeed)
         {
             questCompleted = true;
-            MainScript.questObjectCount = howMuchNeed;
+            mainScript.questObjectCount = howMuchNeed;
         }
         if (questCompleted && !alreadyRewarded)
         {

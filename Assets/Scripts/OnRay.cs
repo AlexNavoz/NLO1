@@ -24,18 +24,23 @@ public class OnRay : MonoBehaviour
         InvokeRepeating("DistanceDetecting", 0, 1.0f);
     }
 
+    public void UpdateScale()
+    {
+        if (massScale < 0.1f)
+            massScale = 0.1f;
+
+        rb.mass = massOnStart * (float)massScale;
+
+        double transformscale = System.Math.Pow(massScale, 0.7f);
+        transform.localScale = new Vector2(scaleOnStart.x * (float)transformscale, scaleOnStart.y * (float)transformscale);
+    }
+
     private void FixedUpdate()
     {
         if (isInRay)
         {
             massScale -= (Time.deltaTime * 0.25f / massOnStart);// * MainScript.forceBatchingMultiplier;
-            if (massScale < 0.1f)
-                massScale = 0.1f;
-
-            rb.mass = massOnStart * (float)massScale;
-
-            double transformscale = System.Math.Pow(massScale, 0.7f);
-            transform.localScale = new Vector2(scaleOnStart.x * (float)transformscale, scaleOnStart.y * (float)transformscale);
+            UpdateScale();
         }
         
     }

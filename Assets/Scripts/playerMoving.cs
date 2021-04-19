@@ -19,6 +19,7 @@ public class playerMoving : MonoBehaviour
     public AudioSource jetSound2;
     public AudioSource deathSound;
     public float EnginePower;
+    float gunPower;
 
     //LevelIndex variables!
     public GameObject ray;
@@ -32,6 +33,9 @@ public class playerMoving : MonoBehaviour
     public Rigidbody2D clawLeft;
     public Rigidbody2D clawRight;
     bool ClawIsClosen = false;
+    public AudioSource powerUpSound;
+    public ParticleSystem shootParticle;
+    bool powerUp;
 
     // Plate Variables!!!
     [SerializeField] GameObject Plate_Variables_______;
@@ -108,16 +112,19 @@ public class playerMoving : MonoBehaviour
         if (ShipIndex == 0)
         {
             EnginePower = mainScript.P_enginePower;
+            gunPower = mainScript.P_gunPower;
         }
         if (ShipIndex == 1)                                         
         {
             EnginePower = mainScript.WS_enginePower;
+            gunPower = mainScript.WS_gunPower;
             leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
             rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
         }
         if (ShipIndex == 2)
         {
             EnginePower = mainScript.K_enginePower;
+            gunPower = mainScript.K_gunPower;
         }
         leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
         rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
@@ -407,6 +414,31 @@ public class playerMoving : MonoBehaviour
             jetSound2.Stop();
         }
     }
+
+    float shooting_angle = 0;
+    void SetShootingAngle(float new_angle) {
+        float rotation_angle = rb.transform.rotation.eulerAngles.z;
+        float deltaAngle;
+
+        if (!gun.activeSelf)
+            return;
+
+        rotation_angle += 180.0f;
+
+        deltaAngle = (new_angle - rotation_angle + 720.0f) % 360.0f;
+
+        const float limit = 45.0f;
+        if (ShipIndex != 1) {
+            if (deltaAngle > 180.0f && deltaAngle < (360.0f - limit))
+                new_angle = (rotation_angle - limit);
+            if (deltaAngle > limit && deltaAngle < 180.0f)
+                new_angle = (rotation_angle + limit);
+        }
+
+        shooting_angle = new_angle;
+
+        gunMuzzle.transform.rotation = Quaternion.Euler(0, 0, 180.0f + shooting_angle);
+    }
     private void Update()
     {
         if (fsScript.currentHP <= 0)
@@ -450,74 +482,110 @@ public class playerMoving : MonoBehaviour
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
         }
-        if (mainScript.levelIndex == 4 || mainScript.levelIndex == 5)
+        //_____-Shooting
+        #region
+        if (fsScript.currentHP > 0)
         {
-            bool touching = false;
-            bool shooting = false;
-            Vector2 touchPosition = new Vector2(0,0);
-            for (int i = 0; i < Input.touchCount; i++)
+            if (gun.activeSelf)
             {
-                Touch t = Input.GetTouch(i);
-                if (EventSystem.current.IsPointerOverGameObject(t.fingerId)) {
-                    continue;
-                }
-                switch (t.phase) {
-                    case TouchPhase.Began:
-                        {
-                            if (aiming_touchid == -1)
-                            {
-                                aiming_touchid = t.fingerId;
-                                aiming_touchtime = 0;
-                                touching = true;
-                            }
-                        }
-                        break;
-                    case TouchPhase.Moved:
-                    case TouchPhase.Stationary:
-                        {
-                            if (aiming_touchid == t.fingerId) {
-                                touchPosition = t.position;
-                                aiming_touchtime += t.deltaTime;
-                                touching = true;
-                            }
-                        }
-                        break;
-                    case TouchPhase.Ended:
-                    case TouchPhase.Canceled:
-                        {
-                            if (aiming_touchid == t.fingerId)
-                            {
-                                aiming_touchtime += t.deltaTime;
-                                touchPosition = t.position;
-                                touching = true;
-                                shooting = true;
-                                aiming_touchid = -1;
-                            }
-                        }
-                        break;
-                }
-            }
-            if (touching) {
-                Vector2 ViewportPosition = mainCamera.WorldToScreenPoint(gameObject.transform.position);
-
-                double dx = touchPosition.x - ViewportPosition.x;
-                double dy = touchPosition.y - ViewportPosition.y;
-
-                float anim_position = (float)((System.Math.Atan2(dx, dy)) / System.Math.PI);
-
-                gunMuzzle.transform.rotation = Quaternion.Euler(0,0, 180 - anim_position * 180);
-
-                if (shooting)
+                bool touching = false;
+                bool shooting = false;
+                Vector2 touchPosition = new Vector2(0, 0);
+                for (int i = 0; i < Input.touchCount; i++)
                 {
+                    Touch t = Input.GetTouch(i);
+                    switch (t.phase)
+                    {
+                        case TouchPhase.Began:
+                            {
+                                if (aiming_touchid == -1 && !EventSystem.current.IsPointerOverGameObject(t.fingerId))
+                                {
+                                    touchPosition = t.position;
+                                    aiming_touchid = t.fingerId;
+                                    aiming_touchtime = 0;
+                                    touching = true;
+                                    goto touching;
+                                }
+                            }
+                            break;
+                        case TouchPhase.Moved:
+                        case TouchPhase.Stationary:
+                            {
+                                if (aiming_touchid == t.fingerId)
+                                {
+                                    touchPosition = t.position;
+                                    aiming_touchtime += t.deltaTime;
+                                    touching = true;
+                                    if (!powerUp)
+                                    {
+                                        powerUp = true;
+                                        powerUpSound.Play();
+                                    }
+                                    goto touching;
+                                }
+                            }
+                            break;
+                        case TouchPhase.Ended:
+                        case TouchPhase.Canceled:
+                            {
+                                if (aiming_touchid == t.fingerId)
+                                {
+                                    aiming_touchtime += t.deltaTime;
+                                    touchPosition = t.position;
+                                    touching = true;
+                                    shooting = true;
+                                    aiming_touchid = -1;
+                                    goto touching;
+                                }
+                            }
+                            break;
+                    }
+                }
+                touching:
+                if (touching)
+                {
+                    Vector2 ViewportPosition = mainCamera.WorldToScreenPoint(gameObject.transform.position);
 
-                    GameObject newbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.Euler(0, 0, -180.0f * anim_position));
-                    BulletScript newbulletscript = newbullet.GetComponent<BulletScript>();
-                    newbulletscript.impulse_angle = anim_position;
-                    newbulletscript.massScale = 1.0f;
-                    newbulletscript.shootPower *= aiming_touchtime;
+                    double dx = touchPosition.x - ViewportPosition.x;
+                    double dy = touchPosition.y - ViewportPosition.y;
+
+                    float anim_position = (float)((System.Math.Atan2(dx, dy)) / System.Math.PI);
+
+                    SetShootingAngle(-anim_position * 180);
+
+                    //gunMuzzle.transform.rotation = Quaternion.Euler(0, 0, 180.0 + shooting_angle);
+
+                    if (shooting)
+                    {
+                        powerUpSound.Stop();
+                        shootParticle.Play();
+                        fsScript.TakingDamage(1);
+                        powerUp = false;
+                        GameObject newbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.Euler(0, 0, shooting_angle));
+                        plateBulletScript newbulletscript = newbullet.GetComponent<plateBulletScript>();
+
+                        //Vector3 kickBack = new Vector3(Mathf.Sin(180 + shooting_angle), Mathf.Cos(180 + shooting_angle), 0);
+                        //rb.AddForce(kickBack* 100, ForceMode2D.Impulse);
+                        //newbulletscript.impulse_angle = anim_position;
+                        if (aiming_touchtime > 3)
+                            aiming_touchtime = 3;
+                        {
+                            if (aiming_touchtime < 1)
+                                newbulletscript.damage = gunPower;
+                            else newbulletscript.damage = gunPower * aiming_touchtime;
+                        }
+                        newbulletscript.massScale *= aiming_touchtime / 2;
+                        if (newbulletscript.massScale < 0.5f)
+                        {
+                            newbulletscript.massScale = 0.5f;
+                        }
+
+                    }
                 }
             }
         }
+        SetShootingAngle(shooting_angle);
+        #endregion
     }
 
     int aiming_touchid = -1;
@@ -611,8 +679,12 @@ public class playerMoving : MonoBehaviour
 
     public void OpenLosePanel()
     {
-        try
-        {
+        
+            if (mainScript.levelIndex > 1)
+            {
+                CampQuestScript campQuset = GameObject.FindGameObjectWithTag("CampQuest").GetComponent<CampQuestScript>();
+                campQuset.Pause();
+            }
             if (SceneManager.GetActiveScene().buildIndex != 1 && mainScript.levelIndex == 1)
             {
                 LooseScreenScript losePanel = GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LooseScreenScript>();
@@ -622,12 +694,7 @@ public class playerMoving : MonoBehaviour
             {
                 ShortMenuScript shortMenu = GameObject.FindGameObjectWithTag("ShortMenu").GetComponent<ShortMenuScript>();
                 shortMenu.StartShortMenu();
-            }
-        }
-        catch
-        {
-            SceneManager.LoadScene("MM");
-        }
+            }      
     }
     public void OpenRefuelPanel()
     {

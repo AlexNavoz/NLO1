@@ -64,6 +64,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Slider P_raySlider;
     public Button P_rayButton;
     float[] P_raypowers = new float[] { 30.0f, 35.0f, 40.0f, 45.0f, 50.0f, 55.0f, 60.0f, 65.0f, 75.0f, 90.0f };
+    float[] P_gunPowers = new float[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1 };
 
     //Tank
     int P_TankLevel;
@@ -100,6 +101,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Slider WS_raySlider;
     public Button WS_rayButton;
     float[] WS_raypowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 75.0f, 80.0f, 90.0f, 105.0f, 120.0f };
+    float[] WS_gunPowers = new float[] { 0.2f, 0.3f, 0.4f, 0.6f, 0.8f, 1.0f, 1.25f, 1.5f, 1.7f, 2.0f };
 
     //Tank
     int WS_TankLevel;
@@ -134,6 +136,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Slider K_raySlider;
     public Button K_rayButton;
     float[] K_raypowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 100.0f, 120.0f, 150.0f, 200.0f };
+    float[] K_gunPowers = new float[] { 0.2f, 0.3f, 0.4f, 0.6f, 0.8f, 1.0f, 1.25f, 1.5f, 1.7f, 2.0f };
 
     //Tank
     int K_TankLevel;
@@ -154,7 +157,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     int shipIndex = 0;
     private void Start()
     {
-
+        Time.timeScale = 1;
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
         mainScript.questButton.SetActive(false);
@@ -573,6 +576,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         P_RayLevel++;
         PlayerPrefs.SetInt("P_RayLevel", P_RayLevel);
         PlayerPrefs.SetFloat("P_rayLiftPower", P_raypowers[P_RayLevel]);
+        PlayerPrefs.SetFloat("P_gunPower", P_gunPowers[P_RayLevel]);
         mainScript.SetMoney(-P_rayPrice);
         P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
         P_rayPrice = prices[P_RayLevel];
@@ -650,6 +654,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         WS_RayLevel++;
         PlayerPrefs.SetInt("WS_RayLevel", WS_RayLevel);
         PlayerPrefs.SetFloat("WS_rayLiftPower", WS_raypowers[WS_RayLevel]);
+        PlayerPrefs.SetFloat("WS_gunPower", WS_gunPowers[WS_RayLevel]);
         mainScript.SetMoney(-WS_rayPrice);
         WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
         WS_rayPrice = WSprices[WS_RayLevel];
@@ -727,6 +732,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         K_RayLevel++;
         PlayerPrefs.SetInt("K_RayLevel", K_RayLevel);
         PlayerPrefs.SetFloat("K_rayLiftPower", K_raypowers[K_RayLevel]);
+        PlayerPrefs.SetFloat("K_gunPower", K_gunPowers[K_RayLevel]);
         mainScript.SetMoney(-K_rayPrice);
         K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
         K_rayPrice = Kprices[K_RayLevel];

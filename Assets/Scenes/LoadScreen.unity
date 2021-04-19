@@ -371,7 +371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &237800537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1272,6 +1272,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604619684}
   m_CullTransparentMesh: 1
+--- !u!1 &606139560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606139561}
+  - component: {fileID: 606139562}
+  m_Layer: 0
+  m_Name: Pause
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &606139561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606139560}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1168118978}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &606139562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606139560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries: []
 --- !u!1 &708526052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,6 +1919,7 @@ Transform:
   - {fileID: 1935709650}
   - {fileID: 982709698}
   - {fileID: 708526053}
+  - {fileID: 606139561}
   m_Father: {fileID: 1845433771}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2184,17 +2230,17 @@ MonoBehaviour:
   peace: 0
   P_enginePower: 0
   P_maxFuel: 0
-  P_rayDacreaserPower: 0
+  P_gunPower: 0
   P_rayLiftPower: 0
   P_forceShieldStrength: 0
   WS_enginePower: 0
   WS_maxFuel: 0
-  WS_rayDacreaserPower: 0
+  WS_gunPower: 0
   WS_rayLiftPower: 0
   WS_forceShieldStrength: 0
   K_enginePower: 0
   K_maxFuel: 0
-  K_rayDacreaserPower: 0
+  K_gunPower: 0
   K_rayLiftPower: 0
   K_forceShieldStrength: 0
   P_fuelLevel: 0
@@ -2210,6 +2256,10 @@ MonoBehaviour:
   campLevels: 
   collection: 0
   allMoney: 0
+  questObjectCount: 0
+  questObjectIndex: 0
+  questObjectId: 0
+  questIdSeed: 0
   questButton: {fileID: 237800536}
   quests: []
   questPanelProgress: {fileID: 0}
@@ -2565,11 +2615,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LoadSceneScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609985599476630485, guid: a6c84ce5818f37e438c5b1542d4f1a21,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c84ce5818f37e438c5b1542d4f1a21, type: 3}

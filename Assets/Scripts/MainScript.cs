@@ -12,21 +12,21 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     //plate variables
     public float P_enginePower;
     public float P_maxFuel;
-    public float P_rayDacreaserPower;
+    public float P_gunPower;
     public float P_rayLiftPower;
     public float P_forceShieldStrength;
 
     //WS variables
     public float WS_enginePower;
     public float WS_maxFuel;
-    public float WS_rayDacreaserPower;
+    public float WS_gunPower;
     public float WS_rayLiftPower;
     public float WS_forceShieldStrength;
 
     //Knippel variables
     public float K_enginePower;
     public float K_maxFuel;
-    public float K_rayDacreaserPower;
+    public float K_gunPower;
     public float K_rayLiftPower;
     public float K_forceShieldStrength;
 
@@ -59,9 +59,10 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public static float forceBatchingMultiplier = 0;
 
     //Quest variables
-    public static int questObjectCount = 0;
-    public static int questObjectIndex = 0;
-    public static int questObjectId = 0;
+    public int questObjectCount = 0;
+    public int questObjectIndex = 0;
+    public int questObjectId = 0;
+    public int questIdSeed = 0;
     public GameObject questButton;
     public GameObject[] quests;
     public Text questPanelProgress;
@@ -134,12 +135,14 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         questObjectId = PlayerPrefs.GetInt("questObjectId", 0);
         questObjectCount = PlayerPrefs.GetInt("questObjectCount", 0);
+        questIdSeed = PlayerPrefs.GetInt("questIdSeed", 0);
     }
 
     public void SaveQuestPrefs()
     {
         PlayerPrefs.SetInt("questObjectId", questObjectId);
         PlayerPrefs.SetInt("questObjectCount", questObjectCount);
+        PlayerPrefs.SetInt("questIdSeed", questIdSeed);
     }
 
     //__________________________________________________________________________PLATE______________________________________________________________________
@@ -148,6 +151,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
         P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 30.0f);
         P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
+        P_gunPower = PlayerPrefs.GetFloat("P_gunPower", 0.1f);
         P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
     }
 
@@ -158,7 +162,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         WS_enginePower = PlayerPrefs.GetFloat("WS_enginePower", 80.0f);
         WS_maxFuel = PlayerPrefs.GetFloat("WS_maxFuel", 40.0f);
-        //WS_rayDacreaserPower = PlayerPrefs.GetFloat("WS_rayDecreaserPower", 0.1f);
+        WS_gunPower = PlayerPrefs.GetFloat("WS_gunPower", 0.2f);
         WS_rayLiftPower = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
         WS_forceShieldStrength = PlayerPrefs.GetFloat("WS_forceShieldStrength", 40.0f);
     }
@@ -169,20 +173,11 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         K_enginePower = PlayerPrefs.GetFloat("K_enginePower", 80.0f);
         K_maxFuel = PlayerPrefs.GetFloat("K_maxFuel", 40.0f);
-        //K_rayDacreaserPower = PlayerPrefs.GetFloat("WS_rayDecreaserPower", 0.1f);
+        K_gunPower = PlayerPrefs.GetFloat("K_gunPower", 0.2f);
         K_rayLiftPower = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
         K_forceShieldStrength = PlayerPrefs.GetFloat("K_forceShieldStrength", 40.0f);
     }
 
-   /* public void PostLevels()
-    {
-        PostScript postScript = GameObject.FindGameObjectWithTag("Post").GetComponent<PostScript>();
-        postLevels = new int[postScript.a_Stages.Length];
-        for (int i = 0; i < postScript.a_Stages.Length; i++)
-        {
-            postLevels[i] = PlayerPrefs.GetInt("A_Stage" + i, 0);
-        }
-    }*/
     public void CampLevels()
     {
         CampaignMenuScript campMenu = GameObject.FindGameObjectWithTag("CampMenu").GetComponent<CampaignMenuScript>();
