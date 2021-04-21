@@ -13,8 +13,13 @@ public class UFOQuest
     public Sprite icon;
 };
 
-public class QuestScript : MonoBehaviour
+public class QuestScript : MonoBehaviour, AdsListener
 {
+    public GameObject buttonCompleteObj;
+    public GameObject completeObj;
+    public GameObject buttonProgressObj;
+    public GameObject progressObj;
+
     public Image targetIcon;
     public Image miniIcon;
     MainScript mainScript;
@@ -70,10 +75,19 @@ public class QuestScript : MonoBehaviour
         loadedQuestId = idToLoad;
     }
 
-    void refreshQuest() {
-        mainScript.questIdSeed += questPeriod;
+    void refreshQuest()
+    {
+        mainScript.questObjectCount = 0;
+        mainScript.questIdSeed += (questPeriod * UnityEngine.Random.Range(1, quests.Length));
+        
         UpdateQuest();
         mainScript.SaveQuestPrefs();
+        buttonCompleteObj.SetActive(false);
+        completeObj.SetActive(false);
+        progressObj.SetActive(true);
+        buttonProgressObj.SetActive(true);
+        alreadyRewarded = false;
+        questCompleted = false;
     }
 
     void UpdateQuest()
@@ -99,6 +113,10 @@ public class QuestScript : MonoBehaviour
         {
             questCompleted = true;
             mainScript.questObjectCount = howMuchNeed;
+            buttonCompleteObj.SetActive(true);
+            completeObj.SetActive(true);
+            progressObj.SetActive(false);
+            buttonProgressObj.SetActive(false);
         }
         if (questCompleted && !alreadyRewarded)
         {
@@ -110,9 +128,37 @@ public class QuestScript : MonoBehaviour
     public void QuestPanelActivation()
     {
         questPanel.SetActive(true);
+        mainScript.peace = true;
     }
     public void QuestPanelExit()
     {
         questPanel.SetActive(false);
+        mainScript.peace = false;
+    }
+
+    public void Change()
+    {
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
+    }
+    public void AdsShowed()
+    {
+        Debug.Log("AdsSkipped");
+        refreshQuest();
+    }
+
+    public void AdsFailed()
+    {
+        Debug.Log("AdsFailed");
+    }
+    public void AdsSkipped()
+    {
+        Debug.Log("AdsSkipped");
     }
 }

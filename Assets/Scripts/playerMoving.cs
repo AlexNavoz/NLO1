@@ -30,9 +30,6 @@ public class playerMoving : MonoBehaviour
     public GameObject bullet;
     public GameObject claw;
     public GameObject clawController;
-    public Rigidbody2D clawLeft;
-    public Rigidbody2D clawRight;
-    bool ClawIsClosen = false;
     public AudioSource powerUpSound;
     public ParticleSystem shootParticle;
     bool powerUp;
@@ -389,20 +386,6 @@ public class playerMoving : MonoBehaviour
                     Invoke("OpenRefuelPanel", 1.0f);
                 }
             }
-
-            if (mainScript.levelIndex == 5)
-            {
-                if (ClawIsClosen)
-                {
-                    clawLeft.AddTorque(-50);
-                    clawRight.AddTorque(50);
-                }
-                else
-                {
-                    clawLeft.AddTorque(50);
-                    clawRight.AddTorque(-50);
-                }
-            }
         }
         else
         {
@@ -702,15 +685,4 @@ public class playerMoving : MonoBehaviour
         refuelCanvas.RefuelCanvasOpen();
     }
     
-    public void ClawControl()
-    {
-        if (ClawIsClosen)
-        {
-            ClawIsClosen = false;
-        }
-        else
-        {
-            ClawIsClosen = true;
-        }
-    }
 }

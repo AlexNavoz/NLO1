@@ -74,6 +74,11 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     public GameObject pausePanel;
     public bool isPaused;
 
+    //____Claw
+    public bool objectIsInClaw = false;
+    public GameObject greenLamp;
+    public GameObject redLamp;
+
     private void Start()
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
@@ -107,6 +112,11 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 ceiling.SetActive(true);
                 mainScript.campaignQisetObjIndex = questObjectIndex;
                 screenProgressText.text = questProgressText.text = mainScript.campaignQuestObjCount.ToString() + "/" + howManyNeed.ToString();
+                break;
+            case 5:
+                ceiling.SetActive(true);
+                screenProgressText.text = questProgressText.text = null;
+                redLamp.SetActive(true);
                 break;
         }
     }
@@ -236,6 +246,48 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                         victory = false;
                     }
                     break;
+                case 5:
+                    {
+                        if (objectIsInClaw && !defeat)
+                        {
+                            victory = true;
+                            ceiling.SetActive(false);
+                            evacButtonObj.SetActive(true);
+                            greenLamp.SetActive(true);
+                            redLamp.SetActive(false);
+                        }
+                        else
+                        {
+                            victory = false;
+                            ceiling.SetActive(true);
+                            evacButtonObj.SetActive(false);
+                            greenLamp.SetActive(false);
+                            redLamp.SetActive(true);
+                        }
+                    }
+
+                    if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
+                    {
+                        if (!defeat && !victory)
+                        {
+                            defeat = true;
+                            Invoke("QuestDefeat", 2.0f);
+                        }
+                    }
+                    else if (playerMoving.currentFuel <= 5 && !alreadyRefuled)
+                    {
+                        NeedRefuel();
+                    }
+                    else if (fss.currentHP <= 15 && fss.currentHP >= 5 && !alreadyRefuled)
+                    {
+                        NeedRearm();
+                    }
+                    if (victory && player.transform.position.y > 27)
+                    {
+                        QuestWin();
+                        victory = false;
+                    }
+                    break;
             }
         }
         
@@ -319,6 +371,39 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 winRewardText.text = (mainScript.collection + reward).ToString();
                 break;
             case 4:
+                if (percent < 25)
+                {
+                    winStars[0].SetActive(true);
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                    }
+                }
+                else if (percent < 50)
+                {
+                    winStars[0].SetActive(true);
+                    winStars[1].SetActive(true);
+                    reward *= 2;
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                    }
+                }
+                else
+                {
+                    winStars[0].SetActive(true);
+                    winStars[1].SetActive(true);
+                    winStars[2].SetActive(true);
+                    reward *= 3;
+                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    {
+                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                    }
+                }
+                winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
+                winRewardText.text = (mainScript.collection + reward).ToString();
+                break;
+            case 5:
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
@@ -598,25 +683,25 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     {
         if (adsdestination == 1)
         {
-            Debug.Log("AdsSkipped");
-            playerMoving.currentFuel = playerMoving.maxFuel;
-            playerMoving.SetFuelValues();
-            refuelPanel.SetActive(false);
-            mainScript.peace = false;
-        }
-        else if (adsdestination == 2)
-        {
-            Debug.Log("AdsSkipped");
-            fss.currentHP = fss.maxHP;
-            fss.SetHPValue();
-            rearmPanel.SetActive(false);
-            mainScript.peace = false;
-        }
-        else if (adsdestination == 3)
-        {
-            Debug.Log("AdsSkipped");
-            Evacuate();
-        }
+        Debug.Log("AdsSkipped");
+        playerMoving.currentFuel = playerMoving.maxFuel;
+        playerMoving.SetFuelValues();
+        refuelPanel.SetActive(false);
+        mainScript.peace = false;
+    }
+    else if (adsdestination == 2)
+    {
+        Debug.Log("AdsSkipped");
+        fss.currentHP = fss.maxHP;
+        fss.SetHPValue();
+        rearmPanel.SetActive(false);
+        mainScript.peace = false;
+    }
+    else if (adsdestination == 3)
+    {
+        Debug.Log("AdsSkipped");
+        Evacuate();
+    }
 
     }
 

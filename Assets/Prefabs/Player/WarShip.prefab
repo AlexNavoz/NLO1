@@ -35773,8 +35773,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
+      minMaxState: 2
+      minColor: {r: 1, g: 0.5117957, b: 0, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -36219,7 +36219,7 @@ ParticleSystem:
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 90, y: 0, z: 0}
+    m_Rotation: {x: -90, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -39542,7 +39542,7 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -39670,7 +39670,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -47400,7 +47400,7 @@ MonoBehaviour:
   gun: {fileID: 16536032575940413}
   gunMuzzle: {fileID: 3441147414118479030}
   muzzle: {fileID: 8330176409282384965}
-  bullet: {fileID: 2030700920148443117, guid: 3c3e71c181f051a4296f6716a02b8ea0, type: 3}
+  bullet: {fileID: 2030700920148443117, guid: 0287b39cd5d619e478ef43852fc2792e, type: 3}
   claw: {fileID: 8623303172701901399}
   clawController: {fileID: 7970645102439101426}
   clawLeft: {fileID: 5920032007808683329}

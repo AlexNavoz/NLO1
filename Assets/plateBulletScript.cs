@@ -30,7 +30,7 @@ public class plateBulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 8 || collision.gameObject.layer == 20)
+        if (collision.gameObject.layer == 8 || collision.gameObject.layer == 19)
         {
             Rigidbody2D cowRb;
             int onRayCount;
