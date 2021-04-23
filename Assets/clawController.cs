@@ -17,7 +17,7 @@ public class clawController : MonoBehaviour
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         campQuest = GameObject.FindGameObjectWithTag("CampQuest").GetComponent<CampQuestScript>();
-        buttonSprite.sprite = openedSprite;
+        buttonSprite.sprite = closedSprite;
     }
 
     private void FixedUpdate()
@@ -45,6 +45,20 @@ public class clawController : MonoBehaviour
         {
             isClosen = true;
             buttonSprite.sprite =  openedSprite;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            campQuest.objectIsInClaw = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            campQuest.objectIsInClaw = false;
         }
     }
 }

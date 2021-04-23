@@ -56,7 +56,7 @@ public class AttackerScript : MonoBehaviour
         cowPowerindex = rb.mass / startMass;
         if (!mainScript.peace)
         {
-            if (onRay.isInRay)
+            if (onRay.isInRay || Mathf.Abs(transform.position.x - player.position.x) < 2)
             {
                 if (!scared)
                 {

@@ -45,7 +45,7 @@ public class CowMoving : MonoBehaviour
         if (!mainScript.peace)
         {
             cowPowerindex = rb.mass / startMass;
-            if (onRay.isInRay)
+            if (onRay.isInRay|| Mathf.Abs(transform.position.x - player.position.x)<2)
             {
                 if (!scared)
                 {
@@ -120,7 +120,7 @@ public class CowMoving : MonoBehaviour
                 }
                 movingVector *= (walkSpeed);
                 ChangeAnimation(1);
-                rb.AddForce(new Vector3(movingVector, 0, 0) * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
+                rb.AddForce(new Vector3(movingVector, 0, 0) * cowPowerindex * Time.deltaTime);// * MainScript.forceBatchingMultiplier
             }
             else
             {
@@ -184,12 +184,12 @@ public class CowMoving : MonoBehaviour
     void RightRunning()
     {
         RightRotate();
-        rb.AddForce(Vector3.right * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
+        rb.AddForce(Vector3.right * cowPower * cowPowerindex * Time.deltaTime);// * MainScript.forceBatchingMultiplier
     }
     void LeftRunning()
     {
         LeftRotate();
-        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime * MainScript.forceBatchingMultiplier);
+        rb.AddForce(Vector3.left * cowPower * cowPowerindex * Time.deltaTime ); // * MainScript.forceBatchingMultiplier
     }
     void LeftRotate()
     {

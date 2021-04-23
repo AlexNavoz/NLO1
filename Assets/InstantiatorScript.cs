@@ -22,6 +22,7 @@ public class InstantiatorScript : MonoBehaviour
             {
                 for (int i = 0; i < Random.Range(0, rightObjects.Length); i++)
                 {
+                    offsetRight.x += Random.Range(-5,5);
                     Instantiate(rightObjects[Random.Range(0, rightObjects.Length)], offsetRight, Quaternion.identity);
                 } 
             }
@@ -29,6 +30,7 @@ public class InstantiatorScript : MonoBehaviour
             {
                 for (int i = 0; i < Random.Range(0, leftObjects.Length); i++)
                 {
+                    offsetLeft.x += Random.Range(-5, 5);
                     Instantiate(leftObjects[Random.Range(0, leftObjects.Length)], offsetLeft, Quaternion.identity);
                 }
             }

@@ -17751,6 +17751,7 @@ GameObject:
   - component: {fileID: 2609953302029365572}
   - component: {fileID: 1035689626788268124}
   - component: {fileID: 2099228305585520715}
+  - component: {fileID: 3298847051029621619}
   m_Layer: 10
   m_Name: kleshna1
   m_TagString: Untagged
@@ -17950,6 +17951,22 @@ MonoBehaviour:
   buttonSprite: {fileID: 4904170832706942393}
   openedSprite: {fileID: 21300000, guid: 46e6da7eff7ef3946a6e0396b0efcf78, type: 3}
   closedSprite: {fileID: 21300000, guid: 287bf2f7af326ba40a5fa5e258ef8768, type: 3}
+--- !u!58 &3298847051029621619
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491023158786571874}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.08027363, y: -4.2499104}
+  serializedVersion: 2
+  m_Radius: 1.5233212
 --- !u!1 &2540036827793194382
 GameObject:
   m_ObjectHideFlags: 0
@@ -41610,8 +41627,6 @@ MonoBehaviour:
   bullet: {fileID: 2030700920148443117, guid: 3c3e71c181f051a4296f6716a02b8ea0, type: 3}
   claw: {fileID: 8126314875462288174}
   clawController: {fileID: 3606633426548312049}
-  clawLeft: {fileID: 1706732272614149036}
-  clawRight: {fileID: 49280226975903304}
   powerUpSound: {fileID: 5019803027989440542}
   shootParticle: {fileID: 5129258418536502479}
   Plate_Variables_______: {fileID: 0}
