@@ -109,14 +109,23 @@ public class QuestScript : MonoBehaviour, AdsListener
         rewardText.text = reward.ToString();
         progressText.text = (mainScript.questObjectCount.ToString() + "/" + howMuchNeed.ToString());
         questPanelProgress.text = progressText.text;
-        if (mainScript.questObjectCount >= howMuchNeed)
         {
-            questCompleted = true;
-            mainScript.questObjectCount = howMuchNeed;
-            buttonCompleteObj.SetActive(true);
-            completeObj.SetActive(true);
-            progressObj.SetActive(false);
-            buttonProgressObj.SetActive(false);
+            if (mainScript.questObjectCount >= howMuchNeed)
+            {
+                questCompleted = true;
+                mainScript.questObjectCount = howMuchNeed;
+                buttonCompleteObj.SetActive(true);
+                completeObj.SetActive(true);
+                progressObj.SetActive(false);
+                buttonProgressObj.SetActive(false);
+            }
+            else
+            {
+                buttonCompleteObj.SetActive(false);
+                completeObj.SetActive(false);
+                progressObj.SetActive(true);
+                buttonProgressObj.SetActive(true);
+            }
         }
         if (questCompleted && !alreadyRewarded)
         {

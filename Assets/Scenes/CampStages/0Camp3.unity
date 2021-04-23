@@ -12106,7 +12106,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftBlock
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3228456978662802656, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7, type: 3}
 --- !u!1001 &3511064823896040125
 PrefabInstance:
@@ -12194,7 +12195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1637679654, guid: d356dda57e85a824bba7fd3c887d963c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.3699646
+      value: -1.3699951
       objectReference: {fileID: 0}
     - target: {fileID: 1737947019, guid: d356dda57e85a824bba7fd3c887d963c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -12423,5 +12424,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightBlock
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 705064180289551866, guid: d4e264a5c799b2e4788a705df0414460, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d4e264a5c799b2e4788a705df0414460, type: 3}

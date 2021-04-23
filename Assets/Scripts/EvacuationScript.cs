@@ -18,6 +18,18 @@ public class EvacuationScript : MonoBehaviour
         if(collision.gameObject.tag == "Player" || collision.gameObject.layer == 8)
         {
             collision.transform.position =new Vector3(collision.transform.position.x, collision.transform.position.y+ 10 *Time.deltaTime, collision.transform.position.z);
+
+            GameObject obj = collision.gameObject;
+            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+
+            if (rb == null)
+            {
+                return;
+            }
+            else
+            {
+                rb.gravityScale = 0;
+            }
         }
     }
 
