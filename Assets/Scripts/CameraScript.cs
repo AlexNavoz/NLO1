@@ -46,6 +46,7 @@ public class CameraScript : MonoBehaviour
         //if (levelIndex != 5)
         {
             Time.fixedDeltaTime = 0.02f;
+            MainScript.UpdateStupidTimeMultiplyingConstant();
         }
 
     }

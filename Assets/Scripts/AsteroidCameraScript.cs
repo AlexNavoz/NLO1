@@ -44,7 +44,8 @@ public class AsteroidCameraScript : MonoBehaviour
     void Start()
     {
         Time.fixedDeltaTime = 0.007f;
-       
+        MainScript.UpdateStupidTimeMultiplyingConstant();
+
         playerRb = player.GetComponent<Rigidbody2D>();
         cam = Camera.main;
         finish = GameObject.FindGameObjectWithTag("Finish");

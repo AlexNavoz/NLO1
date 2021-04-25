@@ -178,6 +178,7 @@ public class playerMoving : MonoBehaviour
                 break;
             case 5:
                 Time.fixedDeltaTime = 0.01f;
+                MainScript.UpdateStupidTimeMultiplyingConstant();
                 ray.SetActive(false);
                 destroyer.SetActive(false);
                 gun.SetActive(true);

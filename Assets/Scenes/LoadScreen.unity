@@ -254,7 +254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.87500006, y: 0.845586}
   m_AnchorMax: {x: 0.97049695, y: 0.9588281}
-  m_AnchoredPosition: {x: -0.9871216, y: -1.1389008}
+  m_AnchoredPosition: {x: -0.9871216, y: -1.1388855}
   m_SizeDelta: {x: 1.9743042, y: 2.2778015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34506896
@@ -1715,10 +1715,10 @@ RectTransform:
   m_Father: {fileID: 2016343038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.103759095, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.1349945, y: 0}
+  m_SizeDelta: {x: 0.27000046, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898567900
 MonoBehaviour:
@@ -1753,7 +1753,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C!"
+  m_Text: Change!
 --- !u!222 &898567901
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2723,7 +2723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041D\u0430\u0433\u0440\u0430\u0434\u0430:"
+  m_Text: 'Reward:'
 --- !u!222 &2106621892
 CanvasRenderer:
   m_ObjectHideFlags: 0

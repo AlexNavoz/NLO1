@@ -96,13 +96,16 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",0);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
 
-        forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
+        UpdateStupidTimeMultiplyingConstant();
 
         //Analytics.initializeOnStartup = false;
         //Analytics.enabled = false;
 
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, testMode);
+    }
+    static public void UpdateStupidTimeMultiplyingConstant() {
+        forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
     }
     public void StartOnPosition()
     {
@@ -148,8 +151,8 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     //__________________________________________________________________________PLATE______________________________________________________________________
     public void LoadPlatePrefs()
     {
-        P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
-        P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 30.0f);
+        P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
+        P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 40.0f);
         P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
         P_gunPower = PlayerPrefs.GetFloat("P_gunPower", 0.1f);
         P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
@@ -160,7 +163,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
 
     public void LoadWSPrefs()
     {
-        WS_enginePower = PlayerPrefs.GetFloat("WS_enginePower", 80.0f);
+        WS_enginePower = PlayerPrefs.GetFloat("WS_enginePower", 100.0f);
         WS_maxFuel = PlayerPrefs.GetFloat("WS_maxFuel", 40.0f);
         WS_gunPower = PlayerPrefs.GetFloat("WS_gunPower", 0.2f);
         WS_rayLiftPower = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
@@ -171,7 +174,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
 
     public void LoadKPrefs()
     {
-        K_enginePower = PlayerPrefs.GetFloat("K_enginePower", 80.0f);
+        K_enginePower = PlayerPrefs.GetFloat("K_enginePower", 100.0f);
         K_maxFuel = PlayerPrefs.GetFloat("K_maxFuel", 40.0f);
         K_gunPower = PlayerPrefs.GetFloat("K_gunPower", 0.2f);
         K_rayLiftPower = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);

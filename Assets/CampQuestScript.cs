@@ -27,6 +27,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     public Text winRewardText;
     public GameObject[] winStars;
     public GameObject ceiling;
+    public GameObject pointerUp;
 
     //defeat panel
     public GameObject defeatPanel;
@@ -92,6 +93,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         screenTimeText.text = questTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
         mainScript.campaignQuestObjCount = 0;
         pausePanel.SetActive(false);
+        pointerUp.SetActive(false);
 
 
         switch (mainScript.levelIndex)
@@ -186,6 +188,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 case 3:
                     if (mainScript.campaignQuestObjCount >= howManyNeed && !defeat)
                     {
+                        pointerUp.SetActive(true);
                         victory = true;
                         ceiling.SetActive(false);
                         evacButtonObj.SetActive(true);
@@ -219,6 +222,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 case 4:
                     if (mainScript.campaignQuestObjCount >= howManyNeed && !defeat)
                     {
+                        pointerUp.SetActive(true);
                         victory = true;
                         ceiling.SetActive(false);
                         evacButtonObj.SetActive(true);
@@ -253,6 +257,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     {
                         if (objectIsInClaw && !defeat)
                         {
+                            pointerUp.SetActive(true);
                             victory = true;
                             ceiling.SetActive(false);
                             evacButtonObj.SetActive(true);
@@ -261,6 +266,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                         }
                         else
                         {
+                            pointerUp.SetActive(false);
                             victory = false;
                             ceiling.SetActive(true);
                             evacButtonObj.SetActive(false);

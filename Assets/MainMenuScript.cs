@@ -55,7 +55,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text P_engineText;
     public Slider P_engineSlider;
     public Button P_engineButton;
-    float[] P_enginepowers = new float[] { 120.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f, 220.0f, 240.0f, 270.0f, 300.0f };
+    float[] P_enginepowers = new float[] { 160.0f, 170.0f, 180.0f, 190.0f, 200.0f, 210.0f, 220.0f, 240.0f, 270.0f, 300.0f };
 
     //Ray
     int P_RayLevel;
@@ -72,7 +72,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text P_tankText;
     public Slider P_tankSlider;
     public Button P_tankButton;
-    float[] P_tankpowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 90.0f, 100.0f, 110.0f, 130.0f };
+    float[] P_tankpowers = new float[] { 40.0f, 45.0f, 50.0f, 60.0f, 70.0f, 80.0f, 90.0f, 100.0f, 110.0f, 130.0f };
 
     //Shield
     int P_ShieldLevel;
@@ -92,7 +92,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text WS_engineText;
     public Slider WS_engineSlider;
     public Button WS_engineButton;
-    float[] WS_enginepowers = new float[] { 80.0f, 90.0f, 100.0f, 110.0f, 120.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f };
+    float[] WS_enginepowers = new float[] { 100.0f, 110.0f, 115.0f, 120.0f, 125.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f };
 
     //Ray
     int WS_RayLevel;
@@ -127,7 +127,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text K_engineText;
     public Slider K_engineSlider;
     public Button K_engineButton;
-    float[] K_enginepowers = new float[] { 80.0f, 90.0f, 100.0f, 110.0f, 120.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f };
+    float[] K_enginepowers = new float[] { 100.0f, 110.0f, 115.0f, 120.0f, 125.0f, 130.0f, 140.0f, 150.0f, 170.0f, 200.0f };
 
     //Ray
     int K_RayLevel;
@@ -559,7 +559,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("P_EngineLevel", P_EngineLevel);
         PlayerPrefs.SetFloat("P_enginePower", P_enginepowers[P_EngineLevel]);
         mainScript.SetMoney(-P_enginePrice);
-        P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
+        P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
         P_enginePrice = prices[P_EngineLevel];
         P_engineText.text = P_enginePrice.ToString();
 
@@ -597,7 +597,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("P_TankLevel", P_TankLevel);
         PlayerPrefs.SetFloat("P_maxFuel", P_tankpowers[P_TankLevel]);
         mainScript.SetMoney(-P_tankPrice);
-        P_tankSlider.value = PlayerPrefs.GetFloat("P_maxFuel", 100.0f);
+        P_tankSlider.value = PlayerPrefs.GetFloat("P_maxFuel", 40.0f);
         P_tankPrice = prices[P_TankLevel];
         P_tankText.text = P_tankPrice.ToString();
 
@@ -637,7 +637,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
         PlayerPrefs.SetFloat("WS_enginePower", WS_enginepowers[WS_EngineLevel]);
         mainScript.SetMoney(-WS_enginePrice);
-        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 80.0f);
+        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 100.0f);
         WS_enginePrice = WSprices[WS_EngineLevel];
         WS_engineText.text = WS_enginePrice.ToString();
 
@@ -715,7 +715,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("K_EngineLevel", K_EngineLevel);
         PlayerPrefs.SetFloat("K_enginePower", K_enginepowers[K_EngineLevel]);
         mainScript.SetMoney(-K_enginePrice);
-        K_engineSlider.value = PlayerPrefs.GetFloat("K_enginePower", 80.0f);
+        K_engineSlider.value = PlayerPrefs.GetFloat("K_enginePower", 100.0f);
         K_enginePrice = Kprices[K_EngineLevel];
         K_engineText.text = K_enginePrice.ToString();
 
@@ -913,7 +913,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
     public void CloseTheGame()
     {
-       // PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
+        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 
