@@ -148,8 +148,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
 
                     if (currentTime <= 0 || boxPercent <= 0 || playerMoving.isDead|| box == null || playerMoving.currentFuel <= 0 || boxScript.boxIsLost)
                     {
-                        if (!defeat && !victory)
+                        if (!defeat)
                         {
+                            victory = false;
                             defeat = true;
                             Invoke("QuestDefeat", 2.0f);
                         }
@@ -194,8 +195,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
 
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
-                        if (!defeat && !victory)
+                        if (!defeat)
                         {
+                            victory = false;
                             defeat = true;
                             Invoke("QuestDefeat", 2.0f);
                         }
@@ -226,8 +228,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
 
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
-                        if (!defeat && !victory)
+                        if (!defeat)
                         {
+                            victory = false;
                             defeat = true;
                             Invoke("QuestDefeat", 2.0f);
                         }
@@ -268,8 +271,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
 
                     if (currentTime <= 0 || playerMoving.currentFuel <= 0 || playerMoving.isDead)
                     {
-                        if (!defeat && !victory)
+                        if (!defeat)
                         {
+                            victory = false;
                             defeat = true;
                             Invoke("QuestDefeat", 2.0f);
                         }
@@ -294,6 +298,23 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     //____WinPanel
     #region
+    int GetCurrentLevelNumb() {
+        string levelname = SceneManager.GetActiveScene().name;
+        int levelnum;
+        if (int.TryParse(levelname.Substring(0, 3), out levelnum))
+        {
+            return levelnum;
+        }
+        if (int.TryParse(levelname.Substring(0, 2), out levelnum))
+        {
+            return levelnum;
+        }
+        if (int.TryParse(levelname.Substring(0, 1), out levelnum))
+        {
+            return levelnum;
+        }
+        return 0;
+    }
     void QuestWin()
     {
         mainScript.peace = true;
@@ -306,9 +327,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 {
                     winTimeText.color = new Color(255, 0, 0, 170);
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
                 }
                 else if (boxPercent < 50)
@@ -317,9 +338,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[1].SetActive(true);
                     reward *= 2;
                     winTimeText.color = new Color(255, 255, 0, 170);
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
                 }
                 else
@@ -329,9 +350,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[2].SetActive(true);
                     reward *= 3;
                     winTimeText.color = new Color(0, 255, 0, 170);
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = boxPercent.ToString() + "%";
@@ -341,9 +362,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
                 }
                 else if (percent < 50)
@@ -351,9 +372,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     reward *= 2;
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
                 }
                 else
@@ -362,9 +383,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
                     reward *= 3;
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
@@ -374,9 +395,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
                 }
                 else if (percent < 50)
@@ -384,9 +405,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     reward *= 2;
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
                 }
                 else
@@ -395,9 +416,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
                     reward *= 3;
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
@@ -407,9 +428,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 1)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 1);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
                 }
                 else if (percent < 50)
@@ -417,9 +438,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     reward *= 2;
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 2)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 2);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
                 }
                 else
@@ -428,9 +449,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
                     reward *= 3;
-                    if (PlayerPrefs.GetInt("campStage" + SceneManager.GetActiveScene().name[0], 0) < 3)
+                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
-                        PlayerPrefs.SetInt("campStage" + SceneManager.GetActiveScene().name[0], 3);
+                        PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
