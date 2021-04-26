@@ -913,7 +913,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
     public void CloseTheGame()
     {
-        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
+        //PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 

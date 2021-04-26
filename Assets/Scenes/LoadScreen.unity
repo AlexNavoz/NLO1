@@ -1457,6 +1457,15 @@ MonoBehaviour:
   - Language: English
     Text: complete
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC644\uB8CC\uB410\uC2B5\uB2C8\uB2E4 \r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5B8C\u6210\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u5B8C\u4E86\u3055\u308C\u307E\u3057\u305F\r"
+    Object: {fileID: 0}
 --- !u!1 &746274200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,6 +1836,15 @@ MonoBehaviour:
   - Language: Russian
     Text: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C!"
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uBC14\uAFD4!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6539\u53D8!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u5909\u3048\u3066!\r"
+    Object: {fileID: 0}
 --- !u!1 &1005784974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,6 +2068,24 @@ MonoBehaviour:
     cultures:
     - ru
     - ru-RU
+  - name: Korean
+    cultures:
+    - ko
+    - ko-KR
+  - name: Chinese
+    cultures:
+    - ChineseSimplified
+    - ChineseTraditional
+    - zh
+    - zh-TW
+    - zh-CN
+    - zh-HK
+    - zh-SG
+    - zh-MO
+  - name: Japanese
+    cultures:
+    - ja
+    - ja-JP
   prefabs: []
 --- !u!1 &1480183618
 GameObject:
@@ -2516,6 +2552,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u041D\u0430\u0433\u0440\u0430\u0434\u0430:"
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uD3EC\uC0C1:\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5956\u52B1:\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u8912\u8CDE\r"
     Object: {fileID: 0}
 --- !u!1 &2016343037
 GameObject:

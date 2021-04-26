@@ -166,7 +166,7 @@ RectTransform:
   - {fileID: 2002580986}
   - {fileID: 1737947019}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24449904, y: 0.17163596}
   m_AnchorMax: {x: 0.7566636, y: 0.8001487}
@@ -1052,6 +1052,15 @@ MonoBehaviour:
   - Language: English
     Text: The pacage was destroyed
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC18C\uD3EC\uAC00 \uD30C\uAD34\uB410\uC2B5\uB2C8\uB2E4\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5305\u88F9\u88AB\u6D88\u9664\u4E86\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u5C0F\u5305\u304C\u7834\u58CA\u3055\u308C\u305F\r"
+    Object: {fileID: 0}
 --- !u!1 &2316433644658544262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1111,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: You have lost the pacage
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC18C\uD3EC\uB97C \uBD84\uC2E4\uD588\uC2B5\uB2C8\uB2E4\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5305\u88F9\u88AB\u4E22\u5931\u2026\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u5C0F\u5305\u304C\u7D1B\u5931\u3055\u308C\u307E\u3057\u305F\u2026\r"
     Object: {fileID: 0}
 --- !u!1 &3105900854029043905
 GameObject:
@@ -1303,6 +1321,15 @@ MonoBehaviour:
   - Language: English
     Text: Evacuation!
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uB300\uD53C!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u758F\u6563!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u9000\u907F!\r"
+    Object: {fileID: 0}
 --- !u!1 &3935350362002429762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1458,7 @@ RectTransform:
   - {fileID: 8029535627501965996}
   - {fileID: 8634615093818644575}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1871,7 +1898,7 @@ RectTransform:
   - {fileID: 5566126438531843869}
   - {fileID: 5566126439129397402}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2079,6 +2106,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0414\u043E\u0431\u0435\u0440\u0438\u0441\u044C \u0434\u043E \u044D\u0432\u0430\u043A\u0443\u0430\u0446\u0438\u0438!"
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uB300\uD53C\uD574!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u8D70\u5230\u758F\u6563\u533A!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u9000\u907F\u307E\u3067\u884C\u304D\u7740\u3053!\r"
     Object: {fileID: 0}
 --- !u!1 &5566126437173907292
 GameObject:
@@ -2557,6 +2593,15 @@ MonoBehaviour:
   - Language: English
     Text: Time is over
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC2DC\uAC04\uC774 \uB05D\uB0AC\uC2B5\uB2C8\uB2E4\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u65F6\u95F4\u7ED3\u675F\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6642\u9593\u5207\u308C\r"
+    Object: {fileID: 0}
 --- !u!1 &5566126437214836287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2740,6 +2785,15 @@ MonoBehaviour:
   - Language: English
     Text: Catch!
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC7A1\uC544!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6293\u4F4F!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u30AD\u30E3\u30C3\u30C1\u3057\u308D!\r"
+    Object: {fileID: 0}
 --- !u!1 &5566126437252308459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,7 +2866,7 @@ RectTransform:
   - {fileID: 5566126437885543644}
   - {fileID: 5566126438555676542}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3188,6 +3242,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Shoot!
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC3D8\uC544!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5C04\u51FB!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u5C04\u308C!\r"
     Object: {fileID: 0}
 --- !u!1 &5566126437388069669
 GameObject:
@@ -3681,6 +3744,15 @@ MonoBehaviour:
   - Language: English
     Text: Take away!
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uAC00\uC838\uAC00!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u62FF\u8D70!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6301\u3061\u53BB\u308C!\r"
+    Object: {fileID: 0}
 --- !u!1 &5566126437562943745
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,6 +4113,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Defeat...
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uD328\uBC30\u2026\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5931\u8D25\u2026\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6557\u5317\u2026\r"
     Object: {fileID: 0}
 --- !u!1 &5566126437885543635
 GameObject:
@@ -4595,7 +4676,7 @@ RectTransform:
   - {fileID: 5566126437351676246}
   - {fileID: 5566126437588773502}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5320,7 +5401,7 @@ RectTransform:
   - {fileID: 5566126439160708032}
   - {fileID: 5566126438042169356}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5636,6 +5717,24 @@ MonoBehaviour:
     cultures:
     - ru
     - ru-RU
+  - name: Korean
+    cultures:
+    - ko
+    - ko-KR
+  - name: Chinese
+    cultures:
+    - ChineseSimplified
+    - ChineseTraditional
+    - zh
+    - zh-TW
+    - zh-CN
+    - zh-HK
+    - zh-SG
+    - zh-MO
+  - name: Japanese
+    cultures:
+    - ja
+    - ja-JP
   prefabs: []
 --- !u!1 &5566126438290802454
 GameObject:
@@ -5781,6 +5880,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Victory!
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC2B9\uB9AC!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u80DC\u5229!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u52DD\u5229\uFF01"
     Object: {fileID: 0}
 --- !u!1 &5566126438351802794
 GameObject:
@@ -6236,6 +6344,7 @@ RectTransform:
   m_Children:
   - {fileID: 5566126438655932073}
   - {fileID: 8159219523850741608}
+  - {fileID: 9149743954097966211}
   - {fileID: 5566126437254704037}
   - {fileID: 5566126437162919807}
   - {fileID: 5566126438033520591}
@@ -6243,7 +6352,6 @@ RectTransform:
   - {fileID: 5566126439166845485}
   - {fileID: 2478904973412610203}
   - {fileID: 1637679654}
-  - {fileID: 9149743954097966211}
   m_Father: {fileID: 5566126437191657798}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6457,6 +6565,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Deliver!
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uBC30\uB2EC\uD574!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6295\u9012!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u914D\u9054\u3057\u308D!\r"
     Object: {fileID: 0}
 --- !u!1 &5566126438555676541
 GameObject:
@@ -6681,6 +6798,15 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Out of fuel
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC5F0\uB8CC \uBD80\uC871.\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u71C3\u6599\u5168\u90E8\u7528\u5B8C\u4E86.\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u71C3\u6599\u5207\u308C\r"
     Object: {fileID: 0}
 --- !u!1 &5566126438757740612
 GameObject:
@@ -7173,10 +7299,19 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u0412\u0430\u0441 \u043F\u043E\u0434\u0441\u0442\u0440\u0435\u043B\u0438\u043B\u0438"
+    Text: "\u0412\u0430\u0441 \u043F\u043E\u0434\u0431\u0438\u043B\u0438"
     Object: {fileID: 0}
   - Language: English
-    Text: You were shot
+    Text: You were hit
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uCD1D\uC5D0 \uB9DE\uC558\uC2B5\uB2C8\uB2E4\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4F60\u88AB\u5C04\u4F24\u4E86\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u3042\u306A\u305F\u306F\u6483\u305F\u308C\u305F\r"
     Object: {fileID: 0}
 --- !u!1 &5566126438979441975
 GameObject:
@@ -7670,7 +7805,7 @@ RectTransform:
   - {fileID: 5566126438833421385}
   - {fileID: 5566126437475984013}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8576,6 +8711,15 @@ MonoBehaviour:
   - Language: English
     Text: Need a charge?
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uCDA9\uC804\uC774 \uD544\uC694\uD569\uB2C8\uAE4C?\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u9700\u8981\u5145\u7535\u5417?\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u5145\u96FB\u304C\u5FC5\u8981\u3067\u3059\u304B\uFF1F\r"
+    Object: {fileID: 0}
 --- !u!1 &7389841367789876465
 GameObject:
   m_ObjectHideFlags: 0
@@ -8683,7 +8827,7 @@ RectTransform:
   - {fileID: 7556246890191966834}
   - {fileID: 6364005053896333688}
   m_Father: {fileID: 5566126438532338897}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8891,4 +9035,13 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Pause
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC911\uC9C0\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6682\u505C\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u4F11\u6B62\r"
     Object: {fileID: 0}
