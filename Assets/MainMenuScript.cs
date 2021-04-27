@@ -63,7 +63,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text P_rayText;
     public Slider P_raySlider;
     public Button P_rayButton;
-    float[] P_raypowers = new float[] { 6.0f, 7.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f, 18.0f, 19.0f, 20.0f };
+    float[] P_raypowers = new float[] { 10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f, 20.0f };
     float[] P_gunPowers = new float[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1 };
 
     //Tank
@@ -174,7 +174,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         P_engineText.text = P_enginePrice.ToString();
 
         //Ray
-        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 6.0f);
+        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 10.0f);
         P_RayLevel = PlayerPrefs.GetInt("P_RayLevel", 0);
         P_rayPrice = prices[P_RayLevel];
         P_rayText.text = P_rayPrice.ToString();
@@ -578,7 +578,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetFloat("P_rayLiftPower", P_raypowers[P_RayLevel]);
         PlayerPrefs.SetFloat("P_gunPower", P_gunPowers[P_RayLevel]);
         mainScript.SetMoney(-P_rayPrice);
-        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 6.0f);
+        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 10.0f);
         P_rayPrice = prices[P_RayLevel];
         P_rayText.text = P_rayPrice.ToString();
 

@@ -153,7 +153,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
         P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 40.0f);
-        P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 6.0f);
+        P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 10.0f);
         P_gunPower = PlayerPrefs.GetFloat("P_gunPower", 0.1f);
         P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
     }
