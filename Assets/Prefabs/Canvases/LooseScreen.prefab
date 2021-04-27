@@ -51,6 +51,15 @@ MonoBehaviour:
   - Language: English
     Text: Evacuation!
     Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uB300\uD53C!\r"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u758F\u6563!\r"
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u9000\u907F!\r"
+    Object: {fileID: 0}
 --- !u!1 &1473383382
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000011444, y: -0.000015259}
+  m_AnchoredPosition: {x: -0.000011444, y: -0.000030517578}
   m_SizeDelta: {x: 647.4168, y: -0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4142257365078109901
@@ -1339,7 +1348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.10852027, y: 0.03535302}
   m_AnchorMax: {x: 0.8913199, y: 0.97400004}
-  m_AnchoredPosition: {x: -0.000030517578, y: -2.5}
+  m_AnchoredPosition: {x: 0, y: -2.5}
   m_SizeDelta: {x: 1.0136719, y: -1.3330994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2577921772644346154
@@ -2507,8 +2516,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.14962515, y: 1}
-  m_AnchoredPosition: {x: -38.361572, y: 0.0000076293945}
-  m_SizeDelta: {x: 69.495895, y: 11.4953}
+  m_AnchoredPosition: {x: -44.146576, y: 0.0000076293945}
+  m_SizeDelta: {x: 81.0659, y: 11.4953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2577921774199997170
 CanvasRenderer:
@@ -2540,7 +2549,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 20024870b68e4294b8c4e88320b7b7f5, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

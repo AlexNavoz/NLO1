@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902727664129144868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27, y: 20, z: 0}
+  m_LocalPosition: {x: -45.5, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3451980498133739962}
@@ -43,7 +43,7 @@ PointEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2096895
   m_ForceMagnitude: 100
   m_ForceVariation: 0
   m_DistanceScale: 1
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15, y: 100}
+  m_Size: {x: 50, y: 100}
   m_EdgeRadius: 0
 --- !u!1 &3451980498133739963
 GameObject:

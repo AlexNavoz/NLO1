@@ -52,7 +52,7 @@ public class Destroyer : MonoBehaviour
                 stolenCows++;
                 onRayCount = onRayComponent.count;
                 cowRb = obj.GetComponent<Rigidbody2D>();
-                if (cowRb.mass >= 2.0f)
+                if (cowRb.mass >= 5.0f)
                 {
                     return;
                 }

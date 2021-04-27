@@ -153,7 +153,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         P_enginePower = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
         P_maxFuel = PlayerPrefs.GetFloat("P_maxFuel", 40.0f);
-        P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
+        P_rayLiftPower = PlayerPrefs.GetFloat("P_rayLiftPower", 6.0f);
         P_gunPower = PlayerPrefs.GetFloat("P_gunPower", 0.1f);
         P_forceShieldStrength = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
     }
@@ -166,7 +166,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         WS_enginePower = PlayerPrefs.GetFloat("WS_enginePower", 100.0f);
         WS_maxFuel = PlayerPrefs.GetFloat("WS_maxFuel", 40.0f);
         WS_gunPower = PlayerPrefs.GetFloat("WS_gunPower", 0.2f);
-        WS_rayLiftPower = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
+        WS_rayLiftPower = PlayerPrefs.GetFloat("WS_rayLiftPower", 10.0f);
         WS_forceShieldStrength = PlayerPrefs.GetFloat("WS_forceShieldStrength", 40.0f);
     }
     //__________________________________________________________________________________KNIPPEL__________________________________________________________
@@ -177,7 +177,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         K_enginePower = PlayerPrefs.GetFloat("K_enginePower", 100.0f);
         K_maxFuel = PlayerPrefs.GetFloat("K_maxFuel", 40.0f);
         K_gunPower = PlayerPrefs.GetFloat("K_gunPower", 0.2f);
-        K_rayLiftPower = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
+        K_rayLiftPower = PlayerPrefs.GetFloat("K_rayLiftPower", 10.0f);
         K_forceShieldStrength = PlayerPrefs.GetFloat("K_forceShieldStrength", 40.0f);
     }
 

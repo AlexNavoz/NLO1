@@ -63,7 +63,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text P_rayText;
     public Slider P_raySlider;
     public Button P_rayButton;
-    float[] P_raypowers = new float[] { 30.0f, 35.0f, 40.0f, 45.0f, 50.0f, 55.0f, 60.0f, 65.0f, 75.0f, 90.0f };
+    float[] P_raypowers = new float[] { 6.0f, 7.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f, 18.0f, 19.0f, 20.0f };
     float[] P_gunPowers = new float[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1 };
 
     //Tank
@@ -100,7 +100,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text WS_rayText;
     public Slider WS_raySlider;
     public Button WS_rayButton;
-    float[] WS_raypowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 75.0f, 80.0f, 90.0f, 105.0f, 120.0f };
+    float[] WS_raypowers = new float[] { 10.0f, 12.0f, 14.0f, 16.0f, 18.0f, 20.0f, 22.0f, 24.0f, 26.0f, 30.0f };
     float[] WS_gunPowers = new float[] { 0.2f, 0.3f, 0.4f, 0.6f, 0.8f, 1.0f, 1.25f, 1.5f, 1.7f, 2.0f };
 
     //Tank
@@ -135,7 +135,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text K_rayText;
     public Slider K_raySlider;
     public Button K_rayButton;
-    float[] K_raypowers = new float[] { 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 100.0f, 120.0f, 150.0f, 200.0f };
+    float[] K_raypowers = new float[] { 10.0f, 12.0f, 14.0f, 16.0f, 18.0f, 21.0f, 24.0f, 27.0f, 30.0f, 35.0f };
     float[] K_gunPowers = new float[] { 0.2f, 0.3f, 0.4f, 0.6f, 0.8f, 1.0f, 1.25f, 1.5f, 1.7f, 2.0f };
 
     //Tank
@@ -174,7 +174,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         P_engineText.text = P_enginePrice.ToString();
 
         //Ray
-        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
+        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 6.0f);
         P_RayLevel = PlayerPrefs.GetInt("P_RayLevel", 0);
         P_rayPrice = prices[P_RayLevel];
         P_rayText.text = P_rayPrice.ToString();
@@ -200,7 +200,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         WS_engineText.text = WS_enginePrice.ToString();
 
         //Ray
-        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
+        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 10.0f);
         WS_RayLevel = PlayerPrefs.GetInt("WS_RayLevel", 0);
         WS_rayPrice = WSprices[WS_RayLevel];
         WS_rayText.text = WS_rayPrice.ToString();
@@ -226,7 +226,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         K_engineText.text = K_enginePrice.ToString();
 
         //Ray
-        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
+        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 10.0f);
         K_RayLevel = PlayerPrefs.GetInt("K_RayLevel", 0);
         K_rayPrice = Kprices[K_RayLevel];
         K_rayText.text = K_rayPrice.ToString();
@@ -578,7 +578,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetFloat("P_rayLiftPower", P_raypowers[P_RayLevel]);
         PlayerPrefs.SetFloat("P_gunPower", P_gunPowers[P_RayLevel]);
         mainScript.SetMoney(-P_rayPrice);
-        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 30.0f);
+        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 6.0f);
         P_rayPrice = prices[P_RayLevel];
         P_rayText.text = P_rayPrice.ToString();
 
@@ -656,7 +656,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetFloat("WS_rayLiftPower", WS_raypowers[WS_RayLevel]);
         PlayerPrefs.SetFloat("WS_gunPower", WS_gunPowers[WS_RayLevel]);
         mainScript.SetMoney(-WS_rayPrice);
-        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 30.0f);
+        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 10.0f);
         WS_rayPrice = WSprices[WS_RayLevel];
         WS_rayText.text = WS_rayPrice.ToString();
 
@@ -734,7 +734,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetFloat("K_rayLiftPower", K_raypowers[K_RayLevel]);
         PlayerPrefs.SetFloat("K_gunPower", K_gunPowers[K_RayLevel]);
         mainScript.SetMoney(-K_rayPrice);
-        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 30.0f);
+        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 10.0f);
         K_rayPrice = Kprices[K_RayLevel];
         K_rayText.text = K_rayPrice.ToString();
 
