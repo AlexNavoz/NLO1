@@ -153,6 +153,16 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         allMoney += money;
         PlayerPrefs.SetInt("allMoney", allMoney);
     }
+    public void SetMilk(int milk)
+    {
+        allMilk += milk;
+        PlayerPrefs.SetInt("allMilk", allMilk);
+    }
+    public void SetBrain(int brain)
+    {
+        allBrain += brain;
+        PlayerPrefs.SetInt("allBrain", allBrain);
+    }
     // quest
 
     public void LoadQuestPrefs()

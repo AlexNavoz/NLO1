@@ -74,7 +74,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text E_rayText;
     public Slider E_raySlider;
     public Button E_rayButton;
-    float[] E_raypowers = new float[] { 10.0f, 10.5f, 11.0f, 11.5f, 12.0f, 12.5f, 13.0f, 13.5f, 14.0f, 15.0f };
+    float[] E_raypowers = new float[] { 7.0f, 8.5f, 9.0f, 10.5f, 12.0f, 12.5f, 13.0f, 13.5f, 14.0f, 15.0f };
     float[] E_gunPowers = new float[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1 };
 
     //Tank
@@ -218,25 +218,25 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         //engine
         E_engineSlider.value = PlayerPrefs.GetFloat("E_enginePower", 160.0f);
         E_EngineLevel = PlayerPrefs.GetInt("E_EngineLevel", 0);
-        E_enginePrice = prices[E_EngineLevel];
+        E_enginePrice = Eprices[E_EngineLevel];
         E_engineText.text = E_enginePrice.ToString();
 
         //Ray
-        E_raySlider.value = PlayerPrefs.GetFloat("E_rayLiftPower", 10.0f);
+        E_raySlider.value = PlayerPrefs.GetFloat("E_rayLiftPower", 7.0f);
         E_RayLevel = PlayerPrefs.GetInt("E_RayLevel", 0);
-        E_rayPrice = prices[E_RayLevel];
+        E_rayPrice = Eprices[E_RayLevel];
         E_rayText.text = E_rayPrice.ToString();
 
         //Tank
         E_tankSlider.value = PlayerPrefs.GetFloat("E_maxFuel", 40.0f);
         E_TankLevel = PlayerPrefs.GetInt("E_TankLevel", 0);
-        E_tankPrice = prices[E_TankLevel];
+        E_tankPrice = Eprices[E_TankLevel];
         E_tankText.text = E_tankPrice.ToString();
 
         //Shield
         E_shieldSlider.value = PlayerPrefs.GetFloat("E_forceShieldStrength", 20.0f);
         E_ShieldLevel = PlayerPrefs.GetInt("E_ShieldLevel", 0);
-        E_shieldPrice = prices[E_ShieldLevel];
+        E_shieldPrice = Eprices[E_ShieldLevel];
         E_shieldText.text = E_shieldPrice.ToString();
 
         //plate_______________________________________________________________________________________________________________________________
@@ -319,7 +319,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
 
         //_______________________________________________________________________SWITCH SHIP___________________
-        shipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
+        shipIndex = PlayerPrefs.GetInt("ShipIndex", -1);
         switch (shipIndex)
         {
             case -1:
@@ -706,13 +706,13 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void E_UpgradeEngine()
     {
         tunButton.Play();
-        E_enginePrice = prices[E_EngineLevel];
+        E_enginePrice = Eprices[E_EngineLevel];
         E_EngineLevel++;
         PlayerPrefs.SetInt("E_EngineLevel", E_EngineLevel);
         PlayerPrefs.SetFloat("E_enginePower", E_enginepowers[E_EngineLevel]);
         mainScript.SetMoney(-E_enginePrice);
         E_engineSlider.value = PlayerPrefs.GetFloat("E_enginePower", 160.0f);
-        E_enginePrice = prices[E_EngineLevel];
+        E_enginePrice = Eprices[E_EngineLevel];
         E_engineText.text = E_enginePrice.ToString();
 
         if (PlayerPrefs.GetInt("E_EngineLevel", 0) == 9)
@@ -724,14 +724,14 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void E_UpgradeRay()
     {
         tunButton.Play();
-        E_rayPrice = prices[E_RayLevel];
+        E_rayPrice = Eprices[E_RayLevel];
         E_RayLevel++;
         PlayerPrefs.SetInt("E_RayLevel", E_RayLevel);
         PlayerPrefs.SetFloat("E_rayLiftPower", E_raypowers[E_RayLevel]);
         PlayerPrefs.SetFloat("E_gunPower", E_gunPowers[E_RayLevel]);
         mainScript.SetMoney(-E_rayPrice);
         E_raySlider.value = PlayerPrefs.GetFloat("E_rayLiftPower", 10.0f);
-        E_rayPrice = prices[E_RayLevel];
+        E_rayPrice = Eprices[E_RayLevel];
         E_rayText.text = E_rayPrice.ToString();
 
         if (PlayerPrefs.GetInt("E_RayLevel", 0) == 9)
@@ -744,13 +744,13 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void E_UpgradeTank()
     {
         tunButton.Play();
-        E_tankPrice = prices[E_TankLevel];
+        E_tankPrice = Eprices[E_TankLevel];
         E_TankLevel++;
         PlayerPrefs.SetInt("E_TankLevel", E_TankLevel);
         PlayerPrefs.SetFloat("E_maxFuel", E_tankpowers[E_TankLevel]);
         mainScript.SetMoney(-E_tankPrice);
         E_tankSlider.value = PlayerPrefs.GetFloat("E_maxFuel", 40.0f);
-        E_tankPrice = prices[E_TankLevel];
+        E_tankPrice = Eprices[E_TankLevel];
         E_tankText.text = E_tankPrice.ToString();
 
         if (PlayerPrefs.GetInt("E_TankLevel", 0) == 9)
@@ -763,13 +763,13 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void E_UpgradeShield()
     {
         tunButton.Play();
-        E_shieldPrice = prices[E_ShieldLevel];
+        E_shieldPrice = Eprices[E_ShieldLevel];
         E_ShieldLevel++;
         PlayerPrefs.SetInt("E_ShieldLevel", E_ShieldLevel);
         PlayerPrefs.SetFloat("E_forceShieldStrength", E_shieldpowers[E_ShieldLevel]);
         mainScript.SetMoney(-E_shieldPrice);
         E_shieldSlider.value = PlayerPrefs.GetFloat("E_forceShieldStrength", 20.0f);
-        E_shieldPrice = prices[E_ShieldLevel];
+        E_shieldPrice = Eprices[E_ShieldLevel];
         E_shieldText.text = E_shieldPrice.ToString();
 
         if (PlayerPrefs.GetInt("E_ShieldLevel", 0) == 9)
@@ -1141,7 +1141,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
     public void CloseTheGame()
     {
-        //PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
+        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 

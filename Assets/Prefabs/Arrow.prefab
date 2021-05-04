@@ -234,7 +234,7 @@ MonoBehaviour:
   emission: {fileID: 0}
   flyTime: 0
   shootPower: 15
-  damage: 5
+  damage: 2
   massScale: 1
   impulse_angle: 0
 --- !u!96 &4693939898358900114
@@ -382,7 +382,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45, y: 4.27}
+    oldSize: {x: 0.45000002, y: 4.430769}
     newSize: {x: 0.7, y: 0.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -92,6 +92,10 @@ public class playerMoving : MonoBehaviour
         crimeIndex = 0;
         ShipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
         gameMode = PlayerPrefs.GetInt("GameMode", 0);
+        if (ShipIndex == -1)
+        {
+            mainScript.LoadEPrefs();
+        }
         if (ShipIndex == 0)                                            
         {
             mainScript.LoadPlatePrefs();
@@ -276,7 +280,7 @@ public class playerMoving : MonoBehaviour
                     {
                         if(joystick.Horizontal != 0|| joystick.Vertical != 0)
                         {
-                            rb.drag = 1;
+                            rb.drag = 2;
                             rb.AddForce(new Vector3(joystick.Horizontal, joystick.Vertical, 0) * EnginePower);
                             if (!jetSound1.isPlaying)
                                 jetSound1.Play();
@@ -284,7 +288,7 @@ public class playerMoving : MonoBehaviour
                         }
                         else
                         {
-                            rb.drag = 5;
+                            rb.drag = 7;
                             jetSound1.Stop();
                         }
                     }
@@ -699,6 +703,11 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.E_maxFuel;
             currentFuel = mainScript.E_maxFuel;
+            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
+            {
+                maxFuel *= 2;
+                currentFuel *= 2;
+            }
             fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
@@ -706,21 +715,36 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.P_maxFuel;
             currentFuel = mainScript.P_maxFuel;
+            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
+            {
+                maxFuel *= 2;
+                currentFuel *= 2;
+            }
             fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
         if (ShipIndex == 1)
         {
             maxFuel = mainScript.WS_maxFuel;
-            fuelBar.SetMaxTank(maxFuel);
             currentFuel = mainScript.WS_maxFuel;
+            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
+            {
+                maxFuel *= 2;
+                currentFuel *= 2;
+            }
+            fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
         if (ShipIndex == 2)
         {
             maxFuel = mainScript.K_maxFuel;
-            fuelBar.SetMaxTank(maxFuel);
             currentFuel = mainScript.K_maxFuel;
+            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
+            {
+                maxFuel *= 2;
+                currentFuel *= 2;
+            }
+            fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
     }
