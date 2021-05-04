@@ -2448,6 +2448,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   peace: 0
+  E_enginePower: 0
+  E_maxFuel: 0
+  E_gunPower: 0
+  E_rayLiftPower: 0
+  E_forceShieldStrength: 0
   P_enginePower: 0
   P_maxFuel: 0
   P_gunPower: 0
@@ -2466,6 +2471,8 @@ MonoBehaviour:
   P_fuelLevel: 0
   P_forceShieldLevel: 0
   P_cowCount: 0
+  easyShip: {fileID: 9088907898758553151, guid: 5093878fca17c3c45ad38b335126d65d,
+    type: 3}
   plate: {fileID: 9088907898758553151, guid: 05b7f69cf42663643ae3af3b9843f565, type: 3}
   warship: {fileID: 9088907898758553151, guid: 6051acea276ee2e44afb529a9e36d73c, type: 3}
   knippel: {fileID: 9088907898758553151, guid: f15b3c9bc3ff6a245a7e2daedaf09466, type: 3}
@@ -2475,7 +2482,12 @@ MonoBehaviour:
   shieldIsActive: 0
   campLevels: 
   collection: 0
+  milkCollection: 0
+  brainCollection: 0
+  allMilk: 0
+  allBrain: 0
   allMoney: 0
+  mixer: {fileID: 24300002, guid: d1c4f6cd9a6935249be8c187b93ed5d1, type: 2}
   questObjectCount: 0
   questObjectIndex: 0
   questObjectId: 0

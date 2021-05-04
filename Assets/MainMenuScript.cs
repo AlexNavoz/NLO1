@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour, AdsListener
@@ -16,6 +17,15 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public AudioSource clickButton;                       //Sounds
     public AudioSource menuOpenSound;
 
+    //Settings
+    public GameObject settingsPanel;
+    public Text onOffText;
+    public AudioMixerGroup mixer;
+    public Slider effectsSlider;
+    public Slider musicSlider;
+    //float musicVolume;
+    float effectsVolume;
+
     //Campaign
     public GameObject campaignPanel;
 
@@ -26,6 +36,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     public Button nextShipButton;
     public Button previousShipButton;
+    public GameObject EGaragePanel;
     public GameObject plateGaragePanel;
     public GameObject WSGaragePanel;
     public GameObject knippelGaragePanel;
@@ -33,12 +44,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public GameObject buyMoneyPanel;
     public GameObject chooseGameStagePanel;
 
+    int[] Eprices = new int[] { 2, 4, 8, 15, 20, 30, 40, 50, 60, 70 };
     int[] prices = new int[] { 200, 400, 800, 1500, 2000, 3000, 4000, 5000, 6000, 7000 };
     int[] WSprices = new int[] { 300, 600, 1000, 2000, 3000, 5000, 6000, 7000, 8000, 10000 };
     int[] Kprices = new int[] { 500, 1000, 2000, 4000, 6000, 8000, 10000, 15000, 20000, 30000 };
 
     //Buy ship
-
     public GameObject buyWSPanel;
     public Button buyWSButton;
     public GameObject buyWSButtonObj;
@@ -46,6 +57,41 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Button buyKButton;
     public GameObject buyKButtonObj;
 
+
+    //EasyShip variables_______________________________________________________________________________________________
+
+    //engine
+    int E_EngineLevel;
+    int E_enginePrice;
+    public Text E_engineText;
+    public Slider E_engineSlider;
+    public Button E_engineButton;
+    float[] E_enginepowers = new float[] { 160.0f, 170.0f, 180.0f, 190.0f, 200.0f, 210.0f, 220.0f, 240.0f, 270.0f, 300.0f };
+
+    //Ray
+    int E_RayLevel;
+    int E_rayPrice;
+    public Text E_rayText;
+    public Slider E_raySlider;
+    public Button E_rayButton;
+    float[] E_raypowers = new float[] { 10.0f, 10.5f, 11.0f, 11.5f, 12.0f, 12.5f, 13.0f, 13.5f, 14.0f, 15.0f };
+    float[] E_gunPowers = new float[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1 };
+
+    //Tank
+    int E_TankLevel;
+    int E_tankPrice;
+    public Text E_tankText;
+    public Slider E_tankSlider;
+    public Button E_tankButton;
+    float[] E_tankpowers = new float[] { 40.0f, 45.0f, 50.0f, 55.0f, 60.0f, 65.0f, 70.0f, 75.0f, 80.0f, 90.0f };
+
+    //Shield
+    int E_ShieldLevel;
+    int E_shieldPrice;
+    public Text E_shieldText;
+    public Slider E_shieldSlider;
+    public Button E_shieldButton;
+    float[] E_shieldpowers = new float[] { 20.0f, 25.0f, 30.0f, 40.0f, 50.0f, 60.0f, 70.0f, 80.0f, 100.0f, 130.0f };
 
     //plate variables_______________________________________________________________________________________________
 
@@ -162,13 +208,41 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
         mainScript.questButton.SetActive(false);
         rentPanel.SetActive(false);
-        
+        MusicVolumeOnStart();
+        EffectsVolumeOnStart();
+
         #region
+
+        //EasyShip_______________________________________________________________________________________________________________________________
+
+        //engine
+        E_engineSlider.value = PlayerPrefs.GetFloat("E_enginePower", 160.0f);
+        E_EngineLevel = PlayerPrefs.GetInt("E_EngineLevel", 0);
+        E_enginePrice = prices[E_EngineLevel];
+        E_engineText.text = E_enginePrice.ToString();
+
+        //Ray
+        E_raySlider.value = PlayerPrefs.GetFloat("E_rayLiftPower", 10.0f);
+        E_RayLevel = PlayerPrefs.GetInt("E_RayLevel", 0);
+        E_rayPrice = prices[E_RayLevel];
+        E_rayText.text = E_rayPrice.ToString();
+
+        //Tank
+        E_tankSlider.value = PlayerPrefs.GetFloat("E_maxFuel", 40.0f);
+        E_TankLevel = PlayerPrefs.GetInt("E_TankLevel", 0);
+        E_tankPrice = prices[E_TankLevel];
+        E_tankText.text = E_tankPrice.ToString();
+
+        //Shield
+        E_shieldSlider.value = PlayerPrefs.GetFloat("E_forceShieldStrength", 20.0f);
+        E_ShieldLevel = PlayerPrefs.GetInt("E_ShieldLevel", 0);
+        E_shieldPrice = prices[E_ShieldLevel];
+        E_shieldText.text = E_shieldPrice.ToString();
 
         //plate_______________________________________________________________________________________________________________________________
 
         //engine
-        P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 120.0f);
+        P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
         P_EngineLevel = PlayerPrefs.GetInt("P_EngineLevel", 0);
         P_enginePrice = prices[P_EngineLevel];
         P_engineText.text = P_enginePrice.ToString();
@@ -248,7 +322,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         shipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
         switch (shipIndex)
         {
-            case 0:
+            case -1:
                 nextShipButton.interactable = true;
                 previousShipButton.interactable = false;
                 buyWSPanel.SetActive(false);
@@ -259,13 +333,39 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                 {
                     knippelGaragePanel.SetActive(false);
                     WSGaragePanel.SetActive(false);
-                    plateGaragePanel.SetActive(true);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(true);
                 }
                 else
                 {
                     knippelGaragePanel.SetActive(false);
                     WSGaragePanel.SetActive(false);
                     plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
+                    buyKPanel.SetActive(false);
+                    buyWSPanel.SetActive(false);
+                }
+                break;
+            case 0:
+                nextShipButton.interactable = true;
+                previousShipButton.interactable = true;
+                buyWSPanel.SetActive(false);
+                buyWSButtonObj.SetActive(false);
+                buyKPanel.SetActive(false);
+                buyKButtonObj.SetActive(false);
+                if (garageIsOpen)
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(true);
+                    EGaragePanel.SetActive(false);
+                }
+                else
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
                     buyKPanel.SetActive(false);
                     buyWSPanel.SetActive(false);
                 }
@@ -280,6 +380,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                     knippelGaragePanel.SetActive(false);
                     WSGaragePanel.SetActive(true);
                     plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
                     if (PlayerPrefs.GetInt("WSBuy", 0) == 0)
                     {
                         buyWSPanel.SetActive(true);
@@ -294,6 +395,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                     knippelGaragePanel.SetActive(false);
                     WSGaragePanel.SetActive(false);
                     plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
                     buyKPanel.SetActive(false);
                     buyWSPanel.SetActive(false);
                 }
@@ -316,6 +418,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                     knippelGaragePanel.SetActive(true);
                     WSGaragePanel.SetActive(false);
                     plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
                     if (PlayerPrefs.GetInt("KBuy", 0) == 0)
                     {
                         buyKPanel.SetActive(true);
@@ -330,6 +433,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                     knippelGaragePanel.SetActive(false);
                     WSGaragePanel.SetActive(false);
                     plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
                     buyKPanel.SetActive(false);
                     buyWSPanel.SetActive(false);
                 }
@@ -361,7 +465,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     float changingPercent = 0;
     private void Update()
     {
-        mainCameraObj.transform.position = Vector3.Lerp(mainCameraObj.transform.position, transformPoints[shipIndex].position, 0.05f);
+        mainCameraObj.transform.position = Vector3.Lerp(mainCameraObj.transform.position, transformPoints[shipIndex+1].position, 0.05f);
 
         //MoneyButton
         bool doupdate = false; // Ќе обновл€ем значение лишний раз чтобы не грузить
@@ -402,6 +506,54 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         else rentByMoneyButton.interactable = true;
 
         #region
+        //_____________________________________________________________________EASYSHIP_________________________________________
+        //engine
+        if (E_enginePrice > mainScript.allMoney)
+        {
+            E_engineButton.interactable = false;
+        }
+        else E_engineButton.interactable = true;
+
+        if (E_EngineLevel == 9)
+        {
+            E_engineButton.gameObject.SetActive(false);
+        }
+
+
+
+        //ray
+        if (E_rayPrice > mainScript.allMoney)
+        {
+            E_rayButton.interactable = false;
+        }
+        else E_rayButton.interactable = true;
+
+        if (PlayerPrefs.GetInt("E_RayLevel", 0) == 9)
+        {
+            E_rayButton.gameObject.SetActive(false);
+        }
+
+        //tank
+        if (E_tankPrice > mainScript.allMoney)
+        {
+            E_tankButton.interactable = false;
+        }
+        else E_tankButton.interactable = true;
+        if (E_TankLevel == 9)
+        {
+            E_tankButton.gameObject.SetActive(false);
+        }
+
+        //shield
+        if (E_shieldPrice > mainScript.allMoney)
+        {
+            E_shieldButton.interactable = false;
+        }
+        else E_shieldButton.interactable = true;
+        if (E_ShieldLevel == 9)
+        {
+            E_shieldButton.gameObject.SetActive(false);
+        }
 
         //_____________________________________________________________________PLATE_________________________________________
         //engine
@@ -550,6 +702,82 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     //___________________________________________________TUNNING!!!_________________________________________________________________________________
     #region
 
+    //___________________________________________________________EASYSHIP_UPGRADE_____________________________________________________
+    public void E_UpgradeEngine()
+    {
+        tunButton.Play();
+        E_enginePrice = prices[E_EngineLevel];
+        E_EngineLevel++;
+        PlayerPrefs.SetInt("E_EngineLevel", E_EngineLevel);
+        PlayerPrefs.SetFloat("E_enginePower", E_enginepowers[E_EngineLevel]);
+        mainScript.SetMoney(-E_enginePrice);
+        E_engineSlider.value = PlayerPrefs.GetFloat("E_enginePower", 160.0f);
+        E_enginePrice = prices[E_EngineLevel];
+        E_engineText.text = E_enginePrice.ToString();
+
+        if (PlayerPrefs.GetInt("E_EngineLevel", 0) == 9)
+        {
+            E_engineButton.gameObject.SetActive(false);
+        }
+
+    }
+    public void E_UpgradeRay()
+    {
+        tunButton.Play();
+        E_rayPrice = prices[E_RayLevel];
+        E_RayLevel++;
+        PlayerPrefs.SetInt("E_RayLevel", E_RayLevel);
+        PlayerPrefs.SetFloat("E_rayLiftPower", E_raypowers[E_RayLevel]);
+        PlayerPrefs.SetFloat("E_gunPower", E_gunPowers[E_RayLevel]);
+        mainScript.SetMoney(-E_rayPrice);
+        E_raySlider.value = PlayerPrefs.GetFloat("E_rayLiftPower", 10.0f);
+        E_rayPrice = prices[E_RayLevel];
+        E_rayText.text = E_rayPrice.ToString();
+
+        if (PlayerPrefs.GetInt("E_RayLevel", 0) == 9)
+        {
+            E_rayButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void E_UpgradeTank()
+    {
+        tunButton.Play();
+        E_tankPrice = prices[E_TankLevel];
+        E_TankLevel++;
+        PlayerPrefs.SetInt("E_TankLevel", E_TankLevel);
+        PlayerPrefs.SetFloat("E_maxFuel", E_tankpowers[E_TankLevel]);
+        mainScript.SetMoney(-E_tankPrice);
+        E_tankSlider.value = PlayerPrefs.GetFloat("E_maxFuel", 40.0f);
+        E_tankPrice = prices[E_TankLevel];
+        E_tankText.text = E_tankPrice.ToString();
+
+        if (PlayerPrefs.GetInt("E_TankLevel", 0) == 9)
+        {
+            E_tankButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void E_UpgradeShield()
+    {
+        tunButton.Play();
+        E_shieldPrice = prices[E_ShieldLevel];
+        E_ShieldLevel++;
+        PlayerPrefs.SetInt("E_ShieldLevel", E_ShieldLevel);
+        PlayerPrefs.SetFloat("E_forceShieldStrength", E_shieldpowers[E_ShieldLevel]);
+        mainScript.SetMoney(-E_shieldPrice);
+        E_shieldSlider.value = PlayerPrefs.GetFloat("E_forceShieldStrength", 20.0f);
+        E_shieldPrice = prices[E_ShieldLevel];
+        E_shieldText.text = E_shieldPrice.ToString();
+
+        if (PlayerPrefs.GetInt("E_ShieldLevel", 0) == 9)
+        {
+            E_shieldButton.gameObject.SetActive(false);
+        }
+
+    }
     //___________________________________________________________PLATE_UPGRADE_____________________________________________________
     public void P_UpgradeEngine()
     {
@@ -923,11 +1151,37 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         shipIndex++;
         switch (shipIndex)
         {
+            case -1:
+                PlayerPrefs.SetInt("ShipIndex", -1);
+                mainScript.ShipIndex = -1;
+                nextShipButton.interactable = true;
+                previousShipButton.interactable = false;
+                buyWSPanel.SetActive(false);
+                buyWSButtonObj.SetActive(false);
+                buyKPanel.SetActive(false);
+                buyKButtonObj.SetActive(false);
+                if (garageIsOpen)
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(true);
+                }
+                else
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
+                    buyKPanel.SetActive(false);
+                    buyWSPanel.SetActive(false);
+                }
+                break;
             case 0:
                 PlayerPrefs.SetInt("ShipIndex", 0);
                 mainScript.ShipIndex = 0;
                 nextShipButton.interactable = true;
-                previousShipButton.interactable = false;
+                previousShipButton.interactable = true;
                 buyWSPanel.SetActive(false);
                 buyWSButtonObj.SetActive(false);
                 buyKPanel.SetActive(false);
@@ -1031,11 +1285,37 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         shipIndex--;
         switch (shipIndex)
         {
+            case -1:
+                PlayerPrefs.SetInt("ShipIndex", -1);
+                mainScript.ShipIndex = -1;
+                nextShipButton.interactable = true;
+                previousShipButton.interactable = false;
+                buyWSPanel.SetActive(false);
+                buyWSButtonObj.SetActive(false);
+                buyKPanel.SetActive(false);
+                buyKButtonObj.SetActive(false);
+                if (garageIsOpen)
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(true);
+                }
+                else
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
+                    buyKPanel.SetActive(false);
+                    buyWSPanel.SetActive(false);
+                }
+                break;
             case 0:
                 PlayerPrefs.SetInt("ShipIndex", 0);
                 mainScript.ShipIndex = 0;
                 nextShipButton.interactable = true;
-                previousShipButton.interactable = false;
+                previousShipButton.interactable = true;
                 buyWSPanel.SetActive(false);
                 buyWSButtonObj.SetActive(false);
                 buyKPanel.SetActive(false);
@@ -1140,9 +1420,33 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         garageIsOpen = true;
         switch (shipIndex)
         {
-            case 0:
+            case -1:
                 nextShipButton.interactable = true;
                 previousShipButton.interactable = false;
+                buyWSPanel.SetActive(false);
+                buyWSButtonObj.SetActive(false);
+                buyKPanel.SetActive(false);
+                buyKButtonObj.SetActive(false);
+                if (garageIsOpen)
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(true);
+                }
+                else
+                {
+                    knippelGaragePanel.SetActive(false);
+                    WSGaragePanel.SetActive(false);
+                    plateGaragePanel.SetActive(false);
+                    EGaragePanel.SetActive(false);
+                    buyKPanel.SetActive(false);
+                    buyWSPanel.SetActive(false);
+                }
+                break;
+            case 0:
+                nextShipButton.interactable = true;
+                previousShipButton.interactable = true;
                 buyWSPanel.SetActive(false);
                 buyWSButtonObj.SetActive(false);
                 buyKPanel.SetActive(false);
@@ -1241,8 +1545,74 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     {
         clickButton.Play();
         garageIsOpen = false;
+        EGaragePanel.SetActive(false);
         plateGaragePanel.SetActive(false);
         WSGaragePanel.SetActive(false);
         knippelGaragePanel.SetActive(false);
     }
+
+    //____Settings
+    #region
+
+    public void OpenSettings()
+    {
+        settingsPanel.SetActive(true);
+        if (PlayerPrefs.GetInt("GameMode", 0) == 0)
+        {
+            onOffText.text = "EASY";
+        }
+        if (PlayerPrefs.GetInt("GameMode", 0) == 1)
+        {
+            onOffText.text = "HARD";
+        }
     }
+    public void CloseSettings()
+    {
+        float musicVolume;
+        settingsPanel.SetActive(false);
+        mixer.audioMixer.GetFloat("Music", out musicVolume);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+        Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 0));
+    }
+    public void ChooseControlsMode()
+    {
+        if(PlayerPrefs.GetInt("GameMode", 0) == 0)
+        {
+            PlayerPrefs.SetInt("GameMode", 1);
+            onOffText.text = "HARD";
+        }
+        else if (PlayerPrefs.GetInt("GameMode", 0) == 1)
+        {
+            PlayerPrefs.SetInt("GameMode", 0);
+            onOffText.text = "EASY";
+        }
+    }
+    public void ChangeMusicVolume(float volume)
+    {
+        mixer.audioMixer.SetFloat("Music", volume);
+    }
+    void MusicVolumeOnStart()
+    {
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0);
+        
+        Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 0));
+        Debug.Log(musicSlider.value);
+
+        float musicVolume;
+        mixer.audioMixer.GetFloat("Music", out musicVolume);
+        Debug.Log("mixer"+ musicVolume);
+
+    }
+    public void ChangeEffectsVolume(float volume)
+    {
+        mixer.audioMixer.SetFloat("Effects", volume);
+        PlayerPrefs.SetFloat("EffectsVolume", volume);
+    }
+    void EffectsVolumeOnStart()
+    {
+        mixer.audioMixer.SetFloat("Effects", PlayerPrefs.GetFloat("EffectsVolume", 0));
+        musicSlider.value = PlayerPrefs.GetFloat("EffectsVolume", 0);
+    }
+
+    #endregion
+}

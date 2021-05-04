@@ -51,10 +51,13 @@ public class ForceShieldScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if(collision.gameObject.layer == 9&&mainScript.levelIndex == 1)
+        if(collision.gameObject.layer == 9)
         {
-            
-            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled && i ==0)
+            if (currentHP > 5)
+            {
+                TakingDamage(3);
+            }
+            if ( playermoving.currentFuel <= 0 && !playermoving.alreadyRefueled && i ==0 && mainScript.levelIndex == 1)
             {
                 i++;
                 OpenRefuelPanel();
@@ -81,6 +84,26 @@ public class ForceShieldScript : MonoBehaviour
     }
     public void SetHPValue()
     {
+        if (mainScript.ShipIndex == -1)
+        {
+            maxHP = mainScript.E_forceShieldStrength;
+            if (currentHP < maxHP)
+            {
+                mainScript.E_forceShieldStrength = maxHP;
+                fsb.SetMaxHP(maxHP);
+
+                fsb.SetValue(currentHP);
+
+            }
+            else
+            {
+                fsb.SetMaxHP(maxHP);
+                currentHP = maxHP;
+                fsb.SetValue(currentHP);
+
+                mainScript.E_forceShieldStrength = maxHP;
+            }
+        }
         if (mainScript.ShipIndex == 0)
         {
             maxHP = mainScript.P_forceShieldStrength;

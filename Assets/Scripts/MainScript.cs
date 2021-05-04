@@ -4,11 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
+using UnityEngine.Audio;
 using UnityEngine.Analytics;
 
 public class MainScript : MonoBehaviour, IUnityAdsListener
 {
     public bool peace = false;
+    //easyShip variables
+    public float E_enginePower;
+    public float E_maxFuel;
+    public float E_gunPower;
+    public float E_rayLiftPower;
+    public float E_forceShieldStrength;
+
     //plate variables
     public float P_enginePower;
     public float P_maxFuel;
@@ -38,6 +46,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     //starting game
     Vector3 startPos;
     Transform startPosTransform;
+    public GameObject easyShip;
     public GameObject plate;
     public GameObject warship;
     public GameObject knippel;
@@ -52,7 +61,14 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     //money variables
     string lname;
     public int collection;
+    public int milkCollection;
+    public int brainCollection;
+    public int allMilk;
+    public int allBrain;
     public int allMoney;
+
+    //settings variables
+    public AudioMixerGroup mixer;
 
     //GPG_CloudSaveSystem cloudsaves;
 
@@ -88,19 +104,20 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         //cloudsaves = new GPG_CloudSaveSystem();
         //cloudsaves.SaveToCloud();
+        LoadEPrefs();
         LoadPlatePrefs();
         LoadWSPrefs();
         LoadKPrefs();
         LoadQuestPrefs();
 
-        ShipIndex = PlayerPrefs.GetInt("ShipIndex",0);
+        ShipIndex = PlayerPrefs.GetInt("ShipIndex",-1);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
 
         UpdateStupidTimeMultiplyingConstant();
 
         //Analytics.initializeOnStartup = false;
         //Analytics.enabled = false;
-
+        mixer.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume", 0));
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, testMode);
     }
@@ -113,6 +130,10 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         startPos = new Vector3(startPosTransform.position.x, startPosTransform.position.y, startPosTransform.position.z);
 
         //change after garage menu
+        if (ShipIndex == -1)
+        {
+            Instantiate(easyShip, startPos, Quaternion.identity);
+        }
         if (ShipIndex == 0)
         {
             Instantiate(plate, startPos, Quaternion.identity);
@@ -148,6 +169,15 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         PlayerPrefs.SetInt("questIdSeed", questIdSeed);
     }
 
+    //__________________________________________________________________________EasyShip______________________________________________________________________
+    public void LoadEPrefs()
+    {
+        E_enginePower = PlayerPrefs.GetFloat("E_enginePower", 160.0f);
+        E_maxFuel = PlayerPrefs.GetFloat("E_maxFuel", 40.0f);
+        E_rayLiftPower = PlayerPrefs.GetFloat("E_rayLiftPower", 10.0f);
+        E_gunPower = PlayerPrefs.GetFloat("E_gunPower", 0.1f);
+        E_forceShieldStrength = PlayerPrefs.GetFloat("E_forceShieldStrength", 20.0f);
+    }
     //__________________________________________________________________________PLATE______________________________________________________________________
     public void LoadPlatePrefs()
     {

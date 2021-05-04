@@ -33,7 +33,8 @@ public class playerMoving : MonoBehaviour
     public AudioSource powerUpSound;
     public ParticleSystem shootParticle;
     bool powerUp;
-
+    // EasyShip Variables
+    public Joystick joystick;
     // Plate Variables!!!
     [SerializeField] GameObject Plate_Variables_______;
     public PressedButton leftButton;
@@ -77,8 +78,10 @@ public class playerMoving : MonoBehaviour
     //Criminal Stars
     public GameObject crimePanel;
     public GameObject[] criminalStars;
-    
     public int crimeIndex = 0;
+
+    //Game Mode settings
+    int gameMode;
 
     private void Awake()
     {
@@ -88,6 +91,7 @@ public class playerMoving : MonoBehaviour
         mainScript.shieldIsActive = true;
         crimeIndex = 0;
         ShipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
+        gameMode = PlayerPrefs.GetInt("GameMode", 0);
         if (ShipIndex == 0)                                            
         {
             mainScript.LoadPlatePrefs();
@@ -105,28 +109,73 @@ public class playerMoving : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
+        switch (gameMode)
+        {
+            case 0:
+                if (ShipIndex == -1)
+                {
+                    EnginePower = mainScript.E_enginePower * 1.5f;
+                    gunPower = mainScript.E_gunPower * 2;
+                }
+                if (ShipIndex == 0)
+                {
+                    EnginePower = mainScript.P_enginePower * 1.5f;
+                    gunPower = mainScript.P_gunPower * 2;
+                }
+                if (ShipIndex == 1)
+                {
+                    EnginePower = mainScript.WS_enginePower * 1.5f;
+                    gunPower = mainScript.WS_gunPower * 2;
+                    leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
+                }
+                if (ShipIndex == 2)
+                {
+                    EnginePower = mainScript.K_enginePower * 1.5f;
+                    gunPower = mainScript.K_gunPower * 2;
+                }
+                if (ShipIndex != -1)
+                {
+                    leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
+                    rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
+                    rbLeft = leftEngine.GetComponent<Rigidbody2D>();
+                    rbRight = rightEngine.GetComponent<Rigidbody2D>();
+                }
+                break;
+            case 1:
+                if (ShipIndex == -1)
+                {
+                    EnginePower = mainScript.E_enginePower;
+                    gunPower = mainScript.E_gunPower;
+                }
+                if (ShipIndex == 0)
+                {
+                    EnginePower = mainScript.P_enginePower;
+                    gunPower = mainScript.P_gunPower;
+                }
+                if (ShipIndex == 1)
+                {
+                    EnginePower = mainScript.WS_enginePower;
+                    gunPower = mainScript.WS_gunPower;
+                    leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
+                    rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
+                }
+                if (ShipIndex == 2)
+                {
+                    EnginePower = mainScript.K_enginePower;
+                    gunPower = mainScript.K_gunPower;
+                }
+                if (ShipIndex != -1)
+                {
+                    leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
+                    rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
+                    rbLeft = leftEngine.GetComponent<Rigidbody2D>();
+                    rbRight = rightEngine.GetComponent<Rigidbody2D>();
+                }
+                break;
+        }
 
-        if (ShipIndex == 0)
-        {
-            EnginePower = mainScript.P_enginePower;
-            gunPower = mainScript.P_gunPower;
-        }
-        if (ShipIndex == 1)                                         
-        {
-            EnginePower = mainScript.WS_enginePower;
-            gunPower = mainScript.WS_gunPower;
-            leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
-            rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
-        }
-        if (ShipIndex == 2)
-        {
-            EnginePower = mainScript.K_enginePower;
-            gunPower = mainScript.K_gunPower;
-        }
-        leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
-        rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
-        rbLeft = leftEngine.GetComponent<Rigidbody2D>();
-        rbRight = rightEngine.GetComponent<Rigidbody2D>();
+        
+
         lname = SceneManager.GetActiveScene().name;
         forceShield = GameObject.FindGameObjectWithTag("ForceShield");
         fsScript = forceShield.GetComponent<ForceShieldScript>();
@@ -215,7 +264,7 @@ public class playerMoving : MonoBehaviour
                 }
                 else
                 {
-                    if (ShipIndex != 2)
+                    if (ShipIndex != 2|| ShipIndex !=-1)
                     {
                         rb.gravityScale = 1;
                     }
@@ -223,6 +272,22 @@ public class playerMoving : MonoBehaviour
                 }
                 if (currentFuel > 0)
                 {
+                    if(ShipIndex == -1)
+                    {
+                        if(joystick.Horizontal != 0|| joystick.Vertical != 0)
+                        {
+                            rb.drag = 1;
+                            rb.AddForce(new Vector3(joystick.Horizontal, joystick.Vertical, 0) * EnginePower);
+                            if (!jetSound1.isPlaying)
+                                jetSound1.Play();
+                            FuelConsampsion(consumption);
+                        }
+                        else
+                        {
+                            rb.drag = 5;
+                            jetSound1.Stop();
+                        }
+                    }
                     if (ShipIndex == 0)
                     {
                         if (Input.GetKey(KeyCode.A) || leftButton.isPressed)
@@ -352,15 +417,20 @@ public class playerMoving : MonoBehaviour
                         {
                             rb.drag = 20;
                         }
-                    }
+                }
+                    
                 }
                 else
                 {
+                    if(ShipIndex != -1)
+                    {
+                        leftParticle.Stop();
+                        rightParticle.Stop();
+                        jetSound2.Stop();
+                    }
                     rb.drag = 1;
-                    leftParticle.Stop();
-                    rightParticle.Stop();
                     jetSound1.Stop();
-                    jetSound2.Stop();
+
                     if (ShipIndex == 2)
                     {
                         rb.gravityScale = 1;
@@ -369,10 +439,13 @@ public class playerMoving : MonoBehaviour
             }
             if (isDead)
             {
-                leftParticle.Stop();
-                rightParticle.Stop();
+                if (ShipIndex != -1)
+                {
+                    leftParticle.Stop();
+                    rightParticle.Stop();
+                    jetSound2.Stop();
+                }
                 jetSound1.Stop();
-                jetSound2.Stop();
                 if (ShipIndex == 2)
                 {
                     rb.gravityScale = 1;
@@ -392,10 +465,13 @@ public class playerMoving : MonoBehaviour
         {
             rb.drag = 20;
             rb.gravityScale = 0;
-            leftParticle.Stop();
-            rightParticle.Stop();
+            if (ShipIndex != -1)
+            {
+                leftParticle.Stop();
+                rightParticle.Stop();
+                jetSound2.Stop();
+            }
             jetSound1.Stop();
-            jetSound2.Stop();
         }
     }
 
@@ -619,6 +695,13 @@ public class playerMoving : MonoBehaviour
     }
     public void SetFuelValues()
     {
+        if (ShipIndex == -1)
+        {
+            maxFuel = mainScript.E_maxFuel;
+            currentFuel = mainScript.E_maxFuel;
+            fuelBar.SetMaxTank(maxFuel);
+            fuelBar.SetValue(currentFuel);
+        }
         if (ShipIndex == 0)
         {
             maxFuel = mainScript.P_maxFuel;
@@ -642,6 +725,12 @@ public class playerMoving : MonoBehaviour
         }
     }
 
+    public void ReloadEPrefs()
+    {
+        mainScript.LoadEPrefs();
+        EnginePower = mainScript.E_enginePower;
+        maxFuel = mainScript.E_maxFuel;
+    }
     public void ReloadPlatePrefs()
     {
         mainScript.LoadPlatePrefs();
