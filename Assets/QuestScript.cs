@@ -9,7 +9,8 @@ public class UFOQuest
 {
     public int targetIndex;
     public int targetCount;
-    public int reward;
+    public int milkReward;
+    public int brainsReward;
     public Sprite icon;
 };
 
@@ -24,7 +25,8 @@ public class QuestScript : MonoBehaviour, AdsListener
     public Image miniIcon;
     MainScript mainScript;
     public Text howMuchNeedText;
-    public Text rewardText;
+    public Text milkRewardText;
+    public Text brainsRewardText;
     public Text progressText;
     public Text timeText;
 
@@ -34,7 +36,8 @@ public class QuestScript : MonoBehaviour, AdsListener
     public GameObject completeTextBtn;
 
     int howMuchNeed;
-    int reward;
+    int milkReward;
+    int brainsReward;
     //public int objectIndex;
 
     public GameObject questPanel;
@@ -67,7 +70,8 @@ public class QuestScript : MonoBehaviour, AdsListener
         }
 
         howMuchNeed = getQuestById(idToLoad).targetCount;
-        reward = getQuestById(idToLoad).reward;
+        milkReward = getQuestById(idToLoad).milkReward;
+        brainsReward = getQuestById(idToLoad).brainsReward;
         mainScript.questObjectIndex = getQuestById(idToLoad).targetIndex;
         targetIcon.sprite = getQuestById(idToLoad).icon;
         miniIcon.sprite = getQuestById(idToLoad).icon;
@@ -106,7 +110,8 @@ public class QuestScript : MonoBehaviour, AdsListener
         int timeToNextQuest = ((((int)DateTime.Now.TimeOfDay.TotalSeconds) / questPeriod) + 1) * questPeriod - 1 - (int)DateTime.Now.TimeOfDay.TotalSeconds;
         timeText.text = questPanelTime.text = (timeToNextQuest / (60 * 60)).ToString("D2") + ":" + ((timeToNextQuest / 60 ) % 60).ToString("D2") + ":" + (timeToNextQuest % 60).ToString("D2");
 
-        rewardText.text = reward.ToString();
+        milkRewardText.text = milkReward.ToString();
+        brainsRewardText.text = brainsReward.ToString();
         progressText.text = (mainScript.questObjectCount.ToString() + "/" + howMuchNeed.ToString());
         questPanelProgress.text = progressText.text;
         {
@@ -130,7 +135,8 @@ public class QuestScript : MonoBehaviour, AdsListener
         if (questCompleted && !alreadyRewarded)
         {
             alreadyRewarded = true;
-            mainScript.SetMoney(reward);
+            mainScript.SetMilk(milkReward);
+            mainScript.SetBrains(brainsReward);
             //rewardText.text = completeTextBtn.GetComponent<Text>().text;
         }
     }

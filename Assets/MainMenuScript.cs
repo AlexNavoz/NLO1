@@ -10,8 +10,10 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     GameObject mainCameraObj;
     bool garageIsOpen;
 
-    public Text moneyText;
-    int currentMoney;
+    public Text milkText;
+    public Text brainsText;
+    int currentMilk;
+    int currentBrains;
 
     public AudioSource tunButton;
     public AudioSource clickButton;                       //Sounds
@@ -45,9 +47,9 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public GameObject chooseGameStagePanel;
 
     int[] Eprices = new int[] { 2, 4, 8, 15, 20, 30, 40, 50, 60, 70 };
-    int[] prices = new int[] { 200, 400, 800, 1500, 2000, 3000, 4000, 5000, 6000, 7000 };
-    int[] WSprices = new int[] { 300, 600, 1000, 2000, 3000, 5000, 6000, 7000, 8000, 10000 };
-    int[] Kprices = new int[] { 500, 1000, 2000, 4000, 6000, 8000, 10000, 15000, 20000, 30000 };
+    int[] prices = new int[] { 2, 4, 8, 15, 20, 30, 40, 50, 60, 70 };
+    int[] WSprices = new int[] { 3, 6, 10, 20, 30, 50, 60, 70, 80, 100 };
+    int[] Kprices = new int[] { 5, 10, 20, 40, 60, 80, 100, 150, 200, 300 };
 
     //Buy ship
     public GameObject buyWSPanel;
@@ -457,8 +459,10 @@ public class MainMenuScript : MonoBehaviour, AdsListener
                 CampaignButtonClick();
                 break;
         }
-        currentMoney = mainScript.allMoney;
-        moneyText.text = currentMoney.ToString();
+        currentMilk = mainScript.allMilk;
+        milkText.text = currentMilk.ToString();
+        currentBrains = mainScript.allBrains;
+        brainsText.text = currentBrains.ToString();
 
     }
 
@@ -467,9 +471,9 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     {
         mainCameraObj.transform.position = Vector3.Lerp(mainCameraObj.transform.position, transformPoints[shipIndex+1].position, 0.05f);
 
-        //MoneyButton
+        //MilkButton
         bool doupdate = false; // Не обновляем значение лишний раз чтобы не грузить
-        if (currentMoney != mainScript.allMoney && changingPercent < 1.0f)
+        if (currentMilk != mainScript.allMilk && changingPercent < 1.0f)
         {
             changingPercent += Time.deltaTime / (1.0f); // Подгоночный коэффицент, количество секунд для прокрутки денег
             doupdate = true;
@@ -477,14 +481,29 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         else {
             if (changingPercent != 0)
                 doupdate = true;
-            currentMoney = mainScript.allMoney;
+            currentMilk = mainScript.allMilk;
             changingPercent = 0;
         }
         if(doupdate)
-            moneyText.text = ((int)Mathf.Lerp((float)currentMoney,(float)mainScript.allMoney,changingPercent)).ToString();
+            milkText.text = ((int)Mathf.Lerp((float)currentMilk,(float)mainScript.allMilk,changingPercent)).ToString();
+
+        //BrainsButton
+        if (currentBrains != mainScript.allBrains && changingPercent < 1.0f)
+        {
+            changingPercent += Time.deltaTime / (1.0f); // Подгоночный коэффицент, количество секунд для прокрутки денег
+            doupdate = true;
+        }
+        else {
+            if (changingPercent != 0)
+                doupdate = true;
+            currentBrains = mainScript.allBrains;
+            changingPercent = 0;
+        }
+        if(doupdate)
+            brainsText.text = ((int)Mathf.Lerp((float)currentBrains, (float)mainScript.allBrains, changingPercent)).ToString();
 
         //Buy ships
-        if (mainScript.allMoney < 10000)
+        if (mainScript.allMilk < 100)
         {
             buyWSButton.interactable = false;
         }
@@ -493,13 +512,13 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
         //_______________________Knippel Buy
 
-        if (mainScript.allMoney < 100000)
+        if (mainScript.allMilk < 1000)
         {
             buyKButton.interactable = false;
         }
         else buyKButton.interactable = true;
 
-        if (mainScript.allMoney < 1000)
+        if (mainScript.allMilk < 10)
         {
             rentByMoneyButton.interactable = false;
         }
@@ -508,7 +527,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         #region
         //_____________________________________________________________________EASYSHIP_________________________________________
         //engine
-        if (E_enginePrice > mainScript.allMoney)
+        if (E_enginePrice > mainScript.allBrains)
         {
             E_engineButton.interactable = false;
         }
@@ -522,7 +541,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
 
         //ray
-        if (E_rayPrice > mainScript.allMoney)
+        if (E_rayPrice > mainScript.allBrains)
         {
             E_rayButton.interactable = false;
         }
@@ -534,7 +553,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //tank
-        if (E_tankPrice > mainScript.allMoney)
+        if (E_tankPrice > mainScript.allBrains)
         {
             E_tankButton.interactable = false;
         }
@@ -545,7 +564,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //shield
-        if (E_shieldPrice > mainScript.allMoney)
+        if (E_shieldPrice > mainScript.allBrains)
         {
             E_shieldButton.interactable = false;
         }
@@ -557,7 +576,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
         //_____________________________________________________________________PLATE_________________________________________
         //engine
-        if (P_enginePrice > mainScript.allMoney)
+        if (P_enginePrice > mainScript.allBrains)
         {
             P_engineButton.interactable = false;
         }
@@ -571,7 +590,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
 
         //ray
-        if (P_rayPrice > mainScript.allMoney)
+        if (P_rayPrice > mainScript.allBrains)
         {
             P_rayButton.interactable = false;
         }
@@ -583,7 +602,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //tank
-        if (P_tankPrice > mainScript.allMoney)
+        if (P_tankPrice > mainScript.allBrains)
         {
             P_tankButton.interactable = false;
         }
@@ -594,7 +613,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //shield
-        if (P_shieldPrice > mainScript.allMoney)
+        if (P_shieldPrice > mainScript.allBrains)
         {
             P_shieldButton.interactable = false;
         }
@@ -607,7 +626,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         //___________________________________________________________________________WARSHIP____________________________________________________
 
         //engine
-        if (WS_enginePrice > mainScript.allMoney)
+        if (WS_enginePrice > mainScript.allBrains)
         {
             WS_engineButton.interactable = false;
         }
@@ -619,7 +638,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
 
         //ray
-        if (WS_rayPrice > mainScript.allMoney)
+        if (WS_rayPrice > mainScript.allBrains)
         {
             WS_rayButton.interactable = false;
         }
@@ -630,7 +649,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //tank
-        if (WS_tankPrice > mainScript.allMoney)
+        if (WS_tankPrice > mainScript.allBrains)
         {
             WS_tankButton.interactable = false;
         }
@@ -641,7 +660,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //shield
-        if (WS_shieldPrice > mainScript.allMoney)
+        if (WS_shieldPrice > mainScript.allBrains)
         {
             WS_shieldButton.interactable = false;
         }
@@ -653,7 +672,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         //___________________________________________________________________________Knippel____________________________________________________
 
         //engine
-        if (K_enginePrice > mainScript.allMoney)
+        if (K_enginePrice > mainScript.allBrains)
         {
             K_engineButton.interactable = false;
         }
@@ -665,7 +684,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
 
         //ray
-        if (K_rayPrice > mainScript.allMoney)
+        if (K_rayPrice > mainScript.allBrains)
         {
             K_rayButton.interactable = false;
         }
@@ -676,7 +695,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //tank
-        if (K_tankPrice > mainScript.allMoney)
+        if (K_tankPrice > mainScript.allBrains)
         {
             K_tankButton.interactable = false;
         }
@@ -687,7 +706,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
 
         //shield
-        if (K_shieldPrice > mainScript.allMoney)
+        if (K_shieldPrice > mainScript.allBrains)
         {
             K_shieldButton.interactable = false;
         }
@@ -710,7 +729,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         E_EngineLevel++;
         PlayerPrefs.SetInt("E_EngineLevel", E_EngineLevel);
         PlayerPrefs.SetFloat("E_enginePower", E_enginepowers[E_EngineLevel]);
-        mainScript.SetMoney(-E_enginePrice);
+        mainScript.SetBrains(-E_enginePrice);
         E_engineSlider.value = PlayerPrefs.GetFloat("E_enginePower", 160.0f);
         E_enginePrice = Eprices[E_EngineLevel];
         E_engineText.text = E_enginePrice.ToString();
@@ -729,7 +748,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("E_RayLevel", E_RayLevel);
         PlayerPrefs.SetFloat("E_rayLiftPower", E_raypowers[E_RayLevel]);
         PlayerPrefs.SetFloat("E_gunPower", E_gunPowers[E_RayLevel]);
-        mainScript.SetMoney(-E_rayPrice);
+        mainScript.SetBrains(-E_rayPrice);
         E_raySlider.value = PlayerPrefs.GetFloat("E_rayLiftPower", 10.0f);
         E_rayPrice = Eprices[E_RayLevel];
         E_rayText.text = E_rayPrice.ToString();
@@ -748,7 +767,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         E_TankLevel++;
         PlayerPrefs.SetInt("E_TankLevel", E_TankLevel);
         PlayerPrefs.SetFloat("E_maxFuel", E_tankpowers[E_TankLevel]);
-        mainScript.SetMoney(-E_tankPrice);
+        mainScript.SetBrains(-E_tankPrice);
         E_tankSlider.value = PlayerPrefs.GetFloat("E_maxFuel", 40.0f);
         E_tankPrice = Eprices[E_TankLevel];
         E_tankText.text = E_tankPrice.ToString();
@@ -767,7 +786,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         E_ShieldLevel++;
         PlayerPrefs.SetInt("E_ShieldLevel", E_ShieldLevel);
         PlayerPrefs.SetFloat("E_forceShieldStrength", E_shieldpowers[E_ShieldLevel]);
-        mainScript.SetMoney(-E_shieldPrice);
+        mainScript.SetBrains(-E_shieldPrice);
         E_shieldSlider.value = PlayerPrefs.GetFloat("E_forceShieldStrength", 20.0f);
         E_shieldPrice = Eprices[E_ShieldLevel];
         E_shieldText.text = E_shieldPrice.ToString();
@@ -786,7 +805,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         P_EngineLevel++;
         PlayerPrefs.SetInt("P_EngineLevel", P_EngineLevel);
         PlayerPrefs.SetFloat("P_enginePower", P_enginepowers[P_EngineLevel]);
-        mainScript.SetMoney(-P_enginePrice);
+        mainScript.SetBrains(-P_enginePrice);
         P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
         P_enginePrice = prices[P_EngineLevel];
         P_engineText.text = P_enginePrice.ToString();
@@ -805,7 +824,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("P_RayLevel", P_RayLevel);
         PlayerPrefs.SetFloat("P_rayLiftPower", P_raypowers[P_RayLevel]);
         PlayerPrefs.SetFloat("P_gunPower", P_gunPowers[P_RayLevel]);
-        mainScript.SetMoney(-P_rayPrice);
+        mainScript.SetBrains(-P_rayPrice);
         P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 10.0f);
         P_rayPrice = prices[P_RayLevel];
         P_rayText.text = P_rayPrice.ToString();
@@ -824,7 +843,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         P_TankLevel++;
         PlayerPrefs.SetInt("P_TankLevel", P_TankLevel);
         PlayerPrefs.SetFloat("P_maxFuel", P_tankpowers[P_TankLevel]);
-        mainScript.SetMoney(-P_tankPrice);
+        mainScript.SetBrains(-P_tankPrice);
         P_tankSlider.value = PlayerPrefs.GetFloat("P_maxFuel", 40.0f);
         P_tankPrice = prices[P_TankLevel];
         P_tankText.text = P_tankPrice.ToString();
@@ -843,7 +862,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         P_ShieldLevel++;
         PlayerPrefs.SetInt("P_ShieldLevel", P_ShieldLevel);
         PlayerPrefs.SetFloat("P_forceShieldStrength", P_shieldpowers[P_ShieldLevel]);
-        mainScript.SetMoney(-P_shieldPrice);
+        mainScript.SetBrains(-P_shieldPrice);
         P_shieldSlider.value = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
         P_shieldPrice = prices[P_ShieldLevel];
         P_shieldText.text = P_shieldPrice.ToString();
@@ -864,7 +883,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         WS_EngineLevel++;
         PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
         PlayerPrefs.SetFloat("WS_enginePower", WS_enginepowers[WS_EngineLevel]);
-        mainScript.SetMoney(-WS_enginePrice);
+        mainScript.SetBrains(-WS_enginePrice);
         WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 100.0f);
         WS_enginePrice = WSprices[WS_EngineLevel];
         WS_engineText.text = WS_enginePrice.ToString();
@@ -883,7 +902,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("WS_RayLevel", WS_RayLevel);
         PlayerPrefs.SetFloat("WS_rayLiftPower", WS_raypowers[WS_RayLevel]);
         PlayerPrefs.SetFloat("WS_gunPower", WS_gunPowers[WS_RayLevel]);
-        mainScript.SetMoney(-WS_rayPrice);
+        mainScript.SetBrains(-WS_rayPrice);
         WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 10.0f);
         WS_rayPrice = WSprices[WS_RayLevel];
         WS_rayText.text = WS_rayPrice.ToString();
@@ -902,7 +921,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         WS_TankLevel++;
         PlayerPrefs.SetInt("WS_TankLevel", WS_TankLevel);
         PlayerPrefs.SetFloat("WS_maxFuel", WS_tankpowers[WS_TankLevel]);
-        mainScript.SetMoney(-WS_tankPrice);
+        mainScript.SetBrains(-WS_tankPrice);
         WS_tankSlider.value = PlayerPrefs.GetFloat("WS_maxFuel", 100.0f);
         WS_tankPrice = WSprices[WS_TankLevel];
         WS_tankText.text = WS_tankPrice.ToString();
@@ -921,7 +940,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         WS_ShieldLevel++;
         PlayerPrefs.SetInt("WS_ShieldLevel", WS_ShieldLevel);
         PlayerPrefs.SetFloat("WS_forceShieldStrength", WS_shieldpowers[WS_ShieldLevel]);
-        mainScript.SetMoney(-WS_shieldPrice);
+        mainScript.SetBrains(-WS_shieldPrice);
         WS_shieldSlider.value = PlayerPrefs.GetFloat("WS_forceShieldStrength", 20.0f);
         WS_shieldPrice = WSprices[WS_ShieldLevel];
         WS_shieldText.text = WS_shieldPrice.ToString();
@@ -942,7 +961,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         K_EngineLevel++;
         PlayerPrefs.SetInt("K_EngineLevel", K_EngineLevel);
         PlayerPrefs.SetFloat("K_enginePower", K_enginepowers[K_EngineLevel]);
-        mainScript.SetMoney(-K_enginePrice);
+        mainScript.SetBrains(-K_enginePrice);
         K_engineSlider.value = PlayerPrefs.GetFloat("K_enginePower", 100.0f);
         K_enginePrice = Kprices[K_EngineLevel];
         K_engineText.text = K_enginePrice.ToString();
@@ -961,7 +980,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("K_RayLevel", K_RayLevel);
         PlayerPrefs.SetFloat("K_rayLiftPower", K_raypowers[K_RayLevel]);
         PlayerPrefs.SetFloat("K_gunPower", K_gunPowers[K_RayLevel]);
-        mainScript.SetMoney(-K_rayPrice);
+        mainScript.SetBrains(-K_rayPrice);
         K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 10.0f);
         K_rayPrice = Kprices[K_RayLevel];
         K_rayText.text = K_rayPrice.ToString();
@@ -980,7 +999,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         K_TankLevel++;
         PlayerPrefs.SetInt("K_TankLevel", K_TankLevel);
         PlayerPrefs.SetFloat("K_maxFuel", K_tankpowers[K_TankLevel]);
-        mainScript.SetMoney(-K_tankPrice);
+        mainScript.SetBrains(-K_tankPrice);
         K_tankSlider.value = PlayerPrefs.GetFloat("K_maxFuel", 50.0f);
         K_tankPrice = Kprices[K_TankLevel];
         K_tankText.text = K_tankPrice.ToString();
@@ -999,7 +1018,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         K_ShieldLevel++;
         PlayerPrefs.SetInt("K_ShieldLevel", K_ShieldLevel);
         PlayerPrefs.SetFloat("K_forceShieldStrength", K_shieldpowers[K_ShieldLevel]);
-        mainScript.SetMoney(-K_shieldPrice);
+        mainScript.SetBrains(-K_shieldPrice);
         K_shieldSlider.value = PlayerPrefs.GetFloat("K_forceShieldStrength", 50.0f);
         K_shieldPrice = Kprices[K_ShieldLevel];
         K_shieldText.text = K_shieldPrice.ToString();
@@ -1016,14 +1035,14 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     #region
     public void BuyWS()
     {
-        mainScript.SetMoney(-10000);
+        mainScript.SetMilk(-100);
         buyWSPanel.SetActive(false);
         buyWSButtonObj.SetActive(false);
         PlayerPrefs.SetInt("WSBuy", 1);
     }
     public void BuyK()
     {
-        mainScript.SetMoney(-100000);
+        mainScript.SetMilk(-1000);
         buyKPanel.SetActive(false);
         buyKButtonObj.SetActive(false);
         PlayerPrefs.SetInt("KBuy", 1);
@@ -1110,7 +1129,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         clickButton.Play();
         rentIndex = 1;
         rentPanel.SetActive(false);
-        mainScript.SetMoney(-1000);
+        mainScript.SetMilk(-10);
     }
     public void RentByAds()
     {

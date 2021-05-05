@@ -36,7 +36,7 @@ public class ChooseLevel : MonoBehaviour
             }
             if (LevelBuyButtons[i] != null)
             {
-                if (LevelBuyPrices[i] > mainScript.allMoney)
+                if (LevelBuyPrices[i] > mainScript.allMilk)
                 {
                     LevelBuyButtons[i].interactable = false;
                 }
@@ -47,7 +47,7 @@ public class ChooseLevel : MonoBehaviour
     {
         PlayerPrefs.SetInt("Stage" + stageIndex, 1);
         blockPanels[stageIndex].SetActive(false);
-        mainScript.SetMoney(-LevelBuyPrices[stageIndex]);
+        mainScript.SetMilk(-LevelBuyPrices[stageIndex]);
     }
 
     public void ChooseEarthStage(int stage)

@@ -8,6 +8,8 @@ public class OnRay : MonoBehaviour
     public int questObjectIndex;
     Rigidbody2D rb;
     public int count;
+    public int milkCount;
+    public int brainCount;
     Transform player;
 
     float massOnStart;

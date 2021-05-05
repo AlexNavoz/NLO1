@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class CampQuestScript : MonoBehaviour, AdsListener
 {
     //Quest variables
-    public int reward;
+    public int milkReward;
+    public int brainsReward;
     public int timeToQuest;
     public int questObjectIndex;
     public int howManyNeed;
@@ -24,7 +25,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     //win panel
     public GameObject winPanel;
     public Text winTimeText;
-    public Text winRewardText;
+    public Text winMilkRewardText;
+    public Text winBrainsRewardText;
     public GameObject[] winStars;
     public GameObject ceiling;
     public GameObject pointerUp;
@@ -342,7 +344,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    reward *= 2;
+                    milkReward *= 2;
+                    brainsReward *= 2;
                     winTimeText.color = new Color(255, 255, 0, 170);
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
@@ -354,7 +357,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    reward *= 3;
+                    milkReward *= 3;
+                    brainsReward *= 2;
                     winTimeText.color = new Color(0, 255, 0, 170);
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
@@ -362,7 +366,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     }
                 }
                 winTimeText.text = boxPercent.ToString() + "%";
-                winRewardText.text = (mainScript.collection + reward).ToString();
+                winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
+                winBrainsRewardText.text = (mainScript.brainsCollection + brainsReward).ToString();
                 break;
             case 3:
                 if (percent < 25)
@@ -377,7 +382,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    reward *= 2;
+                    milkReward *= 2;
+                    brainsReward *= 2;
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
@@ -388,14 +394,16 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    reward *= 3;
+                    milkReward *= 3;
+                    brainsReward *= 3;
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
-                winRewardText.text = (mainScript.collection + reward).ToString();
+                winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
+                winBrainsRewardText.text = (mainScript.brainsCollection + brainsReward).ToString();
                 break;
             case 4:
                 if (percent < 25)
@@ -410,7 +418,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    reward *= 2;
+                    milkReward *= 2;
+                    brainsReward *= 2;
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
@@ -421,14 +430,16 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    reward *= 3;
+                    milkReward *= 3;
+                    brainsReward *= 3;
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
-                winRewardText.text = (mainScript.collection + reward).ToString();
+                winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
+                winBrainsRewardText.text = (mainScript.brainsCollection + brainsReward).ToString();
                 break;
             case 5:
                 if (percent < 25)
@@ -443,7 +454,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    reward *= 2;
+                    milkReward *= 2;
+                    brainsReward *= 2;
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
@@ -454,18 +466,22 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    reward *= 3;
+                    milkReward *= 3;
+                    brainsReward *= 3;
                     if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
-                winRewardText.text = (mainScript.collection + reward).ToString();
+                winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
+                winBrainsRewardText.text = (mainScript.brainsCollection + brainsReward).ToString();
                 break;
         }
-        mainScript.SetMoney(mainScript.collection + reward);
-        mainScript.collection = 0;
+        mainScript.SetMilk(mainScript.milkCollection + milkReward);
+        mainScript.SetBrains(mainScript.brainsCollection + brainsReward);
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
     }
 
     public void WinOkButton()
@@ -474,7 +490,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void Restart()
     {
-        mainScript.collection = 0;
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
     }
     #endregion
@@ -487,8 +504,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         evacPanel.SetActive(true);
         mainScript.checkIfAdsReady();
-        evacPrice.text = mainScript.collection.ToString();
-        if (mainScript.collection > mainScript.allMoney)
+        evacPrice.text = mainScript.milkCollection.ToString();
+        if (mainScript.milkCollection > mainScript.allMilk)
         {
             evacPrice.color = new Color(255, 0, 0);
             evacBuyButton.interactable = false;
@@ -507,7 +524,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void BuyEvac()
     {
-        mainScript.collection = 0;
+        mainScript.milkCollection = 0;
         mainScript.peace = false;
         Evacuate();
     }
@@ -594,8 +611,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         alreadyRefuled = true;
         refuelPanel.SetActive(true);
-        refuelPrice.text = (((int)playerMoving.maxFuel - (int)playerMoving.currentFuel)*3).ToString();
-        if ((((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) * 3) > mainScript.allMoney)
+        refuelPrice.text = (((int)playerMoving.maxFuel - (int)playerMoving.currentFuel)/10).ToString();
+        if ((((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) / 10) > mainScript.allMilk)
         {
             refuelPrice.color = new Color(255, 0, 0);
             refuelByMoneyButton.interactable = false;
@@ -609,7 +626,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RefuelByMoney()
     {
-        mainScript.SetMoney(-((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) * 3);
+        mainScript.SetMilk(-((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) /10);
         playerMoving.currentFuel = playerMoving.maxFuel;
         playerMoving.SetFuelValues();
         refuelPanel.SetActive(false);
@@ -632,8 +649,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         alreadyRefuled = true;
         rearmPanel.SetActive(true);
-        rearmText.text = (((int)fss.maxHP - (int)fss.currentHP) * 3).ToString();
-        if ((((int)fss.maxHP - (int)fss.currentHP) * 3) > mainScript.allMoney)
+        rearmText.text = (((int)fss.maxHP - (int)fss.currentHP) /10).ToString();
+        if ((((int)fss.maxHP - (int)fss.currentHP) /10) > mainScript.allMilk)
         {
             rearmText.color = new Color(255, 0, 0);
             rearmByMoneyButton.interactable = false;
@@ -647,7 +664,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RearmByMoney()
     {
-        mainScript.SetMoney(-((int)fss.maxHP - (int)fss.currentHP) * 3);
+        mainScript.SetMilk(-((int)fss.maxHP - (int)fss.currentHP) /10);
         fss.currentHP = fss.maxHP;
         fss.SetHPValue();
         rearmPanel.SetActive(false);

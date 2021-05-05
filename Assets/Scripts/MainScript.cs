@@ -62,9 +62,9 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     string lname;
     public int collection;
     public int milkCollection;
-    public int brainCollection;
+    public int brainsCollection;
     public int allMilk;
-    public int allBrain;
+    public int allBrains;
     public int allMoney;
 
     //settings variables
@@ -112,6 +112,8 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
 
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",-1);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
+        allMilk = PlayerPrefs.GetInt("allMilk", 50);
+        allBrains = PlayerPrefs.GetInt("allBrains", 20);
 
         UpdateStupidTimeMultiplyingConstant();
 
@@ -158,10 +160,10 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         allMilk += milk;
         PlayerPrefs.SetInt("allMilk", allMilk);
     }
-    public void SetBrain(int brain)
+    public void SetBrains(int brain)
     {
-        allBrain += brain;
-        PlayerPrefs.SetInt("allBrain", allBrain);
+        allBrains += brain;
+        PlayerPrefs.SetInt("allBrains", allBrains);
     }
     // quest
 

@@ -520,27 +520,27 @@ public class playerMoving : MonoBehaviour
 
         if (mainScript.levelIndex == 1)
         {
-            if (mainScript.collection > 200 && !criminalStars[0].activeSelf)
+            if (mainScript.milkCollection > 4 && !criminalStars[0].activeSelf || mainScript.brainsCollection > 1 && !criminalStars[0].activeSelf)
             {
                 crimeIndex = 1;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection > 700 && !criminalStars[1].activeSelf)
+            if (mainScript.milkCollection > 8 && !criminalStars[1].activeSelf || mainScript.brainsCollection > 4 && !criminalStars[0].activeSelf)
             {
                 crimeIndex = 2;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection > 1500 && !criminalStars[2].activeSelf)
+            if (mainScript.milkCollection > 15 && !criminalStars[2].activeSelf || mainScript.brainsCollection > 8 && !criminalStars[0].activeSelf)
             {
                 crimeIndex = 3;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection > 3000 && !criminalStars[3].activeSelf)
+            if (mainScript.milkCollection > 30 && !criminalStars[3].activeSelf || mainScript.brainsCollection > 15 && !criminalStars[0].activeSelf)
             {
                 crimeIndex = 4;
                 criminalStars[crimeIndex - 1].SetActive(true);
             }
-            if (mainScript.collection >5000 && !criminalStars[4].activeSelf)
+            if (mainScript.milkCollection >50 && !criminalStars[4].activeSelf || mainScript.brainsCollection > 30 && !criminalStars[0].activeSelf)
             {
                 crimeIndex = 5;
                 criminalStars[crimeIndex - 1].SetActive(true);

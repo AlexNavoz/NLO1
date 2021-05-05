@@ -12,7 +12,8 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
     CampQuestScript campQuest;
     public Button x2Button;
     public GameObject canvas;
-    public Text collectionText;
+    public Text milkCollectionText;
+    public Text brainsCollectionText;
     public AudioSource clickSound;
     void Start()
     {
@@ -36,8 +37,9 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
                     canvas.SetActive(true);
                     playerRB.gravityScale = 0;
                     playerRB.drag = 10;
-                    collectionText.text = mainScript.collection.ToString();
-                    if (mainScript.collection > 1500)
+                    milkCollectionText.text = mainScript.milkCollection.ToString();
+                    brainsCollectionText.text = mainScript.brainsCollection.ToString();
+                    if (mainScript.milkCollection > 50)
                     {
                         x2Button.interactable = false;
                     }
@@ -65,9 +67,12 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
     public void AdsShowed()
     {
         Debug.Log("AdsSkipped");
-        mainScript.collection *= 2;
-        mainScript.SetMoney(mainScript.collection);
-        mainScript.collection = 0;
+        mainScript.milkCollection *= 2;
+        mainScript.brainsCollection *= 2;
+        mainScript.SetMilk(mainScript.milkCollection);
+        mainScript.SetBrains(mainScript.brainsCollection);
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         StartCoroutine(CrossFade(1));
     }
     public void AdsFailed()
@@ -83,15 +88,18 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
     {
         clickSound.Play();
         Time.timeScale = 1;
-        mainScript.SetMoney(mainScript.collection);
-        mainScript.collection = 0;
+        mainScript.SetMilk(mainScript.milkCollection);
+        mainScript.SetBrains(mainScript.brainsCollection);
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         StartCoroutine(CrossFade(1));
     }
     public void Restart()
     {
         clickSound.Play();
         Time.timeScale = 1.0f;
-        mainScript.collection = 0;
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
     }
     public void ChooseEarthStage(int stage)

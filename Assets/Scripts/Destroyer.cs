@@ -27,7 +27,8 @@ public class Destroyer : MonoBehaviour
         if (collision.gameObject.layer == 8|| collision.gameObject.layer == 20)
         {
             Rigidbody2D cowRb;
-            int onRayCount;
+            int onRayMilkCount;
+            int onRayBrainCount;
             OnRay onRayComponent;
 
             GameObject obj = collision.gameObject;
@@ -50,21 +51,30 @@ public class Destroyer : MonoBehaviour
                     mainScript.campaignQuestObjCount++;
                 }
                 stolenCows++;
-                onRayCount = onRayComponent.count;
+                onRayMilkCount = onRayComponent.milkCount;
+                onRayBrainCount = onRayComponent.brainCount;
                 cowRb = obj.GetComponent<Rigidbody2D>();
                 if (cowRb.mass >= 5.0f)
                 {
                     return;
                 }
-                mainScript.collection += onRayCount;
+                if(onRayMilkCount != 0)
                 {
-                    StringBuilder sb = new StringBuilder("+", 10);
-                    sb.Append(((int)onRayCount).ToString());
-                    player_moving.showTextValue(gameObject, sb.ToString(), 1);
-
-                    //player_moving.showQuestText(mainScript.questButton, sb.ToString(), 1);
+                    mainScript.milkCollection += onRayMilkCount;
+                    {
+                        StringBuilder sb = new StringBuilder("+", 10);
+                        sb.Append(((int)onRayMilkCount).ToString());
+                        player_moving.showTextValue(gameObject, sb.ToString(), 1);
+                    }
                 }
-               
+                if(onRayBrainCount != 0)
+                {
+                    mainScript.brainsCollection += onRayBrainCount;
+                    StringBuilder sb = new StringBuilder("+", 10);
+                    sb.Append(((int)onRayBrainCount).ToString());
+                    player_moving.showTextValue(gameObject, sb.ToString(), 2);
+                }
+
                 if (cowRb != null)
                 {
                     playerRb.mass += cowRb.mass;
@@ -73,13 +83,6 @@ public class Destroyer : MonoBehaviour
 
                 Destroy(obj);
             }
-        }
-
-        if(collision.gameObject.layer == 14 && mainScript.collection!=0)
-        {
-            mainScript.SetMoney(mainScript.collection);
-            givingParticle.Play();
-            mainScript.collection = 0;
         }
 
         if (collision.gameObject.layer == 17)

@@ -33,7 +33,8 @@ public class plateBulletScript : MonoBehaviour
         if (collision.gameObject.layer == 8 || collision.gameObject.layer == 19)
         {
             Rigidbody2D cowRb;
-            int onRayCount;
+            int onRayMilkCount;
+            int onRayBrainsCount;
             OnRay onRayComponent;
 
             GameObject obj = collision.gameObject;
@@ -51,7 +52,9 @@ public class plateBulletScript : MonoBehaviour
                 onRayComponent.massScale -= damage/cowRb.mass;
                 onRayComponent.UpdateScale();
 
-                onRayCount = onRayComponent.count;
+                
+                onRayMilkCount = onRayComponent.milkCount;
+                onRayBrainsCount = onRayComponent.brainCount;
 
                 if (onRayComponent.massScale > 0.11f) {
                     return;
@@ -65,13 +68,23 @@ public class plateBulletScript : MonoBehaviour
                 {
                     mainScript.campaignQuestObjCount++;
                 }
-                mainScript.collection += onRayCount/2;
+                if (onRayMilkCount != 0)
                 {
-                    StringBuilder sb = new StringBuilder("+", 10);
-                    sb.Append(((int)onRayCount/2).ToString());
-                    player_moving.showTextValue(player, sb.ToString(), 1);
-
-                    //player_moving.showQuestText(mainScript.questButton, sb.ToString(), 1);
+                    mainScript.milkCollection += onRayMilkCount;
+                    {
+                        StringBuilder sb = new StringBuilder("+", 10);
+                        sb.Append(((int)onRayMilkCount).ToString());
+                        player_moving.showTextValue(player, sb.ToString(), 1);
+                    }
+                }
+                if (onRayBrainsCount != 0)
+                {
+                    mainScript.brainsCollection += onRayBrainsCount;
+                    {
+                        StringBuilder sb = new StringBuilder("+", 10);
+                        sb.Append(((int)onRayMilkCount).ToString());
+                        player_moving.showTextValue(player, sb.ToString(), 2);
+                    }
                 }
                 
                 Destroy(obj);

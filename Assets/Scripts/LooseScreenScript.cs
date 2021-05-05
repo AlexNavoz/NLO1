@@ -21,7 +21,8 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     public GameObject mainPanel;
     public GameObject choisePanel;
     Animation choiseAnim;
-    public Text collectionText;
+    public Text milkCollectionText;
+    public Text brainsCollectionText;
     public Text priceText;
     Animation mainAnim;
 
@@ -57,12 +58,9 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         if (mainScript.levelIndex == 1)
         {
             choisePanel.SetActive(false);
-            collectionText.text = mainScript.collection.ToString();
-            priceText.text = (mainScript.collection / 2).ToString();
-        }
-        if (mainScript.levelIndex == 2)
-        {
-            collectionText.text = (mainScript.collection/2).ToString();
+            milkCollectionText.text = mainScript.milkCollection.ToString();
+            brainsCollectionText.text = mainScript.brainsCollection.ToString();
+            priceText.text = (mainScript.milkCollection / 2).ToString();
         }
         canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
@@ -72,23 +70,17 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     public void LoadMainMenu()
     {
         mainScript.peace = true;
-        if (mainScript.levelIndex == 2)
-        {
-            mainScript.allMoney += mainScript.collection / 2;
-            mainScript.collection = 0;
-        }
-            StartCoroutine(CrossFade(1));
-    }
-    public void ExitFromTutorial()
-    {
-        PlayerPrefs.SetInt("TutorialCompleted", 1);
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
+        StartCoroutine(CrossFade(1));
     }
 
     public void Restart()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         mainScript.peace = true;
-        mainScript.collection = 0;
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
     }
 
@@ -121,7 +113,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
 
     public void BuyEvac()
     {
-        mainScript.collection = mainScript.collection / 2;
+        mainScript.milkCollection /=2;
         mainScript.peace = false;
         Evacuate();
     }
@@ -158,9 +150,9 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     {
         if (refuelCanvas.activeSelf)
             return;
-        refuelPrice = player.GetComponent<playerMoving>().maxFuel * 3;
+        refuelPrice = player.GetComponent<playerMoving>().maxFuel /10;
         refuelText.text = refuelPrice.ToString();
-        if (refuelPrice > mainScript.allMoney)
+        if (refuelPrice > mainScript.allMilk)
         {
             refuelText.color = new Color(255,0,0);
             refuelByMoneyButton.interactable = false;
@@ -173,7 +165,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     public void RefuelByMoney()
     {
         //mainScript.allMoney -= (int)refuelPrice;
-        mainScript.SetMoney(-(int)refuelPrice);
+        mainScript.SetMilk(-(int)refuelPrice);
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
         player.GetComponent<playerMoving>().SetFuelValues();
         playerMoving.alreadyRefueled = true;

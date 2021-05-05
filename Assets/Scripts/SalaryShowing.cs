@@ -32,13 +32,19 @@ public class SalaryShowing : MonoBehaviour
 
         if (type == 0)
         {
-            textUi.color = new Color(0,180,255);
+            textUi.color = new Color(0, 0.7f, 1.0f);
             deltaposition.x = 50.0f;
             deltaposition.y = 50.0f;
         }
         if (type == 1)
         {
-            textUi.color = new Color(255,255,0);
+            textUi.color = new Color(1.0f, 1.0f, 1.0f);
+            deltaposition.x = -20.0f;
+            deltaposition.y = -20.0f;
+        }
+        if (type == 2)
+        {
+            textUi.color = new Color(1.0f, 0.55f, 0.8f);
             deltaposition.x = -20.0f;
             deltaposition.y = -20.0f;
         }
@@ -55,7 +61,7 @@ public class SalaryShowing : MonoBehaviour
             deltaposition.y += (Time.deltaTime * 50.0f) * (timealive / 2.0f);
             deltaposition.x += (Time.deltaTime * 15.0f);
         }
-        else if (type == 1)
+        else if (type == 1|| type == 2)
         {
             deltaposition.y -= (Time.deltaTime * 50.0f) * (timealive / 2.0f);
             deltaposition.x -= (Time.deltaTime * 15.0f);

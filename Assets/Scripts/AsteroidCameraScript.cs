@@ -95,7 +95,7 @@ public class AsteroidCameraScript : MonoBehaviour
         {
             if (player.transform.position.y > (lastSalaryYPosition + salaryRange)) {
                 lastSalaryYPosition += salaryRange;
-                mainScript.collection += salaryEveryRange;
+                mainScript.milkCollection += salaryEveryRange;
                 {
                     StringBuilder sb = new StringBuilder("+", 10);
                     sb.Append((salaryEveryRange).ToString());
