@@ -10,11 +10,13 @@ public class CampaignMenuScript : MonoBehaviour
     public GameObject[] campStages;
     public Button[] campButtons;
     Animator crossfade;
+    MainMenuScript MMscript;
 
 
 
     private void Start()
     {
+        MMscript = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenuScript>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.CampLevels();
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
@@ -56,7 +58,15 @@ public class CampaignMenuScript : MonoBehaviour
     }
     public void OpenCampStage(string stageName)
     {
-        StartCoroutine(CrossFade(stageName));
+        if (mainScript.GetCurrentEnergy() < 1)
+        {
+            MMscript.OpenEnergyPanel();
+        }
+        else
+        {
+            mainScript.ConsumeEnergy();
+            StartCoroutine(CrossFade(stageName));
+        }
     }
     IEnumerator CrossFade(string stageName)
     {

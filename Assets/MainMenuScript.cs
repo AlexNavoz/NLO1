@@ -10,6 +10,15 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     GameObject mainCameraObj;
     bool garageIsOpen;
 
+    //Energy
+    public GameObject energyPanel;
+    public float energy;
+    public float maxEnergy = 10;
+    public Text energyText;
+    public Text energyTimeText;
+    public Text enetgyPriceText;
+
+    //Money
     public Text milkText;
     public Text brainsText;
     int currentMilk;
@@ -205,6 +214,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     int shipIndex = 0;
     private void Start()
     {
+        energy = 10;
         Time.timeScale = 1;
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
@@ -467,9 +477,16 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
 
     float changingPercent = 0;
+    float changingPercentB = 0;
     private void Update()
     {
         mainCameraObj.transform.position = Vector3.Lerp(mainCameraObj.transform.position, transformPoints[shipIndex+1].position, 0.05f);
+
+        energyText.text = mainScript.GetCurrentEnergy().ToString() + "/" + mainScript.maximumEnergy.ToString();
+        {
+            int timetofill = (int)mainScript.GetTimeToFillEnergy();
+            energyTimeText.text = (timetofill / (60*60)).ToString("00") + ":" + ((timetofill % (60*60)) / 60).ToString("00") + ":" + (timetofill % 60).ToString("00");
+        }
 
         //MilkButton
         bool doupdate = false; // Не обновляем значение лишний раз чтобы не грузить
@@ -488,19 +505,20 @@ public class MainMenuScript : MonoBehaviour, AdsListener
             milkText.text = ((int)Mathf.Lerp((float)currentMilk,(float)mainScript.allMilk,changingPercent)).ToString();
 
         //BrainsButton
-        if (currentBrains != mainScript.allBrains && changingPercent < 1.0f)
+        bool doupdateB = false;
+        if (currentBrains != mainScript.allBrains && changingPercentB < 1.0f)
         {
-            changingPercent += Time.deltaTime / (1.0f); // Подгоночный коэффицент, количество секунд для прокрутки денег
-            doupdate = true;
+            changingPercentB += Time.deltaTime / (1.0f); // Подгоночный коэффицент, количество секунд для прокрутки денег
+            doupdateB = true;
         }
         else {
-            if (changingPercent != 0)
-                doupdate = true;
+            if (changingPercentB != 0)
+                doupdateB = true;
             currentBrains = mainScript.allBrains;
-            changingPercent = 0;
+            changingPercentB = 0;
         }
-        if(doupdate)
-            brainsText.text = ((int)Mathf.Lerp((float)currentBrains, (float)mainScript.allBrains, changingPercent)).ToString();
+        if(doupdateB)
+            brainsText.text = ((int)Mathf.Lerp((float)currentBrains, (float)mainScript.allBrains, changingPercentB)).ToString();
 
         //Buy ships
         if (mainScript.allMilk < 100)
@@ -1570,6 +1588,19 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         knippelGaragePanel.SetActive(false);
     }
 
+    //____Energy
+    #region
+        public void SetEnergy(float nrg)
+    {
+        mainScript.ConsumeEnergy();
+    }
+    public void OpenEnergyPanel()
+    {
+        energyPanel.SetActive(true);
+    }
+
+    #endregion
+
     //____Settings
     #region
 
@@ -1587,11 +1618,10 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     public void CloseSettings()
     {
-        float musicVolume;
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsSlider.value);
         settingsPanel.SetActive(false);
-        mixer.audioMixer.GetFloat("Music", out musicVolume);
-        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
-        Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 0));
+        Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 1));
     }
     public void ChooseControlsMode()
     {
@@ -1608,29 +1638,34 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     public void ChangeMusicVolume(float volume)
     {
-        mixer.audioMixer.SetFloat("Music", volume);
+        float newvalue = Mathf.Log(volume) * 10;
+        if (newvalue < -80.0f)
+            newvalue = -80.0f;
+        mixer.audioMixer.SetFloat("Music", newvalue);
     }
     void MusicVolumeOnStart()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0);
+        //musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0);
         
-        Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 0));
-        Debug.Log(musicSlider.value);
-
-        float musicVolume;
-        mixer.audioMixer.GetFloat("Music", out musicVolume);
-        Debug.Log("mixer"+ musicVolume);
+        //Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 0));
+        //Debug.Log(musicSlider.value);
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1);
+        //float musicVolume;
+        //mixer.audioMixer.GetFloat("Music", out musicVolume);
+        //Debug.Log("mixer"+ musicVolume);
 
     }
     public void ChangeEffectsVolume(float volume)
     {
-        mixer.audioMixer.SetFloat("Effects", volume);
-        PlayerPrefs.SetFloat("EffectsVolume", volume);
+        float newvalue = Mathf.Log(volume) * 10;
+        if (newvalue < -80.0f)
+            newvalue = -80.0f;
+        mixer.audioMixer.SetFloat("Effects", newvalue);
     }
     void EffectsVolumeOnStart()
     {
-        mixer.audioMixer.SetFloat("Effects", PlayerPrefs.GetFloat("EffectsVolume", 0));
-        musicSlider.value = PlayerPrefs.GetFloat("EffectsVolume", 0);
+        //mixer.audioMixer.SetFloat("Effects", Mathf.Log(PlayerPrefs.GetFloat("EffectsVolume", 1) * 10));
+        effectsSlider.value = PlayerPrefs.GetFloat("EffectsVolume", 1);
     }
 
     #endregion

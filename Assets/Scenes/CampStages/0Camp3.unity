@@ -12205,6 +12205,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -4.459961
       objectReference: {fileID: 0}
+    - target: {fileID: 2922746137587644072, guid: d356dda57e85a824bba7fd3c887d963c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.911499
+      objectReference: {fileID: 0}
     - target: {fileID: 5566126437191657797, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
       propertyPath: m_Name
@@ -12270,6 +12275,16 @@ PrefabInstance:
       propertyPath: ceiling
       value: 
       objectReference: {fileID: 1087211703}
+    - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
+        type: 3}
+      propertyPath: milkReward
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
+        type: 3}
+      propertyPath: brainsReward
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d356dda57e85a824bba7fd3c887d963c, type: 3}
 --- !u!1001 &8853692535961087146

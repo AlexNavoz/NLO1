@@ -8,6 +8,7 @@ public class ChooseLevel : MonoBehaviour
 {
     MainScript mainScript;
     GameObject player;
+    MainMenuScript MMscript;
 
     Animator crossfade;
 
@@ -18,6 +19,7 @@ public class ChooseLevel : MonoBehaviour
 
     private void Awake()
     {
+        MMscript = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenuScript>();
         crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -52,7 +54,15 @@ public class ChooseLevel : MonoBehaviour
 
     public void ChooseEarthStage(int stage)
     {
-        StartCoroutine(CrossFade(stage));
+        if (MMscript.energy >= 1)
+        {
+            MMscript.SetEnergy(-1);
+            StartCoroutine(CrossFade(stage));
+        }
+        else
+        {
+            MMscript.OpenEnergyPanel();
+        }
     }
     public void ExitChoosePanel()
     {

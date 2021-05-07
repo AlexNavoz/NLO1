@@ -964,7 +964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.86}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.103759095, y: 1}
-  m_AnchoredPosition: {x: -19.5, y: 0}
+  m_AnchoredPosition: {x: -19.50003, y: 0}
   m_SizeDelta: {x: 39.0652, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &408201009
@@ -2757,6 +2757,7 @@ MonoBehaviour:
   questPanelTime: {fileID: 0}
   campaignQisetObjIndex: 0
   campaignQuestObjCount: 0
+  maximumEnergy: 10
 --- !u!4 &1845433771
 Transform:
   m_ObjectHideFlags: 0

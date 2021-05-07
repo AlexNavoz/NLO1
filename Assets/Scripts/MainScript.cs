@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
 using UnityEngine.Audio;
 using UnityEngine.Analytics;
+using System;
 
 public class MainScript : MonoBehaviour, IUnityAdsListener
 {
@@ -88,6 +89,13 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public int campaignQisetObjIndex = 0;
     public int campaignQuestObjCount = 0;
 
+    //Energy variables
+
+    int currentEnergy;
+    public int maximumEnergy = 10;
+    int increaseEnergyEvery = 10 * 60;
+    double firstConsumationTime = 0;
+
 #if UNITY_IOS
     string gameId = "4059550";
 #else
@@ -109,6 +117,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         LoadWSPrefs();
         LoadKPrefs();
         LoadQuestPrefs();
+        LoadEnergyValues();
 
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",-1);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
@@ -336,5 +345,88 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     }
 
     //__________________________________________________________________________________Quest_________________________________________
-    
+
+    public double GetUnixtimeNow() {
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        double cur_time = (System.DateTime.UtcNow - epochStart).TotalSeconds;
+        return cur_time;
+    }
+
+    public int GetCurrentEnergy()
+    {
+        while (firstConsumationTime != 0)
+        {
+            if (currentEnergy >= maximumEnergy)
+            {
+                firstConsumationTime = 0;
+                break;
+            }
+            if ((GetUnixtimeNow() - firstConsumationTime) > increaseEnergyEvery)
+            {
+                IncreaseEnergy();
+            } else {
+                break;
+            }
+        }
+        return currentEnergy;
+    }
+
+    public double GetTimeToFillEnergy() {
+        double timetofill = firstConsumationTime + increaseEnergyEvery * (maximumEnergy - currentEnergy) - GetUnixtimeNow();
+        if (timetofill > 0)
+            return timetofill;
+        return 0;
+    }
+
+    public void RestoreEnergy()
+    {
+        firstConsumationTime = 0;
+        currentEnergy = maximumEnergy;
+    }
+
+    public void IncreaseEnergy()
+    {
+        currentEnergy++;
+        firstConsumationTime += increaseEnergyEvery;
+        if (firstConsumationTime > GetUnixtimeNow())
+        {
+            if (currentEnergy >= maximumEnergy)
+            {
+                firstConsumationTime = 0;
+            }
+            else
+            {
+                firstConsumationTime = GetUnixtimeNow();
+            }
+        }
+        SaveEnergyValues();
+    }
+
+    public void ConsumeEnergy()
+    {
+        if (currentEnergy > 0)
+        {
+            currentEnergy--;
+            if (firstConsumationTime == 0)
+            {
+                firstConsumationTime = GetUnixtimeNow();
+            }
+            SaveEnergyValues();
+        }
+    }
+
+    void SaveEnergyValues()
+    {
+        PlayerPrefs.SetInt("currentEnergy", currentEnergy);
+        PlayerPrefs.SetInt("firstConsumationTime", (int)firstConsumationTime);
+    }
+    void LoadEnergyValues()
+    {
+        currentEnergy = PlayerPrefs.GetInt("currentEnergy", maximumEnergy);
+        firstConsumationTime = (double)PlayerPrefs.GetInt("firstConsumationTime", 0);
+        if (firstConsumationTime == 0)
+        {
+            currentEnergy = maximumEnergy;
+        }
+    }
 }

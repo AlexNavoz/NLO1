@@ -1067,7 +1067,7 @@ MonoBehaviour:
   StartGeneration: {fileID: 1744044858}
   StopGeneration: {fileID: 476519494}
   salaryRange: 100
-  salaryEveryRange: 100
+  salaryEveryRange: 5
 --- !u!4 &787827024
 Transform:
   m_ObjectHideFlags: 0
@@ -2301,6 +2301,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 3.2211533
       objectReference: {fileID: 0}
+    - target: {fileID: 2922746137587644072, guid: d356dda57e85a824bba7fd3c887d963c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.911499
+      objectReference: {fileID: 0}
     - target: {fileID: 5111048370722491248, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2371,6 +2376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
+        type: 3}
+      propertyPath: milkReward
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5566126437191657799, guid: d356dda57e85a824bba7fd3c887d963c,
         type: 3}

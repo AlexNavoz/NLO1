@@ -55,7 +55,7 @@ public class QuestScript : MonoBehaviour, AdsListener
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
     }
 
-    const int questPeriod = 60 * 60;
+    const int questPeriod = 24 * 60 * 60;
     UFOQuest getQuestById(int questid)
     {
         return quests[(questid / questPeriod) % quests.Length];
