@@ -35,6 +35,7 @@ public class ComingHomeScript : MonoBehaviour, AdsListener
             switch (mainScript.levelIndex) {
                 case 1:
                     canvas.SetActive(true);
+                    mainScript.peace = true;
                     playerRB.gravityScale = 0;
                     playerRB.drag = 10;
                     milkCollectionText.text = mainScript.milkCollection.ToString();

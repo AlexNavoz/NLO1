@@ -82,7 +82,7 @@ public class plateBulletScript : MonoBehaviour
                     mainScript.brainsCollection += onRayBrainsCount;
                     {
                         StringBuilder sb = new StringBuilder("+", 10);
-                        sb.Append(((int)onRayMilkCount).ToString());
+                        sb.Append(((int)onRayBrainsCount).ToString());
                         player_moving.showTextValue(player, sb.ToString(), 2);
                     }
                 }

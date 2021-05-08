@@ -22635,7 +22635,8 @@ AudioSource:
   m_GameObject: {fileID: 3981801057976330876}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 32c55c1c8ee7b6840b4faa063bc6143a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -37895,7 +37896,8 @@ AudioSource:
   m_GameObject: {fileID: 7962930769397290994}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1e8f77faac5ec2648937f7b172c44621, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -41629,6 +41631,7 @@ MonoBehaviour:
   clawController: {fileID: 3606633426548312049}
   powerUpSound: {fileID: 5019803027989440542}
   shootParticle: {fileID: 5129258418536502479}
+  joystick: {fileID: 0}
   Plate_Variables_______: {fileID: 0}
   leftButton: {fileID: 764991711}
   rightButton: {fileID: 310723200}
@@ -41670,10 +41673,6 @@ MonoBehaviour:
   - {fileID: 1785465483610895138}
   - {fileID: 3422974261065063861}
   crimeIndex: 0
-  rightButtonObj: {fileID: 310723198}
-  rightSliderObj: {fileID: 0}
-  rightKJoysticObj: {fileID: 0}
-  rightJoystickObj: {fileID: 0}
 --- !u!70 &1202183299585826703
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

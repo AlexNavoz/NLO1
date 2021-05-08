@@ -80,9 +80,6 @@ public class playerMoving : MonoBehaviour
     public GameObject[] criminalStars;
     public int crimeIndex = 0;
 
-    //Game Mode settings
-    int gameMode;
-
     private void Awake()
     {
         canvas = GetComponentInChildren<Canvas>();
@@ -90,8 +87,7 @@ public class playerMoving : MonoBehaviour
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainScript.shieldIsActive = true;
         crimeIndex = 0;
-        ShipIndex = PlayerPrefs.GetInt("ShipIndex", 0);
-        gameMode = PlayerPrefs.GetInt("GameMode", 0);
+        ShipIndex = PlayerPrefs.GetInt("ShipIndex", -1);
         if (ShipIndex == -1)
         {
             mainScript.LoadEPrefs();
@@ -113,72 +109,36 @@ public class playerMoving : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        switch (gameMode)
+       
+        if (ShipIndex == -1)
         {
-            case 0:
-                if (ShipIndex == -1)
-                {
-                    EnginePower = mainScript.E_enginePower * 1.5f;
-                    gunPower = mainScript.E_gunPower * 2;
-                }
-                if (ShipIndex == 0)
-                {
-                    EnginePower = mainScript.P_enginePower * 1.5f;
-                    gunPower = mainScript.P_gunPower * 2;
-                }
-                if (ShipIndex == 1)
-                {
-                    EnginePower = mainScript.WS_enginePower * 1.5f;
-                    gunPower = mainScript.WS_gunPower * 2;
-                    leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
-                }
-                if (ShipIndex == 2)
-                {
-                    EnginePower = mainScript.K_enginePower * 1.5f;
-                    gunPower = mainScript.K_gunPower * 2;
-                }
-                if (ShipIndex != -1)
-                {
-                    leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
-                    rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
-                    rbLeft = leftEngine.GetComponent<Rigidbody2D>();
-                    rbRight = rightEngine.GetComponent<Rigidbody2D>();
-                }
-                break;
-            case 1:
-                if (ShipIndex == -1)
-                {
-                    EnginePower = mainScript.E_enginePower;
-                    gunPower = mainScript.E_gunPower;
-                }
-                if (ShipIndex == 0)
-                {
-                    EnginePower = mainScript.P_enginePower;
-                    gunPower = mainScript.P_gunPower;
-                }
-                if (ShipIndex == 1)
-                {
-                    EnginePower = mainScript.WS_enginePower;
-                    gunPower = mainScript.WS_gunPower;
-                    leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
-                    rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
-                }
-                if (ShipIndex == 2)
-                {
-                    EnginePower = mainScript.K_enginePower;
-                    gunPower = mainScript.K_gunPower;
-                }
-                if (ShipIndex != -1)
-                {
-                    leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
-                    rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
-                    rbLeft = leftEngine.GetComponent<Rigidbody2D>();
-                    rbRight = rightEngine.GetComponent<Rigidbody2D>();
-                }
-                break;
+            EnginePower = mainScript.E_enginePower;
+            gunPower = mainScript.E_gunPower;
         }
-
-        
+        if (ShipIndex == 0)
+        {
+            EnginePower = mainScript.P_enginePower;
+            gunPower = mainScript.P_gunPower;
+        }
+        if (ShipIndex == 1)
+        {
+            EnginePower = mainScript.WS_enginePower;
+            gunPower = mainScript.WS_gunPower;
+            leftSlider = GameObject.FindGameObjectWithTag("LeftSlider").GetComponent<Slider>();
+            rightSlider = GameObject.FindGameObjectWithTag("RightSlider").GetComponent<Slider>();
+        }
+        if (ShipIndex == 2)
+        {
+            EnginePower = mainScript.K_enginePower;
+            gunPower = mainScript.K_gunPower;
+        }
+        if (ShipIndex != -1)
+        {
+            leftEngine = GameObject.FindGameObjectWithTag("LeftEngine");
+            rightEngine = GameObject.FindGameObjectWithTag("RightEngine");
+            rbLeft = leftEngine.GetComponent<Rigidbody2D>();
+            rbRight = rightEngine.GetComponent<Rigidbody2D>();
+        }
 
         lname = SceneManager.GetActiveScene().name;
         forceShield = GameObject.FindGameObjectWithTag("ForceShield");
@@ -262,9 +222,9 @@ public class playerMoving : MonoBehaviour
         {
             if (!isDead)
             {
-                if (transform.position.y < -0.7 && mainScript.levelIndex != 0 && mainScript.levelIndex != 2)
+                if (transform.position.y < -0.8 && mainScript.levelIndex != 0 && mainScript.levelIndex != 2)
                 {
-                    rb.gravityScale = 1.75f;
+                    rb.gravityScale = 1.4f;
                 }
                 else
                 {
@@ -703,11 +663,6 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.E_maxFuel;
             currentFuel = mainScript.E_maxFuel;
-            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
-            {
-                maxFuel *= 2;
-                currentFuel *= 2;
-            }
             fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
@@ -715,11 +670,6 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.P_maxFuel;
             currentFuel = mainScript.P_maxFuel;
-            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
-            {
-                maxFuel *= 2;
-                currentFuel *= 2;
-            }
             fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
@@ -727,11 +677,6 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.WS_maxFuel;
             currentFuel = mainScript.WS_maxFuel;
-            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
-            {
-                maxFuel *= 2;
-                currentFuel *= 2;
-            }
             fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }
@@ -739,11 +684,6 @@ public class playerMoving : MonoBehaviour
         {
             maxFuel = mainScript.K_maxFuel;
             currentFuel = mainScript.K_maxFuel;
-            if (PlayerPrefs.GetInt("GameMode", 0) == 0)
-            {
-                maxFuel *= 2;
-                currentFuel *= 2;
-            }
             fuelBar.SetMaxTank(maxFuel);
             fuelBar.SetValue(currentFuel);
         }

@@ -9,11 +9,10 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     MainScript mainScript;
     GameObject mainCameraObj;
     bool garageIsOpen;
+    int adsDestination;
 
     //Energy
     public GameObject energyPanel;
-    public float energy;
-    public float maxEnergy = 10;
     public Text energyText;
     public Text energyTimeText;
     public Text enetgyPriceText;
@@ -214,7 +213,6 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     int shipIndex = 0;
     private void Start()
     {
-        energy = 10;
         Time.timeScale = 1;
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
@@ -1151,6 +1149,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     public void RentByAds()
     {
+        adsDestination = 1;
         clickButton.Play();
         if (mainScript.ShowRewardedVideo(this))
         {
@@ -1164,8 +1163,16 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void AdsShowed()
     {
         Debug.Log("AdsSkipped");
-        rentIndex = 1;
-        rentPanel.SetActive(false);
+        if (adsDestination == 1)
+        {
+            
+            rentIndex = 1;
+            rentPanel.SetActive(false);
+        }
+        else if(adsDestination == 2)
+        {
+            mainScript.RestoreEnergy();
+        }
     }
     public void AdsFailed()
     {
@@ -1178,7 +1185,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
     public void CloseTheGame()
     {
-        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
+        //PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 
@@ -1590,13 +1597,32 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     //____Energy
     #region
-        public void SetEnergy(float nrg)
+        public void SetEnergy()
     {
         mainScript.ConsumeEnergy();
     }
     public void OpenEnergyPanel()
     {
+        mainScript.checkIfAdsReady();
         energyPanel.SetActive(true);
+    }
+    public void CloseEnergyPanel()
+    {
+        energyPanel.SetActive(false);
+    }
+    public void EnergyRestoreByAds()
+    {
+        CloseEnergyPanel();
+        adsDestination = 2;
+        clickButton.Play();
+        if (mainScript.ShowRewardedVideo(this))
+        {
+            Debug.Log("Showing ad");
+        }
+        else
+        {
+            Debug.Log("Showing ad failed");
+        }
     }
 
     #endregion
@@ -1607,34 +1633,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void OpenSettings()
     {
         settingsPanel.SetActive(true);
-        if (PlayerPrefs.GetInt("GameMode", 0) == 0)
-        {
-            onOffText.text = "EASY";
-        }
-        if (PlayerPrefs.GetInt("GameMode", 0) == 1)
-        {
-            onOffText.text = "HARD";
-        }
     }
     public void CloseSettings()
     {
         PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
         PlayerPrefs.SetFloat("EffectsVolume", effectsSlider.value);
         settingsPanel.SetActive(false);
-        Debug.Log(PlayerPrefs.GetFloat("MusicVolume", 1));
-    }
-    public void ChooseControlsMode()
-    {
-        if(PlayerPrefs.GetInt("GameMode", 0) == 0)
-        {
-            PlayerPrefs.SetInt("GameMode", 1);
-            onOffText.text = "HARD";
-        }
-        else if (PlayerPrefs.GetInt("GameMode", 0) == 1)
-        {
-            PlayerPrefs.SetInt("GameMode", 0);
-            onOffText.text = "EASY";
-        }
     }
     public void ChangeMusicVolume(float volume)
     {

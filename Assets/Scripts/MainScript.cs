@@ -92,7 +92,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     //Energy variables
 
     int currentEnergy;
-    public int maximumEnergy = 10;
+    public int maximumEnergy = 5;
     int increaseEnergyEvery = 10 * 60;
     double firstConsumationTime = 0;
 
@@ -128,7 +128,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
 
         //Analytics.initializeOnStartup = false;
         //Analytics.enabled = false;
-        mixer.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume", 0));
+        mixer.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume", 1));
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, testMode);
     }
@@ -344,7 +344,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         Advertisement.RemoveListener(this);
     }
 
-    //__________________________________________________________________________________Quest_________________________________________
+    //__________________________________________________________________________________Energy_________________________________________
 
     public double GetUnixtimeNow() {
         System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);

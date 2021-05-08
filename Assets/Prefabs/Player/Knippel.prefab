@@ -10973,7 +10973,8 @@ AudioSource:
   m_GameObject: {fileID: 1731285213133352391}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 32c55c1c8ee7b6840b4faa063bc6143a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -46870,7 +46871,8 @@ AudioSource:
   m_GameObject: {fileID: 7718192793114427901}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7781128425229055697, guid: d1c4f6cd9a6935249be8c187b93ed5d1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1e8f77faac5ec2648937f7b172c44621, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -51766,6 +51768,7 @@ MonoBehaviour:
   clawController: {fileID: 5548050968189454970}
   powerUpSound: {fileID: 7099339142391081525}
   shootParticle: {fileID: 3978027871165750147}
+  joystick: {fileID: 0}
   Plate_Variables_______: {fileID: 0}
   leftButton: {fileID: 0}
   rightButton: {fileID: 0}

@@ -54,14 +54,14 @@ public class ChooseLevel : MonoBehaviour
 
     public void ChooseEarthStage(int stage)
     {
-        if (MMscript.energy >= 1)
+        if (mainScript.GetCurrentEnergy() < 1)
         {
-            MMscript.SetEnergy(-1);
-            StartCoroutine(CrossFade(stage));
+            MMscript.OpenEnergyPanel();
         }
         else
         {
-            MMscript.OpenEnergyPanel();
+            mainScript.ConsumeEnergy();
+            StartCoroutine(CrossFade(stage));
         }
     }
     public void ExitChoosePanel()

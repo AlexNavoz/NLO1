@@ -390,10 +390,10 @@ RectTransform:
   m_Father: {fileID: 495852433}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -87.900024, y: -98}
-  m_SizeDelta: {x: 139.09778, y: 40.588898}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 64, y: -146}
+  m_SizeDelta: {x: 88.5674, y: 25.8441}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237800538
 MonoBehaviour:
@@ -1085,8 +1085,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -15.128738}
-  m_SizeDelta: {x: 0, y: 31.0343}
+  m_AnchoredPosition: {x: 0, y: -10.8002}
+  m_SizeDelta: {x: 0, y: 22.3772}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &495852432
 GameObject:
@@ -2757,7 +2757,7 @@ MonoBehaviour:
   questPanelTime: {fileID: 0}
   campaignQisetObjIndex: 0
   campaignQuestObjCount: 0
-  maximumEnergy: 10
+  maximumEnergy: 5
 --- !u!4 &1845433771
 Transform:
   m_ObjectHideFlags: 0

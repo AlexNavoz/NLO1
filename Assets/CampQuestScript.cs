@@ -545,6 +545,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     #endregion
     void QuestDefeat()
     {
+        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         gameIsStarted = false;
         mainScript.peace = true;
         defeatPanel.SetActive(true);
