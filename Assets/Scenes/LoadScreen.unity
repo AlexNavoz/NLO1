@@ -301,7 +301,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 237800541}
+      - m_Target: {fileID: 495852437}
         m_TargetAssemblyTypeName: QuestScript, Assembly-CSharp
         m_MethodName: QuestPanelExit
         m_Mode: 1
@@ -363,7 +363,6 @@ GameObject:
   - component: {fileID: 237800540}
   - component: {fileID: 237800539}
   - component: {fileID: 237800538}
-  - component: {fileID: 237800541}
   - component: {fileID: 237800542}
   m_Layer: 0
   m_Name: QuestButton
@@ -439,7 +438,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 237800541}
+      - m_Target: {fileID: 495852437}
         m_TargetAssemblyTypeName: QuestScript, Assembly-CSharp
         m_MethodName: QuestPanelActivation
         m_Mode: 1
@@ -489,161 +488,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237800536}
   m_CullTransparentMesh: 1
---- !u!114 &237800541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237800536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea8598ed8025604bbe6cb29fea5bccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonCompleteObj: {fileID: 553256932}
-  completeObj: {fileID: 1549933175}
-  buttonProgressObj: {fileID: 1754806539}
-  progressObj: {fileID: 1480183618}
-  targetIcon: {fileID: 604619686}
-  miniIcon: {fileID: 1009527830}
-  howMuchNeedText: {fileID: 0}
-  milkRewardText: {fileID: 1763738713}
-  brainsRewardText: {fileID: 1715279439}
-  progressText: {fileID: 1754806541}
-  timeText: {fileID: 466453888}
-  questPanelProgress: {fileID: 1480183620}
-  questPanelTime: {fileID: 883951647}
-  completeTextBtn: {fileID: 553256932}
-  questPanel: {fileID: 382154508}
-  questCompleted: 0
-  alreadyRewarded: 0
-  quests:
-  - targetIndex: 1
-    targetCount: 50
-    milkReward: 50
-    brainsReward: 0
-    icon: {fileID: -7683020918165317649, guid: 66579d863ea6928468da043d78fc88d7, type: 3}
-  - targetIndex: 1
-    targetCount: 100
-    milkReward: 120
-    brainsReward: 0
-    icon: {fileID: -7683020918165317649, guid: 66579d863ea6928468da043d78fc88d7, type: 3}
-  - targetIndex: 1
-    targetCount: 150
-    milkReward: 200
-    brainsReward: 20
-    icon: {fileID: -7683020918165317649, guid: 66579d863ea6928468da043d78fc88d7, type: 3}
-  - targetIndex: 2
-    targetCount: 50
-    milkReward: 20
-    brainsReward: 70
-    icon: {fileID: 6657371256508908071, guid: ffb3170d232b4584eb3ff8f0d9f4eeb2, type: 3}
-  - targetIndex: 2
-    targetCount: 100
-    milkReward: 50
-    brainsReward: 150
-    icon: {fileID: 6657371256508908071, guid: ffb3170d232b4584eb3ff8f0d9f4eeb2, type: 3}
-  - targetIndex: 3
-    targetCount: 30
-    milkReward: 40
-    brainsReward: 0
-    icon: {fileID: -874136688744668924, guid: c99f8d06c260703478a327848b584675, type: 3}
-  - targetIndex: 3
-    targetCount: 60
-    milkReward: 100
-    brainsReward: 10
-    icon: {fileID: -874136688744668924, guid: c99f8d06c260703478a327848b584675, type: 3}
-  - targetIndex: 3
-    targetCount: 100
-    milkReward: 140
-    brainsReward: 20
-    icon: {fileID: -874136688744668924, guid: c99f8d06c260703478a327848b584675, type: 3}
-  - targetIndex: 4
-    targetCount: 100
-    milkReward: 200
-    brainsReward: 20
-    icon: {fileID: -3009860210957267025, guid: 482c80f89da1a7e4b96990b0056d0cb2, type: 3}
-  - targetIndex: 4
-    targetCount: 200
-    milkReward: 500
-    brainsReward: 50
-    icon: {fileID: -3009860210957267025, guid: 482c80f89da1a7e4b96990b0056d0cb2, type: 3}
-  - targetIndex: 4
-    targetCount: 400
-    milkReward: 1200
-    brainsReward: 150
-    icon: {fileID: -3009860210957267025, guid: 482c80f89da1a7e4b96990b0056d0cb2, type: 3}
-  - targetIndex: 5
-    targetCount: 50
-    milkReward: 150
-    brainsReward: 15
-    icon: {fileID: -5148312676835458850, guid: 84bf1f52f0229134c80a7cddb24e70ca, type: 3}
-  - targetIndex: 5
-    targetCount: 100
-    milkReward: 400
-    brainsReward: 50
-    icon: {fileID: -5148312676835458850, guid: 84bf1f52f0229134c80a7cddb24e70ca, type: 3}
-  - targetIndex: 5
-    targetCount: 200
-    milkReward: 1000
-    brainsReward: 150
-    icon: {fileID: -5148312676835458850, guid: 84bf1f52f0229134c80a7cddb24e70ca, type: 3}
-  - targetIndex: 6
-    targetCount: 100
-    milkReward: 100
-    brainsReward: 50
-    icon: {fileID: -4067607278205597147, guid: 5c1bd3379f5097a40870434e54ffdafe, type: 3}
-  - targetIndex: 6
-    targetCount: 200
-    milkReward: 300
-    brainsReward: 150
-    icon: {fileID: -4067607278205597147, guid: 5c1bd3379f5097a40870434e54ffdafe, type: 3}
-  - targetIndex: 6
-    targetCount: 300
-    milkReward: 500
-    brainsReward: 300
-    icon: {fileID: -4067607278205597147, guid: 5c1bd3379f5097a40870434e54ffdafe, type: 3}
-  - targetIndex: 7
-    targetCount: 100
-    milkReward: 150
-    brainsReward: 50
-    icon: {fileID: -2781453673856480560, guid: 86a4187500fa9ee4ca03e24587a040b2, type: 3}
-  - targetIndex: 8
-    targetCount: 100
-    milkReward: 300
-    brainsReward: 100
-    icon: {fileID: 21300000, guid: 3c75ae9038387c540a423056908165bb, type: 3}
-  - targetIndex: 8
-    targetCount: 200
-    milkReward: 500
-    brainsReward: 200
-    icon: {fileID: 21300000, guid: 3c75ae9038387c540a423056908165bb, type: 3}
-  - targetIndex: 9
-    targetCount: 50
-    milkReward: 50
-    brainsReward: 100
-    icon: {fileID: -1489267862001195594, guid: b6fc086ddd40c48419660bb94ce36c6a, type: 3}
-  - targetIndex: 9
-    targetCount: 100
-    milkReward: 100
-    brainsReward: 250
-    icon: {fileID: -1489267862001195594, guid: b6fc086ddd40c48419660bb94ce36c6a, type: 3}
-  - targetIndex: 10
-    targetCount: 100
-    milkReward: 100
-    brainsReward: 200
-    icon: {fileID: 1304841362926077432, guid: 834e96340c6f07a4b86af386c3642179, type: 3}
-  - targetIndex: 10
-    targetCount: 200
-    milkReward: 200
-    brainsReward: 500
-    icon: {fileID: 1304841362926077432, guid: 834e96340c6f07a4b86af386c3642179, type: 3}
-  - targetIndex: 11
-    targetCount: 100
-    milkReward: 200
-    brainsReward: 200
-    icon: {fileID: 21300000, guid: fd878851281168740a069d04f689d57f, type: 3}
 --- !u!111 &237800542
 Animation:
   m_ObjectHideFlags: 0
@@ -1100,9 +944,10 @@ GameObject:
   - component: {fileID: 495852436}
   - component: {fileID: 495852435}
   - component: {fileID: 495852434}
+  - component: {fileID: 495852437}
   m_Layer: 0
   m_Name: QuestCanvas
-  m_TagString: Untagged
+  m_TagString: Quest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1189,6 +1034,162 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 201
   m_TargetDisplay: 0
+--- !u!114 &495852437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495852432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea8598ed8025604bbe6cb29fea5bccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonCompleteObj: {fileID: 553256932}
+  completeObj: {fileID: 1549933175}
+  buttonProgressObj: {fileID: 1754806539}
+  progressObj: {fileID: 1480183618}
+  questButton: {fileID: 237800538}
+  targetIcon: {fileID: 604619686}
+  miniIcon: {fileID: 1009527830}
+  howMuchNeedText: {fileID: 0}
+  milkRewardText: {fileID: 1763738713}
+  brainsRewardText: {fileID: 1715279439}
+  progressText: {fileID: 1754806541}
+  timeText: {fileID: 466453888}
+  questPanelProgress: {fileID: 1480183620}
+  questPanelTime: {fileID: 883951647}
+  completeTextBtn: {fileID: 553256932}
+  questPanel: {fileID: 382154508}
+  questCompleted: 0
+  alreadyRewarded: 0
+  quests:
+  - targetIndex: 1
+    targetCount: 50
+    milkReward: 50
+    brainsReward: 0
+    icon: {fileID: -7683020918165317649, guid: 66579d863ea6928468da043d78fc88d7, type: 3}
+  - targetIndex: 1
+    targetCount: 100
+    milkReward: 120
+    brainsReward: 0
+    icon: {fileID: -7683020918165317649, guid: 66579d863ea6928468da043d78fc88d7, type: 3}
+  - targetIndex: 1
+    targetCount: 150
+    milkReward: 200
+    brainsReward: 20
+    icon: {fileID: -7683020918165317649, guid: 66579d863ea6928468da043d78fc88d7, type: 3}
+  - targetIndex: 2
+    targetCount: 50
+    milkReward: 20
+    brainsReward: 70
+    icon: {fileID: 6657371256508908071, guid: ffb3170d232b4584eb3ff8f0d9f4eeb2, type: 3}
+  - targetIndex: 2
+    targetCount: 100
+    milkReward: 50
+    brainsReward: 150
+    icon: {fileID: 6657371256508908071, guid: ffb3170d232b4584eb3ff8f0d9f4eeb2, type: 3}
+  - targetIndex: 3
+    targetCount: 30
+    milkReward: 40
+    brainsReward: 0
+    icon: {fileID: -874136688744668924, guid: c99f8d06c260703478a327848b584675, type: 3}
+  - targetIndex: 3
+    targetCount: 60
+    milkReward: 100
+    brainsReward: 10
+    icon: {fileID: -874136688744668924, guid: c99f8d06c260703478a327848b584675, type: 3}
+  - targetIndex: 3
+    targetCount: 100
+    milkReward: 140
+    brainsReward: 20
+    icon: {fileID: -874136688744668924, guid: c99f8d06c260703478a327848b584675, type: 3}
+  - targetIndex: 4
+    targetCount: 100
+    milkReward: 200
+    brainsReward: 20
+    icon: {fileID: -3009860210957267025, guid: 482c80f89da1a7e4b96990b0056d0cb2, type: 3}
+  - targetIndex: 4
+    targetCount: 200
+    milkReward: 500
+    brainsReward: 50
+    icon: {fileID: -3009860210957267025, guid: 482c80f89da1a7e4b96990b0056d0cb2, type: 3}
+  - targetIndex: 4
+    targetCount: 400
+    milkReward: 1200
+    brainsReward: 150
+    icon: {fileID: -3009860210957267025, guid: 482c80f89da1a7e4b96990b0056d0cb2, type: 3}
+  - targetIndex: 5
+    targetCount: 50
+    milkReward: 150
+    brainsReward: 15
+    icon: {fileID: -5148312676835458850, guid: 84bf1f52f0229134c80a7cddb24e70ca, type: 3}
+  - targetIndex: 5
+    targetCount: 100
+    milkReward: 400
+    brainsReward: 50
+    icon: {fileID: -5148312676835458850, guid: 84bf1f52f0229134c80a7cddb24e70ca, type: 3}
+  - targetIndex: 5
+    targetCount: 200
+    milkReward: 1000
+    brainsReward: 150
+    icon: {fileID: -5148312676835458850, guid: 84bf1f52f0229134c80a7cddb24e70ca, type: 3}
+  - targetIndex: 6
+    targetCount: 100
+    milkReward: 100
+    brainsReward: 50
+    icon: {fileID: -4067607278205597147, guid: 5c1bd3379f5097a40870434e54ffdafe, type: 3}
+  - targetIndex: 6
+    targetCount: 200
+    milkReward: 300
+    brainsReward: 150
+    icon: {fileID: -4067607278205597147, guid: 5c1bd3379f5097a40870434e54ffdafe, type: 3}
+  - targetIndex: 6
+    targetCount: 300
+    milkReward: 500
+    brainsReward: 300
+    icon: {fileID: -4067607278205597147, guid: 5c1bd3379f5097a40870434e54ffdafe, type: 3}
+  - targetIndex: 7
+    targetCount: 100
+    milkReward: 150
+    brainsReward: 50
+    icon: {fileID: -2781453673856480560, guid: 86a4187500fa9ee4ca03e24587a040b2, type: 3}
+  - targetIndex: 8
+    targetCount: 100
+    milkReward: 300
+    brainsReward: 100
+    icon: {fileID: 21300000, guid: 3c75ae9038387c540a423056908165bb, type: 3}
+  - targetIndex: 8
+    targetCount: 200
+    milkReward: 500
+    brainsReward: 200
+    icon: {fileID: 21300000, guid: 3c75ae9038387c540a423056908165bb, type: 3}
+  - targetIndex: 9
+    targetCount: 50
+    milkReward: 50
+    brainsReward: 100
+    icon: {fileID: -1489267862001195594, guid: b6fc086ddd40c48419660bb94ce36c6a, type: 3}
+  - targetIndex: 9
+    targetCount: 100
+    milkReward: 100
+    brainsReward: 250
+    icon: {fileID: -1489267862001195594, guid: b6fc086ddd40c48419660bb94ce36c6a, type: 3}
+  - targetIndex: 10
+    targetCount: 100
+    milkReward: 100
+    brainsReward: 200
+    icon: {fileID: 1304841362926077432, guid: 834e96340c6f07a4b86af386c3642179, type: 3}
+  - targetIndex: 10
+    targetCount: 200
+    milkReward: 200
+    brainsReward: 500
+    icon: {fileID: 1304841362926077432, guid: 834e96340c6f07a4b86af386c3642179, type: 3}
+  - targetIndex: 11
+    targetCount: 100
+    milkReward: 200
+    brainsReward: 200
+    icon: {fileID: 21300000, guid: fd878851281168740a069d04f689d57f, type: 3}
 --- !u!1 &553256932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,7 +2919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 237800541}
+      - m_Target: {fileID: 495852437}
         m_TargetAssemblyTypeName: QuestScript, Assembly-CSharp
         m_MethodName: Change
         m_Mode: 1

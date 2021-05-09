@@ -20,6 +20,7 @@ public class QuestScript : MonoBehaviour, AdsListener
     public GameObject completeObj;
     public GameObject buttonProgressObj;
     public GameObject progressObj;
+    public Button questButton;
 
     public Image targetIcon;
     public Image miniIcon;
@@ -75,8 +76,11 @@ public class QuestScript : MonoBehaviour, AdsListener
         mainScript.questObjectIndex = getQuestById(idToLoad).targetIndex;
         targetIcon.sprite = getQuestById(idToLoad).icon;
         miniIcon.sprite = getQuestById(idToLoad).icon;
-
         loadedQuestId = idToLoad;
+        if(mainScript.levelIndex == 1)
+        {
+            questButton.interactable = true;
+        }
     }
 
     void refreshQuest()
@@ -92,6 +96,7 @@ public class QuestScript : MonoBehaviour, AdsListener
         buttonProgressObj.SetActive(true);
         alreadyRewarded = false;
         questCompleted = false;
+        questButton.interactable = true;
     }
 
     void UpdateQuest()
@@ -137,6 +142,10 @@ public class QuestScript : MonoBehaviour, AdsListener
             alreadyRewarded = true;
             mainScript.SetMilk(milkReward);
             mainScript.SetBrains(brainsReward);
+            if (mainScript.levelIndex == 1)
+            {
+                questButton.interactable = false;
+            }
             //rewardText.text = completeTextBtn.GetComponent<Text>().text;
         }
     }

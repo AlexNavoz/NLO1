@@ -17,6 +17,10 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text energyTimeText;
     public Text enetgyPriceText;
 
+    //DailyQuest
+    QuestScript questScript;
+    public Button dailyQuestButton;
+
     //Money
     public Text milkText;
     public Text brainsText;
@@ -216,6 +220,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         Time.timeScale = 1;
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
+        questScript = GameObject.FindGameObjectWithTag("Quest").GetComponent<QuestScript>();
         mainScript.questButton.SetActive(false);
         rentPanel.SetActive(false);
         MusicVolumeOnStart();
@@ -540,6 +545,16 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
         else rentByMoneyButton.interactable = true;
 
+        //___________________________________________dailyQuest_______
+        if (questScript.questCompleted)
+        {
+            dailyQuestButton.interactable = false;
+        }
+        else
+        {
+            dailyQuestButton.interactable = true;
+        }
+
         #region
         //_____________________________________________________________________EASYSHIP_________________________________________
         //engine
@@ -732,6 +747,11 @@ public class MainMenuScript : MonoBehaviour, AdsListener
             K_shieldButton.gameObject.SetActive(false);
         }
         #endregion
+    }
+
+    public void DailyQuestPanelOpen()
+    {
+        questScript.QuestPanelActivation();
     }
 
     //___________________________________________________TUNNING!!!_________________________________________________________________________________
