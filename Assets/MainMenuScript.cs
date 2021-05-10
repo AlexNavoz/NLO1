@@ -1098,14 +1098,85 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     {
         buyMoneyPanel.SetActive(false);
     }
-    public void BuyMoneyByAds()
+
+    public void BuyMilk(int milkCount)
     {
-        mainScript.SetMoney(500);
-        //AfterAds                                                                                                                                  AfterAds!!!
+        mainScript.SetMilk(milkCount);
     }
-    public void BuyMoneyByMoney(int reward)
+    public void BuyBrains(int brainsCount)
     {
-        mainScript.SetMoney(reward);
+        mainScript.SetBrains(brainsCount);
+    }
+    public void MaxUpgradePlate()
+    {
+        P_EngineLevel = P_RayLevel = P_TankLevel = P_ShieldLevel = 9;
+        PlayerPrefs.SetInt("P_EngineLevel", P_EngineLevel);
+        PlayerPrefs.SetFloat("P_enginePower", P_enginepowers[P_EngineLevel]);
+        P_engineSlider.value = PlayerPrefs.GetFloat("P_enginePower", 160.0f);
+
+        PlayerPrefs.SetInt("P_RayLevel", P_RayLevel);
+        PlayerPrefs.SetFloat("P_rayLiftPower", P_raypowers[P_RayLevel]);
+        PlayerPrefs.SetFloat("P_gunPower", P_gunPowers[P_RayLevel]);
+        P_raySlider.value = PlayerPrefs.GetFloat("P_rayLiftPower", 10.0f);
+
+        PlayerPrefs.SetInt("P_TankLevel", P_TankLevel);
+        PlayerPrefs.SetFloat("P_maxFuel", P_tankpowers[P_TankLevel]);
+        P_tankSlider.value = PlayerPrefs.GetFloat("P_maxFuel", 40.0f);
+
+        PlayerPrefs.SetInt("P_ShieldLevel", P_ShieldLevel);
+        PlayerPrefs.SetFloat("P_forceShieldStrength", P_shieldpowers[P_ShieldLevel]);
+        P_shieldSlider.value = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
+    }
+    public void MaxUpgradeWS()
+    {
+        WS_EngineLevel = WS_RayLevel = WS_TankLevel = WS_ShieldLevel = 9;
+
+        PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
+        PlayerPrefs.SetFloat("WS_enginePower", WS_enginepowers[WS_EngineLevel]);
+        WS_engineSlider.value = PlayerPrefs.GetFloat("WS_enginePower", 160.0f);
+
+        PlayerPrefs.SetInt("WS_RayLevel", WS_RayLevel);
+        PlayerPrefs.SetFloat("WS_rayLiftPower", WS_raypowers[WS_RayLevel]);
+        PlayerPrefs.SetFloat("WS_gunPower", WS_gunPowers[WS_RayLevel]);
+        WS_raySlider.value = PlayerPrefs.GetFloat("WS_rayLiftPower", 10.0f);
+
+        PlayerPrefs.SetInt("WS_TankLevel", WS_TankLevel);
+        PlayerPrefs.SetFloat("WS_maxFuel", WS_tankpowers[WS_TankLevel]);
+        WS_tankSlider.value = PlayerPrefs.GetFloat("WS_maxFuel", 40.0f);
+
+        PlayerPrefs.SetInt("WS_ShieldLevel", WS_ShieldLevel);
+        PlayerPrefs.SetFloat("WS_forceShieldStrength", WS_shieldpowers[WS_ShieldLevel]);
+        WS_shieldSlider.value = PlayerPrefs.GetFloat("WS_forceShieldStrength", 20.0f);
+
+        buyWSPanel.SetActive(false);
+        buyWSButtonObj.SetActive(false);
+        PlayerPrefs.SetInt("WSBuy", 1);
+    }
+
+    public void MaxUpgradeK()
+    {
+        K_EngineLevel = K_RayLevel = K_TankLevel = K_ShieldLevel = 9;
+
+        PlayerPrefs.SetInt("K_EngineLevel", K_EngineLevel);
+        PlayerPrefs.SetFloat("K_enginePower", K_enginepowers[K_EngineLevel]);
+        K_engineSlider.value = PlayerPrefs.GetFloat("K_enginePower", 160.0f);
+
+        PlayerPrefs.SetInt("K_RayLevel", K_RayLevel);
+        PlayerPrefs.SetFloat("K_rayLiftPower", K_raypowers[K_RayLevel]);
+        PlayerPrefs.SetFloat("K_gunPower", K_gunPowers[K_RayLevel]);
+        K_raySlider.value = PlayerPrefs.GetFloat("K_rayLiftPower", 10.0f);
+
+        PlayerPrefs.SetInt("K_TankLevel", K_TankLevel);
+        PlayerPrefs.SetFloat("K_maxFuel", K_tankpowers[K_TankLevel]);
+        K_tankSlider.value = PlayerPrefs.GetFloat("K_maxFuel", 40.0f);
+
+        PlayerPrefs.SetInt("K_ShieldLevel", K_ShieldLevel);
+        PlayerPrefs.SetFloat("K_forceShieldStrength", K_shieldpowers[K_ShieldLevel]);
+        K_shieldSlider.value = PlayerPrefs.GetFloat("K_forceShieldStrength", 20.0f);
+
+        buyKPanel.SetActive(false);
+        buyKButtonObj.SetActive(false);
+        PlayerPrefs.SetInt("KBuy", 1);
     }
     #endregion
 
@@ -1205,7 +1276,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
     public void CloseTheGame()
     {
-        //PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
+        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 
