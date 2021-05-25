@@ -16,6 +16,8 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Text energyText;
     public Text energyTimeText;
     public Text enetgyPriceText;
+    public Button restoreEnergyButton;
+    public Text timeToRestoreText;
 
     //DailyQuest
     QuestScript questScript;
@@ -488,7 +490,22 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         energyText.text = mainScript.GetCurrentEnergy().ToString() + "/" + mainScript.maximumEnergy.ToString();
         {
             int timetofill = (int)mainScript.GetTimeToFillEnergy();
-            energyTimeText.text = (timetofill / (60*60)).ToString("00") + ":" + ((timetofill % (60*60)) / 60).ToString("00") + ":" + (timetofill % 60).ToString("00");
+            if (timetofill > 0)
+            {
+                energyTimeText.text = (timetofill / (60 * 60)).ToString("00") + ":" + ((timetofill % (60 * 60)) / 60).ToString("00") + ":" + (timetofill % 60).ToString("00");
+            }
+            else
+            {
+                energyTimeText.text = "";
+            }
+        }
+        if (restoreEnergyButton.interactable = (mainScript.GetTimeToAdsEnergyRestorationAvailable() == 0)) {
+            timeToRestoreText.text = "";
+        }
+        else
+        {
+            int timetofill = (int)mainScript.GetTimeToAdsEnergyRestorationAvailable();
+            timeToRestoreText.text = (timetofill / (60 * 60)).ToString("00") + ":" + ((timetofill % (60 * 60)) / 60).ToString("00") + ":" + (timetofill % 60).ToString("00");
         }
 
         //MilkButton
@@ -1262,7 +1279,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         }
         else if(adsDestination == 2)
         {
-            mainScript.RestoreEnergy();
+            mainScript.RestoreEnergyAds();
         }
     }
     public void AdsFailed()
@@ -1276,7 +1293,8 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 #endregion
     public void CloseTheGame()
     {
-        PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
+        mainScript.ufonotifications.OnAppStop();
+        //PlayerPrefs.DeleteAll();                                                                    //TESTS!!!!!!!!!!!
         Application.Quit();
     }
 
@@ -1696,6 +1714,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     {
         mainScript.checkIfAdsReady();
         energyPanel.SetActive(true);
+
     }
     public void CloseEnergyPanel()
     {

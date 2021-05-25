@@ -109,6 +109,8 @@ public class QuestScript : MonoBehaviour, AdsListener
 
     private void LateUpdate()
     {
+        if (mainScript == null)
+            return;
         //MainScript.questObjectIndex = objectIndex;
         UpdateQuest();
 

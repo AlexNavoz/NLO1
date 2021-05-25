@@ -95,6 +95,10 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     public int maximumEnergy = 5;
     int increaseEnergyEvery = 10 * 60;
     double firstConsumationTime = 0;
+    double lastadsrestoreenergy;
+    const int adsrestoreenergytimeout = 60 * 60;
+
+    public Notifications ufonotifications;
 
 #if UNITY_IOS
     string gameId = "4059550";
@@ -118,6 +122,8 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         LoadKPrefs();
         LoadQuestPrefs();
         LoadEnergyValues();
+
+        ufonotifications = gameObject.AddComponent<Notifications>();
 
         ShipIndex = PlayerPrefs.GetInt("ShipIndex",-1);
         allMoney = PlayerPrefs.GetInt("allMoney", 1500);
@@ -384,6 +390,23 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         currentEnergy = maximumEnergy;
     }
 
+    public void RestoreEnergyAds()
+    {
+        lastadsrestoreenergy = GetUnixtimeNow();
+        RestoreEnergy();
+    }
+
+    public double GetTimeToAdsEnergyRestorationAvailable()
+    {
+        if (lastadsrestoreenergy == 0)
+            return 0;
+        double timetoadsrestoration = adsrestoreenergytimeout - (GetUnixtimeNow() - lastadsrestoreenergy);
+        if(timetoadsrestoration < 0) { 
+            return 0;
+        }
+        return timetoadsrestoration;
+    }
+
     public void IncreaseEnergy()
     {
         currentEnergy++;
@@ -419,11 +442,13 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     {
         PlayerPrefs.SetInt("currentEnergy", currentEnergy);
         PlayerPrefs.SetInt("firstConsumationTime", (int)firstConsumationTime);
+        PlayerPrefs.SetInt("lastadsrestoreenergy", (int)lastadsrestoreenergy);
     }
     void LoadEnergyValues()
     {
         currentEnergy = PlayerPrefs.GetInt("currentEnergy", maximumEnergy);
         firstConsumationTime = (double)PlayerPrefs.GetInt("firstConsumationTime", 0);
+        lastadsrestoreenergy = (double)PlayerPrefs.GetInt("lastadsrestoreenergy", 0);
         if (firstConsumationTime == 0)
         {
             currentEnergy = maximumEnergy;
