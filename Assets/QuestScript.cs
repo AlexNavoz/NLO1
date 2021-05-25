@@ -67,7 +67,8 @@ public class QuestScript : MonoBehaviour, AdsListener
         {
             mainScript.questObjectId = idToLoad;
             mainScript.questObjectCount = 0;
-            thisQuestButton.interactable = true;
+            if(thisQuestButton != null)
+                thisQuestButton.interactable = true;
         }
 
         howMuchNeed = getQuestById(idToLoad).targetCount;
