@@ -68,6 +68,11 @@ public class plateBulletScript : MonoBehaviour
                 {
                     mainScript.campaignQuestObjCount++;
                 }
+                if (onRayComponent.questObjectIndex == mainScript.questObjectIndex)
+                {
+                    mainScript.questObjectCount++;
+                    mainScript.SaveQuestPrefs();
+                }
                 if (onRayMilkCount != 0)
                 {
                     mainScript.milkCollection += onRayMilkCount;
