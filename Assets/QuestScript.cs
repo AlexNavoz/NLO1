@@ -126,6 +126,10 @@ public class QuestScript : MonoBehaviour, AdsListener
             if (mainScript.questObjectCount >= howMuchNeed)
             {
                 questCompleted = true;
+                if (mainScript.levelIndex == 1)
+                {
+                    questButton.interactable = false;
+                }
                 mainScript.questObjectCount = howMuchNeed;
                 buttonCompleteObj.SetActive(true);
                 completeObj.SetActive(true);
@@ -145,10 +149,7 @@ public class QuestScript : MonoBehaviour, AdsListener
             alreadyRewarded = true;
             mainScript.SetMilk(milkReward);
             mainScript.SetBrains(brainsReward);
-            if (mainScript.levelIndex == 1)
-            {
-                questButton.interactable = false;
-            }
+            
             //rewardText.text = completeTextBtn.GetComponent<Text>().text;
         }
     }

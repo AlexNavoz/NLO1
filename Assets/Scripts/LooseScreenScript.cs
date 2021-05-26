@@ -60,7 +60,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
             choisePanel.SetActive(false);
             milkCollectionText.text = mainScript.milkCollection.ToString();
             brainsCollectionText.text = mainScript.brainsCollection.ToString();
-            priceText.text = (mainScript.milkCollection / 2).ToString();
+            priceText.text =((int)(mainScript.milkCollection / 2)).ToString();
         }
         canvas.SetActive(true);
         mainAnim.Play("PanelStartAnim");
@@ -150,7 +150,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     {
         if (refuelCanvas.activeSelf)
             return;
-        refuelPrice = player.GetComponent<playerMoving>().maxFuel /10;
+        refuelPrice = (int)(mainScript.milkCollection/2);
         refuelText.text = refuelPrice.ToString();
         if (refuelPrice > mainScript.allMilk)
         {

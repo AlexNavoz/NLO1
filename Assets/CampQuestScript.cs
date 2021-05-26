@@ -504,12 +504,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         evacPanel.SetActive(true);
         mainScript.checkIfAdsReady();
-        evacPrice.text = mainScript.milkCollection.ToString();
-        if (mainScript.milkCollection > mainScript.allMilk)
-        {
-            evacPrice.color = new Color(255, 0, 0);
-            evacBuyButton.interactable = false;
-        }
+        evacPrice.text = (mainScript.brainsCollection).ToString();
     }
     public void EvacPanelClose()
     {
@@ -524,7 +519,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void BuyEvac()
     {
-        mainScript.milkCollection = 0;
+        mainScript.brainsCollection = 0;
         mainScript.peace = false;
         Evacuate();
     }
@@ -613,8 +608,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         alreadyRefuled = true;
         refuelPanel.SetActive(true);
-        refuelPrice.text = (((int)playerMoving.maxFuel - (int)playerMoving.currentFuel)/10).ToString();
-        if ((((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) / 10) > mainScript.allMilk)
+        refuelPrice.text = (mainScript.milkCollection / 2).ToString();
+        if ((mainScript.milkCollection/2) > mainScript.allMilk)
         {
             refuelPrice.color = new Color(255, 0, 0);
             refuelByMoneyButton.interactable = false;
@@ -628,7 +623,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RefuelByMoney()
     {
-        mainScript.SetMilk(-((int)playerMoving.maxFuel - (int)playerMoving.currentFuel) /10);
+        mainScript.SetMilk(-mainScript.milkCollection / 2);
         playerMoving.currentFuel = playerMoving.maxFuel;
         playerMoving.SetFuelValues();
         refuelPanel.SetActive(false);
@@ -651,8 +646,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         alreadyRefuled = true;
         rearmPanel.SetActive(true);
-        rearmText.text = (((int)fss.maxHP - (int)fss.currentHP) /10).ToString();
-        if ((((int)fss.maxHP - (int)fss.currentHP) /10) > mainScript.allMilk)
+        rearmText.text = (mainScript.milkCollection / 2).ToString();
+        if ((mainScript.milkCollection / 2) > mainScript.allMilk)
         {
             rearmText.color = new Color(255, 0, 0);
             rearmByMoneyButton.interactable = false;
@@ -666,7 +661,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RearmByMoney()
     {
-        mainScript.SetMilk(-((int)fss.maxHP - (int)fss.currentHP) /10);
+        mainScript.SetMilk(-mainScript.milkCollection / 2);
         fss.currentHP = fss.maxHP;
         fss.SetHPValue();
         rearmPanel.SetActive(false);

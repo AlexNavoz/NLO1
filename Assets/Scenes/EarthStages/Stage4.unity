@@ -22294,7 +22294,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftBlock
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3228456978662802656, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e41e9eeb90d2ad4c9ae12f5c798dec7, type: 3}
 --- !u!1001 &8853692535961087146
 PrefabInstance:
@@ -22443,5 +22444,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightBlock
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 705064180289551866, guid: d4e264a5c799b2e4788a705df0414460, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d4e264a5c799b2e4788a705df0414460, type: 3}
