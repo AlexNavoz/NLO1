@@ -328,6 +328,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         winPanel.SetActive(true);
         gameIsStarted = false;
+        int rewardmultiplier = 0;
+        int previousreward = 0;
         switch (mainScript.levelIndex)
         {
             case 2:
@@ -335,35 +337,34 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 {
                     winTimeText.color = new Color(255, 0, 0, 170);
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 1)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
+                    rewardmultiplier = 1 - previousreward;
                 }
                 else if (boxPercent < 50)
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    milkReward *= 2;
-                    brainsReward *= 2;
                     winTimeText.color = new Color(255, 255, 0, 170);
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
+                    rewardmultiplier = 2 - previousreward;
                 }
                 else
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    milkReward *= 3;
-                    brainsReward *= 2;
                     winTimeText.color = new Color(0, 255, 0, 170);
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
+                    rewardmultiplier = 3 - previousreward;
                 }
                 winTimeText.text = boxPercent.ToString() + "%";
                 winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
@@ -373,33 +374,32 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 1)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
+                    rewardmultiplier = 1 - previousreward;
                 }
                 else if (percent < 50)
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    milkReward *= 2;
-                    brainsReward *= 2;
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
+                    rewardmultiplier = 2 - previousreward;
                 }
                 else
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    milkReward *= 3;
-                    brainsReward *= 3;
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
+                    rewardmultiplier = 3 - previousreward;
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
                 winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
@@ -409,33 +409,32 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 1)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
+                    rewardmultiplier = 1 - previousreward;
                 }
                 else if (percent < 50)
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    milkReward *= 2;
-                    brainsReward *= 2;
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
+                    rewardmultiplier = 2 - previousreward;
                 }
                 else
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    milkReward *= 3;
-                    brainsReward *= 3;
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
+                    rewardmultiplier = 3 - previousreward;
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
                 winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
@@ -445,39 +444,40 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 if (percent < 25)
                 {
                     winStars[0].SetActive(true);
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 1)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 1)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 1);
                     }
+                    rewardmultiplier = 1 - previousreward;
                 }
                 else if (percent < 50)
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
-                    milkReward *= 2;
-                    brainsReward *= 2;
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 2)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 2)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 2);
                     }
+                    rewardmultiplier = 2 - previousreward;
                 }
                 else
                 {
                     winStars[0].SetActive(true);
                     winStars[1].SetActive(true);
                     winStars[2].SetActive(true);
-                    milkReward *= 3;
-                    brainsReward *= 3;
-                    if (PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0) < 3)
+                    if ((previousreward = PlayerPrefs.GetInt("campStage" + GetCurrentLevelNumb(), 0)) < 3)
                     {
                         PlayerPrefs.SetInt("campStage" + GetCurrentLevelNumb(), 3);
                     }
+                    rewardmultiplier = 3 - previousreward;
                 }
                 winTimeText.text = (((int)currentTime / 60) % 60).ToString("D2") + ":" + ((int)currentTime % 60).ToString("D2");
                 winMilkRewardText.text = (mainScript.milkCollection + milkReward).ToString();
                 winBrainsRewardText.text = (mainScript.brainsCollection + brainsReward).ToString();
                 break;
         }
+        milkReward *= rewardmultiplier;
+        brainsReward *= rewardmultiplier;
         mainScript.SetMilk(mainScript.milkCollection + milkReward);
         mainScript.SetBrains(mainScript.brainsCollection + brainsReward);
         mainScript.milkCollection = 0;

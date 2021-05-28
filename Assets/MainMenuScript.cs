@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour, AdsListener
@@ -164,7 +167,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public Button WS_rayButton;
     float[] WS_raypowers = new float[] { 10.0f, 12.0f, 14.0f, 16.0f, 18.0f, 20.0f, 22.0f, 24.0f, 26.0f, 30.0f };
     float[] WS_gunPowers = new float[] { 0.2f, 0.3f, 0.4f, 0.6f, 0.8f, 1.0f, 1.25f, 1.5f, 1.7f, 2.0f };
-
+    
     //Tank
     int WS_TankLevel;
     int WS_tankPrice;
@@ -1105,24 +1108,39 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     //_______________________________BUY_MONEY
     #region
 
-
+    void UpdateBuypanelThings()
+    {
+        if (P_EngineLevel == 9 && P_RayLevel == 9 && P_TankLevel==9 && P_ShieldLevel==9)
+            buyMoneyPanel.transform.Find("MaxPlatePanel/MaxPlateButton").gameObject.GetComponent<Button>().interactable = false;
+        if (WS_EngineLevel == 9 && WS_RayLevel == 9 && WS_TankLevel == 9 && WS_ShieldLevel == 9)
+            buyMoneyPanel.transform.Find("MaxWSPanel/MaxWSButton").gameObject.GetComponent<Button>().interactable = false;
+        if (K_EngineLevel == 9 && K_RayLevel == 9 && K_TankLevel == 9 && K_ShieldLevel == 9)
+            buyMoneyPanel.transform.Find("MaxKPanel/MaxKButton").gameObject.GetComponent<Button>().interactable = false;
+    }
 
     public void OpenBuyMoneyPanel()
     {
         buyMoneyPanel.SetActive(true);
+        UpdateBuypanelThings();
+    }
+    void ClosePanelAction()
+    {
+        buyMoneyPanel.SetActive(false);
     }
     public void CloseBuyMoneyPanel()
     {
-        buyMoneyPanel.SetActive(false);
+        Invoke("ClosePanelAction", 0);
     }
 
     public void BuyMilk(int milkCount)
     {
         mainScript.SetMilk(milkCount);
+        CloseBuyMoneyPanel();
     }
     public void BuyBrains(int brainsCount)
     {
         mainScript.SetBrains(brainsCount);
+        CloseBuyMoneyPanel();
     }
     public void MaxUpgradePlate()
     {
@@ -1143,6 +1161,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         PlayerPrefs.SetInt("P_ShieldLevel", P_ShieldLevel);
         PlayerPrefs.SetFloat("P_forceShieldStrength", P_shieldpowers[P_ShieldLevel]);
         P_shieldSlider.value = PlayerPrefs.GetFloat("P_forceShieldStrength", 20.0f);
+        CloseBuyMoneyPanel();
     }
     public void MaxUpgradeWS()
     {
@@ -1168,6 +1187,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         buyWSPanel.SetActive(false);
         buyWSButtonObj.SetActive(false);
         PlayerPrefs.SetInt("WSBuy", 1);
+        CloseBuyMoneyPanel();
     }
 
     public void MaxUpgradeK()
@@ -1194,6 +1214,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         buyKPanel.SetActive(false);
         buyKButtonObj.SetActive(false);
         PlayerPrefs.SetInt("KBuy", 1);
+        CloseBuyMoneyPanel();
     }
     #endregion
 
