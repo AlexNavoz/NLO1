@@ -7,6 +7,7 @@ using UnityEngine.Advertisements;
 using UnityEngine.Audio;
 using UnityEngine.Analytics;
 using System;
+using AppsFlyerSDK;
 
 public class MainScript : MonoBehaviour, IUnityAdsListener
 {
@@ -114,6 +115,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
     }
     void Start()
     {
+
         //cloudsaves = new GPG_CloudSaveSystem();
         //cloudsaves.SaveToCloud();
         LoadEPrefs();
@@ -137,6 +139,11 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         mixer.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume", 1));
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, testMode);
+
+
+        //__AppsFlyer
+
+        AppsFlyer.sendEvent("af_login", null);
     }
     static public void UpdateStupidTimeMultiplyingConstant() {
         forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);

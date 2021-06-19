@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using AppsFlyerSDK;
 
 public class CampQuestScript : MonoBehaviour, AdsListener
 {
@@ -330,6 +331,8 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         gameIsStarted = false;
         int rewardmultiplier = 0;
         int previousreward = 0;
+
+
         switch (mainScript.levelIndex)
         {
             case 2:
@@ -476,6 +479,15 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                 winBrainsRewardText.text = (mainScript.brainsCollection + brainsReward).ToString();
                 break;
         }
+
+
+        {
+            Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+            LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+            LevelAchievedEvent.Add("af_score", previousreward.ToString());
+            AppsFlyer.sendEvent("af_level_achieved", LevelAchievedEvent);
+        }
+
         milkReward *= rewardmultiplier;
         brainsReward *= rewardmultiplier;
         mainScript.SetMilk(mainScript.milkCollection + milkReward);
