@@ -16,7 +16,7 @@ public class CameraScript : MonoBehaviour
     public Vector3 offset;
     public float maxSize;
     public float minSize;
-    public float maxHeight;
+    float maxHeight = 11f;
     public float minHeight;
     public Transform leftBlock;
     public Transform rightBlock;

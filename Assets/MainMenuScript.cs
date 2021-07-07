@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.Purchasing;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour, AdsListener
@@ -48,6 +49,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     //Campaign
     public GameObject campaignPanel;
+    public Button gameButton;
 
     //ShipRent
     public GameObject rentPanel;
@@ -483,6 +485,10 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         currentBrains = mainScript.allBrains;
         brainsText.text = currentBrains.ToString();
 
+        if(PlayerPrefs.GetInt("campStage2", 0)== 0)
+        {
+            gameButton.interactable = false;
+        }
     }
 
     float changingPercent = 0;
@@ -772,6 +778,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     public void DailyQuestPanelOpen()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("DailyQuestButtonClick", ButtonEvent);
+        }
+
         questScript.QuestPanelActivation();
     }
 
@@ -1092,6 +1104,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     #region
     public void BuyWS()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("BuyWSButtonClick", ButtonEvent);
+        }
+
         mainScript.SetMilk(-100);
         buyWSPanel.SetActive(false);
         buyWSButtonObj.SetActive(false);
@@ -1099,6 +1117,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     public void BuyK()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("BuyKButtonClick", ButtonEvent);
+        }
+
         mainScript.SetMilk(-1000);
         buyKPanel.SetActive(false);
         buyKButtonObj.SetActive(false);
@@ -1117,10 +1141,19 @@ public class MainMenuScript : MonoBehaviour, AdsListener
             buyMoneyPanel.transform.Find("MaxWSPanel/MaxWSButton").gameObject.GetComponent<Button>().interactable = false;
         if (K_EngineLevel == 9 && K_RayLevel == 9 && K_TankLevel == 9 && K_ShieldLevel == 9)
             buyMoneyPanel.transform.Find("MaxKPanel/MaxKButton").gameObject.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetInt("MaxEnergy", 5) > 5)
+            buyMoneyPanel.transform.Find("MaxEnergyUpgrade/MaxEnergyButton").gameObject.GetComponent<Button>().interactable = false;
+
     }
+
 
     public void OpenBuyMoneyPanel()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("OpenShop", ButtonEvent);
+        }
         buyMoneyPanel.SetActive(true);
         UpdateBuypanelThings();
     }
@@ -1131,20 +1164,54 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     public void CloseBuyMoneyPanel()
     {
         Invoke("ClosePanelAction", 0);
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("CloseShop", ButtonEvent);
+        }
     }
-
     public void BuyMilk(int milkCount)
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("BuyMilk", ButtonEvent);
+        }
+
         mainScript.SetMilk(milkCount);
+        CloseBuyMoneyPanel();
+    }
+
+    public void BuyMaxEnergy()
+    {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("BuyMaxEnergy", ButtonEvent);
+        }
+
+        PlayerPrefs.SetInt("MaxEnergy", 10);
+        mainScript.RestoreEnergy();
         CloseBuyMoneyPanel();
     }
     public void BuyBrains(int brainsCount)
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("BuyBrains", ButtonEvent);
+        }
         mainScript.SetBrains(brainsCount);
         CloseBuyMoneyPanel();
     }
     public void MaxUpgradePlate()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("MaxUpgradePlate", ButtonEvent);
+        }
+
         P_EngineLevel = P_RayLevel = P_TankLevel = P_ShieldLevel = 9;
         PlayerPrefs.SetInt("P_EngineLevel", P_EngineLevel);
         PlayerPrefs.SetFloat("P_enginePower", P_enginepowers[P_EngineLevel]);
@@ -1166,6 +1233,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     public void MaxUpgradeWS()
     {
+
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("MaxUpgradeWS", ButtonEvent);
+        }
         WS_EngineLevel = WS_RayLevel = WS_TankLevel = WS_ShieldLevel = 9;
 
         PlayerPrefs.SetInt("WS_EngineLevel", WS_EngineLevel);
@@ -1193,6 +1266,11 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     public void MaxUpgradeK()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("MaxUpgradeKnippel", ButtonEvent);
+        }
         K_EngineLevel = K_RayLevel = K_TankLevel = K_ShieldLevel = 9;
 
         PlayerPrefs.SetInt("K_EngineLevel", K_EngineLevel);
@@ -1219,8 +1297,24 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     #endregion
 
+    public void ClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(1);
+    }
+
+    public void UnlockGameButton()
+    {
+        PlayerPrefs.SetInt("TutorialCompleted", 1);
+    }
     public void CampaignButtonClick()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("CampaignMenuButtonClick", ButtonEvent);
+        }
+
         mainScript.mainMenuPanelIndex = 2;
         if (shipIndex == 1 && PlayerPrefs.GetInt("WSBuy", 0) == 0 && rentIndex == 0)
         {
@@ -1242,6 +1336,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     public void GameButtonClick()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("GameButtonClick", ButtonEvent);
+        }
+
         mainScript.mainMenuPanelIndex = 1;
         if(shipIndex == 1 && PlayerPrefs.GetInt("WSBuy", 0) == 0 && rentIndex == 0 )
         {
@@ -1279,6 +1379,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     }
     public void RentByAds()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("RentByAdsButtonClick", ButtonEvent);
+        }
+
         adsDestination = 1;
         clickButton.Play();
         if (mainScript.ShowRewardedVideo(this))
@@ -1591,6 +1697,12 @@ public class MainMenuScript : MonoBehaviour, AdsListener
 
     public void OpenGarage()
     {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("GarageButtonClick", ButtonEvent);
+        }
+
         menuOpenSound.Play();
         garageIsOpen = true;
         switch (shipIndex)
@@ -1736,7 +1848,7 @@ public class MainMenuScript : MonoBehaviour, AdsListener
     {
         mainScript.checkIfAdsReady();
         energyPanel.SetActive(true);
-
+        
     }
     public void CloseEnergyPanel()
     {
@@ -1747,6 +1859,13 @@ public class MainMenuScript : MonoBehaviour, AdsListener
         CloseEnergyPanel();
         adsDestination = 2;
         clickButton.Play();
+
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", mainScript.timeInGame.ToString());
+            AppsFlyer.sendEvent("EnergyByAdsButtonClick", ButtonEvent);
+        }
+
         if (mainScript.ShowRewardedVideo(this))
         {
             Debug.Log("Showing ad");

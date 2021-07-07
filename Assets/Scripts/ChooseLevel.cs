@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AppsFlyerSDK;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,6 +51,12 @@ public class ChooseLevel : MonoBehaviour
         PlayerPrefs.SetInt("Stage" + stageIndex, 1);
         blockPanels[stageIndex].SetActive(false);
         mainScript.SetMilk(-LevelBuyPrices[stageIndex]);
+
+        {
+            Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+            LevelAchievedEvent.Add("EarthStageIndex", stageIndex.ToString());
+            AppsFlyer.sendEvent("BuyEarthStage", LevelAchievedEvent);
+        }
     }
 
     public void ChooseEarthStage(int stage)
@@ -62,6 +69,12 @@ public class ChooseLevel : MonoBehaviour
         {
             mainScript.ConsumeEnergy();
             StartCoroutine(CrossFade(stage));
+
+            {
+                Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+                LevelAchievedEvent.Add("EarthStageIndex", stage.ToString());
+                AppsFlyer.sendEvent("StartEarthStage", LevelAchievedEvent);
+            }
         }
     }
     public void ExitChoosePanel()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using AppsFlyerSDK;
 
 public class LooseScreenScript : MonoBehaviour, AdsListener
 {
@@ -12,7 +13,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     public Button refuelByMoneyButton;
     public Text refuelText;
     Animation refuelAnim;
-    float refuelPrice;
+    int refuelPrice;
 
     //LooseScreen variables
 
@@ -77,11 +78,18 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
 
     public void Restart()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        mainScript.peace = true;
-        mainScript.milkCollection = 0;
-        mainScript.brainsCollection = 0;
-        StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
+        if (mainScript.GetCurrentEnergy() < 1)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            mainScript.ConsumeEnergy();
+            mainScript.peace = true;
+            mainScript.milkCollection = 0;
+            mainScript.brainsCollection = 0;
+            StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
+        }
     }
 
     public void Evacuate()
@@ -113,6 +121,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
 
     public void BuyEvac()
     {
+        AppsFlyer.sendEvent("GameBuyEvacByMoney", null);
         mainScript.milkCollection /=2;
         mainScript.peace = false;
         Evacuate();
@@ -120,6 +129,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
 
     public void BuyEvacByAdd()                                                //change after add
     {
+        AppsFlyer.sendEvent("GameBuyEvacByAdd", null);
         if (mainScript.ShowRewardedVideo(this))
         {
             adsdestination = 2;
@@ -151,6 +161,10 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
         if (refuelCanvas.activeSelf)
             return;
         refuelPrice = (int)(mainScript.milkCollection/2);
+        if (refuelPrice < 10)
+        {
+            refuelPrice = 10;
+        }
         refuelText.text = refuelPrice.ToString();
         if (refuelPrice > mainScript.allMilk)
         {
@@ -164,6 +178,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
     }
     public void RefuelByMoney()
     {
+        AppsFlyer.sendEvent("GameRefuelByMoney", null);
         //mainScript.allMoney -= (int)refuelPrice;
         mainScript.SetMilk(-(int)refuelPrice);
         player.GetComponent<playerMoving>().currentFuel = player.GetComponent<playerMoving>().maxFuel;
@@ -175,6 +190,7 @@ public class LooseScreenScript : MonoBehaviour, AdsListener
                                                                                                                             // After Ads
     public void RefuelByAds()
     {
+        AppsFlyer.sendEvent("GameRefuelByAds", null);
         if (mainScript.ShowRewardedVideo(this))
         {
             adsdestination = 1;

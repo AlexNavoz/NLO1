@@ -11,6 +11,7 @@ using AppsFlyerSDK;
 
 public class MainScript : MonoBehaviour, IUnityAdsListener
 {
+    public float timeInGame;
     public bool peace = false;
     //easyShip variables
     public float E_enginePower;
@@ -140,10 +141,21 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, testMode);
 
-
+        maximumEnergy = PlayerPrefs.GetInt("MaxEnergy", 5);
         //__AppsFlyer
 
         AppsFlyer.sendEvent("af_login", null);
+    }
+
+    private void Update()
+    {
+        timeInGame += Time.deltaTime;
+
+        // Не читайте это позорище, я хотел спать!
+        if (allBrains <= 0)
+        {
+            allBrains = 0;
+        }
     }
     static public void UpdateStupidTimeMultiplyingConstant() {
         forceBatchingMultiplier = (0.02f / Time.fixedDeltaTime);
@@ -393,6 +405,7 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
 
     public void RestoreEnergy()
     {
+        maximumEnergy = PlayerPrefs.GetInt("MaxEnergy", 5);
         firstConsumationTime = 0;
         currentEnergy = maximumEnergy;
     }
@@ -459,6 +472,14 @@ public class MainScript : MonoBehaviour, IUnityAdsListener
         if (firstConsumationTime == 0)
         {
             currentEnergy = maximumEnergy;
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        {
+            Dictionary<string, string> ButtonEvent = new Dictionary<string, string>();
+            ButtonEvent.Add("Time_in_game", timeInGame.ToString());
+            AppsFlyer.sendEvent("QuitGame", ButtonEvent);
         }
     }
 }

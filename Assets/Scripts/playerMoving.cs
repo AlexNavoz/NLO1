@@ -595,8 +595,8 @@ public class playerMoving : MonoBehaviour
                             aiming_touchtime = 3;
                         {
                             if (aiming_touchtime < 1)
-                                newbulletscript.damage = gunPower;
-                            else newbulletscript.damage = gunPower * aiming_touchtime;
+                                newbulletscript.damage = gunPower*1.4f;
+                            else newbulletscript.damage = gunPower * aiming_touchtime*1.4f;
                         }
                         newbulletscript.massScale *= aiming_touchtime / 2;
                         if (newbulletscript.massScale < 0.5f)

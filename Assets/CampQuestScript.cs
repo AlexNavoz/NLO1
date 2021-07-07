@@ -36,16 +36,19 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     public GameObject defeatPanel;
     public GameObject[] defeatReasonTextObj;
     bool defeat = false;
+    bool defeatSwithed = false;
 
     //refuel panel
     public GameObject refuelPanel;
     public Text refuelPrice;
     public Button refuelByMoneyButton;
+    int priceOfRefuel;
 
     //rearm panel
     public GameObject rearmPanel;
     public Text rearmText;
     public Button rearmByMoneyButton;
+    int priceOfRearm;
 
     //Evacuation
     public GameObject evacButtonObj;
@@ -216,7 +219,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     {
                         NeedRearm();
                     }
-                    if (victory && player.transform.position.y > 27)
+                    if (victory && player.transform.position.y > 24)
                     {
                         QuestWin();
                         victory = false;
@@ -250,7 +253,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     {
                         NeedRearm();
                     }
-                    if (victory && player.transform.position.y > 27)
+                    if (victory && player.transform.position.y > 24)
                     {
                         QuestWin();
                         victory = false;
@@ -295,7 +298,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
                     {
                         NeedRearm();
                     }
-                    if (victory && player.transform.position.y > 27)
+                    if (victory && player.transform.position.y > 23)
                     {
                         QuestWin();
                         victory = false;
@@ -502,9 +505,16 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void Restart()
     {
-        mainScript.milkCollection = 0;
-        mainScript.brainsCollection = 0;
-        StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
+        if (mainScript.GetCurrentEnergy() < 1)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            mainScript.milkCollection = 0;
+            mainScript.brainsCollection = 0;
+            StartCoroutine(CrossFade(SceneManager.GetActiveScene().buildIndex));
+        }
     }
     #endregion
 
@@ -534,10 +544,22 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.brainsCollection = 0;
         mainScript.peace = false;
         Evacuate();
+
+        {
+            Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+            LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+            AppsFlyer.sendEvent("EvacuateByMoney", LevelAchievedEvent);
+        }
     }
 
     public void BuyEvacByAdd()                                                //change after add
     {
+        {
+            Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+            LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+            AppsFlyer.sendEvent("EvacuateByAds", LevelAchievedEvent);
+        }
+
         if (mainScript.ShowRewardedVideo(this))
         {
             adsdestination = 3;
@@ -552,64 +574,90 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     #endregion
     void QuestDefeat()
     {
-        mainScript.milkCollection = 0;
-        mainScript.brainsCollection = 0;
-        gameIsStarted = false;
-        mainScript.peace = true;
-        defeatPanel.SetActive(true);
-        switch (mainScript.levelIndex) {
-            case 2:
-                if (currentTime <= 0)
-                {
-                    defeatReasonTextObj[2].SetActive(true);
-                }
-                if (playerMoving.currentFuel <= 0)
-                {
-                    defeatReasonTextObj[0].SetActive(true);
-                }
-                if (playerMoving.isDead)
-                {
-                    defeatReasonTextObj[1].SetActive(true);
-                }
-                if (box == null || boxPercent <=0)
-                {
-                    defeatReasonTextObj[3].SetActive(true);
-                }
-                if (boxScript.boxIsLost)
-                {
-                    defeatReasonTextObj[4].SetActive(true);
-                }
-                break;
-            case 3:
-                if (currentTime <= 0)
-                {
-                    defeatReasonTextObj[2].SetActive(true);
-                }
-                if (playerMoving.currentFuel <= 0)
-                {
-                    defeatReasonTextObj[0].SetActive(true);
-                }
-                if (playerMoving.isDead)
-                {
-                    defeatReasonTextObj[1].SetActive(true);
-                }
+        if (!defeatSwithed)
+        {
 
-                break;
-            case 4:
-                if (currentTime <= 0)
-                {
-                    defeatReasonTextObj[2].SetActive(true);
-                }
-                if (playerMoving.currentFuel <= 0)
-                {
-                    defeatReasonTextObj[0].SetActive(true);
-                }
-                if (playerMoving.isDead)
-                {
-                    defeatReasonTextObj[1].SetActive(true);
-                }
+            {
+                Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+                LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+                AppsFlyer.sendEvent("CampaignDefeat", LevelAchievedEvent);
+            }
+            defeatSwithed = true;
+            mainScript.milkCollection = 0;
+            mainScript.brainsCollection = 0;
+            gameIsStarted = false;
+            mainScript.peace = true;
+            defeatPanel.SetActive(true);
+            switch (mainScript.levelIndex)
+            {
+                case 2:
+                    if (currentTime <= 0)
+                    {
+                        defeatReasonTextObj[2].SetActive(true);
+                    }
+                    if (playerMoving.currentFuel <= 0)
+                    {
+                        defeatReasonTextObj[0].SetActive(true);
+                    }
+                    if (playerMoving.isDead)
+                    {
+                        defeatReasonTextObj[1].SetActive(true);
+                    }
+                    if (box == null || boxPercent <= 0)
+                    {
+                        defeatReasonTextObj[3].SetActive(true);
+                    }
+                    if (boxScript.boxIsLost)
+                    {
+                        defeatReasonTextObj[4].SetActive(true);
+                    }
+                    break;
+                case 3:
+                    if (currentTime <= 0)
+                    {
+                        defeatReasonTextObj[2].SetActive(true);
+                    }
+                    if (playerMoving.currentFuel <= 0)
+                    {
+                        defeatReasonTextObj[0].SetActive(true);
+                    }
+                    if (playerMoving.isDead)
+                    {
+                        defeatReasonTextObj[1].SetActive(true);
+                    }
 
-                break;
+                    break;
+                case 4:
+                    if (currentTime <= 0)
+                    {
+                        defeatReasonTextObj[2].SetActive(true);
+                    }
+                    if (playerMoving.currentFuel <= 0)
+                    {
+                        defeatReasonTextObj[0].SetActive(true);
+                    }
+                    if (playerMoving.isDead)
+                    {
+                        defeatReasonTextObj[1].SetActive(true);
+                    }
+
+                    break;
+                case 5:
+                    if (currentTime <= 0)
+                    {
+                        defeatReasonTextObj[2].SetActive(true);
+                    }
+                    if (playerMoving.currentFuel <= 0)
+                    {
+                        defeatReasonTextObj[0].SetActive(true);
+                    }
+                    if (playerMoving.isDead)
+                    {
+                        defeatReasonTextObj[1].SetActive(true);
+                    }
+
+                    break;
+            }
         }
     }
 
@@ -617,11 +665,17 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     #region
     void NeedRefuel()
     {
+        
         mainScript.peace = true;
         alreadyRefuled = true;
         refuelPanel.SetActive(true);
-        refuelPrice.text = (mainScript.milkCollection / 2).ToString();
-        if ((mainScript.milkCollection/2) > mainScript.allMilk)
+        priceOfRefuel = mainScript.milkCollection / 2;
+        if(priceOfRefuel < 10)
+        {
+            priceOfRefuel = 10;
+        }
+        refuelPrice.text = priceOfRefuel.ToString();
+        if (priceOfRefuel > mainScript.allMilk)
         {
             refuelPrice.color = new Color(255, 0, 0);
             refuelByMoneyButton.interactable = false;
@@ -635,14 +689,20 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RefuelByMoney()
     {
-        mainScript.SetMilk(-mainScript.milkCollection / 2);
+        mainScript.SetMilk(-priceOfRefuel);
         playerMoving.currentFuel = playerMoving.maxFuel;
         playerMoving.SetFuelValues();
         refuelPanel.SetActive(false);
         mainScript.peace = false;
+        Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+        LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+        AppsFlyer.sendEvent("CampRefuelByMoney", LevelAchievedEvent);
     }
     public void RefuelByAds()
     {
+        Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+        LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+        AppsFlyer.sendEvent("CampRefuelByAds", LevelAchievedEvent);
         if (mainScript.ShowRewardedVideo(this))
         {
             adsdestination = 1;
@@ -658,8 +718,13 @@ public class CampQuestScript : MonoBehaviour, AdsListener
         mainScript.peace = true;
         alreadyRefuled = true;
         rearmPanel.SetActive(true);
-        rearmText.text = (mainScript.milkCollection / 2).ToString();
-        if ((mainScript.milkCollection / 2) > mainScript.allMilk)
+        priceOfRearm = mainScript.milkCollection / 2;
+        if (priceOfRearm < 10)
+        {
+            priceOfRearm = 10;
+        }
+        rearmText.text = priceOfRearm.ToString();
+        if (priceOfRearm > mainScript.allMilk)
         {
             rearmText.color = new Color(255, 0, 0);
             rearmByMoneyButton.interactable = false;
@@ -673,7 +738,10 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RearmByMoney()
     {
-        mainScript.SetMilk(-mainScript.milkCollection / 2);
+        Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+        LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+        AppsFlyer.sendEvent("CampRearmByMoney", LevelAchievedEvent);
+        mainScript.SetMilk(-priceOfRearm);
         fss.currentHP = fss.maxHP;
         fss.SetHPValue();
         rearmPanel.SetActive(false);
@@ -681,6 +749,9 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     }
     public void RearmByAds()
     {
+        Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+        LevelAchievedEvent.Add("af_level", GetCurrentLevelNumb().ToString());
+        AppsFlyer.sendEvent("CampRearmByAds", LevelAchievedEvent);
         if (mainScript.ShowRewardedVideo(this))
         {
             adsdestination = 2;
@@ -722,6 +793,7 @@ public class CampQuestScript : MonoBehaviour, AdsListener
     #endregion
     public void QuestPanelOKButton()
     {
+        mainScript.ConsumeEnergy();
         mainScript.peace = false;
         questPanel.SetActive(false);
         gameIsStarted = true;

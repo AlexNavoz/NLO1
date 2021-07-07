@@ -1,3 +1,4 @@
+using AppsFlyerSDK;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,6 +99,11 @@ public class QuestScript : MonoBehaviour, AdsListener
         alreadyRewarded = false;
         questCompleted = false;
         questButton.interactable = true;
+
+        {
+            Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+            AppsFlyer.sendEvent("RefreshDaileQuestByAds", LevelAchievedEvent);
+        }
     }
 
     void UpdateQuest()
@@ -149,7 +155,12 @@ public class QuestScript : MonoBehaviour, AdsListener
             alreadyRewarded = true;
             mainScript.SetMilk(milkReward);
             mainScript.SetBrains(brainsReward);
-            
+
+            {
+                Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+                AppsFlyer.sendEvent("DailyQuestCompleted", LevelAchievedEvent);
+            }
+
             //rewardText.text = completeTextBtn.GetComponent<Text>().text;
         }
     }

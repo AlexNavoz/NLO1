@@ -96,7 +96,7 @@ public class plateBulletScript : MonoBehaviour
             }
         }
         Instantiate(HitParticle, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        Destroy(gameObject,0.02f);
 
     }
 }

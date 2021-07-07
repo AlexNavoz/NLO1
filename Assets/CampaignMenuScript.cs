@@ -1,3 +1,4 @@
+using AppsFlyerSDK;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,8 +65,14 @@ public class CampaignMenuScript : MonoBehaviour
         }
         else
         {
-            mainScript.ConsumeEnergy();
+            
             StartCoroutine(CrossFade(stageName));
+
+            {
+                Dictionary<string, string> LevelAchievedEvent = new Dictionary<string, string>();
+                LevelAchievedEvent.Add("CampStage", stageName);
+                AppsFlyer.sendEvent("CampStageStart", LevelAchievedEvent);
+            }
         }
     }
     IEnumerator CrossFade(string stageName)
